@@ -198,3 +198,60 @@ test_that("render_entry_qmd 語言中立欄位不被包進任一語言區塊", {
   expect_true(grepl(entry$stat_goal, qmd, fixed = TRUE))
   expect_true(grepl(entry$persona, qmd, fixed = TRUE))
 })
+
+# ---------------------------------------------------------------------------
+# 「尚未實測」警語 callout。
+# pending_notice() 是純函式：輸入所有條目、所有 tested_with 項目的 result
+# 值，依「全部 pending／部分 pending／全部已測」三種狀態回傳 callout 的
+# Markdown 全文（全部已測時回傳空字串 ""）。
+# render_index_qmd() 應把對應的 R chunk（在 quarto render 當下才執行、依
+# docs/prompts.json 現況判斷）嵌進總表頁，而不是寫死靜態文字。
+# ---------------------------------------------------------------------------
+
+test_that("pending_notice：全部 pending 時回傳「尚未實測」警語，中英皆有", {
+  txt <- pending_notice(c("pending", "pending", "pending"))
+  expect_type(txt, "character")
+  expect_true(grepl("callout-warning", txt, fixed = TRUE))
+  expect_true(grepl("{.zh}", txt, fixed = TRUE))
+  expect_true(grepl("{.en}", txt, fixed = TRUE))
+  expect_true(grepl("pending", txt, fixed = TRUE))
+})
+
+test_that("pending_notice：部分 pending 時回傳「部分已實測」措辭，且與全部 pending 的文字不同", {
+  all_pending_txt <- pending_notice(c("pending", "pending"))
+  partial_txt <- pending_notice(c("pending", "pass"))
+  expect_type(partial_txt, "character")
+  expect_true(grepl("callout-warning", partial_txt, fixed = TRUE))
+  expect_true(grepl("{.zh}", partial_txt, fixed = TRUE))
+  expect_true(grepl("{.en}", partial_txt, fixed = TRUE))
+  expect_false(identical(partial_txt, all_pending_txt))
+})
+
+test_that("pending_notice：全部已實測時不印任何警語", {
+  txt <- pending_notice(c("pass", "partial", "fail"))
+  expect_equal(txt, "")
+})
+
+test_that("pending_notice：空輸入時不印任何警語", {
+  expect_equal(pending_notice(character(0)), "")
+})
+
+test_that("render_index_qmd 嵌入依資料判斷的 R chunk，而非寫死的靜態警語文字", {
+  dir <- test_path("fixtures", "read-entries-only5")
+  dir.create(dir, showWarnings = FALSE)
+  file.copy(fx("valid-entry.yaml"), file.path(dir, "valid-entry.yaml"), overwrite = TRUE)
+  entries <- read_entries(dir)
+  idx <- render_index_qmd(entries)
+
+  # 必須是可執行的 R chunk（RED 前這裡不存在）
+  expect_true(grepl("```{r}", idx, fixed = TRUE))
+  expect_true(grepl("#| echo: false", idx, fixed = TRUE))
+  expect_true(grepl("#| output: asis", idx, fixed = TRUE))
+  expect_true(grepl("pending_notice", idx, fixed = TRUE))
+
+  # 不應該把「尚未實測」的警語內文直接寫死進 qmd（那應該是 render 當下
+  # 由 R chunk 執行 pending_notice() 才印出來的東西）
+  expect_false(grepl("callout-warning", idx, fixed = TRUE))
+
+  unlink(dir, recursive = TRUE)
+})

@@ -213,6 +213,92 @@ write_entry_qmds <- function(entries, out_dir) {
   invisible(paths)
 }
 
+#' 依所有 tested_with.result 值決定總表頁要不要顯示「尚未實測」警語 callout。
+#' 純函式：不觸碰檔案，方便單獨測試；由 render_index_qmd() 產生的 R chunk
+#' 在 quarto render 當下呼叫，確保文字不會因為日後補了實測而過期。
+#' 判準：
+#'   - 全部 pending：印「這些提示詞尚未實測」（強語氣，讀者應把期望回覆當設計意圖）
+#'   - 部分 pending：印「部分提示詞尚未實測」（提醒哪些條目還沒有實測依據）
+#'   - 沒有任何 pending（含輸入為空）：不印，回傳 ""
+#' @param results character vector，所有條目、所有 tested_with 項目的 result 值
+#' @return character(1) callout 的 Markdown 全文；不需要顯示時回傳 ""
+pending_notice <- function(results) {
+  if (length(results) == 0 || !any(results == "pending")) return("")
+
+  if (all(results == "pending")) {
+    title_zh <- "這些提示詞尚未實測"
+    title_en <- "These prompts have not been tested yet"
+    body_zh <- paste(
+      "本庫每一條條目的 `tested_with` 都記為 `pending`：沒有任何一條送給真實模型跑過。",
+      "請把「期望回覆要素」當成設計意圖，不是已觀察到的行為。",
+      sep = "\n"
+    )
+    body_en <- paste(
+      "Every entry in this library records `pending` as its test result. No prompt here has been run",
+      "against a live model. Treat the expected-response list as a design intention, not as observed",
+      "behaviour.",
+      sep = "\n"
+    )
+  } else {
+    title_zh <- "部分提示詞尚未實測"
+    title_en <- "Some prompts have not been tested yet"
+    body_zh <- paste(
+      "本庫部分條目的 `tested_with` 仍記為 `pending`：還沒有送給真實模型跑過。",
+      "這些條目的「期望回覆要素」請當成設計意圖；只有標為 `pass`／`partial`／`fail` 的條目才代表已觀察到的實測行為。",
+      sep = "\n"
+    )
+    body_en <- paste(
+      "Some entries in this library still record `pending` as their test result and have not been run",
+      "against a live model yet. Treat those entries' expected-response list as a design intention; only",
+      "entries marked `pass`, `partial`, or `fail` reflect observed test behaviour.",
+      sep = "\n"
+    )
+  }
+
+  sprintf(
+    paste(
+      ':::: {.callout-warning}',
+      '## [%s]{.zh}[%s]{.en}',
+      '',
+      '::: {.zh}',
+      '%s',
+      ':::',
+      '',
+      '::: {.en}',
+      '%s',
+      ':::',
+      '::::',
+      '',
+      sep = "\n"
+    ),
+    title_zh, title_en, body_zh, body_en
+  )
+}
+
+#' 產生嵌入總表頁的「尚未實測」R chunk 原始碼。
+#' 該 chunk 在 quarto render 當下才執行：讀入 docs/prompts.json（此時工作
+#' 目錄是 index.qmd 所在的 prompts/ 目錄，故用 "../docs/prompts.json"、
+#' "../tools/build-prompts.R" 這種相對於 prompts/ 的路徑，已用實際
+#' `quarto render` 驗證過工作目錄假設成立），取出所有 tested_with.result，
+#' 呼叫 pending_notice() 印出（或略過）警語——文字不因日後補實測而過期。
+#' @return character(1) chunk 原始碼（含前後的 ```` ``` ```` 圍欄）
+render_pending_chunk <- function() {
+  paste(
+    '```{r}',
+    '#| echo: false',
+    '#| output: asis',
+    'source("../tools/build-prompts.R", chdir = TRUE)',
+    'pending_notice_entries <- jsonlite::fromJSON("../docs/prompts.json", simplifyVector = FALSE)',
+    'pending_notice_results <- unlist(lapply(pending_notice_entries, function(pn_e) {',
+    '  vapply(pn_e$tested_with, function(pn_t) pn_t$result, character(1))',
+    '}))',
+    'cat(pending_notice(pending_notice_results))',
+    '```',
+    '',
+    sep = "\n"
+  )
+}
+
 #' 把所有條目合併成單一總表頁（prompts/index.qmd）
 #' 對應 PROPOSAL §3.3 目錄結構：「index.qmd（由 build 腳本產生的總表，勿手改）」。
 #' 作法：重用 render_entry_qmd() 產出的每條內容，去掉各自的 YAML frontmatter
@@ -241,7 +327,11 @@ render_index_qmd <- function(entries) {
     sep = "\n"
   )
 
-  paste0(header, paste(bodies, collapse = "\n\n---\n\n"))
+  # header 結尾已有一個換行，這裡再補一個空行，確保 R chunk 的圍欄不會被
+  # pandoc 併進前一段落（fenced div 對「上一行是不是空白行」很敏感，實測
+  # 過沒有空行時 ":::: {.callout-warning}" 會被吃進上一段文字，導致整個
+  # callout 沒有被解析成 fenced div，只剩一坨純文字）。
+  paste0(header, "\n", render_pending_chunk(), "\n", paste(bodies, collapse = "\n\n---\n\n"))
 }
 
 #' 寫出 prompts/index.qmd 總表
