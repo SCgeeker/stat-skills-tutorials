@@ -129,6 +129,55 @@ test_that("render_entry_qmd 的 prompt 中英文各自包在對應語言區塊�
   expect_false(any(grepl(entry$prompt$zh, en_blocks, fixed = TRUE)))
 })
 
+test_that("render_entry_qmd 的 prerequisites 中英文各自落在對應語言區塊", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  qmd <- render_entry_qmd(entry)
+  zh_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  expect_true(any(grepl(entry$prerequisites[[1]]$zh, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$prerequisites[[1]]$en, en_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$prerequisites[[1]]$en, zh_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$prerequisites[[1]]$zh, en_blocks, fixed = TRUE)))
+})
+
+test_that("render_entry_qmd 的 expected 中英文各自落在對應語言區塊", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  qmd <- render_entry_qmd(entry)
+  zh_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  expect_true(any(grepl(entry$expected[[1]]$zh, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$expected[[1]]$en, en_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$expected[[1]]$en, zh_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$expected[[1]]$zh, en_blocks, fixed = TRUE)))
+})
+
+test_that("render_entry_qmd 的 check.what 中英文各自落在對應語言區塊，step 代號兩邊都在", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  qmd <- render_entry_qmd(entry)
+  zh_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  expect_true(any(grepl(entry$check[[1]]$what$zh, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$check[[1]]$what$en, en_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$check[[1]]$what$en, zh_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$check[[1]]$what$zh, en_blocks, fixed = TRUE)))
+  # step 代號語言中立，兩邊語言區塊都要看得到
+  expect_true(any(grepl(entry$check[[1]]$step, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$check[[1]]$step, en_blocks, fixed = TRUE)))
+})
+
+test_that("render_entry_qmd 的 stop_criteria 中英文各自落在對應語言區塊", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  qmd <- render_entry_qmd(entry)
+  zh_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  expect_true(any(grepl(entry$stop_criteria$solved$zh, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$stop_criteria$solved$en, en_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$stop_criteria$reopen$zh, zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl(entry$stop_criteria$reopen$en, en_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$stop_criteria$solved$en, zh_blocks, fixed = TRUE)))
+  expect_false(any(grepl(entry$stop_criteria$reopen$zh, en_blocks, fixed = TRUE)))
+})
+
 test_that("render_entry_qmd 語言中立欄位不被包進任一語言區塊", {
   entry <- yaml::read_yaml(fx("valid-entry.yaml"))
   qmd <- render_entry_qmd(entry)

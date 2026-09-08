@@ -26,7 +26,12 @@ exactly like a correct answer.
 
 ::: {.zh}
 askLLM 的資料摘要函式 `summarize_data()` 為每個變項產生固定格式的區塊。連續
-變項(數值型)長這樣：
+變項（數值型）長這樣：
+:::
+
+::: {.en}
+`summarize_data()`, askLLM's data-summarizer, produces a fixed-format block
+per variable. A continuous (numeric) variable looks like this:
 :::
 
 ```
@@ -36,7 +41,11 @@ age [numeric]:
 ```
 
 ::: {.zh}
-類別變項(factor)長這樣：
+類別變項（factor）長這樣：
+:::
+
+::: {.en}
+A categorical (factor) variable looks like this:
 :::
 
 ```
@@ -46,17 +55,16 @@ group [factor]:
 ```
 
 ::: {.zh}
-就這樣——沒有第三行。**LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。**
+就這樣。唯一的例外是**有序類別變項（ordered factor）**會多一行 `level order: 低 < 中 < 高`，說明水準的順序。除此之外沒有別的了——**LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。**
 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全
 是在憑空猜測。
 :::
 
 ::: {.en}
-`summarize_data()`, askLLM's data-summarizer, produces a fixed-format block
-per variable. A continuous variable looks like the block above; a
-categorical variable reports level counts the same way. An ordered factor
-adds one more line, `level order: low < medium < high`. Beyond that there is
-nothing — **the LLM receives exactly what you just read, nothing more.**
+That is all. The one exception is an **ordered factor**, which adds one more
+line, `level order: low < medium < high`, to show how the levels are ordered.
+Beyond that there is nothing — **the LLM receives exactly what you just read,
+nothing more.**
 This block is attached only when "Attach data summary to prompt" is ticked;
 untick it and the LLM is guessing with no data at all.
 :::

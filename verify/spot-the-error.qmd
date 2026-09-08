@@ -3,34 +3,548 @@ title: "[故意找錯練習]{.zh}[Spot the Error]{.en}"
 ---
 
 ::: {.zh}
-> 狀態：Phase 0 placeholder，內容待 Phase 2 撰寫（見 `PROPOSAL.zh-TW.md` §5.4、
-> §8 Phase 2）。
+本頁把 `askLLM/docs/LIMITATIONS.zh-TW.md` 裡記錄的真實錯誤，改寫成一組「找碴」
+練習：你會先看到一段情境與一段模型回覆，回覆裡藏著一個錯誤，練習先自己找出
+問題所在，再打開答案核對。這是練習 `verify/workflow.qmd` 裡 V1（路徑核對）、
+V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你**親身發現**幻覺，
+而不是被動接受文件裡的結論。
 :::
-
-## [這一頁要做什麼]{.zh}
-
-::: {.zh}
-直接取材 `askLLM/docs/LIMITATIONS.zh-TW.md` 表格裡的真實錯誤路徑（例如
-`分析 > 比較 > 獨立樣本t檢定`、`探索 > 相關性`、
-`Regression > General Linear Model > Linear Regression` 等已記錄的幻覺案例），
-做成：
-
-- 8–10 題「這條路徑錯在哪」（練習 V1 路徑核對）
-- 3–4 題「這段 R 違反哪條紅旗」（練習 V4a 讀碼核對）
-
-每題附答案與對應的查核步驟編號（例如「見 V1」「見 V4a」），讓學生練習親身
-發現幻覺、而不是被動接受 LIMITATIONS 文件裡的結論。這是 Phase 2（課堂驗證）
-的產出物，Phase 0 只先佔位、註明取材來源與題型設計。
-:::
-
-## [English (placeholder)]{.en}
 
 ::: {.en}
-This page will turn real hallucinated menu paths and code red flags recorded
-in `askLLM/docs/LIMITATIONS.zh-TW.md` into a graded practice set: 8-10
-"what's wrong with this path" questions (practicing the V1 path check) and
-3-4 "which red flag does this R code violate" questions (practicing the V4a
-code-read check), each with an answer key pointing back to the relevant
-workflow step. This is a Phase 2 deliverable; Phase 0 only reserves the page
-and documents its intended source material and question format.
+This page turns the real errors recorded in `askLLM/docs/LIMITATIONS.zh-TW.md`
+into a "spot the error" practice set: you will see a scenario and a model
+reply with an error hidden in it, try to find the problem yourself, then open
+the answer to check. This is a hands-on way to practice V1 (path check), V3
+(scope check), and V4a (code-read check) from `verify/workflow.qmd` — the
+point is to **discover** the hallucination yourself rather than take the
+documentation's word for it.
+:::
+
+::: {.zh}
+**題目來源說明**：第 1–7 題逐字取材自 `askLLM/docs/LIMITATIONS.zh-TW.md`
+表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行
+設計的**示意範例**，用來練習 V4a 的程式碼紅旗核對——這三題**不是**任何模型
+的真實輸出，只是依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成的教學
+用例，題目本身會清楚標示「示意範例」。目前共 10 題；PROPOSAL 的 Phase 2 目標
+是擴充到 10 題以上並加入課堂實測的新案例，本頁會在課堂驗證後持續擴充。
+:::
+
+::: {.en}
+**Where the questions come from**: Questions 1–7 are taken verbatim from the
+real error paths and real observations recorded in the tables of
+`askLLM/docs/LIMITATIONS.zh-TW.md`; the source is noted on each question.
+Questions 8–10 are **illustrative examples** designed for this page to
+practice the V4a code red-flag check — these three are **not** real output
+from any model; they are teaching examples built from the instruction list
+that `askLLM/R/llm-adapter.R` explicitly forbids, and each is clearly labeled
+"illustrative." There are 10 questions here today; the PROPOSAL's Phase 2 goal
+is to grow this set further with new cases collected from classroom use.
+:::
+
+## [第 1 題：「比較」選單]{.zh}[Question 1: the "Compare" menu]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者用 Module Guider 問「哪一個分析適合比較兩組平均數？」
+
+**模型回覆**：「你可以使用 `分析 > 比較 > 獨立樣本t檢定`。」
+
+**問題**：這條路徑錯在哪裡？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks the Module Guider "which analysis compares two
+group means?"
+
+**Model reply**: "You can use `Analyses > Compare > Independent Samples
+T-Test`."
+
+**Question**: What is wrong with this path?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於
+**T-Tests** 選單之下。這是 LIMITATIONS 記錄「模型判斷正確、路徑寫錯」的典型
+案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核
+步驟：**V1 路徑核對**。
+:::
+
+::: {.en}
+**Answer**: jamovi has no "Compare" menu level. The independent-samples
+t-test actually lives under the **T-Tests** menu. This is the textbook case
+LIMITATIONS records where "the model reasoned correctly but wrote the wrong
+path" — it correctly identified the right family of analysis but invented an
+intermediate menu that does not exist. Verification step: **V1, path check**.
+:::
+:::
+
+## [第 2 題：相關性長在哪裡]{.zh}[Question 2: where correlation lives]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者問「我想看兩個連續變項的相關係數，該用哪個分析？」
+
+**模型回覆**：「請用 `探索 > 相關性`。」
+
+**問題**：這條路徑錯在哪裡？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks "I want the correlation between two continuous
+variables — which analysis?"
+
+**Model reply**: "Use `Exploration > Correlation`."
+
+**Question**: What is wrong with this path?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：相關矩陣實際位於 **Regression** 選單之下，不在 Exploration。跟
+第 1 題一樣，模型正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。
+對應查核步驟：**V1 路徑核對**。
+:::
+
+::: {.en}
+**Answer**: the correlation matrix actually lives under the **Regression**
+menu, not Exploration. As in question 1, the model correctly identified "this
+calls for a correlation analysis" but hung it under the wrong top-level menu.
+Verification step: **V1, path check**.
+:::
+:::
+
+## [第 3 題：主成分分析躲在哪裡]{.zh}[Question 3: where PCA hides]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者問「我想對這幾個連續變項做主成分分析。」
+
+**模型回覆**：「可以到 `探索 > 主成分分析`。」
+
+**問題**：這條路徑錯在哪裡？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks "I want to run a principal component analysis on
+these continuous variables."
+
+**Model reply**: "Go to `Exploration > Principal Component Analysis`."
+
+**Question**: What is wrong with this path?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：PCA 實際位於 **Factor** 選單之下，不在 Exploration。同一個錯誤
+模式再出現一次：分析名稱對，選單掛錯地方。對應查核步驟：**V1 路徑核對**。
+:::
+
+::: {.en}
+**Answer**: PCA actually lives under the **Factor** menu, not Exploration.
+The same error pattern shows up again: the analysis name is right, the menu
+it's hung under is wrong. Verification step: **V1, path check**.
+:::
+:::
+
+## [第 4 題：整個選單都不存在]{.zh}[Question 4: a menu that doesn't exist at all]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者問「我想做判別分析來分類這幾個組別。」
+
+**模型回覆**：「請用 `分類 > 判別分析`，或者 `機器學習 > 分類器`。」
+
+**問題**：這兩條路徑錯在哪裡？跟前三題的錯誤性質有什麼不同？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks "I want to run a discriminant analysis to classify
+these groups."
+
+**Model reply**: "Use `Classification > Discriminant Analysis`, or
+`Machine Learning > Classifier`."
+
+**Question**: What is wrong with these two paths? How does this error differ
+in kind from questions 1–3?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是
+「選單掛錯位置」，而是**整條路徑（含分析本身）都是虛構的**。跟前三題不同：
+前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不
+存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身
+（含已安裝模組）是否真的有這個功能——沒有的話就是模型純粹幻覺出一個功能。
+對應查核步驟：**V1 路徑核對**（核對後結論應為「查無此路徑」）。
+:::
+
+::: {.en}
+**Answer**: LIMITATIONS explicitly records that "jamovi's built-in menus have
+no such menu or analysis at all" — this is not "the menu is in the wrong
+place," it is that **the entire path, including the analysis itself, is
+fabricated**. Unlike questions 1–3, where the analysis exists and only the
+menu location is wrong, here the analysis does not exist anywhere in jamovi's
+built-in scope. The right move is not to go looking for "the real location" —
+it's to first confirm whether jamovi (including your installed modules)
+actually has this capability at all; if not, the model has simply hallucinated
+a feature. Verification step: **V1, path check** (the correct conclusion here
+is "no such path exists").
+:::
+:::
+
+## [第 5 題：編出來的巢狀層級]{.zh}[Question 5: an invented nesting]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者用英文問模型如何做線性迴歸。
+
+**模型回覆**：「Use `Regression > General Linear Model > Linear
+Regression`.」
+
+**問題**：這條路徑錯在哪裡？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks the model, in English, how to run a linear
+regression.
+
+**Model reply**: "Use `Regression > General Linear Model > Linear
+Regression`."
+
+**Question**: What is wrong with this path?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：LIMITATIONS 記錄這是「巢狀層級是編的」——`Linear Regression` 確實
+在 **Regression** 選單之下，但中間多插了一層不存在的 `General Linear Model`
+子選單。這種錯誤特別難抓，因為頭尾都對，只有中間一層是編的；逐條核對每一層
+（不是只看第一層與最後一層對不對）才抓得到。對應查核步驟：**V1 路徑核對**。
+:::
+
+::: {.en}
+**Answer**: LIMITATIONS records this as "a fabricated nesting level" — `Linear
+Regression` really is under **Regression**, but an extra, nonexistent
+`General Linear Model` sub-menu has been inserted in between. This kind of
+error is especially hard to catch because the first and last segments are
+both correct — only the middle level is invented. You only catch it by
+checking every level of the path, not just whether the first and last
+segments look right. Verification step: **V1, path check**.
+:::
+:::
+
+## [第 6 題：連翻譯都出錯]{.zh}[Question 6: even the translation is wrong]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
+
+**情境**：使用者用中文問模型如何做線性迴歸。
+
+**模型回覆**：「請到 `迴歸 → 線性線性(Linear Regression)`。」
+
+**問題**：除了路徑本身，這則回覆還有什麼地方看起來不對勁？
+:::
+
+::: {.en}
+**Source**: recorded observation in section 1 of
+`askLLM/docs/LIMITATIONS.zh-TW.md`.
+
+**Scenario**: A user asks the model, in Chinese, how to run a linear
+regression.
+
+**Model reply**: "Go to `迴歸 → 線性線性(Linear Regression)`" (the Chinese
+label literally reads "linear-linear").
+
+**Question**: Besides the path itself, what else looks off about this reply?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：LIMITATIONS 特別點出「連中文標籤都出現錯字」——`線性線性` 是重複
+詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看
+「大致講得通」，連標籤的逐字拼寫都要對得上你自己 jamovi 裡看到的文字，因為
+自信的語氣與正確性無關。對應查核步驟：**V1 路徑核對**。
+:::
+
+::: {.en}
+**Answer**: LIMITATIONS specifically flags that "even the Chinese label has a
+typo" — `線性線性` ("linear-linear") is a duplicated word that never appears
+anywhere in jamovi's actual interface. This is a reminder that the path check
+isn't satisfied by something that "roughly makes sense" — the label's exact
+wording has to match what you see in your own jamovi, because confident tone
+has nothing to do with correctness. Verification step: **V1, path check**.
+:::
+:::
+
+## [第 7 題：沒附摘要時的憑空生成]{.zh}[Question 7: fabrication with no summary attached]{.en}
+
+::: {.zh}
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md`〈綜合使用建議〉第 3 點實測記錄。
+
+**情境**：使用者在送出問題時**沒有勾選**「Attach data summary to prompt」，
+資料集其實是 `iris`（150 筆鳶尾花觀測，三個品種：`setosa`、`versicolor`、
+`virginica`），問模型「這份資料有幾個樣本、有哪些組別？」
+
+**模型回覆**：「這份資料大約有 8 個樣本，分成 Saguaro 與 Palo Verde 兩個
+物種。」
+
+**問題**：這則回覆錯在哪裡？根本原因是什麼？
+:::
+
+::: {.en}
+**Source**: recorded observation in the "overall recommendations" section of
+`askLLM/docs/LIMITATIONS.zh-TW.md`, point 3.
+
+**Scenario**: A user submits a question **without** ticking "Attach data
+summary to prompt." The dataset is actually `iris` (150 observations, three
+species: `setosa`, `versicolor`, `virginica`), and the user asks "how many
+samples are in this dataset, and what groups does it have?"
+
+**Model reply**: "This dataset has roughly 8 samples, split into two species,
+Saguaro and Palo Verde."
+
+**Question**: What is wrong with this reply? What is the root cause?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：這是 LIMITATIONS 記錄的真實實測結果——未勾選「Attach data
+summary」時，模型完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體
+物種名稱（Saguaro、Palo Verde，這兩者甚至不是 `iris` 的品種，是憑空生成的
+仙人掌／植物名稱）。根本原因不是「模型算錯了」，是**它從頭到尾沒有拿到任何
+資料資訊**，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：**V3 範圍核對**
+——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是
+否真的附上了資料摘要。
+:::
+
+::: {.en}
+**Answer**: this is a real recorded observation from LIMITATIONS — when
+"Attach data summary" is unticked, the model has no visibility into your
+data at all, yet it still produced a specific number (8 samples) and specific
+group names (Saguaro, Palo Verde — which are not even `iris` species; they
+are fabricated plant names). The root cause is not "the model miscalculated"
+— it's that **it never received any information about the data in the first
+place**, yet answered with the same confident tone it would use if it had.
+Verification step: **V3, scope check** — a reply that claims to know
+something it cannot actually see should be discounted entirely, and you
+should go back and confirm whether the data summary was actually attached
+when you submitted the question.
+:::
+:::
+
+## [第 8 題（示意範例）：程式碼裡的安裝指令]{.zh}[Question 8 (illustrative): an install call in the code]{.en}
+
+::: {.zh}
+> 本題為**示意範例**，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。
+
+**情境**：使用者用 R code tutor 問「幫我對 `data` 裡的 `score` 欄位做常態性
+檢定。」
+
+**模型回覆（示意）**：
+
+```r
+install.packages("moments")
+library(moments)
+agostino.test(data$score)
+```
+
+**問題**：這段程式碼違反了哪一條紅旗規則？
+:::
+
+::: {.en}
+> This question is an **illustrative example**, not real output from any
+> model, used to practice the V4a code-read check.
+
+**Scenario**: A user asks the R code tutor "run a normality test on the
+`score` column in `data`."
+
+**Model reply (illustrative)**:
+
+```r
+install.packages("moments")
+library(moments)
+agostino.test(data$score)
+```
+
+**Question**: Which red-flag rule does this code violate?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：第一行 `install.packages("moments")` 直接違反 `askLLM/R/llm-adapter.R`
+第 172–177 行明文禁止的指令清單——system prompt 明確要求「never suggest
+install.packages()」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入
+權限去安裝新套件，而且 askLLM 應該只引用 `<rj_environment>` 清單裡**已經
+裝好**的套件。對應查核步驟：**V4a 讀**（見 `checklist-rtutor.qmd` 的紅旗
+字串表）。
+:::
+
+::: {.en}
+**Answer**: the first line, `install.packages("moments")`, directly violates
+the instruction list explicitly forbidden in `askLLM/R/llm-adapter.R` lines
+172–177 — the system prompt explicitly requires "never suggest
+install.packages()". This line cannot be run safely: your Rj environment
+isn't guaranteed to have network or write access to install a new package,
+and askLLM is supposed to cite only packages **already installed**, from the
+`<rj_environment>` list. Verification step: **V4a, read** (see the red-flag
+table in `checklist-rtutor.qmd`).
+:::
+:::
+
+## [第 9 題（示意範例）：程式碼裡的檔案讀取]{.zh}[Question 9 (illustrative): a file read in the code]{.en}
+
+::: {.zh}
+> 本題為**示意範例**，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。
+
+**情境**：使用者用 R code tutor 問「幫我畫出兩個變項的散佈圖。」
+
+**模型回覆（示意）**：
+
+```r
+mydata <- read.csv("C:/Users/me/Desktop/survey.csv")
+plot(mydata$x, mydata$y)
+```
+
+**問題**：這段程式碼違反了哪幾條紅旗規則？（不只一條）
+:::
+
+::: {.en}
+**Scenario**: A user asks the R code tutor "plot a scatterplot of two
+variables."
+
+**Model reply (illustrative)**:
+
+```r
+mydata <- read.csv("C:/Users/me/Desktop/survey.csv")
+plot(mydata$x, mydata$y)
+```
+
+**Question**: Which red-flag rules does this code violate? (More than one.)
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：這一行同時踩到**兩條**紅旗：`read.csv(...)`（不得建議讀取檔案，
+資料一律用既有的 `data` 物件）以及**絕對路徑**（`C:/Users/me/Desktop/...`
+這種路徑因人而異，在你的機器上幾乎必然不存在）。就算你剛好也有一份叫
+`survey.csv` 的檔案放在桌面，這段程式碼也完全沒有用到 jamovi 已經幫你準備
+好的 `data` 物件，等於繞過了 askLLM 的設計邊界。對應查核步驟：**V4a 讀**。
+:::
+
+::: {.en}
+**Answer**: this single line trips **two** red flags at once: `read.csv(...)`
+(no file reads are allowed; the data must always come from the existing
+`data` object) and an **absolute path** (`C:/Users/me/Desktop/...` is
+machine-specific and almost certainly does not exist on your computer). Even
+if you happened to have a file called `survey.csv` on your own desktop, this
+code entirely bypasses the `data` object jamovi already prepared for you —
+it sidesteps askLLM's design boundary. Verification step: **V4a, read**.
+:::
+:::
+
+## [第 10 題（示意範例）：引用一個沒裝的套件]{.zh}[Question 10 (illustrative): citing an uninstalled package]{.en}
+
+::: {.zh}
+> 本題為**示意範例**，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。
+
+**情境**：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件），
+`<rj_environment>` 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸
+（robust regression）。」
+
+**模型回覆（示意）**：
+
+```r
+library(MASS)
+fit <- rlm(y ~ x, data = data)
+summary(fit)
+```
+
+**問題**：這段程式碼有問題嗎？如果 `MASS` 沒有出現在 `<rj_environment>`
+清單裡，你會怎麼處理？
+:::
+
+::: {.en}
+**Scenario**: The user's Rj environment has only base R installed (no extra
+statistical packages), so the `<rj_environment>` list contains only base R
+packages. The user asks "run a robust regression for me."
+
+**Model reply (illustrative)**:
+
+```r
+library(MASS)
+fit <- rlm(y ~ x, data = data)
+summary(fit)
+```
+
+**Question**: Is there a problem with this code? If `MASS` does not appear in
+the `<rj_environment>` list, what should you do?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：這裡要看清楚：`MASS` 隨 base R 一起發行，在多數 R 安裝裡本來就
+存在，所以「引用 `MASS`」本身不一定是錯的——**關鍵是核對，不是背名單**。
+真正的檢查方法是：打開這次呼叫附給模型的 `<rj_environment>` 區塊，逐字確認
+`MASS` 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒
+列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到
+`there is no package called 'MASS'`——這種情況下應該回頭修改問題（例如
+「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合模型的回覆。
+對應查核步驟：**V4a 讀** 與 **V4b 跑**（V4b 的錯誤訊息正是拿來確認 V4a
+判斷是否正確的依據）。
+:::
+
+::: {.en}
+**Answer**: look carefully here — `MASS` ships with base R and exists in most
+R installations by default, so citing `MASS` is not automatically wrong. **The
+point is to check, not to memorize a blocklist.** The real check is: open the
+`<rj_environment>` block that was sent to the model for this call, and confirm
+verbatim whether `MASS` is actually listed. If it is, this code does not
+violate a red flag. If it is not listed (meaning your Rj scan didn't find it),
+running this code will immediately produce
+`there is no package called 'MASS'` — in that case, go back and rephrase the
+question (e.g. "use only base R for a robust estimate") rather than manually
+installing a package just to make the model's reply work. Verification steps:
+**V4a, read** and **V4b, run** (the V4b error message is exactly what
+confirms whether the V4a judgment was correct).
+:::
+:::
+
+## [相關頁面]{.zh}[Related pages]{.en}
+
+::: {.zh}
+- 完整流程說明：[`verify/workflow.qmd`](workflow.qmd)
+- Module Guider 版查核清單：[`checklist-guider.qmd`](checklist-guider.qmd)
+- R code tutor 版查核清單（含紅旗字串表）：[`checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- 已知錯誤原始記錄：`askLLM/docs/LIMITATIONS.zh-TW.md`（母專案文件，
+  不在本站範圍內修改）
+:::
+
+::: {.en}
+- Full workflow: [`verify/workflow.qmd`](workflow.qmd)
+- Module Guider checklist: [`checklist-guider.qmd`](checklist-guider.qmd)
+- R code tutor checklist (includes the red-flag table):
+  [`checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- Original record of the errors above: `askLLM/docs/LIMITATIONS.zh-TW.md`
+  (parent-project document, not modified within this site)
 :::

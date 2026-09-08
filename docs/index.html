@@ -142,9 +142,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這是什麼" id="toc-這是什麼" class="nav-link active" data-scroll-target="#這是什麼"><span class="zh">這是什麼</span></a></li>
-  <li><a href="#目前狀態" id="toc-目前狀態" class="nav-link" data-scroll-target="#目前狀態"><span class="zh">目前狀態</span></a></li>
-  <li><a href="#english" id="toc-english" class="nav-link" data-scroll-target="#english"><span class="en">English</span></a></li>
+  <li><a href="#這是什麼what-this-is" id="toc-這是什麼what-this-is" class="nav-link active" data-scroll-target="#這是什麼what-this-is"><span class="zh">這是什麼</span><span class="en">What this is</span></a></li>
+  <li><a href="#目前狀態current-status" id="toc-目前狀態current-status" class="nav-link" data-scroll-target="#目前狀態current-status"><span class="zh">目前狀態</span><span class="en">Current status</span></a></li>
   </ul>
 </nav>
     </div>
@@ -170,8 +169,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="這是什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這是什麼"><span class="zh">這是什麼</span></h2>
+<section id="這是什麼what-this-is" class="level2">
+<h2 class="anchored" data-anchor-id="這是什麼what-this-is"><span class="zh">這是什麼</span><span class="en">What this is</span></h2>
 <div class="zh">
 <p><code>stat-skills-tutorials</code> 是給 jamovi 模組 <code>askLLM</code> 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。</p>
 <p>本站分三層，對應 README 提到的三件事：</p>
@@ -181,18 +180,25 @@ ul.task-list li input[type="checkbox"] {
 <li><strong><a href="./verify/workflow.html">生成結果查核</a></strong>：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。</li>
 </ol>
 </div>
+<div class="en">
+<p><code>stat-skills-tutorials</code> is an original tutorial and prompt library for users of the jamovi module <code>askLLM</code>. It teaches you how to collaborate with a consulting AI — the Module Guider or the R code tutor — on statistical analysis. It does not teach statistics or R themselves; for that, every page links out to the matching chapter in an external textbook such as psyteachr or lsj-book (see <a href="./external/reading-map.html">External Reading Map</a>).</p>
+<p>The site has three layers, matching the three things the README describes:</p>
+<ol type="1">
+<li><strong><a href="./literacy/01-what-the-llm-sees.html">Collaboration literacy</a></strong>: six short lessons on treating the AI as a collaborator with awareness, describing your problem clearly, and setting explicit acceptance criteria.</li>
+<li><strong><a href="./prompts/index.html">Prompt library</a></strong>: scenario-based prompts you can paste directly into askLLM’s <code>question</code> field, each with its own verification points and acceptance criteria and a structured schema (see <code>prompts/_schema.yaml</code>).</li>
+<li><strong><a href="./verify/workflow.html">Verifying generated results</a></strong>: an AI reply is never taken at face value — it is checked against your jamovi interface, your raw data, and your research design. The Module Guider and the R code tutor each have their own verification checklist.</li>
+</ol>
+</div>
 </section>
-<section id="目前狀態" class="level2">
-<h2 class="anchored" data-anchor-id="目前狀態"><span class="zh">目前狀態</span></h2>
+<section id="目前狀態current-status" class="level2">
+<h2 class="anchored" data-anchor-id="目前狀態current-status"><span class="zh">目前狀態</span><span class="en">Current status</span></h2>
 <div class="zh">
 <p>本站正在 <strong>Phase 0（骨架與可行性）</strong>：目錄結構、提示詞 schema、3 條示範提示詞、 1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。 詳細規劃見 repo 內的 <code>PROPOSAL.zh-TW.md</code>。</p>
 </div>
-</section>
-<section id="english" class="level2">
-<h2 class="anchored" data-anchor-id="english"><span class="en">English</span></h2>
 <div class="en">
-<p>This site teaches jamovi <code>askLLM</code> users how to collaborate with a consulting LLM (the Module Guider or the R code tutor), not statistics or R themselves — for those, see <a href="./external/reading-map.html">外部教材導讀</a>. It has three layers: AI-collaboration literacy, a scenario-based prompt library, and a verification workflow for checking what the AI actually said against your own jamovi session. The site is currently in Phase 0 (scaffolding); see <code>PROPOSAL.zh-TW.md</code> for the roadmap.</p>
+<p>The site is currently in <strong>Phase 0 (scaffolding and feasibility)</strong>: the directory structure, the prompt schema, three example prompts, and one verification checklist are already live. The six collaboration-literacy lessons and the remaining verification checklists are still placeholders awaiting content. See <code>PROPOSAL.zh-TW.md</code> in the repo for the full roadmap.</p>
 </div>
+<p></p>
 
 
 </section>

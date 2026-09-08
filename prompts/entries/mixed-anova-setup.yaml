@@ -16,8 +16,10 @@ variables:
 design: mixed
 stat_goal: compare-k
 prerequisites:
-  - 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
-  - 三個時間點欄名記下來
+  - zh: 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+    en: Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+  - zh: 三個時間點欄名記下來
+    en: Write down the three time-point column names.
 persona: tutor
 prompt:
   zh: |-
@@ -37,16 +39,32 @@ prompt:
     3. Do not run the ANOVA for me.
 system_prompt_override: null
 expected:
-  - 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
-  - 長格式列數 = n 受試者 × 3
-  - 有一行驗證輸出（table 或 nrow）
+  - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+    en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+  - zh: 長格式列數 = n 受試者 × 3
+    en: The long-format row count equals n subjects x 3
+  - zh: 有一行驗證輸出（table 或 nrow）
+    en: Includes one line of verification output (a table or nrow)
 check:
-  - {step: code-read, what: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件}
-  - {step: code-run, what: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題}
-  - {step: cross-check, what: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致}
+  - step: code-read
+    what:
+      zh: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件
+      en: Read line by line for setwd, file paths, or packages not listed in rj_environment
+  - step: code-run
+    what:
+      zh: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題
+      en: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question
+  - step: cross-check
+    what:
+      zh: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致
+      en: Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones
 stop_criteria:
-  solved: code-run 列數正確且 cross-check 描述統計一致
-  reopen: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版
+  solved:
+    zh: code-run 列數正確且 cross-check 描述統計一致
+    en: The code-run row count is correct and the cross-check descriptive statistics agree.
+  reopen:
+    zh: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版
+    en: The row count is wrong, or the code uses a package not available in the environment -> paste the error message back and ask the consultant persona for the full solution.
 links:
   - {title: "psyteachr quant-fun (wrangling / ANOVA)", url: "https://psyteachr.github.io/quant-fun-v3/", license: "CC BY-SA 4.0"}
 tested_with:

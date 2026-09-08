@@ -2,7 +2,7 @@
 title: "stat-skills-tutorials"
 ---
 
-## [這是什麼]{.zh}
+## [這是什麼]{.zh}[What this is]{.en}
 
 ::: {.zh}
 `stat-skills-tutorials` 是給 jamovi 模組 `askLLM` 使用者的原創教程與提示詞庫，
@@ -20,7 +20,30 @@ title: "stat-skills-tutorials"
    介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。
 :::
 
-## [目前狀態]{.zh}
+::: {.en}
+`stat-skills-tutorials` is an original tutorial and prompt library for users
+of the jamovi module `askLLM`. It teaches you how to collaborate with a
+consulting AI — the Module Guider or the R code tutor — on statistical
+analysis. It does not teach statistics or R themselves; for that, every page
+links out to the matching chapter in an external textbook such as psyteachr
+or lsj-book (see [External Reading Map](external/reading-map.qmd)).
+
+The site has three layers, matching the three things the README describes:
+
+1. **[Collaboration literacy](literacy/01-what-the-llm-sees.qmd)**: six short
+   lessons on treating the AI as a collaborator with awareness, describing
+   your problem clearly, and setting explicit acceptance criteria.
+2. **[Prompt library](prompts/index.qmd)**: scenario-based prompts you can
+   paste directly into askLLM's `question` field, each with its own
+   verification points and acceptance criteria and a structured schema (see
+   `prompts/_schema.yaml`).
+3. **[Verifying generated results](verify/workflow.qmd)**: an AI reply is
+   never taken at face value — it is checked against your jamovi interface,
+   your raw data, and your research design. The Module Guider and the R code
+   tutor each have their own verification checklist.
+:::
+
+## [目前狀態]{.zh}[Current status]{.en}
 
 ::: {.zh}
 本站正在 **Phase 0（骨架與可行性）**：目錄結構、提示詞 schema、3 條示範提示詞、
@@ -28,14 +51,11 @@ title: "stat-skills-tutorials"
 詳細規劃見 repo 內的 `PROPOSAL.zh-TW.md`。
 :::
 
-## [English]{.en}
-
 ::: {.en}
-This site teaches jamovi `askLLM` users how to collaborate with a consulting
-LLM (the Module Guider or the R code tutor), not statistics or R themselves —
-for those, see [外部教材導讀](external/reading-map.qmd). It has three layers:
-AI-collaboration literacy, a scenario-based prompt library, and a verification
-workflow for checking what the AI actually said against your own jamovi
-session. The site is currently in Phase 0 (scaffolding); see `PROPOSAL.zh-TW.md`
-for the roadmap.
+The site is currently in **Phase 0 (scaffolding and feasibility)**: the
+directory structure, the prompt schema, three example prompts, and one
+verification checklist are already live. The six collaboration-literacy
+lessons and the remaining verification checklists are still placeholders
+awaiting content. See `PROPOSAL.zh-TW.md` in the repo for the full roadmap.
 :::
+</content>

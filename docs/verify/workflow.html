@@ -183,10 +183,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#原則" id="toc-原則" class="nav-link active" data-scroll-target="#原則"><span class="zh">原則</span></a></li>
-  <li><a href="#流程步驟" id="toc-流程步驟" class="nav-link" data-scroll-target="#流程步驟"><span class="zh">流程步驟</span></a></li>
-  <li><a href="#兩份查核清單" id="toc-兩份查核清單" class="nav-link" data-scroll-target="#兩份查核清單"><span class="zh">兩份查核清單</span></a></li>
-  <li><a href="#english" id="toc-english" class="nav-link" data-scroll-target="#english"><span class="en">English</span></a></li>
+  <li><a href="#原則principles" id="toc-原則principles" class="nav-link active" data-scroll-target="#原則principles"><span class="zh">原則</span><span class="en">Principles</span></a></li>
+  <li><a href="#流程步驟workflow-steps" id="toc-流程步驟workflow-steps" class="nav-link" data-scroll-target="#流程步驟workflow-steps"><span class="zh">流程步驟</span><span class="en">Workflow steps</span></a></li>
+  <li><a href="#兩份查核清單two-checklists" id="toc-兩份查核清單two-checklists" class="nav-link" data-scroll-target="#兩份查核清單two-checklists"><span class="zh">兩份查核清單</span><span class="en">Two checklists</span></a></li>
   </ul>
 </nav>
     </div>
@@ -217,8 +216,13 @@ ul.task-list li input[type="checkbox"] {
 <p>狀態：Phase 0 placeholder，流程骨架已定，逐步展開待 Phase 1（見 <code>PROPOSAL.zh-TW.md</code> §5.2）。<code>checklist-guider.qmd</code> 已是完整版；本頁與 <code>checklist-rtutor.qmd</code>、<code>spot-the-error.qmd</code> 仍待撰寫成教學文字。</p>
 </blockquote>
 </div>
-<section id="原則" class="level2">
-<h2 class="anchored" data-anchor-id="原則"><span class="zh">原則</span></h2>
+<div class="en">
+<blockquote class="blockquote">
+<p>Status: Phase 0 placeholder. The workflow skeleton is fixed; the full teaching prose is planned for Phase 1 (see <code>PROPOSAL.zh-TW.md</code> §5.2). <code>checklist-guider.qmd</code> is already complete; this page, <code>checklist-rtutor.qmd</code>, and <code>spot-the-error.qmd</code> still need to be written up as teaching text.</p>
+</blockquote>
+</div>
+<section id="原則principles" class="level2">
+<h2 class="anchored" data-anchor-id="原則principles"><span class="zh">原則</span><span class="en">Principles</span></h2>
 <div class="zh">
 <ul>
 <li>查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始 資料、你的研究設計——去對。</li>
@@ -226,9 +230,16 @@ ul.task-list li input[type="checkbox"] {
 <li>每次查核產出一筆「協作日誌」（見第六課），這是可教、可重複、可交作業的單位。</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Verification is not “asking the AI again” — it is checking what the AI said against things it cannot see: your jamovi interface, your raw data, your research design.</li>
+<li>The two paths are not equally hard to verify: the Module Guider’s output can be checked against a finite, verifiable set (menu paths); the R code tutor’s output can only be checked through a process (read the code, run it, cross-check against the GUI).</li>
+<li>Every verification pass produces one “collaboration log” entry (see Lesson 6) — a unit that can be taught, repeated, and turned into an assignment.</li>
+</ul>
+</div>
 </section>
-<section id="流程步驟" class="level2">
-<h2 class="anchored" data-anchor-id="流程步驟"><span class="zh">流程步驟</span></h2>
+<section id="流程步驟workflow-steps" class="level2">
+<h2 class="anchored" data-anchor-id="流程步驟workflow-steps"><span class="zh">流程步驟</span><span class="en">Workflow steps</span></h2>
 <pre><code>送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課
          P1 記下摘要裡的關鍵數字（n、mean、遺漏）
 
@@ -244,19 +255,19 @@ ul.task-list li input[type="checkbox"] {
 結案     C1 對照 P0 判準：solved / reopen
          C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）</code></pre>
 </section>
-<section id="兩份查核清單" class="level2">
-<h2 class="anchored" data-anchor-id="兩份查核清單"><span class="zh">兩份查核清單</span></h2>
+<section id="兩份查核清單two-checklists" class="level2">
+<h2 class="anchored" data-anchor-id="兩份查核清單two-checklists"><span class="zh">兩份查核清單</span><span class="en">Two checklists</span></h2>
 <div class="zh">
 <ul>
 <li><a href="../verify/checklist-guider.html"><code>checklist-guider.qmd</code></a>：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。</li>
 <li><a href="../verify/checklist-rtutor.html"><code>checklist-rtutor.qmd</code></a>：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。</li>
 </ul>
 </div>
-</section>
-<section id="english" class="level2">
-<h2 class="anchored" data-anchor-id="english"><span class="en">English</span></h2>
 <div class="en">
-<p>Verification is not “asking the AI again” — it is checking the AI’s reply against things it cannot see: your jamovi interface, your raw data, your research design. The Module Guider path is easier to check mechanically (menu paths are a finite, verifiable set); the R code tutor path can only be checked through a process (read the code, run it, cross-check against the GUI). Full English prose for this page is planned for Phase 1; the checklist above already exists in complete bilingual form.</p>
+<ul>
+<li><a href="../verify/checklist-guider.html"><code>checklist-guider.qmd</code></a>: P0–P1, V1–V3, V5, C1–C2 — a single printable page.</li>
+<li><a href="../verify/checklist-rtutor.html"><code>checklist-rtutor.qmd</code></a>: P0–P1, V2–V4, V5, C1–C2 (Phase 0 placeholder).</li>
+</ul>
 </div>
 
 

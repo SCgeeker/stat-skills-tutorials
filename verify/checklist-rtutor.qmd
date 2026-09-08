@@ -3,33 +3,189 @@ title: "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.e
 ---
 
 ::: {.zh}
-> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §5.3）。
+本頁對應 `PROPOSAL.zh-TW.md` §5.3 的第二份查核清單：涵蓋 `verify/workflow.qmd`
+流程裡的 P0–P1、V2–V4、V5、C1–C2 步驟，設計成可列印的一頁。適用對象是使用
+**R code tutor**（`askllmr`）取得 R 程式碼的情境；若你用的是 Module
+Guider（`askllm`），請改用 `checklist-guider.qmd`。
 :::
-
-## [這一頁要做什麼]{.zh}
-
-::: {.zh}
-這是 `verify/workflow.qmd` 的第二份查核清單，涵蓋 P0–P1、V2–V4、V5、C1–C2，
-給用 **R code tutor**（`askllmr`）取得 R 程式碼的情境。與 `checklist-guider.qmd`
-最大的差異在 V4（程式碼核對）分三段：
-
-- **4a 讀**：逐行讀程式碼——只用 `data`？`library()` 引用的套件都在
-  `rj_environment` 清單內？沒有 `setwd`、絕對路徑、`system(`？
-- **4b 跑**：把程式碼原封不動貼進 Rj Editor 執行，記錄輸出或錯誤原文。
-- **4c 對**：同一個分析改用 jamovi GUI（或 Syntax Mode 的 `jmv::` 呼叫）跑
-  一次，比較關鍵數字是否一致。
-
-Phase 1 會加入「紅旗字串表」（`install.packages`、`read.csv`、`setwd`、
-`system(`、絕對路徑、`library(` 後接不在 `rj_environment` 清單的套件），並把
-本頁做成跟 `checklist-guider.qmd` 一樣的可列印格式。
-:::
-
-## [English (placeholder)]{.en}
 
 ::: {.en}
-This is the second verification checklist (steps P0–P1, V2–V4, V5, C1–C2) for
-sessions using the R code tutor (`askllmr`). It differs from
-`checklist-guider.qmd` mainly in step V4 (code check), split into read (4a),
-run (4b), and cross-check against the jamovi GUI (4c). A red-flag string table
-and a fully printable bilingual layout are planned for Phase 1.
+This page is the second of the two verification checklists described in
+`PROPOSAL.zh-TW.md` §5.3. It covers steps P0–P1, V2–V4, V5, and C1–C2 of the
+workflow in `verify/workflow.qmd`, laid out as a single printable page. Use it
+when you asked the **R code tutor** (`askllmr`) for R code. If you used the
+Module Guider (`askllm`) instead, use `checklist-guider.qmd`.
+:::
+
+::: {.zh}
+與 `checklist-guider.qmd` 最大的差異在於：R code tutor 的答案空間不是有限
+集合（不像選單路徑可以逐條核對），R 是 Turing-complete，沒有任何掃描能證明
+一段任意生成的程式碼「如它所說地運作」。所以這裡沒有 V1 路徑核對，取而代之
+的是 **V4 程式碼核對**，拆成讀（4a）、跑（4b）、對（4c）三段——這是流程性
+的查核，不是機械性的查核。詳見 `askLLM/docs/LIMITATIONS.zh-TW.md`〈兩個分析，
+兩種查證方式〉一節。
+:::
+
+::: {.en}
+The key difference from `checklist-guider.qmd` is that the R code tutor's
+output space is not a finite, checkable set the way menu paths are — R is
+Turing-complete, so no scan can prove that an arbitrary piece of generated
+code actually "works as claimed." So there is no V1 path check here; instead
+there is **V4, the code check**, split into read (4a), run (4b), and cross-check
+(4c). This is a procedural check, not a mechanical one. See the "Two
+analyses, two ways to verify" section of `askLLM/docs/LIMITATIONS.zh-TW.md`
+for background.
+:::
+
+## [送出前]{.zh}[Before you submit]{.en}
+
+::: {.zh}
+- [ ] **P0** 我已經寫下「我會接受什麼答案」（例如：程式碼必須只用
+      `data` 這個物件名稱、必須產出我要的統計量、不得需要我自己補檔案路徑）。
+- [ ] **P1** 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數），
+      這些數字之後要拿來跟程式碼的輸出核對。
+:::
+
+::: {.en}
+- [ ] **P0** I have written down what answer I will accept (e.g. "the code
+      must use only the object name `data`, must produce the statistic I
+      asked for, and must not require me to fill in a file path myself").
+- [ ] **P1** I have written down the key numbers from the summary (n, mean, sd,
+      missing count per group) so I can check the code's output against them
+      later.
+:::
+
+## [收到回覆後]{.zh}[After you receive a reply]{.en}
+
+::: {.zh}
+- [ ] **V2 數字核對** — 執行後的輸出數字（n、mean、sd 等），跟我在 P1
+      記下的、以及在 Descriptives 面板看到的一致。
+- [ ] **V3 範圍核對** — 回覆有沒有宣稱它「看不到」的東西（例如常態性、離
+      群值、原始資料列的內容）？如果有，這是「越界」，代表回覆超出摘要統計
+      能支持的範圍，應打折扣看待。
+- [ ] **V4a 讀** — 逐行讀完整段程式碼，確認：
+      - 資料只用 `data` 這個物件名稱，沒有另外指定其他資料來源；
+      - 每一個 `library(...)` 引用的套件，都出現在 askLLM 附給模型的
+        `<rj_environment>` 套件清單內，或屬於 base R；
+      - 沒有出現「紅旗指令」（見下方紅旗字串表）。
+      **只要有一項沒通過，就先不要執行**，回頭修改問題或換一個 persona
+      再問一次。
+- [ ] **V4b 跑** — 把程式碼**原封不動**貼進 Rj Editor（`Analyses ▸ R ▸
+      Rj ▸ Rj Editor`），按下 Run，把輸出或錯誤訊息原文記下來（成功的輸出
+      與失敗的錯誤訊息都要記，不要只記成功的）。
+- [ ] **V4c 對** — 用另一個獨立管道重跑同一個分析，比較關鍵數字是否一致：
+      改用 jamovi GUI 對應的分析模組跑一次；或在該分析的 Syntax Mode 中查看
+      jamovi 自己產生的 `jmv::` 呼叫，作為第二層獨立對照。
+- [ ] **V5 交叉核對** — 換一個 persona（Consultant / Tutor / Explainer）
+      或換一個模型，針對同一個 `What should the R code do?` 問題再問一次；
+      兩次程式碼的邏輯與輸出是否一致？（V4a／V4b 仍須對第二份程式碼各自
+      重跑一次，不能因為兩次都「看起來合理」就省略讀碼與執行。）
+:::
+
+::: {.en}
+- [ ] **V2 Number check** — The numbers produced by running the code (n, mean,
+      sd, etc.) match what I wrote down in P1 and what I see in the
+      Descriptives panel.
+- [ ] **V3 Scope check** — Does the reply make claims about things it cannot
+      actually see (e.g. normality, outliers, the content of raw data rows)?
+      If so, flag this as "overreaching" — the claim exceeds what summary
+      statistics can support, and should be discounted.
+- [ ] **V4a Read** — Read the entire code block line by line and confirm:
+      - the data is referenced only through the object name `data`, with no
+        other data source specified;
+      - every `library(...)` call names a package that appears in the
+        `<rj_environment>` package list askLLM sent the model, or is base R;
+      - none of the red-flag instructions below appear.
+      **If any of these fails, do not run the code.** Rephrase the question
+      or try a different persona instead.
+- [ ] **V4b Run** — Paste the code **verbatim, unmodified** into the Rj Editor
+      (`Analyses ▸ R ▸ Rj ▸ Rj Editor`), press Run, and record the exact
+      output or error message (record both a successful output and a failed
+      error message — don't only keep the successes).
+- [ ] **V4c Cross-check** — Re-run the same analysis through an independent
+      channel and compare the key numbers: run the equivalent analysis
+      through the jamovi GUI; or check that analysis's Syntax Mode for the
+      `jmv::` call jamovi generates itself, as a second, independent
+      comparison.
+- [ ] **V5 Cross-check (persona/model)** — Ask the same "What should the R
+      code do?" question again with a different persona (Consultant / Tutor /
+      Explainer) or a different model. Do the two pieces of code agree in
+      logic and output? (Still repeat V4a/V4b on the second piece of code —
+      two replies "looking reasonable" is not a substitute for reading and
+      running each one.)
+:::
+
+## [結案]{.zh}[Closing out]{.en}
+
+::: {.zh}
+- [ ] **C1** 對照 P0 寫下的判準：solved（全部命中，程式碼可用）還是 reopen
+      （任一項沒通過，需要換個問法或換個 persona 再試）。
+- [ ] **C2** 填寫協作日誌四欄：問題 / 判準 / 回覆摘要 / 查核結果。
+:::
+
+::: {.en}
+- [ ] **C1** Compare the reply against the P0 criteria: solved (everything
+      checks out — the code is usable) or reopen (something failed —
+      rephrase the question or try a different persona).
+- [ ] **C2** Fill in the four-column collaboration log: question / criteria /
+      reply summary / verification result.
+:::
+
+## [紅旗字串表（4a 逐行核對用）]{.zh}[Red-flag string table (for V4a)]{.en}
+
+::: {.zh}
+askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令
+（見 `askLLM/R/llm-adapter.R` 第 172–177 行）。若程式碼裡出現任何一項，代表
+回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：
+:::
+
+::: {.en}
+askLLM's system prompt explicitly forbids the model from using the following
+in an R code tutor reply (see `askLLM/R/llm-adapter.R`, lines 172–177). If any
+of these appear in the code, the reply has violated askLLM's own stated
+boundary — flag it as "do not run" and go back and rephrase the question:
+:::
+
+| [紅旗]{.zh}[Red flag]{.en} | [為什麼]{.zh}[Why]{.en} |
+|---|---|
+| `install.packages(...)` | [模型不能替你安裝套件；Rj 只用已裝好的套件。]{.zh}[The model cannot install packages for you; Rj only has what is already installed.]{.en} |
+| `read.csv(...)`／[任何檔案讀取函式]{.zh}[/ any file-reading function]{.en} | [不得建議讀取檔案；資料一律用 `data` 這個既有物件。]{.zh}[No file reads are allowed; the data must always come from the existing `data` object.]{.en} |
+| `setwd(...)` | [不得變更工作目錄。]{.zh}[The working directory must not be changed.]{.en} |
+| [任何絕對路徑（如 `C:/...`、`/Users/...`）]{.zh}[Any absolute file path (e.g. `C:/...`, `/Users/...`)]{.en} | [路徑因人而異，不可能通用，且暗示前一條「檔案讀取」紅旗。]{.zh}[Paths are machine-specific and can't generalize; this usually co-occurs with the file-read red flag above.]{.en} |
+| `system(...)` | [不得呼叫系統層級指令。]{.zh}[System-level shell calls are not allowed.]{.en} |
+| `library(套件)`，但該套件**不在** `<rj_environment>` 清單內、也非 base R | [模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 `there is no package called '...'`。]{.zh}[`library(package)` where the package is **not** in the `<rj_environment>` list and is not base R — the model may only cite packages actually installed in your Rj; code citing an uninstalled package will fail immediately with `there is no package called '...'`.]{.en} |
+
+::: {.zh}
+> 提醒：`<rj_environment>` 這個套件清單只有在你的 jamovi 裝有 Rj、且
+> askLLM 掃描到套件時才會附上。若你的 jamovi 沒裝 Rj，askLLM 會改教你
+> 用 Syntax Mode，而不是硬生出一段你根本跑不了的程式碼；這種情況下本清單
+> 的 4a／4b 步驟不適用，因為根本沒有 Rj Editor 可以貼上執行。
+:::
+
+::: {.en}
+> Note: the `<rj_environment>` package list is only attached when your
+> jamovi has Rj installed and askLLM was able to scan its packages. If Rj is
+> not installed, askLLM should instead teach you to use Syntax Mode rather
+> than generating code you cannot actually run — in that case steps 4a/4b of
+> this checklist do not apply, since there is no Rj Editor to paste into.
+:::
+
+## [相關頁面]{.zh}[Related pages]{.en}
+
+::: {.zh}
+- 完整流程說明：[`verify/workflow.qmd`](workflow.qmd)
+- Module Guider 版查核清單：[`checklist-guider.qmd`](checklist-guider.qmd)
+- 已知錯誤範例與「兩個分析，兩種查證方式」說明：
+  `askLLM/docs/LIMITATIONS.zh-TW.md`（母專案文件，不在本站範圍內修改）
+- 找碴練習（含程式碼紅旗題）：[`spot-the-error.qmd`](spot-the-error.qmd)
+:::
+
+::: {.en}
+- Full workflow: [`verify/workflow.qmd`](workflow.qmd)
+- Module Guider checklist: [`checklist-guider.qmd`](checklist-guider.qmd)
+- Recorded real errors and the "two analyses, two ways to verify" discussion:
+  `askLLM/docs/LIMITATIONS.zh-TW.md` (parent-project document, not modified
+  within this site)
+- Spot-the-error practice (includes code red-flag questions):
+  [`spot-the-error.qmd`](spot-the-error.qmd)
 :::

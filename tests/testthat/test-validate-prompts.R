@@ -77,6 +77,42 @@ test_that("id 與檔名不一致時被擋下", {
   expect_true(any(grepl("id", result$errors, ignore.case = TRUE)))
 })
 
+test_that("prerequisites 缺英文的條目被擋下", {
+  entry <- yaml::read_yaml(fx("missing-english-fields.yaml"))
+  result <- validate_entry(entry)
+  expect_false(result$valid)
+  expect_true(any(grepl("prerequisites.*en", result$errors)))
+})
+
+test_that("expected 缺英文的條目被擋下", {
+  entry <- yaml::read_yaml(fx("missing-english-fields.yaml"))
+  result <- validate_entry(entry)
+  expect_false(result$valid)
+  expect_true(any(grepl("expected.*en", result$errors)))
+})
+
+test_that("check.what 缺英文的條目被擋下", {
+  entry <- yaml::read_yaml(fx("missing-english-fields.yaml"))
+  result <- validate_entry(entry)
+  expect_false(result$valid)
+  expect_true(any(grepl("check\\[\\d+\\]\\.what\\.en", result$errors)))
+})
+
+test_that("stop_criteria.solved/.reopen 缺英文的條目被擋下", {
+  entry <- yaml::read_yaml(fx("missing-english-fields.yaml"))
+  result <- validate_entry(entry)
+  expect_false(result$valid)
+  expect_true(any(grepl("stop_criteria\\.solved\\.en", result$errors)))
+  expect_true(any(grepl("stop_criteria\\.reopen\\.en", result$errors)))
+})
+
+test_that("prerequisites 為雙語物件清單且皆完整時通過驗證", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  result <- validate_entry(entry)
+  expect_true(result$valid)
+  expect_length(result$errors, 0)
+})
+
 test_that("validate_all_entries 對目錄下所有合法條目回傳全 PASS", {
   dir <- test_path("fixtures", "valid-only")
   dir.create(dir, showWarnings = FALSE)

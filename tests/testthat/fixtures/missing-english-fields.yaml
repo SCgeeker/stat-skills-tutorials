@@ -1,0 +1,31 @@
+id: missing-english-fields
+title: {zh: 四個雙語欄位缺英文的測試條目, en: Fixture entry missing English in the four bilingual fields}
+analysis: guider
+scenario:
+  zh: 這條故意讓 prerequisites／expected／check.what／stop_criteria 缺英文，用來測試 validator 是否擋下這四個欄位。
+  en: This fixture deliberately omits English in prerequisites/expected/check.what/stop_criteria to test the validator's enforcement on these four fields.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+design: between
+stat_goal: compare-2
+prerequisites:
+  - {zh: 測試用前置條件, en: ""}
+persona: consultant
+prompt:
+  zh: "這是一行測試用提示詞。"
+  en: "This is a single-line fixture prompt."
+system_prompt_override: null
+expected:
+  - {zh: 測試用期望項目一, en: ""}
+check:
+  - step: path
+    what: {zh: 測試用查核點一, en: ""}
+  - step: number
+    what: {zh: 測試用查核點二, en: ""}
+stop_criteria:
+  solved: {zh: 測試用 solved 說明, en: ""}
+  reopen: {zh: 測試用 reopen 說明, en: ""}
+links: []
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測"}

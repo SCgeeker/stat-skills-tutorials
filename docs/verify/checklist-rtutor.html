@@ -183,8 +183,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這一頁要做什麼" id="toc-這一頁要做什麼" class="nav-link active" data-scroll-target="#這一頁要做什麼"><span class="zh">這一頁要做什麼</span></a></li>
-  <li><a href="#english-placeholder" id="toc-english-placeholder" class="nav-link" data-scroll-target="#english-placeholder"><span class="en">English (placeholder)</span></a></li>
+  <li><a href="#送出前before-you-submit" id="toc-送出前before-you-submit" class="nav-link active" data-scroll-target="#送出前before-you-submit"><span class="zh">送出前</span><span class="en">Before you submit</span></a></li>
+  <li><a href="#收到回覆後after-you-receive-a-reply" id="toc-收到回覆後after-you-receive-a-reply" class="nav-link" data-scroll-target="#收到回覆後after-you-receive-a-reply"><span class="zh">收到回覆後</span><span class="en">After you receive a reply</span></a></li>
+  <li><a href="#結案closing-out" id="toc-結案closing-out" class="nav-link" data-scroll-target="#結案closing-out"><span class="zh">結案</span><span class="en">Closing out</span></a></li>
+  <li><a href="#紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a" id="toc-紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a" class="nav-link" data-scroll-target="#紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a"><span class="zh">紅旗字串表（4a 逐行核對用）</span><span class="en">Red-flag string table (for V4a)</span></a></li>
+  <li><a href="#相關頁面related-pages" id="toc-相關頁面related-pages" class="nav-link" data-scroll-target="#相關頁面related-pages"><span class="zh">相關頁面</span><span class="en">Related pages</span></a></li>
   </ul>
 </nav>
     </div>
@@ -211,26 +214,144 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="zh">
-<blockquote class="blockquote">
-<p>狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 <code>PROPOSAL.zh-TW.md</code> §5.3）。</p>
-</blockquote>
+<p>本頁對應 <code>PROPOSAL.zh-TW.md</code> §5.3 的第二份查核清單：涵蓋 <code>verify/workflow.qmd</code> 流程裡的 P0–P1、V2–V4、V5、C1–C2 步驟，設計成可列印的一頁。適用對象是使用 <strong>R code tutor</strong>（<code>askllmr</code>）取得 R 程式碼的情境；若你用的是 Module Guider（<code>askllm</code>），請改用 <code>checklist-guider.qmd</code>。</p>
 </div>
-<section id="這一頁要做什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這一頁要做什麼"><span class="zh">這一頁要做什麼</span></h2>
+<div class="en">
+<p>This page is the second of the two verification checklists described in <code>PROPOSAL.zh-TW.md</code> §5.3. It covers steps P0–P1, V2–V4, V5, and C1–C2 of the workflow in <code>verify/workflow.qmd</code>, laid out as a single printable page. Use it when you asked the <strong>R code tutor</strong> (<code>askllmr</code>) for R code. If you used the Module Guider (<code>askllm</code>) instead, use <code>checklist-guider.qmd</code>.</p>
+</div>
 <div class="zh">
-<p>這是 <code>verify/workflow.qmd</code> 的第二份查核清單，涵蓋 P0–P1、V2–V4、V5、C1–C2， 給用 <strong>R code tutor</strong>（<code>askllmr</code>）取得 R 程式碼的情境。與 <code>checklist-guider.qmd</code> 最大的差異在 V4（程式碼核對）分三段：</p>
-<ul>
-<li><strong>4a 讀</strong>：逐行讀程式碼——只用 <code>data</code>？<code>library()</code> 引用的套件都在 <code>rj_environment</code> 清單內？沒有 <code>setwd</code>、絕對路徑、<code>system(</code>？</li>
-<li><strong>4b 跑</strong>：把程式碼原封不動貼進 Rj Editor 執行，記錄輸出或錯誤原文。</li>
-<li><strong>4c 對</strong>：同一個分析改用 jamovi GUI（或 Syntax Mode 的 <code>jmv::</code> 呼叫）跑 一次，比較關鍵數字是否一致。</li>
+<p>與 <code>checklist-guider.qmd</code> 最大的差異在於：R code tutor 的答案空間不是有限 集合（不像選單路徑可以逐條核對），R 是 Turing-complete，沒有任何掃描能證明 一段任意生成的程式碼「如它所說地運作」。所以這裡沒有 V1 路徑核對，取而代之 的是 <strong>V4 程式碼核對</strong>，拆成讀（4a）、跑（4b）、對（4c）三段——這是流程性 的查核，不是機械性的查核。詳見 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈兩個分析， 兩種查證方式〉一節。</p>
+</div>
+<div class="en">
+<p>The key difference from <code>checklist-guider.qmd</code> is that the R code tutor’s output space is not a finite, checkable set the way menu paths are — R is Turing-complete, so no scan can prove that an arbitrary piece of generated code actually “works as claimed.” So there is no V1 path check here; instead there is <strong>V4, the code check</strong>, split into read (4a), run (4b), and cross-check (4c). This is a procedural check, not a mechanical one. See the “Two analyses, two ways to verify” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> for background.</p>
+</div>
+<section id="送出前before-you-submit" class="level2">
+<h2 class="anchored" data-anchor-id="送出前before-you-submit"><span class="zh">送出前</span><span class="en">Before you submit</span></h2>
+<div class="zh">
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>P0</strong> 我已經寫下「我會接受什麼答案」（例如：程式碼必須只用 <code>data</code> 這個物件名稱、必須產出我要的統計量、不得需要我自己補檔案路徑）。</label></li>
+<li><label><input type="checkbox"><strong>P1</strong> 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數）， 這些數字之後要拿來跟程式碼的輸出核對。</label></li>
 </ul>
-<p>Phase 1 會加入「紅旗字串表」（<code>install.packages</code>、<code>read.csv</code>、<code>setwd</code>、 <code>system(</code>、絕對路徑、<code>library(</code> 後接不在 <code>rj_environment</code> 清單的套件），並把 本頁做成跟 <code>checklist-guider.qmd</code> 一樣的可列印格式。</p>
+</div>
+<div class="en">
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>P0</strong> I have written down what answer I will accept (e.g.&nbsp;“the code must use only the object name <code>data</code>, must produce the statistic I asked for, and must not require me to fill in a file path myself”).</label></li>
+<li><label><input type="checkbox"><strong>P1</strong> I have written down the key numbers from the summary (n, mean, sd, missing count per group) so I can check the code’s output against them later.</label></li>
+</ul>
 </div>
 </section>
-<section id="english-placeholder" class="level2">
-<h2 class="anchored" data-anchor-id="english-placeholder"><span class="en">English (placeholder)</span></h2>
+<section id="收到回覆後after-you-receive-a-reply" class="level2">
+<h2 class="anchored" data-anchor-id="收到回覆後after-you-receive-a-reply"><span class="zh">收到回覆後</span><span class="en">After you receive a reply</span></h2>
+<div class="zh">
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>V2 數字核對</strong> — 執行後的輸出數字（n、mean、sd 等），跟我在 P1 記下的、以及在 Descriptives 面板看到的一致。</label></li>
+<li><label><input type="checkbox"><strong>V3 範圍核對</strong> — 回覆有沒有宣稱它「看不到」的東西（例如常態性、離 群值、原始資料列的內容）？如果有，這是「越界」，代表回覆超出摘要統計 能支持的範圍，應打折扣看待。</label></li>
+<li><label><input type="checkbox"><strong>V4a 讀</strong> — 逐行讀完整段程式碼，確認： - 資料只用 <code>data</code> 這個物件名稱，沒有另外指定其他資料來源； - 每一個 <code>library(...)</code> 引用的套件，都出現在 askLLM 附給模型的 <code>&lt;rj_environment&gt;</code> 套件清單內，或屬於 base R； - 沒有出現「紅旗指令」（見下方紅旗字串表）。 <strong>只要有一項沒通過，就先不要執行</strong>，回頭修改問題或換一個 persona 再問一次。</label></li>
+<li><label><input type="checkbox"><strong>V4b 跑</strong> — 把程式碼<strong>原封不動</strong>貼進 Rj Editor（<code>Analyses ▸ R ▸     Rj ▸ Rj Editor</code>），按下 Run，把輸出或錯誤訊息原文記下來（成功的輸出 與失敗的錯誤訊息都要記，不要只記成功的）。</label></li>
+<li><label><input type="checkbox"><strong>V4c 對</strong> — 用另一個獨立管道重跑同一個分析，比較關鍵數字是否一致： 改用 jamovi GUI 對應的分析模組跑一次；或在該分析的 Syntax Mode 中查看 jamovi 自己產生的 <code>jmv::</code> 呼叫，作為第二層獨立對照。</label></li>
+<li><label><input type="checkbox"><strong>V5 交叉核對</strong> — 換一個 persona（Consultant / Tutor / Explainer） 或換一個模型，針對同一個 <code>What should the R code do?</code> 問題再問一次； 兩次程式碼的邏輯與輸出是否一致？（V4a／V4b 仍須對第二份程式碼各自 重跑一次，不能因為兩次都「看起來合理」就省略讀碼與執行。）</label></li>
+</ul>
+</div>
 <div class="en">
-<p>This is the second verification checklist (steps P0–P1, V2–V4, V5, C1–C2) for sessions using the R code tutor (<code>askllmr</code>). It differs from <code>checklist-guider.qmd</code> mainly in step V4 (code check), split into read (4a), run (4b), and cross-check against the jamovi GUI (4c). A red-flag string table and a fully printable bilingual layout are planned for Phase 1.</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>V2 Number check</strong> — The numbers produced by running the code (n, mean, sd, etc.) match what I wrote down in P1 and what I see in the Descriptives panel.</label></li>
+<li><label><input type="checkbox"><strong>V3 Scope check</strong> — Does the reply make claims about things it cannot actually see (e.g.&nbsp;normality, outliers, the content of raw data rows)? If so, flag this as “overreaching” — the claim exceeds what summary statistics can support, and should be discounted.</label></li>
+<li><label><input type="checkbox"><strong>V4a Read</strong> — Read the entire code block line by line and confirm: - the data is referenced only through the object name <code>data</code>, with no other data source specified; - every <code>library(...)</code> call names a package that appears in the <code>&lt;rj_environment&gt;</code> package list askLLM sent the model, or is base R; - none of the red-flag instructions below appear. <strong>If any of these fails, do not run the code.</strong> Rephrase the question or try a different persona instead.</label></li>
+<li><label><input type="checkbox"><strong>V4b Run</strong> — Paste the code <strong>verbatim, unmodified</strong> into the Rj Editor (<code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>), press Run, and record the exact output or error message (record both a successful output and a failed error message — don’t only keep the successes).</label></li>
+<li><label><input type="checkbox"><strong>V4c Cross-check</strong> — Re-run the same analysis through an independent channel and compare the key numbers: run the equivalent analysis through the jamovi GUI; or check that analysis’s Syntax Mode for the <code>jmv::</code> call jamovi generates itself, as a second, independent comparison.</label></li>
+<li><label><input type="checkbox"><strong>V5 Cross-check (persona/model)</strong> — Ask the same “What should the R code do?” question again with a different persona (Consultant / Tutor / Explainer) or a different model. Do the two pieces of code agree in logic and output? (Still repeat V4a/V4b on the second piece of code — two replies “looking reasonable” is not a substitute for reading and running each one.)</label></li>
+</ul>
+</div>
+</section>
+<section id="結案closing-out" class="level2">
+<h2 class="anchored" data-anchor-id="結案closing-out"><span class="zh">結案</span><span class="en">Closing out</span></h2>
+<div class="zh">
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>C1</strong> 對照 P0 寫下的判準：solved（全部命中，程式碼可用）還是 reopen （任一項沒通過，需要換個問法或換個 persona 再試）。</label></li>
+<li><label><input type="checkbox"><strong>C2</strong> 填寫協作日誌四欄：問題 / 判準 / 回覆摘要 / 查核結果。</label></li>
+</ul>
+</div>
+<div class="en">
+<ul class="task-list">
+<li><label><input type="checkbox"><strong>C1</strong> Compare the reply against the P0 criteria: solved (everything checks out — the code is usable) or reopen (something failed — rephrase the question or try a different persona).</label></li>
+<li><label><input type="checkbox"><strong>C2</strong> Fill in the four-column collaboration log: question / criteria / reply summary / verification result.</label></li>
+</ul>
+</div>
+</section>
+<section id="紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a" class="level2">
+<h2 class="anchored" data-anchor-id="紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a"><span class="zh">紅旗字串表（4a 逐行核對用）</span><span class="en">Red-flag string table (for V4a)</span></h2>
+<div class="zh">
+<p>askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令 （見 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行）。若程式碼裡出現任何一項，代表 回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：</p>
+</div>
+<div class="en">
+<p>askLLM’s system prompt explicitly forbids the model from using the following in an R code tutor reply (see <code>askLLM/R/llm-adapter.R</code>, lines 172–177). If any of these appear in the code, the reply has violated askLLM’s own stated boundary — flag it as “do not run” and go back and rephrase the question:</p>
+</div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="zh">紅旗</span><span class="en">Red flag</span></th>
+<th><span class="zh">為什麼</span><span class="en">Why</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>install.packages(...)</code></td>
+<td><span class="zh">模型不能替你安裝套件；Rj 只用已裝好的套件。</span><span class="en">The model cannot install packages for you; Rj only has what is already installed.</span></td>
+</tr>
+<tr class="even">
+<td><code>read.csv(...)</code>／<span class="zh">任何檔案讀取函式</span><span class="en">/ any file-reading function</span></td>
+<td><span class="zh">不得建議讀取檔案；資料一律用 <code>data</code> 這個既有物件。</span><span class="en">No file reads are allowed; the data must always come from the existing <code>data</code> object.</span></td>
+</tr>
+<tr class="odd">
+<td><code>setwd(...)</code></td>
+<td><span class="zh">不得變更工作目錄。</span><span class="en">The working directory must not be changed.</span></td>
+</tr>
+<tr class="even">
+<td><span class="zh">任何絕對路徑（如 <code>C:/...</code>、<code>/Users/...</code>）</span><span class="en">Any absolute file path (e.g.&nbsp;<code>C:/...</code>, <code>/Users/...</code>)</span></td>
+<td><span class="zh">路徑因人而異，不可能通用，且暗示前一條「檔案讀取」紅旗。</span><span class="en">Paths are machine-specific and can’t generalize; this usually co-occurs with the file-read red flag above.</span></td>
+</tr>
+<tr class="odd">
+<td><code>system(...)</code></td>
+<td><span class="zh">不得呼叫系統層級指令。</span><span class="en">System-level shell calls are not allowed.</span></td>
+</tr>
+<tr class="even">
+<td><code>library(套件)</code>，但該套件<strong>不在</strong> <code>&lt;rj_environment&gt;</code> 清單內、也非 base R</td>
+<td><span class="zh">模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 <code>there is no package called '...'</code>。</span><span class="en"><code>library(package)</code> where the package is <strong>not</strong> in the <code>&lt;rj_environment&gt;</code> list and is not base R — the model may only cite packages actually installed in your Rj; code citing an uninstalled package will fail immediately with <code>there is no package called '...'</code>.</span></td>
+</tr>
+</tbody>
+</table>
+<div class="zh">
+<blockquote class="blockquote">
+<p>提醒：<code>&lt;rj_environment&gt;</code> 這個套件清單只有在你的 jamovi 裝有 Rj、且 askLLM 掃描到套件時才會附上。若你的 jamovi 沒裝 Rj，askLLM 會改教你 用 Syntax Mode，而不是硬生出一段你根本跑不了的程式碼；這種情況下本清單 的 4a／4b 步驟不適用，因為根本沒有 Rj Editor 可以貼上執行。</p>
+</blockquote>
+</div>
+<div class="en">
+<blockquote class="blockquote">
+<p>Note: the <code>&lt;rj_environment&gt;</code> package list is only attached when your jamovi has Rj installed and askLLM was able to scan its packages. If Rj is not installed, askLLM should instead teach you to use Syntax Mode rather than generating code you cannot actually run — in that case steps 4a/4b of this checklist do not apply, since there is no Rj Editor to paste into.</p>
+</blockquote>
+</div>
+</section>
+<section id="相關頁面related-pages" class="level2">
+<h2 class="anchored" data-anchor-id="相關頁面related-pages"><span class="zh">相關頁面</span><span class="en">Related pages</span></h2>
+<div class="zh">
+<ul>
+<li>完整流程說明：<a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a></li>
+<li>Module Guider 版查核清單：<a href="../verify/checklist-guider.html"><code>checklist-guider.qmd</code></a></li>
+<li>已知錯誤範例與「兩個分析，兩種查證方式」說明： <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>（母專案文件，不在本站範圍內修改）</li>
+<li>找碴練習（含程式碼紅旗題）：<a href="../verify/spot-the-error.html"><code>spot-the-error.qmd</code></a></li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Full workflow: <a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a></li>
+<li>Module Guider checklist: <a href="../verify/checklist-guider.html"><code>checklist-guider.qmd</code></a></li>
+<li>Recorded real errors and the “two analyses, two ways to verify” discussion: <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> (parent-project document, not modified within this site)</li>
+<li>Spot-the-error practice (includes code red-flag questions): <a href="../verify/spot-the-error.html"><code>spot-the-error.qmd</code></a></li>
+</ul>
 </div>
 
 

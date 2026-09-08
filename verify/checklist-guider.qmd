@@ -103,6 +103,15 @@ menu path. If you used the R code tutor (`askllmr`) instead, use
 
 ::: {.zh}
 - 完整流程說明：[`verify/workflow.qmd`](workflow.qmd)
-- R code tutor 版查核清單（Phase 0 placeholder）：[`verify/checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- R code tutor 版查核清單：[`verify/checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- 找錯練習：[`verify/spot-the-error.qmd`](spot-the-error.qmd)
 - 已知錯誤範例：`askLLM/docs/LIMITATIONS.zh-TW.md`（母專案文件，不在本站範圍內修改）
+:::
+
+::: {.en}
+- Full workflow: [`verify/workflow.qmd`](workflow.qmd)
+- Checklist for the R code tutor: [`verify/checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- Spot-the-error drill: [`verify/spot-the-error.qmd`](spot-the-error.qmd)
+- Recorded real errors: `askLLM/docs/LIMITATIONS.zh-TW.md` (a document of the
+  parent project; not edited from this site)
 :::

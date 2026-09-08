@@ -11,6 +11,11 @@
 # 欄位（title / scenario / prompt / expected 的英文對照）都是「必填、且必須
 # 是人工撰寫品質的英文」，validator 只能做「有沒有填、格式對不對」的機械檢查，
 # 無法檢查文字品質——品質靠人工審稿把關，不在本檔案範圍內。
+#
+# 2026-09-08 擴充：prerequisites / expected / check.what / stop_criteria 原本
+# 是單一語言（中文）欄位，切到英文介面時整段消失——但這正是提示詞庫最有教學
+# 價值的部分。比照 Q5 的 en_required 慣例，這四個欄位（check 的 step 代號
+# 除外）一併改為雙語必填。
 # ---------------------------------------------------------------------------
 
 fields:
@@ -65,9 +70,16 @@ fields:
     values: [describe, compare-2, compare-k, associate, predict, reliability, screen]
 
   prerequisites:
-    type: list_of_string
+    # 2026-09-08 起改為雙語：每個項目是 {zh: ..., en: ...}（比照 title 等
+    # bilingual_string 的風格），英文必填（Q5 邏輯延伸——這是提示詞庫最有
+    # 教學價值的部分，要拿給英文教材原作者徵求回饋，切到英文不能整段消失）。
+    type: list_of_bilingual_string
     required: true
     min_items: 1
+    en_required: true
+    item_fields:
+      zh: {type: string, required: true}
+      en: {type: string, required: true}   # en_required: true
 
   persona:
     type: enum
@@ -95,11 +107,15 @@ fields:
     # 若非 null，zh/en 兩欄仍須同時存在（Q5 邏輯延伸：一旦要用英文介面就不能只有中文）
 
   expected:
-    type: list_of_string
+    # 2026-09-08 起改為雙語（理由同 prerequisites）：每個項目是 {zh, en}，
+    # 英文必填。
+    type: list_of_bilingual_string
     required: true
     min_items: 1
-    lang: zh_or_en_note   # expected 目前以條目撰寫語言為主，供人工核對用；
-                          # Q5 範圍內 expected 不強制雙語，但建議雙語（見下方 validator 規則）
+    en_required: true
+    item_fields:
+      zh: {type: string, required: true}
+      en: {type: string, required: true}   # en_required: true
 
   check:
     type: list
@@ -107,20 +123,35 @@ fields:
     min_items: 2
     item_fields:
       step:
+        # step 是語言中立的受控詞彙代碼（如 path / code-run），本身不需要
+        # 雙語——它不是給使用者讀的敘述文字，是查核流程的分類標籤。
         type: enum
         required: true
         values: [path, number, assumption, code-read, code-run, cross-check]
       what:
-        type: string
+        # what 才是給人讀的查核說明，2026-09-08 起改為雙語，英文必填。
+        type: bilingual_string
         required: true
+        zh_required: true
+        en_required: true
     extra_rule: "analysis == rtutor 時，check 必須同時包含 code-read 與 code-run"
 
   stop_criteria:
+    # 2026-09-08 起 solved／reopen 兩個子欄位各自改為雙語（bilingual_string），
+    # 英文必填，形狀與寫法比照 title/scenario 等既有 bilingual_string 欄位。
     type: object
     required: true
     fields:
-      solved: {type: string, required: true}
-      reopen: {type: string, required: true}
+      solved:
+        type: bilingual_string
+        required: true
+        zh_required: true
+        en_required: true
+      reopen:
+        type: bilingual_string
+        required: true
+        zh_required: true
+        en_required: true
 
   links:
     type: list
@@ -156,5 +187,6 @@ validator_rules:
   - "tested_with 至少 1 筆"
   - "analysis: rtutor 的條目，check 必含 step: code-read 與 step: code-run"
   - "title / scenario / prompt 的 zh 與 en 欄位皆不得為空字串或 NA（Q5 強制英文）"
+  - "prerequisites / expected 的每個項目、check[].what、stop_criteria.solved / .reopen 的 zh 與 en 皆不得為空字串或 NA（2026-09-08 擴充英文必填範圍）"
   - "id 必須是 kebab-case，且與檔名（不含 .yaml）相同"
   - "stat_goal 必須在受控詞彙表內，非法值視為 FAIL"

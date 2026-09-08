@@ -11,44 +11,33 @@
     ]
   },
   {
-    "objectID": "verify/workflow.html#原則",
-    "href": "verify/workflow.html#原則",
+    "objectID": "verify/workflow.html#原則principles",
+    "href": "verify/workflow.html#原則principles",
     "title": "可重複的查核流程A repeatable verification workflow",
-    "section": "原則",
-    "text": "原則\n\n\n查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始 資料、你的研究設計——去對。\n兩條路線難度不對等：Module Guider 的輸出有有限集合可核（選單路徑）； R code tutor 的輸出只能靠流程（讀碼、跑碼、跟 GUI 對照）。\n每次查核產出一筆「協作日誌」（見第六課），這是可教、可重複、可交作業的單位。",
+    "section": "原則Principles",
+    "text": "原則Principles\n\n\n查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始 資料、你的研究設計——去對。\n兩條路線難度不對等：Module Guider 的輸出有有限集合可核（選單路徑）； R code tutor 的輸出只能靠流程（讀碼、跑碼、跟 GUI 對照）。\n每次查核產出一筆「協作日誌」（見第六課），這是可教、可重複、可交作業的單位。\n\n\n\n\nVerification is not “asking the AI again” — it is checking what the AI said against things it cannot see: your jamovi interface, your raw data, your research design.\nThe two paths are not equally hard to verify: the Module Guider’s output can be checked against a finite, verifiable set (menu paths); the R code tutor’s output can only be checked through a process (read the code, run it, cross-check against the GUI).\nEvery verification pass produces one “collaboration log” entry (see Lesson 6) — a unit that can be taught, repeated, and turned into an assignment.",
     "crumbs": [
       "結果查核 / Verification",
       "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}"
     ]
   },
   {
-    "objectID": "verify/workflow.html#流程步驟",
-    "href": "verify/workflow.html#流程步驟",
+    "objectID": "verify/workflow.html#流程步驟workflow-steps",
+    "href": "verify/workflow.html#流程步驟workflow-steps",
     "title": "可重複的查核流程A repeatable verification workflow",
-    "section": "流程步驟",
-    "text": "流程步驟\n送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課\n         P1 記下摘要裡的關鍵數字（n、mean、遺漏）\n\n收到後   V1 路徑核對（Guider）：每條 Analyses ▸ … 在選單點得到？逐條打勾\n         V2 數字核對：回覆引用的數字 = P1 記下的？\n         V3 範圍核對：回覆有沒有宣稱它「看不到」的事（常態性、離群值、原始列）？有 → 標「越界」\n         V4 程式碼核對（R tutor）：\n              4a 讀：只用 data？library() 都在 rj_environment？無 setwd／路徑／system？\n              4b 跑：貼進 Rj，記錄輸出或錯誤原文\n              4c 對：同一分析在 jamovi GUI 跑一次，關鍵數字一致？（Syntax Mode 的 jmv:: 呼叫可作第二對照）\n         V5 交叉：換 persona 或換模型再問一次，結論一致？路徑仍須各自核對\n\n結案     C1 對照 P0 判準：solved / reopen\n         C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）",
+    "section": "流程步驟Workflow steps",
+    "text": "流程步驟Workflow steps\n送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課\n         P1 記下摘要裡的關鍵數字（n、mean、遺漏）\n\n收到後   V1 路徑核對（Guider）：每條 Analyses ▸ … 在選單點得到？逐條打勾\n         V2 數字核對：回覆引用的數字 = P1 記下的？\n         V3 範圍核對：回覆有沒有宣稱它「看不到」的事（常態性、離群值、原始列）？有 → 標「越界」\n         V4 程式碼核對（R tutor）：\n              4a 讀：只用 data？library() 都在 rj_environment？無 setwd／路徑／system？\n              4b 跑：貼進 Rj，記錄輸出或錯誤原文\n              4c 對：同一分析在 jamovi GUI 跑一次，關鍵數字一致？（Syntax Mode 的 jmv:: 呼叫可作第二對照）\n         V5 交叉：換 persona 或換模型再問一次，結論一致？路徑仍須各自核對\n\n結案     C1 對照 P0 判準：solved / reopen\n         C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）",
     "crumbs": [
       "結果查核 / Verification",
       "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}"
     ]
   },
   {
-    "objectID": "verify/workflow.html#兩份查核清單",
-    "href": "verify/workflow.html#兩份查核清單",
+    "objectID": "verify/workflow.html#兩份查核清單two-checklists",
+    "href": "verify/workflow.html#兩份查核清單two-checklists",
     "title": "可重複的查核流程A repeatable verification workflow",
-    "section": "兩份查核清單",
-    "text": "兩份查核清單\n\n\nchecklist-guider.qmd：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。\nchecklist-rtutor.qmd：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。",
-    "crumbs": [
-      "結果查核 / Verification",
-      "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}"
-    ]
-  },
-  {
-    "objectID": "verify/workflow.html#english",
-    "href": "verify/workflow.html#english",
-    "title": "可重複的查核流程A repeatable verification workflow",
-    "section": "English",
-    "text": "English\n\nVerification is not “asking the AI again” — it is checking the AI’s reply against things it cannot see: your jamovi interface, your raw data, your research design. The Module Guider path is easier to check mechanically (menu paths are a finite, verifiable set); the R code tutor path can only be checked through a process (read the code, run it, cross-check against the GUI). Full English prose for this page is planned for Phase 1; the checklist above already exists in complete bilingual form.",
+    "section": "兩份查核清單Two checklists",
+    "text": "兩份查核清單Two checklists\n\n\nchecklist-guider.qmd：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。\nchecklist-rtutor.qmd：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。\n\n\n\n\nchecklist-guider.qmd: P0–P1, V1–V3, V5, C1–C2 — a single printable page.\nchecklist-rtutor.qmd: P0–P1, V2–V4, V5, C1–C2 (Phase 0 placeholder).",
     "crumbs": [
       "結果查核 / Verification",
       "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}"
@@ -59,29 +48,62 @@
     "href": "verify/checklist-rtutor.html",
     "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
     "section": "",
-    "text": "狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 PROPOSAL.zh-TW.md §5.3）。",
+    "text": "本頁對應 PROPOSAL.zh-TW.md §5.3 的第二份查核清單：涵蓋 verify/workflow.qmd 流程裡的 P0–P1、V2–V4、V5、C1–C2 步驟，設計成可列印的一頁。適用對象是使用 R code tutor（askllmr）取得 R 程式碼的情境；若你用的是 Module Guider（askllm），請改用 checklist-guider.qmd。",
     "crumbs": [
       "結果查核 / Verification",
       "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
     ]
   },
   {
-    "objectID": "verify/checklist-rtutor.html#這一頁要做什麼",
-    "href": "verify/checklist-rtutor.html#這一頁要做什麼",
+    "objectID": "verify/checklist-rtutor.html#送出前before-you-submit",
+    "href": "verify/checklist-rtutor.html#送出前before-you-submit",
     "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
-    "section": "這一頁要做什麼",
-    "text": "這一頁要做什麼\n\n這是 verify/workflow.qmd 的第二份查核清單，涵蓋 P0–P1、V2–V4、V5、C1–C2， 給用 R code tutor（askllmr）取得 R 程式碼的情境。與 checklist-guider.qmd 最大的差異在 V4（程式碼核對）分三段：\n\n4a 讀：逐行讀程式碼——只用 data？library() 引用的套件都在 rj_environment 清單內？沒有 setwd、絕對路徑、system(？\n4b 跑：把程式碼原封不動貼進 Rj Editor 執行，記錄輸出或錯誤原文。\n4c 對：同一個分析改用 jamovi GUI（或 Syntax Mode 的 jmv:: 呼叫）跑 一次，比較關鍵數字是否一致。\n\nPhase 1 會加入「紅旗字串表」（install.packages、read.csv、setwd、 system(、絕對路徑、library( 後接不在 rj_environment 清單的套件），並把 本頁做成跟 checklist-guider.qmd 一樣的可列印格式。",
+    "section": "送出前Before you submit",
+    "text": "送出前Before you submit\n\n\nP0 我已經寫下「我會接受什麼答案」（例如：程式碼必須只用 data 這個物件名稱、必須產出我要的統計量、不得需要我自己補檔案路徑）。\nP1 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數）， 這些數字之後要拿來跟程式碼的輸出核對。\n\n\n\n\nP0 I have written down what answer I will accept (e.g. “the code must use only the object name data, must produce the statistic I asked for, and must not require me to fill in a file path myself”).\nP1 I have written down the key numbers from the summary (n, mean, sd, missing count per group) so I can check the code’s output against them later.",
     "crumbs": [
       "結果查核 / Verification",
       "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
     ]
   },
   {
-    "objectID": "verify/checklist-rtutor.html#english-placeholder",
-    "href": "verify/checklist-rtutor.html#english-placeholder",
+    "objectID": "verify/checklist-rtutor.html#收到回覆後after-you-receive-a-reply",
+    "href": "verify/checklist-rtutor.html#收到回覆後after-you-receive-a-reply",
     "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
-    "section": "English (placeholder)",
-    "text": "English (placeholder)\n\nThis is the second verification checklist (steps P0–P1, V2–V4, V5, C1–C2) for sessions using the R code tutor (askllmr). It differs from checklist-guider.qmd mainly in step V4 (code check), split into read (4a), run (4b), and cross-check against the jamovi GUI (4c). A red-flag string table and a fully printable bilingual layout are planned for Phase 1.",
+    "section": "收到回覆後After you receive a reply",
+    "text": "收到回覆後After you receive a reply\n\n\nV2 數字核對 — 執行後的輸出數字（n、mean、sd 等），跟我在 P1 記下的、以及在 Descriptives 面板看到的一致。\nV3 範圍核對 — 回覆有沒有宣稱它「看不到」的東西（例如常態性、離 群值、原始資料列的內容）？如果有，這是「越界」，代表回覆超出摘要統計 能支持的範圍，應打折扣看待。\nV4a 讀 — 逐行讀完整段程式碼，確認： - 資料只用 data 這個物件名稱，沒有另外指定其他資料來源； - 每一個 library(...) 引用的套件，都出現在 askLLM 附給模型的 &lt;rj_environment&gt; 套件清單內，或屬於 base R； - 沒有出現「紅旗指令」（見下方紅旗字串表）。 只要有一項沒通過，就先不要執行，回頭修改問題或換一個 persona 再問一次。\nV4b 跑 — 把程式碼原封不動貼進 Rj Editor（Analyses ▸ R ▸     Rj ▸ Rj Editor），按下 Run，把輸出或錯誤訊息原文記下來（成功的輸出 與失敗的錯誤訊息都要記，不要只記成功的）。\nV4c 對 — 用另一個獨立管道重跑同一個分析，比較關鍵數字是否一致： 改用 jamovi GUI 對應的分析模組跑一次；或在該分析的 Syntax Mode 中查看 jamovi 自己產生的 jmv:: 呼叫，作為第二層獨立對照。\nV5 交叉核對 — 換一個 persona（Consultant / Tutor / Explainer） 或換一個模型，針對同一個 What should the R code do? 問題再問一次； 兩次程式碼的邏輯與輸出是否一致？（V4a／V4b 仍須對第二份程式碼各自 重跑一次，不能因為兩次都「看起來合理」就省略讀碼與執行。）\n\n\n\n\nV2 Number check — The numbers produced by running the code (n, mean, sd, etc.) match what I wrote down in P1 and what I see in the Descriptives panel.\nV3 Scope check — Does the reply make claims about things it cannot actually see (e.g. normality, outliers, the content of raw data rows)? If so, flag this as “overreaching” — the claim exceeds what summary statistics can support, and should be discounted.\nV4a Read — Read the entire code block line by line and confirm: - the data is referenced only through the object name data, with no other data source specified; - every library(...) call names a package that appears in the &lt;rj_environment&gt; package list askLLM sent the model, or is base R; - none of the red-flag instructions below appear. If any of these fails, do not run the code. Rephrase the question or try a different persona instead.\nV4b Run — Paste the code verbatim, unmodified into the Rj Editor (Analyses ▸ R ▸ Rj ▸ Rj Editor), press Run, and record the exact output or error message (record both a successful output and a failed error message — don’t only keep the successes).\nV4c Cross-check — Re-run the same analysis through an independent channel and compare the key numbers: run the equivalent analysis through the jamovi GUI; or check that analysis’s Syntax Mode for the jmv:: call jamovi generates itself, as a second, independent comparison.\nV5 Cross-check (persona/model) — Ask the same “What should the R code do?” question again with a different persona (Consultant / Tutor / Explainer) or a different model. Do the two pieces of code agree in logic and output? (Still repeat V4a/V4b on the second piece of code — two replies “looking reasonable” is not a substitute for reading and running each one.)",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/checklist-rtutor.html#結案closing-out",
+    "href": "verify/checklist-rtutor.html#結案closing-out",
+    "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
+    "section": "結案Closing out",
+    "text": "結案Closing out\n\n\nC1 對照 P0 寫下的判準：solved（全部命中，程式碼可用）還是 reopen （任一項沒通過，需要換個問法或換個 persona 再試）。\nC2 填寫協作日誌四欄：問題 / 判準 / 回覆摘要 / 查核結果。\n\n\n\n\nC1 Compare the reply against the P0 criteria: solved (everything checks out — the code is usable) or reopen (something failed — rephrase the question or try a different persona).\nC2 Fill in the four-column collaboration log: question / criteria / reply summary / verification result.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/checklist-rtutor.html#紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a",
+    "href": "verify/checklist-rtutor.html#紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a",
+    "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
+    "section": "紅旗字串表（4a 逐行核對用）Red-flag string table (for V4a)",
+    "text": "紅旗字串表（4a 逐行核對用）Red-flag string table (for V4a)\n\naskLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令 （見 askLLM/R/llm-adapter.R 第 172–177 行）。若程式碼裡出現任何一項，代表 回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：\n\n\naskLLM’s system prompt explicitly forbids the model from using the following in an R code tutor reply (see askLLM/R/llm-adapter.R, lines 172–177). If any of these appear in the code, the reply has violated askLLM’s own stated boundary — flag it as “do not run” and go back and rephrase the question:\n\n\n\n\n\n\n\n\n紅旗Red flag\n為什麼Why\n\n\n\n\ninstall.packages(...)\n模型不能替你安裝套件；Rj 只用已裝好的套件。The model cannot install packages for you; Rj only has what is already installed.\n\n\nread.csv(...)／任何檔案讀取函式/ any file-reading function\n不得建議讀取檔案；資料一律用 data 這個既有物件。No file reads are allowed; the data must always come from the existing data object.\n\n\nsetwd(...)\n不得變更工作目錄。The working directory must not be changed.\n\n\n任何絕對路徑（如 C:/...、/Users/...）Any absolute file path (e.g. C:/..., /Users/...)\n路徑因人而異，不可能通用，且暗示前一條「檔案讀取」紅旗。Paths are machine-specific and can’t generalize; this usually co-occurs with the file-read red flag above.\n\n\nsystem(...)\n不得呼叫系統層級指令。System-level shell calls are not allowed.\n\n\nlibrary(套件)，但該套件不在 &lt;rj_environment&gt; 清單內、也非 base R\n模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 there is no package called '...'。library(package) where the package is not in the &lt;rj_environment&gt; list and is not base R — the model may only cite packages actually installed in your Rj; code citing an uninstalled package will fail immediately with there is no package called '...'.\n\n\n\n\n\n提醒：&lt;rj_environment&gt; 這個套件清單只有在你的 jamovi 裝有 Rj、且 askLLM 掃描到套件時才會附上。若你的 jamovi 沒裝 Rj，askLLM 會改教你 用 Syntax Mode，而不是硬生出一段你根本跑不了的程式碼；這種情況下本清單 的 4a／4b 步驟不適用，因為根本沒有 Rj Editor 可以貼上執行。\n\n\n\n\nNote: the &lt;rj_environment&gt; package list is only attached when your jamovi has Rj installed and askLLM was able to scan its packages. If Rj is not installed, askLLM should instead teach you to use Syntax Mode rather than generating code you cannot actually run — in that case steps 4a/4b of this checklist do not apply, since there is no Rj Editor to paste into.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/checklist-rtutor.html#相關頁面related-pages",
+    "href": "verify/checklist-rtutor.html#相關頁面related-pages",
+    "title": "R code tutor 查核清單R Code Tutor Verification Checklist",
+    "section": "相關頁面Related pages",
+    "text": "相關頁面Related pages\n\n\n完整流程說明：verify/workflow.qmd\nModule Guider 版查核清單：checklist-guider.qmd\n已知錯誤範例與「兩個分析，兩種查證方式」說明： askLLM/docs/LIMITATIONS.zh-TW.md（母專案文件，不在本站範圍內修改）\n找碴練習（含程式碼紅旗題）：spot-the-error.qmd\n\n\n\n\nFull workflow: verify/workflow.qmd\nModule Guider checklist: checklist-guider.qmd\nRecorded real errors and the “two analyses, two ways to verify” discussion: askLLM/docs/LIMITATIONS.zh-TW.md (parent-project document, not modified within this site)\nSpot-the-error practice (includes code red-flag questions): spot-the-error.qmd",
     "crumbs": [
       "結果查核 / Verification",
       "[R code tutor 查核清單]{.zh}[R Code Tutor Verification Checklist]{.en}"
@@ -103,7 +125,7 @@
     "href": "prompts/index.html#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova",
     "title": "提示詞庫 / Prompt Library",
     "section": "混合設計 ANOVA 前的資料整形Reshaping data for a mixed ANOVA",
-    "text": "混合設計 ANOVA 前的資料整形Reshaping data for a mixed ANOVA\nanalysis: rtutor  |  design: mixed  |  stat_goal: compare-k  |  persona: tutor\n\n情境Scenario\n\n資料是寬格式（每個受試者一列、三個時間點三欄）加一個組別欄；想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑 Repeated Measures ANOVA。\n\n\nData is in wide format (one row per subject, three time-point columns) plus a group column. You want to verify a long-format reshape in Rj before running the RM ANOVA in jamovi.\n\n\n\n送出前必做Prerequisites\n\n\n確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）\n三個時間點欄名記下來\n\n\n\n\n提示詞Prompt\n\n資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。\n\n請依下列規則引導我，不要直接給完整解答：\n1. 只給程式骨架與 TODO 註解，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。\n2. 印出每個受試者 × 時間點的列數，讓我自己核對。\n3. 不要幫我跑 ANOVA。\n\n\ndata has {id}, {group}, and three time columns {t1}, {t2}, {t3}.\n\nPlease guide me under these rules, without giving the full solution:\n1. Give only a skeleton with TODO comments, guiding me to reshape to long\n   format using base R or packages already in rj_environment.\n2. Print the row count per subject x time point so I can verify it myself.\n3. Do not run the ANOVA for me.\n\n\n\n期望回覆要素Expected elements\n\n\n只用 data，不出現 read.csv / install.packages（R tutor 的硬規則）\n長格式列數 = n 受試者 × 3\n有一行驗證輸出（table 或 nrow）\n\n\n\n\n查核點Check\n\n\ncode-read: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件\ncode-run: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題\ncross-check: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致\n\n\n\n\n判準Stop criteria\n\n\nsolved: code-run 列數正確且 cross-check 描述統計一致\nreopen: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版\n\n\n\n\n延伸閱讀Links\n\npsyteachr quant-fun (wrangling / ANOVA)（CC BY-SA 4.0）\n\n\n\n實測記錄Tested with\n\n2026-09-08 | pending | pending | pending | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄",
+    "text": "混合設計 ANOVA 前的資料整形Reshaping data for a mixed ANOVA\nanalysis: rtutor  |  design: mixed  |  stat_goal: compare-k  |  persona: tutor\n\n情境Scenario\n\n資料是寬格式（每個受試者一列、三個時間點三欄）加一個組別欄；想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑 Repeated Measures ANOVA。\n\n\nData is in wide format (one row per subject, three time-point columns) plus a group column. You want to verify a long-format reshape in Rj before running the RM ANOVA in jamovi.\n\n\n\n送出前必做Prerequisites\n\n\n確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）\n三個時間點欄名記下來\n\n\n\n\nConfirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).\nWrite down the three time-point column names.\n\n\n\n\n提示詞Prompt\n\n資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。\n\n請依下列規則引導我，不要直接給完整解答：\n1. 只給程式骨架與 TODO 註解，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。\n2. 印出每個受試者 × 時間點的列數，讓我自己核對。\n3. 不要幫我跑 ANOVA。\n\n\ndata has {id}, {group}, and three time columns {t1}, {t2}, {t3}.\n\nPlease guide me under these rules, without giving the full solution:\n1. Give only a skeleton with TODO comments, guiding me to reshape to long\n   format using base R or packages already in rj_environment.\n2. Print the row count per subject x time point so I can verify it myself.\n3. Do not run the ANOVA for me.\n\n\n\n期望回覆要素Expected elements\n\n\n只用 data，不出現 read.csv / install.packages（R tutor 的硬規則）\n長格式列數 = n 受試者 × 3\n有一行驗證輸出（table 或 nrow）\n\n\n\n\nUses only data, with no read.csv / install.packages (a hard rule for the R tutor)\nThe long-format row count equals n subjects x 3\nIncludes one line of verification output (a table or nrow)\n\n\n\n\n查核點Check\n\n\ncode-read: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件\ncode-run: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題\ncross-check: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致\n\n\n\n\ncode-read: Read line by line for setwd, file paths, or packages not listed in rj_environment\ncode-run: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question\ncross-check: Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones\n\n\n\n\n判準Stop criteria\n\n\nsolved: code-run 列數正確且 cross-check 描述統計一致\nreopen: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版\n\n\n\n\nsolved: The code-run row count is correct and the cross-check descriptive statistics agree.\nreopen: The row count is wrong, or the code uses a package not available in the environment -&gt; paste the error message back and ask the consultant persona for the full solution.\n\n\n\n\n延伸閱讀Links\n\npsyteachr quant-fun (wrangling / ANOVA)（CC BY-SA 4.0）\n\n\n\n實測記錄Tested with\n\n2026-09-08 | pending | pending | pending | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄",
     "crumbs": [
       "提示詞庫 / Prompts",
       "提示詞庫 / Prompt Library"
@@ -114,7 +136,7 @@
     "href": "prompts/index.html#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison",
     "title": "提示詞庫 / Prompt Library",
     "section": "兩組比較前該檢查什麼What to check before a two-group comparison",
-    "text": "兩組比較前該檢查什麼What to check before a two-group comparison\nanalysis: guider  |  design: between  |  stat_goal: compare-2  |  persona: consultant\n\n情境Scenario\n\n資料集有一個連續結果變項與一個兩水準分組變項，想知道該用哪個 t 檢定、以及前提不符時的替代方案。\n\n\nYour data has one continuous outcome and one two-level grouping variable. You want to know which t-test to use, and what to do if its assumptions are not met.\n\n\n\n送出前必做Prerequisites\n\n\n已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd\n兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）\n\n\n\n\n提示詞Prompt\n\n{outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。\n\n請回答以下三件事：\n1. 該用哪一個 t 檢定？Welch 與 Student 的選擇依據是什麼？\n2. 我應該在 jamovi 的 Assumption Checks 勾選哪些項目（給逐字選單路徑）？\n3. 若前提不符，請給一個非參數替代方案，並引用該分析的逐字選單路徑。\n\n\n{outcome} is continuous; {group} has two levels (n = {n1}, {n2}).\n\nPlease answer all three:\n1. Which t-test should I run? How do I choose between Welch and Student?\n2. Which Assumption Checks boxes should I tick in jamovi (give the exact menu path)?\n3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?\n\n\n\n期望回覆要素Expected elements\n\n\n指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）\n提到 Welch 為預設較穩健、或以變異數同質性為選擇依據\n列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）\n給出 Mann-Whitney U 作為替代且路徑正確\n\n\n\n\n查核點Check\n\n\npath: 回覆中每條 “Analyses ▸ …” 路徑在你的 jamovi 選單裡點得到\nnumber: 回覆引用的 n 與你在 Descriptives 看到的一致\nassumption: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下\n\n\n\n\n判準Stop criteria\n\n\nsolved: 四個 expected 全命中且 path 查核零錯 → 依建議執行\nreopen: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章\n\n\n\n\n延伸閱讀Links\n\nlsj-book ch.11 Comparing two means（CC BY-SA 4.0）\n\n\n\n實測記錄Tested with\n\n2026-09-08 | pending | pending | pending | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄",
+    "text": "兩組比較前該檢查什麼What to check before a two-group comparison\nanalysis: guider  |  design: between  |  stat_goal: compare-2  |  persona: consultant\n\n情境Scenario\n\n資料集有一個連續結果變項與一個兩水準分組變項，想知道該用哪個 t 檢定、以及前提不符時的替代方案。\n\n\nYour data has one continuous outcome and one two-level grouping variable. You want to know which t-test to use, and what to do if its assumptions are not met.\n\n\n\n送出前必做Prerequisites\n\n\n已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd\n兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）\n\n\n\n\nYou have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups’ n, mean, and sd.\nWrite down both groups’ n and sd (the LLM will also receive them, but you need to be able to check them).\n\n\n\n\n提示詞Prompt\n\n{outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。\n\n請回答以下三件事：\n1. 該用哪一個 t 檢定？Welch 與 Student 的選擇依據是什麼？\n2. 我應該在 jamovi 的 Assumption Checks 勾選哪些項目（給逐字選單路徑）？\n3. 若前提不符，請給一個非參數替代方案，並引用該分析的逐字選單路徑。\n\n\n{outcome} is continuous; {group} has two levels (n = {n1}, {n2}).\n\nPlease answer all three:\n1. Which t-test should I run? How do I choose between Welch and Student?\n2. Which Assumption Checks boxes should I tick in jamovi (give the exact menu path)?\n3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?\n\n\n\n期望回覆要素Expected elements\n\n\n指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）\n提到 Welch 為預設較穩健、或以變異數同質性為選擇依據\n列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）\n給出 Mann-Whitney U 作為替代且路徑正確\n\n\n\n\nNames T-Tests ▸ Independent Samples T-Test (the exact menu path)\nMentions that Welch is the more robust default, or bases the choice on homogeneity of variance\nLists Normality and Homogeneity (Levene) under Assumption Checks\nGives Mann-Whitney U as the alternative with the correct menu path\n\n\n\n\n查核點Check\n\n\npath: 回覆中每條 “Analyses ▸ …” 路徑在你的 jamovi 選單裡點得到\nnumber: 回覆引用的 n 與你在 Descriptives 看到的一致\nassumption: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下\n\n\n\n\npath: Every “Analyses ▸ …” path in the reply is clickable in your jamovi menu\nnumber: The n cited in the reply matches what you saw in Descriptives\nassumption: Run Assumption Checks yourself, and note whether the result matches or contradicts what the reply expects\n\n\n\n\n判準Stop criteria\n\n\nsolved: 四個 expected 全命中且 path 查核零錯 → 依建議執行\nreopen: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章\n\n\n\n\nsolved: All four expected elements are hit and the path check has zero errors -&gt; proceed with the suggestion.\nreopen: Any path cannot be clicked, or the reply omits Assumption Checks -&gt; switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead.\n\n\n\n\n延伸閱讀Links\n\nlsj-book ch.11 Comparing two means（CC BY-SA 4.0）\n\n\n\n實測記錄Tested with\n\n2026-09-08 | pending | pending | pending | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄",
     "crumbs": [
       "提示詞庫 / Prompts",
       "提示詞庫 / Prompt Library"
@@ -279,7 +301,7 @@
     "href": "literacy/01-what-the-llm-sees.html#askllm-實際送出的內容what-askllm-actually-sends",
     "title": "第一課：LLM 看得到什麼、看不到什麼What the LLM Sees, and What It Doesn’t",
     "section": "askLLM 實際送出的內容What askLLM actually sends",
-    "text": "askLLM 實際送出的內容What askLLM actually sends\n\naskLLM 的資料摘要函式 summarize_data() 為每個變項產生固定格式的區塊。連續 變項(數值型)長這樣：\n\nage [numeric]:\n  n: 118, missing: 2\n  mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61\n\n類別變項(factor)長這樣：\n\ngroup [factor]:\n  n: 120, missing: 0, 2 levels\n  levels by count: control(61), treatment(59)\n\n就這樣——沒有第三行。LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。\n\n\nsummarize_data(), askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous variable looks like the block above; a categorical variable reports level counts the same way. An ordered factor adds one more line, level order: low &lt; medium &lt; high. Beyond that there is nothing — the LLM receives exactly what you just read, nothing more. This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.",
+    "text": "askLLM 實際送出的內容What askLLM actually sends\n\naskLLM 的資料摘要函式 summarize_data() 為每個變項產生固定格式的區塊。連續 變項（數值型）長這樣：\n\n\nsummarize_data(), askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous (numeric) variable looks like this:\n\nage [numeric]:\n  n: 118, missing: 2\n  mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61\n\n類別變項（factor）長這樣：\n\n\nA categorical (factor) variable looks like this:\n\ngroup [factor]:\n  n: 120, missing: 0, 2 levels\n  levels by count: control(61), treatment(59)\n\n就這樣。唯一的例外是有序類別變項（ordered factor）會多一行 level order: 低 &lt; 中 &lt; 高，說明水準的順序。除此之外沒有別的了——LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。\n\n\nThat is all. The one exception is an ordered factor, which adds one more line, level order: low &lt; medium &lt; high, to show how the levels are ordered. Beyond that there is nothing — the LLM receives exactly what you just read, nothing more. This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.",
     "crumbs": [
       "協作素養 / Literacy",
       "[第一課：LLM 看得到什麼、看不到什麼]{.zh}[What the LLM Sees, and What It Doesn't]{.en}"
@@ -345,28 +367,21 @@
     "href": "index.html",
     "title": "stat-skills-tutorials",
     "section": "",
-    "text": "stat-skills-tutorials 是給 jamovi 模組 askLLM 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。\n本站分三層，對應 README 提到的三件事：\n\n協作素養：有意識了解 AI 是協作者、 清晰描述問題、設定明確判準，六課短文。\n提示詞庫：情境化、可直接複製進 askLLM question 欄的提示詞，附查核點與判準；每條有結構化 schema（見 prompts/_schema.yaml）。\n生成結果查核：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。"
+    "text": "stat-skills-tutorials 是給 jamovi 模組 askLLM 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。\n本站分三層，對應 README 提到的三件事：\n\n協作素養：有意識了解 AI 是協作者、 清晰描述問題、設定明確判準，六課短文。\n提示詞庫：情境化、可直接複製進 askLLM question 欄的提示詞，附查核點與判準；每條有結構化 schema（見 prompts/_schema.yaml）。\n生成結果查核：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。\n\n\n\nstat-skills-tutorials is an original tutorial and prompt library for users of the jamovi module askLLM. It teaches you how to collaborate with a consulting AI — the Module Guider or the R code tutor — on statistical analysis. It does not teach statistics or R themselves; for that, every page links out to the matching chapter in an external textbook such as psyteachr or lsj-book (see External Reading Map).\nThe site has three layers, matching the three things the README describes:\n\nCollaboration literacy: six short lessons on treating the AI as a collaborator with awareness, describing your problem clearly, and setting explicit acceptance criteria.\nPrompt library: scenario-based prompts you can paste directly into askLLM’s question field, each with its own verification points and acceptance criteria and a structured schema (see prompts/_schema.yaml).\nVerifying generated results: an AI reply is never taken at face value — it is checked against your jamovi interface, your raw data, and your research design. The Module Guider and the R code tutor each have their own verification checklist."
   },
   {
-    "objectID": "index.html#這是什麼",
-    "href": "index.html#這是什麼",
+    "objectID": "index.html#這是什麼what-this-is",
+    "href": "index.html#這是什麼what-this-is",
     "title": "stat-skills-tutorials",
     "section": "",
-    "text": "stat-skills-tutorials 是給 jamovi 模組 askLLM 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。\n本站分三層，對應 README 提到的三件事：\n\n協作素養：有意識了解 AI 是協作者、 清晰描述問題、設定明確判準，六課短文。\n提示詞庫：情境化、可直接複製進 askLLM question 欄的提示詞，附查核點與判準；每條有結構化 schema（見 prompts/_schema.yaml）。\n生成結果查核：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。"
+    "text": "stat-skills-tutorials 是給 jamovi 模組 askLLM 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。\n本站分三層，對應 README 提到的三件事：\n\n協作素養：有意識了解 AI 是協作者、 清晰描述問題、設定明確判準，六課短文。\n提示詞庫：情境化、可直接複製進 askLLM question 欄的提示詞，附查核點與判準；每條有結構化 schema（見 prompts/_schema.yaml）。\n生成結果查核：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。\n\n\n\nstat-skills-tutorials is an original tutorial and prompt library for users of the jamovi module askLLM. It teaches you how to collaborate with a consulting AI — the Module Guider or the R code tutor — on statistical analysis. It does not teach statistics or R themselves; for that, every page links out to the matching chapter in an external textbook such as psyteachr or lsj-book (see External Reading Map).\nThe site has three layers, matching the three things the README describes:\n\nCollaboration literacy: six short lessons on treating the AI as a collaborator with awareness, describing your problem clearly, and setting explicit acceptance criteria.\nPrompt library: scenario-based prompts you can paste directly into askLLM’s question field, each with its own verification points and acceptance criteria and a structured schema (see prompts/_schema.yaml).\nVerifying generated results: an AI reply is never taken at face value — it is checked against your jamovi interface, your raw data, and your research design. The Module Guider and the R code tutor each have their own verification checklist."
   },
   {
-    "objectID": "index.html#目前狀態",
-    "href": "index.html#目前狀態",
+    "objectID": "index.html#目前狀態current-status",
+    "href": "index.html#目前狀態current-status",
     "title": "stat-skills-tutorials",
-    "section": "目前狀態",
-    "text": "目前狀態\n\n本站正在 Phase 0（骨架與可行性）：目錄結構、提示詞 schema、3 條示範提示詞、 1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。 詳細規劃見 repo 內的 PROPOSAL.zh-TW.md。"
-  },
-  {
-    "objectID": "index.html#english",
-    "href": "index.html#english",
-    "title": "stat-skills-tutorials",
-    "section": "English",
-    "text": "English\n\nThis site teaches jamovi askLLM users how to collaborate with a consulting LLM (the Module Guider or the R code tutor), not statistics or R themselves — for those, see 外部教材導讀. It has three layers: AI-collaboration literacy, a scenario-based prompt library, and a verification workflow for checking what the AI actually said against your own jamovi session. The site is currently in Phase 0 (scaffolding); see PROPOSAL.zh-TW.md for the roadmap."
+    "section": "目前狀態Current status",
+    "text": "目前狀態Current status\n\n本站正在 Phase 0（骨架與可行性）：目錄結構、提示詞 schema、3 條示範提示詞、 1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。 詳細規劃見 repo 內的 PROPOSAL.zh-TW.md。\n\n\nThe site is currently in Phase 0 (scaffolding and feasibility): the directory structure, the prompt schema, three example prompts, and one verification checklist are already live. The six collaboration-literacy lessons and the remaining verification checklists are still placeholders awaiting content. See PROPOSAL.zh-TW.md in the repo for the full roadmap."
   },
   {
     "objectID": "literacy/02-one-answerable-question.html",
@@ -648,7 +663,7 @@
     "href": "verify/checklist-guider.html#相關頁面related-pages",
     "title": "Module Guider 查核清單Module Guider Verification Checklist",
     "section": "相關頁面Related pages",
-    "text": "相關頁面Related pages\n\n\n完整流程說明：verify/workflow.qmd\nR code tutor 版查核清單（Phase 0 placeholder）：verify/checklist-rtutor.qmd\n已知錯誤範例：askLLM/docs/LIMITATIONS.zh-TW.md（母專案文件，不在本站範圍內修改）",
+    "text": "相關頁面Related pages\n\n\n完整流程說明：verify/workflow.qmd\nR code tutor 版查核清單：verify/checklist-rtutor.qmd\n找錯練習：verify/spot-the-error.qmd\n已知錯誤範例：askLLM/docs/LIMITATIONS.zh-TW.md（母專案文件，不在本站範圍內修改）\n\n\n\n\nFull workflow: verify/workflow.qmd\nChecklist for the R code tutor: verify/checklist-rtutor.qmd\nSpot-the-error drill: verify/spot-the-error.qmd\nRecorded real errors: askLLM/docs/LIMITATIONS.zh-TW.md (a document of the parent project; not edited from this site)",
     "crumbs": [
       "結果查核 / Verification",
       "[Module Guider 查核清單]{.zh}[Module Guider Verification Checklist]{.en}"
@@ -659,29 +674,128 @@
     "href": "verify/spot-the-error.html",
     "title": "故意找錯練習Spot the Error",
     "section": "",
-    "text": "狀態：Phase 0 placeholder，內容待 Phase 2 撰寫（見 PROPOSAL.zh-TW.md §5.4、 §8 Phase 2）。",
+    "text": "本頁把 askLLM/docs/LIMITATIONS.zh-TW.md 裡記錄的真實錯誤，改寫成一組「找碴」 練習：你會先看到一段情境與一段模型回覆，回覆裡藏著一個錯誤，練習先自己找出 問題所在，再打開答案核對。這是練習 verify/workflow.qmd 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你親身發現幻覺， 而不是被動接受文件裡的結論。",
     "crumbs": [
       "結果查核 / Verification",
       "[故意找錯練習]{.zh}[Spot the Error]{.en}"
     ]
   },
   {
-    "objectID": "verify/spot-the-error.html#這一頁要做什麼",
-    "href": "verify/spot-the-error.html#這一頁要做什麼",
+    "objectID": "verify/spot-the-error.html#第-1-題比較選單question-1-the-compare-menu",
+    "href": "verify/spot-the-error.html#第-1-題比較選單question-1-the-compare-menu",
     "title": "故意找錯練習Spot the Error",
-    "section": "這一頁要做什麼",
-    "text": "這一頁要做什麼\n\n直接取材 askLLM/docs/LIMITATIONS.zh-TW.md 表格裡的真實錯誤路徑（例如 分析 &gt; 比較 &gt; 獨立樣本t檢定、探索 &gt; 相關性、 Regression &gt; General Linear Model &gt; Linear Regression 等已記錄的幻覺案例）， 做成：\n\n8–10 題「這條路徑錯在哪」（練習 V1 路徑核對）\n3–4 題「這段 R 違反哪條紅旗」（練習 V4a 讀碼核對）\n\n每題附答案與對應的查核步驟編號（例如「見 V1」「見 V4a」），讓學生練習親身 發現幻覺、而不是被動接受 LIMITATIONS 文件裡的結論。這是 Phase 2（課堂驗證） 的產出物，Phase 0 只先佔位、註明取材來源與題型設計。",
+    "section": "第 1 題：「比較」選單Question 1: the “Compare” menu",
+    "text": "第 1 題：「比較」選單Question 1: the “Compare” menu\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者用 Module Guider 問「哪一個分析適合比較兩組平均數？」\n模型回覆：「你可以使用 分析 &gt; 比較 &gt; 獨立樣本t檢定。」\n問題：這條路徑錯在哪裡？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks the Module Guider “which analysis compares two group means?”\nModel reply: “You can use Analyses &gt; Compare &gt; Independent Samples T-Test.”\nQuestion: What is wrong with this path?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 T-Tests 選單之下。這是 LIMITATIONS 記錄「模型判斷正確、路徑寫錯」的典型 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核 步驟：V1 路徑核對。\n\n\nAnswer: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the T-Tests menu. This is the textbook case LIMITATIONS records where “the model reasoned correctly but wrote the wrong path” — it correctly identified the right family of analysis but invented an intermediate menu that does not exist. Verification step: V1, path check.",
     "crumbs": [
       "結果查核 / Verification",
       "[故意找錯練習]{.zh}[Spot the Error]{.en}"
     ]
   },
   {
-    "objectID": "verify/spot-the-error.html#english-placeholder",
-    "href": "verify/spot-the-error.html#english-placeholder",
+    "objectID": "verify/spot-the-error.html#第-2-題相關性長在哪裡question-2-where-correlation-lives",
+    "href": "verify/spot-the-error.html#第-2-題相關性長在哪裡question-2-where-correlation-lives",
     "title": "故意找錯練習Spot the Error",
-    "section": "English (placeholder)",
-    "text": "English (placeholder)\n\nThis page will turn real hallucinated menu paths and code red flags recorded in askLLM/docs/LIMITATIONS.zh-TW.md into a graded practice set: 8-10 “what’s wrong with this path” questions (practicing the V1 path check) and 3-4 “which red flag does this R code violate” questions (practicing the V4a code-read check), each with an answer key pointing back to the relevant workflow step. This is a Phase 2 deliverable; Phase 0 only reserves the page and documents its intended source material and question format.",
+    "section": "第 2 題：相關性長在哪裡Question 2: where correlation lives",
+    "text": "第 2 題：相關性長在哪裡Question 2: where correlation lives\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者問「我想看兩個連續變項的相關係數，該用哪個分析？」\n模型回覆：「請用 探索 &gt; 相關性。」\n問題：這條路徑錯在哪裡？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks “I want the correlation between two continuous variables — which analysis?”\nModel reply: “Use Exploration &gt; Correlation.”\nQuestion: What is wrong with this path?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：相關矩陣實際位於 Regression 選單之下，不在 Exploration。跟 第 1 題一樣，模型正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。 對應查核步驟：V1 路徑核對。\n\n\nAnswer: the correlation matrix actually lives under the Regression menu, not Exploration. As in question 1, the model correctly identified “this calls for a correlation analysis” but hung it under the wrong top-level menu. Verification step: V1, path check.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-3-題主成分分析躲在哪裡question-3-where-pca-hides",
+    "href": "verify/spot-the-error.html#第-3-題主成分分析躲在哪裡question-3-where-pca-hides",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 3 題：主成分分析躲在哪裡Question 3: where PCA hides",
+    "text": "第 3 題：主成分分析躲在哪裡Question 3: where PCA hides\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者問「我想對這幾個連續變項做主成分分析。」\n模型回覆：「可以到 探索 &gt; 主成分分析。」\n問題：這條路徑錯在哪裡？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks “I want to run a principal component analysis on these continuous variables.”\nModel reply: “Go to Exploration &gt; Principal Component Analysis.”\nQuestion: What is wrong with this path?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：PCA 實際位於 Factor 選單之下，不在 Exploration。同一個錯誤 模式再出現一次：分析名稱對，選單掛錯地方。對應查核步驟：V1 路徑核對。\n\n\nAnswer: PCA actually lives under the Factor menu, not Exploration. The same error pattern shows up again: the analysis name is right, the menu it’s hung under is wrong. Verification step: V1, path check.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-4-題整個選單都不存在question-4-a-menu-that-doesnt-exist-at-all",
+    "href": "verify/spot-the-error.html#第-4-題整個選單都不存在question-4-a-menu-that-doesnt-exist-at-all",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 4 題：整個選單都不存在Question 4: a menu that doesn’t exist at all",
+    "text": "第 4 題：整個選單都不存在Question 4: a menu that doesn’t exist at all\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者問「我想做判別分析來分類這幾個組別。」\n模型回覆：「請用 分類 &gt; 判別分析，或者 機器學習 &gt; 分類器。」\n問題：這兩條路徑錯在哪裡？跟前三題的錯誤性質有什麼不同？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks “I want to run a discriminant analysis to classify these groups.”\nModel reply: “Use Classification &gt; Discriminant Analysis, or Machine Learning &gt; Classifier.”\nQuestion: What is wrong with these two paths? How does this error differ in kind from questions 1–3?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是 「選單掛錯位置」，而是整條路徑（含分析本身）都是虛構的。跟前三題不同： 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身 （含已安裝模組）是否真的有這個功能——沒有的話就是模型純粹幻覺出一個功能。 對應查核步驟：V1 路徑核對（核對後結論應為「查無此路徑」）。\n\n\nAnswer: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all” — this is not “the menu is in the wrong place,” it is that the entire path, including the analysis itself, is fabricated. Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the model has simply hallucinated a feature. Verification step: V1, path check (the correct conclusion here is “no such path exists”).",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-5-題編出來的巢狀層級question-5-an-invented-nesting",
+    "href": "verify/spot-the-error.html#第-5-題編出來的巢狀層級question-5-an-invented-nesting",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 5 題：編出來的巢狀層級Question 5: an invented nesting",
+    "text": "第 5 題：編出來的巢狀層級Question 5: an invented nesting\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者用英文問模型如何做線性迴歸。\n模型回覆：「Use Regression &gt; General Linear Model &gt; Linear Regression.」\n問題：這條路徑錯在哪裡？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks the model, in English, how to run a linear regression.\nModel reply: “Use Regression &gt; General Linear Model &gt; Linear Regression.”\nQuestion: What is wrong with this path?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：LIMITATIONS 記錄這是「巢狀層級是編的」——Linear Regression 確實 在 Regression 選單之下，但中間多插了一層不存在的 General Linear Model 子選單。這種錯誤特別難抓，因為頭尾都對，只有中間一層是編的；逐條核對每一層 （不是只看第一層與最後一層對不對）才抓得到。對應查核步驟：V1 路徑核對。\n\n\nAnswer: LIMITATIONS records this as “a fabricated nesting level” — Linear Regression really is under Regression, but an extra, nonexistent General Linear Model sub-menu has been inserted in between. This kind of error is especially hard to catch because the first and last segments are both correct — only the middle level is invented. You only catch it by checking every level of the path, not just whether the first and last segments look right. Verification step: V1, path check.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong",
+    "href": "verify/spot-the-error.html#第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 6 題：連翻譯都出錯Question 6: even the translation is wrong",
+    "text": "第 6 題：連翻譯都出錯Question 6: even the translation is wrong\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md 第 1 節實測記錄。\n情境：使用者用中文問模型如何做線性迴歸。\n模型回覆：「請到 迴歸 → 線性線性(Linear Regression)。」\n問題：除了路徑本身，這則回覆還有什麼地方看起來不對勁？\n\n\nSource: recorded observation in section 1 of askLLM/docs/LIMITATIONS.zh-TW.md.\nScenario: A user asks the model, in Chinese, how to run a linear regression.\nModel reply: “Go to 迴歸 → 線性線性(Linear Regression)” (the Chinese label literally reads “linear-linear”).\nQuestion: Besides the path itself, what else looks off about this reply?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：LIMITATIONS 特別點出「連中文標籤都出現錯字」——線性線性 是重複 詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看 「大致講得通」，連標籤的逐字拼寫都要對得上你自己 jamovi 裡看到的文字，因為 自信的語氣與正確性無關。對應查核步驟：V1 路徑核對。\n\n\nAnswer: LIMITATIONS specifically flags that “even the Chinese label has a typo” — 線性線性 (“linear-linear”) is a duplicated word that never appears anywhere in jamovi’s actual interface. This is a reminder that the path check isn’t satisfied by something that “roughly makes sense” — the label’s exact wording has to match what you see in your own jamovi, because confident tone has nothing to do with correctness. Verification step: V1, path check.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached",
+    "href": "verify/spot-the-error.html#第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 7 題：沒附摘要時的憑空生成Question 7: fabrication with no summary attached",
+    "text": "第 7 題：沒附摘要時的憑空生成Question 7: fabrication with no summary attached\n\n來源：askLLM/docs/LIMITATIONS.zh-TW.md〈綜合使用建議〉第 3 點實測記錄。\n情境：使用者在送出問題時沒有勾選「Attach data summary to prompt」， 資料集其實是 iris（150 筆鳶尾花觀測，三個品種：setosa、versicolor、 virginica），問模型「這份資料有幾個樣本、有哪些組別？」\n模型回覆：「這份資料大約有 8 個樣本，分成 Saguaro 與 Palo Verde 兩個 物種。」\n問題：這則回覆錯在哪裡？根本原因是什麼？\n\n\nSource: recorded observation in the “overall recommendations” section of askLLM/docs/LIMITATIONS.zh-TW.md, point 3.\nScenario: A user submits a question without ticking “Attach data summary to prompt.” The dataset is actually iris (150 observations, three species: setosa, versicolor, virginica), and the user asks “how many samples are in this dataset, and what groups does it have?”\nModel reply: “This dataset has roughly 8 samples, split into two species, Saguaro and Palo Verde.”\nQuestion: What is wrong with this reply? What is the root cause?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：這是 LIMITATIONS 記錄的真實實測結果——未勾選「Attach data summary」時，模型完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體 物種名稱（Saguaro、Palo Verde，這兩者甚至不是 iris 的品種，是憑空生成的 仙人掌／植物名稱）。根本原因不是「模型算錯了」，是它從頭到尾沒有拿到任何 資料資訊，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：V3 範圍核對 ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是 否真的附上了資料摘要。\n\n\nAnswer: this is a real recorded observation from LIMITATIONS — when “Attach data summary” is unticked, the model has no visibility into your data at all, yet it still produced a specific number (8 samples) and specific group names (Saguaro, Palo Verde — which are not even iris species; they are fabricated plant names). The root cause is not “the model miscalculated” — it’s that it never received any information about the data in the first place, yet answered with the same confident tone it would use if it had. Verification step: V3, scope check — a reply that claims to know something it cannot actually see should be discounted entirely, and you should go back and confirm whether the data summary was actually attached when you submitted the question.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code",
+    "href": "verify/spot-the-error.html#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 8 題（示意範例）：程式碼裡的安裝指令Question 8 (illustrative): an install call in the code",
+    "text": "第 8 題（示意範例）：程式碼裡的安裝指令Question 8 (illustrative): an install call in the code\n\n\n本題為示意範例，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。\n\n情境：使用者用 R code tutor 問「幫我對 data 裡的 score 欄位做常態性 檢定。」\n模型回覆（示意）：\ninstall.packages(\"moments\")\nlibrary(moments)\nagostino.test(data$score)\n問題：這段程式碼違反了哪一條紅旗規則？\n\n\n\nThis question is an illustrative example, not real output from any model, used to practice the V4a code-read check.\n\nScenario: A user asks the R code tutor “run a normality test on the score column in data.”\nModel reply (illustrative):\ninstall.packages(\"moments\")\nlibrary(moments)\nagostino.test(data$score)\nQuestion: Which red-flag rule does this code violate?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：第一行 install.packages(\"moments\") 直接違反 askLLM/R/llm-adapter.R 第 172–177 行明文禁止的指令清單——system prompt 明確要求「never suggest install.packages()」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入 權限去安裝新套件，而且 askLLM 應該只引用 &lt;rj_environment&gt; 清單裡已經 裝好的套件。對應查核步驟：V4a 讀（見 checklist-rtutor.qmd 的紅旗 字串表）。\n\n\nAnswer: the first line, install.packages(\"moments\"), directly violates the instruction list explicitly forbidden in askLLM/R/llm-adapter.R lines 172–177 — the system prompt explicitly requires “never suggest install.packages()”. This line cannot be run safely: your Rj environment isn’t guaranteed to have network or write access to install a new package, and askLLM is supposed to cite only packages already installed, from the &lt;rj_environment&gt; list. Verification step: V4a, read (see the red-flag table in checklist-rtutor.qmd).",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code",
+    "href": "verify/spot-the-error.html#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 9 題（示意範例）：程式碼裡的檔案讀取Question 9 (illustrative): a file read in the code",
+    "text": "第 9 題（示意範例）：程式碼裡的檔案讀取Question 9 (illustrative): a file read in the code\n\n\n本題為示意範例，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。\n\n情境：使用者用 R code tutor 問「幫我畫出兩個變項的散佈圖。」\n模型回覆（示意）：\nmydata &lt;- read.csv(\"C:/Users/me/Desktop/survey.csv\")\nplot(mydata$x, mydata$y)\n問題：這段程式碼違反了哪幾條紅旗規則？（不只一條）\n\n\nScenario: A user asks the R code tutor “plot a scatterplot of two variables.”\nModel reply (illustrative):\nmydata &lt;- read.csv(\"C:/Users/me/Desktop/survey.csv\")\nplot(mydata$x, mydata$y)\nQuestion: Which red-flag rules does this code violate? (More than one.)\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：這一行同時踩到兩條紅旗：read.csv(...)（不得建議讀取檔案， 資料一律用既有的 data 物件）以及絕對路徑（C:/Users/me/Desktop/... 這種路徑因人而異，在你的機器上幾乎必然不存在）。就算你剛好也有一份叫 survey.csv 的檔案放在桌面，這段程式碼也完全沒有用到 jamovi 已經幫你準備 好的 data 物件，等於繞過了 askLLM 的設計邊界。對應查核步驟：V4a 讀。\n\n\nAnswer: this single line trips two red flags at once: read.csv(...) (no file reads are allowed; the data must always come from the existing data object) and an absolute path (C:/Users/me/Desktop/... is machine-specific and almost certainly does not exist on your computer). Even if you happened to have a file called survey.csv on your own desktop, this code entirely bypasses the data object jamovi already prepared for you — it sidesteps askLLM’s design boundary. Verification step: V4a, read.",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package",
+    "href": "verify/spot-the-error.html#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package",
+    "title": "故意找錯練習Spot the Error",
+    "section": "第 10 題（示意範例）：引用一個沒裝的套件Question 10 (illustrative): citing an uninstalled package",
+    "text": "第 10 題（示意範例）：引用一個沒裝的套件Question 10 (illustrative): citing an uninstalled package\n\n\n本題為示意範例，並非任何模型的真實輸出，用來練習 V4a 讀碼核對。\n\n情境：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件）， &lt;rj_environment&gt; 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸 （robust regression）。」\n模型回覆（示意）：\nlibrary(MASS)\nfit &lt;- rlm(y ~ x, data = data)\nsummary(fit)\n問題：這段程式碼有問題嗎？如果 MASS 沒有出現在 &lt;rj_environment&gt; 清單裡，你會怎麼處理？\n\n\nScenario: The user’s Rj environment has only base R installed (no extra statistical packages), so the &lt;rj_environment&gt; list contains only base R packages. The user asks “run a robust regression for me.”\nModel reply (illustrative):\nlibrary(MASS)\nfit &lt;- rlm(y ~ x, data = data)\nsummary(fit)\nQuestion: Is there a problem with this code? If MASS does not appear in the &lt;rj_environment&gt; list, what should you do?\n\n\n\n\n\n\n\n註釋\n\n\n\n\n\n\n答案：這裡要看清楚：MASS 隨 base R 一起發行，在多數 R 安裝裡本來就 存在，所以「引用 MASS」本身不一定是錯的——關鍵是核對，不是背名單。 真正的檢查方法是：打開這次呼叫附給模型的 &lt;rj_environment&gt; 區塊，逐字確認 MASS 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒 列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到 there is no package called 'MASS'——這種情況下應該回頭修改問題（例如 「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合模型的回覆。 對應查核步驟：V4a 讀 與 V4b 跑（V4b 的錯誤訊息正是拿來確認 V4a 判斷是否正確的依據）。\n\n\nAnswer: look carefully here — MASS ships with base R and exists in most R installations by default, so citing MASS is not automatically wrong. The point is to check, not to memorize a blocklist. The real check is: open the &lt;rj_environment&gt; block that was sent to the model for this call, and confirm verbatim whether MASS is actually listed. If it is, this code does not violate a red flag. If it is not listed (meaning your Rj scan didn’t find it), running this code will immediately produce there is no package called 'MASS' — in that case, go back and rephrase the question (e.g. “use only base R for a robust estimate”) rather than manually installing a package just to make the model’s reply work. Verification steps: V4a, read and V4b, run (the V4b error message is exactly what confirms whether the V4a judgment was correct).",
+    "crumbs": [
+      "結果查核 / Verification",
+      "[故意找錯練習]{.zh}[Spot the Error]{.en}"
+    ]
+  },
+  {
+    "objectID": "verify/spot-the-error.html#相關頁面related-pages",
+    "href": "verify/spot-the-error.html#相關頁面related-pages",
+    "title": "故意找錯練習Spot the Error",
+    "section": "相關頁面Related pages",
+    "text": "相關頁面Related pages\n\n\n完整流程說明：verify/workflow.qmd\nModule Guider 版查核清單：checklist-guider.qmd\nR code tutor 版查核清單（含紅旗字串表）：checklist-rtutor.qmd\n已知錯誤原始記錄：askLLM/docs/LIMITATIONS.zh-TW.md（母專案文件， 不在本站範圍內修改）\n\n\n\n\nFull workflow: verify/workflow.qmd\nModule Guider checklist: checklist-guider.qmd\nR code tutor checklist (includes the red-flag table): checklist-rtutor.qmd\nOriginal record of the errors above: askLLM/docs/LIMITATIONS.zh-TW.md (parent-project document, not modified within this site)",
     "crumbs": [
       "結果查核 / Verification",
       "[故意找錯練習]{.zh}[Spot the Error]{.en}"

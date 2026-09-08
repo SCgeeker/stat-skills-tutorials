@@ -24,31 +24,64 @@
     ],
     "design": "none",
     "stat_goal": "screen",
-    "prerequisites": "勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）",
+    "prerequisites": [
+      {
+        "zh": "勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）",
+        "en": "Tick every variable you care about before you submit (the \"Missing\" column in the summary is the only clue the LLM can see)."
+      }
+    ],
     "persona": "explainer",
     "prompt": {
       "zh": "摘要裡 {var_a} 遺漏 {pct_a}%、{var_b} 遺漏 {pct_b}%。\n\n請用初學者聽得懂的方式回答：\n1. 這個遺漏比例算不算嚴重？\n2. 我該先在 jamovi 用哪個分析看遺漏是否集中在某些組別（請給逐字選單路徑）？\n3. 哪些處理方式（例如刪除或插補）的選擇需要我自己根據研究設計決定、你無法替我判斷？",
       "en": "The summary shows {var_a} has {pct_a}% missing and {var_b} has {pct_b}% missing.\n\nIn beginner-friendly terms, please answer:\n1. Is this level of missingness serious?\n2. Which jamovi analysis (exact menu path) lets me see whether missingness clusters by group?\n3. Which treatment decisions (e.g. deletion vs. imputation) depend on my research design, so you cannot make them for me?"
     },
     "system_prompt_override": null,
-    "expected": ["明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）", "建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈", "把「刪除 vs. 插補」的決定交回使用者，並說明依據"],
+    "expected": [
+      {
+        "zh": "明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）",
+        "en": "Clearly states it cannot see the \"pattern\" of missingness (MCAR/MAR/MNAR cannot be judged from the summary alone)"
+      },
+      {
+        "zh": "建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈",
+        "en": "Suggests a real menu path such as Exploration ▸ Descriptives (Split by) or Frequencies to inspect the distribution"
+      },
+      {
+        "zh": "把「刪除 vs. 插補」的決定交回使用者，並說明依據",
+        "en": "Hands the \"deletion vs. imputation\" decision back to you, and explains the reasoning"
+      }
+    ],
     "check": [
       {
         "step": "path",
-        "what": "路徑逐字核對"
+        "what": {
+          "zh": "路徑逐字核對",
+          "en": "Check the menu path word-for-word"
+        }
       },
       {
         "step": "number",
-        "what": "遺漏比例與 Descriptives 的 Missing 欄一致"
+        "what": {
+          "zh": "遺漏比例與 Descriptives 的 Missing 欄一致",
+          "en": "The missingness percentage matches the Missing column in Descriptives"
+        }
       },
       {
         "step": "cross-check",
-        "what": "換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致"
+        "what": {
+          "zh": "換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致",
+          "en": "Ask again with the consultant persona, and check whether the two \"decisions handed back to you\" lists agree"
+        }
       }
     ],
     "stop_criteria": {
-      "solved": "回覆明確承認摘要的極限且建議的觀察步驟可執行",
-      "reopen": "回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習"
+      "solved": {
+        "zh": "回覆明確承認摘要的極限且建議的觀察步驟可執行",
+        "en": "The reply clearly acknowledges the summary's limits and the suggested inspection step is actionable."
+      },
+      "reopen": {
+        "zh": "回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習",
+        "en": "The reply picks an imputation method for you outright without stating its assumptions -> log it as an \"overconfidence\" case and use it in the spot-the-error exercise."
+      }
     },
     "links": [
       {
@@ -97,31 +130,68 @@
     ],
     "design": "mixed",
     "stat_goal": "compare-k",
-    "prerequisites": ["確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）", "三個時間點欄名記下來"],
+    "prerequisites": [
+      {
+        "zh": "確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）",
+        "en": "Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead)."
+      },
+      {
+        "zh": "三個時間點欄名記下來",
+        "en": "Write down the three time-point column names."
+      }
+    ],
     "persona": "tutor",
     "prompt": {
       "zh": "資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。\n\n請依下列規則引導我，不要直接給完整解答：\n1. 只給程式骨架與 TODO 註解，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。\n2. 印出每個受試者 × 時間點的列數，讓我自己核對。\n3. 不要幫我跑 ANOVA。",
       "en": "data has {id}, {group}, and three time columns {t1}, {t2}, {t3}.\n\nPlease guide me under these rules, without giving the full solution:\n1. Give only a skeleton with TODO comments, guiding me to reshape to long\n   format using base R or packages already in rj_environment.\n2. Print the row count per subject x time point so I can verify it myself.\n3. Do not run the ANOVA for me."
     },
     "system_prompt_override": null,
-    "expected": ["只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）", "長格式列數 = n 受試者 × 3", "有一行驗證輸出（table 或 nrow）"],
+    "expected": [
+      {
+        "zh": "只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）",
+        "en": "Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)"
+      },
+      {
+        "zh": "長格式列數 = n 受試者 × 3",
+        "en": "The long-format row count equals n subjects x 3"
+      },
+      {
+        "zh": "有一行驗證輸出（table 或 nrow）",
+        "en": "Includes one line of verification output (a table or nrow)"
+      }
+    ],
     "check": [
       {
         "step": "code-read",
-        "what": "逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件"
+        "what": {
+          "zh": "逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件",
+          "en": "Read line by line for setwd, file paths, or packages not listed in rj_environment"
+        }
       },
       {
         "step": "code-run",
-        "what": "貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題"
+        "what": {
+          "zh": "貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題",
+          "en": "Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question"
+        }
       },
       {
         "step": "cross-check",
-        "what": "回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致"
+        "what": {
+          "zh": "回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致",
+          "en": "Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones"
+        }
       }
     ],
     "stop_criteria": {
-      "solved": "code-run 列數正確且 cross-check 描述統計一致",
-      "reopen": "列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版"
+      "solved": {
+        "zh": "code-run 列數正確且 cross-check 描述統計一致",
+        "en": "The code-run row count is correct and the cross-check descriptive statistics agree."
+      },
+      "reopen": {
+        "zh": "列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版",
+        "en": "The row count is wrong, or the code uses a package not available in the environment -> paste the error message back and ask the consultant persona for the full solution."
+      }
     },
     "links": [
       {
@@ -165,31 +235,72 @@
     ],
     "design": "between",
     "stat_goal": "compare-2",
-    "prerequisites": ["已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd", "兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）"],
+    "prerequisites": [
+      {
+        "zh": "已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd",
+        "en": "You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups' n, mean, and sd."
+      },
+      {
+        "zh": "兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）",
+        "en": "Write down both groups' n and sd (the LLM will also receive them, but you need to be able to check them)."
+      }
+    ],
     "persona": "consultant",
     "prompt": {
       "zh": "{outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。\n\n請回答以下三件事：\n1. 該用哪一個 t 檢定？Welch 與 Student 的選擇依據是什麼？\n2. 我應該在 jamovi 的 Assumption Checks 勾選哪些項目（給逐字選單路徑）？\n3. 若前提不符，請給一個非參數替代方案，並引用該分析的逐字選單路徑。",
       "en": "{outcome} is continuous; {group} has two levels (n = {n1}, {n2}).\n\nPlease answer all three:\n1. Which t-test should I run? How do I choose between Welch and Student?\n2. Which Assumption Checks boxes should I tick in jamovi (give the exact menu path)?\n3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?"
     },
     "system_prompt_override": null,
-    "expected": ["指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）", "提到 Welch 為預設較穩健、或以變異數同質性為選擇依據", "列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）", "給出 Mann-Whitney U 作為替代且路徑正確"],
+    "expected": [
+      {
+        "zh": "指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）",
+        "en": "Names T-Tests ▸ Independent Samples T-Test (the exact menu path)"
+      },
+      {
+        "zh": "提到 Welch 為預設較穩健、或以變異數同質性為選擇依據",
+        "en": "Mentions that Welch is the more robust default, or bases the choice on homogeneity of variance"
+      },
+      {
+        "zh": "列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）",
+        "en": "Lists Normality and Homogeneity (Levene) under Assumption Checks"
+      },
+      {
+        "zh": "給出 Mann-Whitney U 作為替代且路徑正確",
+        "en": "Gives Mann-Whitney U as the alternative with the correct menu path"
+      }
+    ],
     "check": [
       {
         "step": "path",
-        "what": "回覆中每條 \"Analyses ▸ …\" 路徑在你的 jamovi 選單裡點得到"
+        "what": {
+          "zh": "回覆中每條 \"Analyses ▸ …\" 路徑在你的 jamovi 選單裡點得到",
+          "en": "Every \"Analyses ▸ ...\" path in the reply is clickable in your jamovi menu"
+        }
       },
       {
         "step": "number",
-        "what": "回覆引用的 n 與你在 Descriptives 看到的一致"
+        "what": {
+          "zh": "回覆引用的 n 與你在 Descriptives 看到的一致",
+          "en": "The n cited in the reply matches what you saw in Descriptives"
+        }
       },
       {
         "step": "assumption",
-        "what": "你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下"
+        "what": {
+          "zh": "你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下",
+          "en": "Run Assumption Checks yourself, and note whether the result matches or contradicts what the reply expects"
+        }
       }
     ],
     "stop_criteria": {
-      "solved": "四個 expected 全命中且 path 查核零錯 → 依建議執行",
-      "reopen": "任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章"
+      "solved": {
+        "zh": "四個 expected 全命中且 path 查核零錯 → 依建議執行",
+        "en": "All four expected elements are hit and the path check has zero errors -> proceed with the suggestion."
+      },
+      "reopen": {
+        "zh": "任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章",
+        "en": "Any path cannot be clicked, or the reply omits Assumption Checks -> switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead."
+      }
     },
     "links": [
       {

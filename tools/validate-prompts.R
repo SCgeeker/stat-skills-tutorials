@@ -60,6 +60,22 @@ suppressWarnings(suppressMessages({
   errs
 }
 
+#' 檢查「雙語字串清單」欄位（prerequisites/expected 等）
+#' 每個項目須為 {zh: ..., en: ...}，英文預設必填（2026-09-08 擴充範圍）。
+#' @param items list，來自 entry$prerequisites 或 entry$expected
+#' @param field_name character(1) 欄位名稱（用於錯誤訊息與索引前綴）
+#' @return character()：錯誤訊息（可能為 0 筆）
+.check_bilingual_list <- function(items, field_name, require_en = TRUE) {
+  errs <- character()
+  if (is.null(items) || length(items) < 1) {
+    return(sprintf("%s 至少須有 1 筆", field_name))
+  }
+  for (i in seq_along(items)) {
+    errs <- c(errs, .check_bilingual(items[[i]], sprintf("%s[%d]", field_name, i), require_en))
+  }
+  errs
+}
+
 # 主驗證函式 ------------------------------------------------------------
 
 #' 驗證單一條目（已讀入為 R list）
@@ -131,9 +147,9 @@ validate_entry <- function(entry, expected_id = NULL) {
                                   entry$stat_goal, paste(.STAT_GOAL_VALUES, collapse = ", ")))
   }
 
-  # prerequisites ---------------------------------------------------------
-  if (!is.null(entry$prerequisites) && length(entry$prerequisites) < 1) {
-    errors <- c(errors, "prerequisites 至少須有 1 筆")
+  # prerequisites（雙語字串清單，英文必填，2026-09-08 擴充） ---------------
+  if (!is.null(entry$prerequisites)) {
+    errors <- c(errors, .check_bilingual_list(entry$prerequisites, "prerequisites"))
   }
 
   # persona -------------------------------------------------------------
@@ -160,12 +176,12 @@ validate_entry <- function(entry, expected_id = NULL) {
     }
   }
 
-  # expected ------------------------------------------------------------
-  if (!is.null(entry$expected) && length(entry$expected) < 1) {
-    errors <- c(errors, "expected 至少須有 1 筆")
+  # expected（雙語字串清單，英文必填，2026-09-08 擴充） --------------------
+  if (!is.null(entry$expected)) {
+    errors <- c(errors, .check_bilingual_list(entry$expected, "expected"))
   }
 
-  # check ------------------------------------------------------------
+  # check（step 語言中立；what 為雙語，英文必填，2026-09-08 擴充） ---------
   if (!is.null(entry$check)) {
     if (length(entry$check) < 2) {
       errors <- c(errors, "check 至少須有 2 條")
@@ -178,9 +194,7 @@ validate_entry <- function(entry, expected_id = NULL) {
       } else {
         steps <- c(steps, c_i$step)
       }
-      if (.is_blank(c_i$what)) {
-        errors <- c(errors, sprintf("check[%d].what 不得為空", i))
-      }
+      errors <- c(errors, .check_bilingual(c_i$what, sprintf("check[%d].what", i)))
     }
     if (!is.null(entry$analysis) && identical(entry$analysis, "rtutor")) {
       if (!("code-read" %in% steps) || !("code-run" %in% steps)) {
@@ -189,14 +203,10 @@ validate_entry <- function(entry, expected_id = NULL) {
     }
   }
 
-  # stop_criteria ---------------------------------------------------------
+  # stop_criteria（solved/reopen 皆為雙語，英文必填，2026-09-08 擴充） -----
   if (!is.null(entry$stop_criteria)) {
-    if (.is_blank(entry$stop_criteria$solved)) {
-      errors <- c(errors, "stop_criteria.solved 不得為空")
-    }
-    if (.is_blank(entry$stop_criteria$reopen)) {
-      errors <- c(errors, "stop_criteria.reopen 不得為空")
-    }
+    errors <- c(errors, .check_bilingual(entry$stop_criteria$solved, "stop_criteria.solved"))
+    errors <- c(errors, .check_bilingual(entry$stop_criteria$reopen, "stop_criteria.reopen"))
   }
 
   # links（選填） ---------------------------------------------------------

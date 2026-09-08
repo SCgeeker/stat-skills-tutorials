@@ -54,9 +54,17 @@ write_prompts_json <- function(entries, out_path) {
 #' @return character(1)，qmd 全文
 render_entry_qmd <- function(entry) {
   id <- if (!is.null(entry$id)) entry$id else "unknown"
-  fmt_list <- function(x) paste(sprintf("- %s", x), collapse = "\n")
-  fmt_check <- function(check) {
-    paste(vapply(check, function(c_i) sprintf("- **%s**: %s", c_i$step, c_i$what), character(1)),
+
+  #' 將雙語字串清單（prerequisites/expected：{zh, en} 的 list）取出指定語言，
+  #' 轉成條列 Markdown
+  fmt_list_lang <- function(x, lang) {
+    paste(vapply(x, function(item) sprintf("- %s", item[[lang]]), character(1)),
+          collapse = "\n")
+  }
+  #' 將 check（{step, what: {zh, en}} 的 list）取出指定語言，轉成條列
+  #' Markdown；step 代號語言中立，兩種語言都原樣顯示。
+  fmt_check_lang <- function(check, lang) {
+    paste(vapply(check, function(c_i) sprintf("- **%s**: %s", c_i$step, c_i$what[[lang]]), character(1)),
           collapse = "\n")
   }
   fmt_links <- function(links) {
@@ -74,11 +82,11 @@ render_entry_qmd <- function(entry) {
   # 語言標記慣例（對應 assets/lang.css 的單站語言切換）：
   #   - 標題／行內：[中文]{.zh}[English]{.en}
   #   - 區塊：::: {.zh} ... ::: 與 ::: {.en} ... :::
-  # 依 prompts/_schema.yaml，真正成對存在中英欄位（bilingual_string）的
-  # 只有 title / scenario / prompt（system_prompt_override 目前本頁未輸出）；
-  # prerequisites／expected／check／stop_criteria 在 schema 裡是「單一語言」
-  # 欄位（撰寫時用中文），沒有對應英文欄位可用，因此整段包進 .zh 區塊——
-  # 切到英文時先隱藏，避免顯示未翻譯的中文片段。
+  # 依 prompts/_schema.yaml（2026-09-08 擴充後），成對存在中英欄位的欄位有
+  # title / scenario / prompt（system_prompt_override 目前本頁未輸出），
+  # 以及 prerequisites／expected／check.what／stop_criteria（新增）——
+  # 這四個欄位的中英文各自落進對應的 .zh / .en 區塊，不再整段只包進 .zh。
+  # check 的 step 代號本身語言中立，兩種語言的區塊都原樣顯示。
   # stat_goal／persona／analysis／design／tested_with 的 date/provider/model
   # 是語言中立的代碼／識別碼，不包進任何語言區塊，兩種語言都看得到。
   bilingual_title <- sprintf("[%s]{.zh}[%s]{.en}", entry$title$zh, entry$title$en)
@@ -107,6 +115,10 @@ title: "%s"
 %s
 :::
 
+::: {.en}
+%s
+:::
+
 ### [提示詞]{.zh}[Prompt]{.en}
 
 ::: {.zh}
@@ -127,15 +139,28 @@ title: "%s"
 %s
 :::
 
+::: {.en}
+%s
+:::
+
 ### [查核點]{.zh}[Check]{.en}
 
 ::: {.zh}
 %s
 :::
 
+::: {.en}
+%s
+:::
+
 ### [判準]{.zh}[Stop criteria]{.en}
 
 ::: {.zh}
+- **solved**: %s
+- **reopen**: %s
+:::
+
+::: {.en}
 - **solved**: %s
 - **reopen**: %s
 :::
@@ -156,12 +181,16 @@ title: "%s"
     entry$analysis, entry$design, entry$stat_goal, entry$persona,
     entry$scenario$zh,
     entry$scenario$en,
-    fmt_list(entry$prerequisites),
+    fmt_list_lang(entry$prerequisites, "zh"),
+    fmt_list_lang(entry$prerequisites, "en"),
     entry$prompt$zh,
     entry$prompt$en,
-    fmt_list(entry$expected),
-    fmt_check(entry$check),
-    entry$stop_criteria$solved, entry$stop_criteria$reopen,
+    fmt_list_lang(entry$expected, "zh"),
+    fmt_list_lang(entry$expected, "en"),
+    fmt_check_lang(entry$check, "zh"),
+    fmt_check_lang(entry$check, "en"),
+    entry$stop_criteria$solved$zh, entry$stop_criteria$reopen$zh,
+    entry$stop_criteria$solved$en, entry$stop_criteria$reopen$en,
     fmt_links(entry$links),
     fmt_tested(entry$tested_with)
   )

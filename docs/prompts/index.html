@@ -239,6 +239,11 @@ ul.task-list li input[type="checkbox"] {
 <li>勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Tick every variable you care about before you submit (the “Missing” column in the summary is the only clue the LLM can see).</li>
+</ul>
+</div>
 </section>
 <section id="提示詞prompt" class="level3">
 <h3 class="anchored" data-anchor-id="提示詞prompt"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
@@ -268,6 +273,13 @@ In beginner-friendly terms, please answer:
 <li>把「刪除 vs.&nbsp;插補」的決定交回使用者，並說明依據</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Clearly states it cannot see the “pattern” of missingness (MCAR/MAR/MNAR cannot be judged from the summary alone)</li>
+<li>Suggests a real menu path such as Exploration ▸ Descriptives (Split by) or Frequencies to inspect the distribution</li>
+<li>Hands the “deletion vs.&nbsp;imputation” decision back to you, and explains the reasoning</li>
+</ul>
+</div>
 </section>
 <section id="查核點check" class="level3">
 <h3 class="anchored" data-anchor-id="查核點check"><span class="zh">查核點</span><span class="en">Check</span></h3>
@@ -278,6 +290,13 @@ In beginner-friendly terms, please answer:
 <li><strong>cross-check</strong>: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li><strong>path</strong>: Check the menu path word-for-word</li>
+<li><strong>number</strong>: The missingness percentage matches the Missing column in Descriptives</li>
+<li><strong>cross-check</strong>: Ask again with the consultant persona, and check whether the two “decisions handed back to you” lists agree</li>
+</ul>
+</div>
 </section>
 <section id="判準stop-criteria" class="level3">
 <h3 class="anchored" data-anchor-id="判準stop-criteria"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
@@ -285,6 +304,12 @@ In beginner-friendly terms, please answer:
 <ul>
 <li><strong>solved</strong>: 回覆明確承認摘要的極限且建議的觀察步驟可執行</li>
 <li><strong>reopen</strong>: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: The reply clearly acknowledges the summary’s limits and the suggested inspection step is actionable.</li>
+<li><strong>reopen</strong>: The reply picks an imputation method for you outright without stating its assumptions -&gt; log it as an “overconfidence” case and use it in the spot-the-error exercise.</li>
 </ul>
 </div>
 </section>
@@ -321,6 +346,12 @@ In beginner-friendly terms, please answer:
 <li>三個時間點欄名記下來</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).</li>
+<li>Write down the three time-point column names.</li>
+</ul>
+</div>
 </section>
 <section id="提示詞prompt-1" class="level3">
 <h3 class="anchored" data-anchor-id="提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
@@ -351,6 +382,13 @@ Please guide me under these rules, without giving the full solution:
 <li>有一行驗證輸出（table 或 nrow）</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Uses only <code>data</code>, with no read.csv / install.packages (a hard rule for the R tutor)</li>
+<li>The long-format row count equals n subjects x 3</li>
+<li>Includes one line of verification output (a table or nrow)</li>
+</ul>
+</div>
 </section>
 <section id="查核點check-1" class="level3">
 <h3 class="anchored" data-anchor-id="查核點check-1"><span class="zh">查核點</span><span class="en">Check</span></h3>
@@ -361,6 +399,13 @@ Please guide me under these rules, without giving the full solution:
 <li><strong>cross-check</strong>: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li><strong>code-read</strong>: Read line by line for setwd, file paths, or packages not listed in rj_environment</li>
+<li><strong>code-run</strong>: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question</li>
+<li><strong>cross-check</strong>: Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones</li>
+</ul>
+</div>
 </section>
 <section id="判準stop-criteria-1" class="level3">
 <h3 class="anchored" data-anchor-id="判準stop-criteria-1"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
@@ -368,6 +413,12 @@ Please guide me under these rules, without giving the full solution:
 <ul>
 <li><strong>solved</strong>: code-run 列數正確且 cross-check 描述統計一致</li>
 <li><strong>reopen</strong>: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: The code-run row count is correct and the cross-check descriptive statistics agree.</li>
+<li><strong>reopen</strong>: The row count is wrong, or the code uses a package not available in the environment -&gt; paste the error message back and ask the consultant persona for the full solution.</li>
 </ul>
 </div>
 </section>
@@ -405,6 +456,12 @@ Please guide me under these rules, without giving the full solution:
 <li>兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups’ n, mean, and sd.</li>
+<li>Write down both groups’ n and sd (the LLM will also receive them, but you need to be able to check them).</li>
+</ul>
+</div>
 </section>
 <section id="提示詞prompt-2" class="level3">
 <h3 class="anchored" data-anchor-id="提示詞prompt-2"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
@@ -435,6 +492,14 @@ Please answer all three:
 <li>給出 Mann-Whitney U 作為替代且路徑正確</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li>Names T-Tests ▸ Independent Samples T-Test (the exact menu path)</li>
+<li>Mentions that Welch is the more robust default, or bases the choice on homogeneity of variance</li>
+<li>Lists Normality and Homogeneity (Levene) under Assumption Checks</li>
+<li>Gives Mann-Whitney U as the alternative with the correct menu path</li>
+</ul>
+</div>
 </section>
 <section id="查核點check-2" class="level3">
 <h3 class="anchored" data-anchor-id="查核點check-2"><span class="zh">查核點</span><span class="en">Check</span></h3>
@@ -445,6 +510,13 @@ Please answer all three:
 <li><strong>assumption</strong>: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下</li>
 </ul>
 </div>
+<div class="en">
+<ul>
+<li><strong>path</strong>: Every “Analyses ▸ …” path in the reply is clickable in your jamovi menu</li>
+<li><strong>number</strong>: The n cited in the reply matches what you saw in Descriptives</li>
+<li><strong>assumption</strong>: Run Assumption Checks yourself, and note whether the result matches or contradicts what the reply expects</li>
+</ul>
+</div>
 </section>
 <section id="判準stop-criteria-2" class="level3">
 <h3 class="anchored" data-anchor-id="判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
@@ -452,6 +524,12 @@ Please answer all three:
 <ul>
 <li><strong>solved</strong>: 四個 expected 全命中且 path 查核零錯 → 依建議執行</li>
 <li><strong>reopen</strong>: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: All four expected elements are hit and the path check has zero errors -&gt; proceed with the suggestion.</li>
+<li><strong>reopen</strong>: Any path cannot be clicked, or the reply omits Assumption Checks -&gt; switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead.</li>
 </ul>
 </div>
 </section>

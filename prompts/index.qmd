@@ -27,6 +27,10 @@ The summary shows non-trivial missingness in some variables. You want to know wh
 - 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）
 :::
 
+::: {.en}
+- Tick every variable you care about before you submit (the "Missing" column in the summary is the only clue the LLM can see).
+:::
+
 ### [提示詞]{.zh}[Prompt]{.en}
 
 ::: {.zh}
@@ -59,6 +63,12 @@ In beginner-friendly terms, please answer:
 - 把「刪除 vs. 插補」的決定交回使用者，並說明依據
 :::
 
+::: {.en}
+- Clearly states it cannot see the "pattern" of missingness (MCAR/MAR/MNAR cannot be judged from the summary alone)
+- Suggests a real menu path such as Exploration ▸ Descriptives (Split by) or Frequencies to inspect the distribution
+- Hands the "deletion vs. imputation" decision back to you, and explains the reasoning
+:::
+
 ### [查核點]{.zh}[Check]{.en}
 
 ::: {.zh}
@@ -67,11 +77,22 @@ In beginner-friendly terms, please answer:
 - **cross-check**: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致
 :::
 
+::: {.en}
+- **path**: Check the menu path word-for-word
+- **number**: The missingness percentage matches the Missing column in Descriptives
+- **cross-check**: Ask again with the consultant persona, and check whether the two "decisions handed back to you" lists agree
+:::
+
 ### [判準]{.zh}[Stop criteria]{.en}
 
 ::: {.zh}
 - **solved**: 回覆明確承認摘要的極限且建議的觀察步驟可執行
 - **reopen**: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習
+:::
+
+::: {.en}
+- **solved**: The reply clearly acknowledges the summary's limits and the suggested inspection step is actionable.
+- **reopen**: The reply picks an imputation method for you outright without stating its assumptions -> log it as an "overconfidence" case and use it in the spot-the-error exercise.
 :::
 
 ### [延伸閱讀]{.zh}[Links]{.en}
@@ -104,6 +125,11 @@ Data is in wide format (one row per subject, three time-point columns) plus a gr
 ::: {.zh}
 - 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
 - 三個時間點欄名記下來
+:::
+
+::: {.en}
+- Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+- Write down the three time-point column names.
 :::
 
 ### [提示詞]{.zh}[Prompt]{.en}
@@ -139,6 +165,12 @@ Please guide me under these rules, without giving the full solution:
 - 有一行驗證輸出（table 或 nrow）
 :::
 
+::: {.en}
+- Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+- The long-format row count equals n subjects x 3
+- Includes one line of verification output (a table or nrow)
+:::
+
 ### [查核點]{.zh}[Check]{.en}
 
 ::: {.zh}
@@ -147,11 +179,22 @@ Please guide me under these rules, without giving the full solution:
 - **cross-check**: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致
 :::
 
+::: {.en}
+- **code-read**: Read line by line for setwd, file paths, or packages not listed in rj_environment
+- **code-run**: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question
+- **cross-check**: Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones
+:::
+
 ### [判準]{.zh}[Stop criteria]{.en}
 
 ::: {.zh}
 - **solved**: code-run 列數正確且 cross-check 描述統計一致
 - **reopen**: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版
+:::
+
+::: {.en}
+- **solved**: The code-run row count is correct and the cross-check descriptive statistics agree.
+- **reopen**: The row count is wrong, or the code uses a package not available in the environment -> paste the error message back and ask the consultant persona for the full solution.
 :::
 
 ### [延伸閱讀]{.zh}[Links]{.en}
@@ -184,6 +227,11 @@ Your data has one continuous outcome and one two-level grouping variable. You wa
 ::: {.zh}
 - 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
 - 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
+:::
+
+::: {.en}
+- You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups' n, mean, and sd.
+- Write down both groups' n and sd (the LLM will also receive them, but you need to be able to check them).
 :::
 
 ### [提示詞]{.zh}[Prompt]{.en}
@@ -219,6 +267,13 @@ Please answer all three:
 - 給出 Mann-Whitney U 作為替代且路徑正確
 :::
 
+::: {.en}
+- Names T-Tests ▸ Independent Samples T-Test (the exact menu path)
+- Mentions that Welch is the more robust default, or bases the choice on homogeneity of variance
+- Lists Normality and Homogeneity (Levene) under Assumption Checks
+- Gives Mann-Whitney U as the alternative with the correct menu path
+:::
+
 ### [查核點]{.zh}[Check]{.en}
 
 ::: {.zh}
@@ -227,11 +282,22 @@ Please answer all three:
 - **assumption**: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下
 :::
 
+::: {.en}
+- **path**: Every "Analyses ▸ ..." path in the reply is clickable in your jamovi menu
+- **number**: The n cited in the reply matches what you saw in Descriptives
+- **assumption**: Run Assumption Checks yourself, and note whether the result matches or contradicts what the reply expects
+:::
+
 ### [判準]{.zh}[Stop criteria]{.en}
 
 ::: {.zh}
 - **solved**: 四個 expected 全命中且 path 查核零錯 → 依建議執行
 - **reopen**: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit and the path check has zero errors -> proceed with the suggestion.
+- **reopen**: Any path cannot be clicked, or the reply omits Assumption Checks -> switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead.
 :::
 
 ### [延伸閱讀]{.zh}[Links]{.en}

@@ -8,7 +8,15 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 > `checklist-rtutor.qmd`、`spot-the-error.qmd` 仍待撰寫成教學文字。
 :::
 
-## [原則]{.zh}
+::: {.en}
+> Status: Phase 0 placeholder. The workflow skeleton is fixed; the full
+> teaching prose is planned for Phase 1 (see `PROPOSAL.zh-TW.md` §5.2).
+> `checklist-guider.qmd` is already complete; this page,
+> `checklist-rtutor.qmd`, and `spot-the-error.qmd` still need to be written
+> up as teaching text.
+:::
+
+## [原則]{.zh}[Principles]{.en}
 
 ::: {.zh}
 - 查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始
@@ -18,7 +26,20 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 - 每次查核產出一筆「協作日誌」（見第六課），這是可教、可重複、可交作業的單位。
 :::
 
-## [流程步驟]{.zh}
+::: {.en}
+- Verification is not "asking the AI again" — it is checking what the AI
+  said against things it cannot see: your jamovi interface, your raw data,
+  your research design.
+- The two paths are not equally hard to verify: the Module Guider's output
+  can be checked against a finite, verifiable set (menu paths); the R code
+  tutor's output can only be checked through a process (read the code, run
+  it, cross-check against the GUI).
+- Every verification pass produces one "collaboration log" entry (see
+  Lesson 6) — a unit that can be taught, repeated, and turned into an
+  assignment.
+:::
+
+## [流程步驟]{.zh}[Workflow steps]{.en}
 
 ```
 送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課
@@ -37,21 +58,17 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
          C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）
 ```
 
-## [兩份查核清單]{.zh}
+## [兩份查核清單]{.zh}[Two checklists]{.en}
 
 ::: {.zh}
 - [`checklist-guider.qmd`](checklist-guider.qmd)：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。
 - [`checklist-rtutor.qmd`](checklist-rtutor.qmd)：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。
 :::
 
-## [English]{.en}
-
 ::: {.en}
-Verification is not "asking the AI again" — it is checking the AI's reply
-against things it cannot see: your jamovi interface, your raw data, your
-research design. The Module Guider path is easier to check mechanically
-(menu paths are a finite, verifiable set); the R code tutor path can only be
-checked through a process (read the code, run it, cross-check against the
-GUI). Full English prose for this page is planned for Phase 1; the checklist
-above already exists in complete bilingual form.
+- [`checklist-guider.qmd`](checklist-guider.qmd): P0–P1, V1–V3, V5, C1–C2 —
+  a single printable page.
+- [`checklist-rtutor.qmd`](checklist-rtutor.qmd): P0–P1, V2–V4, V5, C1–C2
+  (Phase 0 placeholder).
 :::
+

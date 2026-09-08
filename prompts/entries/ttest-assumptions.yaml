@@ -15,8 +15,10 @@ variables:
 design: between
 stat_goal: compare-2
 prerequisites:
-  - 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
-  - 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
+  - zh: 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
+    en: You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups' n, mean, and sd.
+  - zh: 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
+    en: Write down both groups' n and sd (the LLM will also receive them, but you need to be able to check them).
 persona: consultant
 prompt:
   zh: |-
@@ -35,17 +37,34 @@ prompt:
     3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?
 system_prompt_override: null
 expected:
-  - 指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）
-  - 提到 Welch 為預設較穩健、或以變異數同質性為選擇依據
-  - 列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）
-  - 給出 Mann-Whitney U 作為替代且路徑正確
+  - zh: 指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）
+    en: Names T-Tests ▸ Independent Samples T-Test (the exact menu path)
+  - zh: 提到 Welch 為預設較穩健、或以變異數同質性為選擇依據
+    en: Mentions that Welch is the more robust default, or bases the choice on homogeneity of variance
+  - zh: 列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）
+    en: Lists Normality and Homogeneity (Levene) under Assumption Checks
+  - zh: 給出 Mann-Whitney U 作為替代且路徑正確
+    en: Gives Mann-Whitney U as the alternative with the correct menu path
 check:
-  - {step: path, what: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡點得到}
-  - {step: number, what: 回覆引用的 n 與你在 Descriptives 看到的一致}
-  - {step: assumption, what: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下}
+  - step: path
+    what:
+      zh: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡點得到
+      en: Every "Analyses ▸ ..." path in the reply is clickable in your jamovi menu
+  - step: number
+    what:
+      zh: 回覆引用的 n 與你在 Descriptives 看到的一致
+      en: The n cited in the reply matches what you saw in Descriptives
+  - step: assumption
+    what:
+      zh: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下
+      en: Run Assumption Checks yourself, and note whether the result matches or contradicts what the reply expects
 stop_criteria:
-  solved: 四個 expected 全命中且 path 查核零錯 → 依建議執行
-  reopen: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章
+  solved:
+    zh: 四個 expected 全命中且 path 查核零錯 → 依建議執行
+    en: All four expected elements are hit and the path check has zero errors -> proceed with the suggestion.
+  reopen:
+    zh: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章
+    en: Any path cannot be clicked, or the reply omits Assumption Checks -> switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead.
 links:
   - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
 tested_with:

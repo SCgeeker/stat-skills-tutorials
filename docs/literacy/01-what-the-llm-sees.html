@@ -237,22 +237,28 @@ ul.task-list li input[type="checkbox"] {
 <section id="askllm-實際送出的內容what-askllm-actually-sends" class="level2">
 <h2 class="anchored" data-anchor-id="askllm-實際送出的內容what-askllm-actually-sends"><span class="zh">askLLM 實際送出的內容</span><span class="en">What askLLM actually sends</span></h2>
 <div class="zh">
-<p>askLLM 的資料摘要函式 <code>summarize_data()</code> 為每個變項產生固定格式的區塊。連續 變項(數值型)長這樣：</p>
+<p>askLLM 的資料摘要函式 <code>summarize_data()</code> 為每個變項產生固定格式的區塊。連續 變項（數值型）長這樣：</p>
+</div>
+<div class="en">
+<p><code>summarize_data()</code>, askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous (numeric) variable looks like this:</p>
 </div>
 <pre><code>age [numeric]:
   n: 118, missing: 2
   mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61</code></pre>
 <div class="zh">
-<p>類別變項(factor)長這樣：</p>
+<p>類別變項（factor）長這樣：</p>
+</div>
+<div class="en">
+<p>A categorical (factor) variable looks like this:</p>
 </div>
 <pre><code>group [factor]:
   n: 120, missing: 0, 2 levels
   levels by count: control(61), treatment(59)</code></pre>
 <div class="zh">
-<p>就這樣——沒有第三行。<strong>LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。</p>
+<p>就這樣。唯一的例外是<strong>有序類別變項（ordered factor）</strong>會多一行 <code>level order: 低 &lt; 中 &lt; 高</code>，說明水準的順序。除此之外沒有別的了——<strong>LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。</p>
 </div>
 <div class="en">
-<p><code>summarize_data()</code>, askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous variable looks like the block above; a categorical variable reports level counts the same way. An ordered factor adds one more line, <code>level order: low &lt; medium &lt; high</code>. Beyond that there is nothing — <strong>the LLM receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.</p>
+<p>That is all. The one exception is an <strong>ordered factor</strong>, which adds one more line, <code>level order: low &lt; medium &lt; high</code>, to show how the levels are ordered. Beyond that there is nothing — <strong>the LLM receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.</p>
 </div>
 </section>
 <section id="摘要看不到什麼what-the-summary-cannot-show" class="level2">

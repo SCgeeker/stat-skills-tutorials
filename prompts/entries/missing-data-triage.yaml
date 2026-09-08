@@ -14,7 +14,8 @@ variables:
 design: none
 stat_goal: screen
 prerequisites:
-  - 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）
+  - zh: 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）
+    en: Tick every variable you care about before you submit (the "Missing" column in the summary is the only clue the LLM can see).
 persona: explainer
 prompt:
   zh: |-
@@ -33,16 +34,32 @@ prompt:
     3. Which treatment decisions (e.g. deletion vs. imputation) depend on my research design, so you cannot make them for me?
 system_prompt_override: null
 expected:
-  - 明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）
-  - 建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈
-  - 把「刪除 vs. 插補」的決定交回使用者，並說明依據
+  - zh: 明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）
+    en: Clearly states it cannot see the "pattern" of missingness (MCAR/MAR/MNAR cannot be judged from the summary alone)
+  - zh: 建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈
+    en: Suggests a real menu path such as Exploration ▸ Descriptives (Split by) or Frequencies to inspect the distribution
+  - zh: 把「刪除 vs. 插補」的決定交回使用者，並說明依據
+    en: Hands the "deletion vs. imputation" decision back to you, and explains the reasoning
 check:
-  - {step: path, what: 路徑逐字核對}
-  - {step: number, what: 遺漏比例與 Descriptives 的 Missing 欄一致}
-  - {step: cross-check, what: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致}
+  - step: path
+    what:
+      zh: 路徑逐字核對
+      en: Check the menu path word-for-word
+  - step: number
+    what:
+      zh: 遺漏比例與 Descriptives 的 Missing 欄一致
+      en: The missingness percentage matches the Missing column in Descriptives
+  - step: cross-check
+    what:
+      zh: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致
+      en: Ask again with the consultant persona, and check whether the two "decisions handed back to you" lists agree
 stop_criteria:
-  solved: 回覆明確承認摘要的極限且建議的觀察步驟可執行
-  reopen: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習
+  solved:
+    zh: 回覆明確承認摘要的極限且建議的觀察步驟可執行
+    en: The reply clearly acknowledges the summary's limits and the suggested inspection step is actionable.
+  reopen:
+    zh: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習
+    en: The reply picks an imputation method for you outright without stating its assumptions -> log it as an "overconfidence" case and use it in the spot-the-error exercise.
 links:
   - {title: "lsj-book ch.6 (data handling)", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
 tested_with:

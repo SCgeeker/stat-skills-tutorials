@@ -10,20 +10,24 @@ variables:
 design: between
 stat_goal: compare-2
 prerequisites:
-  - 這是測試用的前置條件說明
+  - zh: 這是測試用的前置條件說明
+    en: This is a fixture prerequisite description.
 persona: consultant
 prompt:
   zh: "這是一行測試用提示詞，沒有換行。"
   en: "This is a single-line fixture prompt with no newline."
 system_prompt_override: null
 expected:
-  - 測試用期望項目一
+  - zh: 測試用期望項目一
+    en: Fixture expected item one
 check:
-  - {step: path, what: 測試用查核點一}
-  - {step: number, what: 測試用查核點二}
+  - step: path
+    what: {zh: 測試用查核點一, en: Fixture check item one}
+  - step: number
+    what: {zh: 測試用查核點二, en: Fixture check item two}
 stop_criteria:
-  solved: 測試用 solved 說明
-  reopen: 測試用 reopen 說明
+  solved: {zh: 測試用 solved 說明, en: Fixture solved description}
+  reopen: {zh: 測試用 reopen 說明, en: Fixture reopen description}
 links: []
 tested_with:
   - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測"}
