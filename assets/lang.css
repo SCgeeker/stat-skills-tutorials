@@ -1,0 +1,32 @@
+/* 語言切換：以 <html> 上的 class 控制顯示哪一語言的區塊。
+   內容頁以 ::: {.zh} / ::: {.en} 標記段落，兩者只顯示其一。 */
+html.lang-zh .en { display: none !important; }
+html.lang-en .zh { display: none !important; }
+
+/* 切換鈕：固定在右上，列印時隱藏 */
+.lang-toggle {
+  position: fixed;
+  top: 0.6rem;
+  right: 0.8rem;
+  z-index: 1050;
+  display: inline-flex;
+  border: 1px solid var(--bs-border-color, #ccc);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--bs-body-bg, #fff);
+  font-size: 0.85rem;
+}
+.lang-toggle button {
+  border: 0;
+  background: transparent;
+  padding: 0.2rem 0.7rem;
+  cursor: pointer;
+  color: inherit;
+}
+.lang-toggle button[aria-pressed="true"] {
+  background: var(--bs-primary, #2780e3);
+  color: #fff;
+}
+@media print {
+  .lang-toggle { display: none; }
+}

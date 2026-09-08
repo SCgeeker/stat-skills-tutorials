@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../literacy/01-what-the-llm-sees.html"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../external/reading-map.html" aria-current="page"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -226,6 +241,29 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

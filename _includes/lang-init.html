@@ -1,0 +1,14 @@
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>

@@ -2,8 +2,9 @@
 title: "stat-skills-tutorials"
 ---
 
-## 這是什麼
+## [這是什麼]{.zh}
 
+::: {.zh}
 `stat-skills-tutorials` 是給 jamovi 模組 `askLLM` 使用者的原創教程與提示詞庫，
 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教
 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節
@@ -17,15 +18,19 @@ title: "stat-skills-tutorials"
    欄的提示詞，附查核點與判準；每條有結構化 schema（見 `prompts/_schema.yaml`）。
 3. **[生成結果查核](verify/workflow.qmd)**：AI 回覆不是自己說了算，要拿 jamovi
    介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。
+:::
 
-## 目前狀態
+## [目前狀態]{.zh}
 
+::: {.zh}
 本站正在 **Phase 0（骨架與可行性）**：目錄結構、提示詞 schema、3 條示範提示詞、
 1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。
 詳細規劃見 repo 內的 `PROPOSAL.zh-TW.md`。
+:::
 
-## English
+## [English]{.en}
 
+::: {.en}
 This site teaches jamovi `askLLM` users how to collaborate with a consulting
 LLM (the Module Guider or the R code tutor), not statistics or R themselves —
 for those, see [外部教材導讀](external/reading-map.qmd). It has three layers:
@@ -33,3 +38,4 @@ AI-collaboration literacy, a scenario-based prompt library, and a verification
 workflow for checking what the AI actually said against your own jamovi
 session. The site is currently in Phase 0 (scaffolding); see `PROPOSAL.zh-TW.md`
 for the roadmap.
+:::

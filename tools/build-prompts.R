@@ -71,72 +71,94 @@ render_entry_qmd <- function(entry) {
           collapse = "\n")
   }
 
+  # 語言標記慣例（對應 assets/lang.css 的單站語言切換）：
+  #   - 標題／行內：[中文]{.zh}[English]{.en}
+  #   - 區塊：::: {.zh} ... ::: 與 ::: {.en} ... :::
+  # 依 prompts/_schema.yaml，真正成對存在中英欄位（bilingual_string）的
+  # 只有 title / scenario / prompt（system_prompt_override 目前本頁未輸出）；
+  # prerequisites／expected／check／stop_criteria 在 schema 裡是「單一語言」
+  # 欄位（撰寫時用中文），沒有對應英文欄位可用，因此整段包進 .zh 區塊——
+  # 切到英文時先隱藏，避免顯示未翻譯的中文片段。
+  # stat_goal／persona／analysis／design／tested_with 的 date/provider/model
+  # 是語言中立的代碼／識別碼，不包進任何語言區塊，兩種語言都看得到。
+  bilingual_title <- sprintf("[%s]{.zh}[%s]{.en}", entry$title$zh, entry$title$en)
+
   glue_tpl <- '---
-title: "%s / %s"
+title: "%s"
 ---
 
-## %s / %s
+## %s
 
 **analysis**: `%s` &nbsp;|&nbsp; **design**: `%s` &nbsp;|&nbsp; **stat_goal**: `%s` &nbsp;|&nbsp; **persona**: `%s`
 
-### 情境 / Scenario
+### [情境]{.zh}[Scenario]{.en}
 
+::: {.zh}
 %s
-
-%s
-
-### 送出前必做 / Prerequisites
-
-%s
-
-### 提示詞 / Prompt
-
-::: {.panel-tabset}
-
-## 繁體中文
-
-```
-%s
-```
-
-## English
-
-```
-%s
-```
-
 :::
 
-### 期望回覆要素 / Expected elements
-
+::: {.en}
 %s
+:::
 
-### 查核點 / Check
+### [送出前必做]{.zh}[Prerequisites]{.en}
 
+::: {.zh}
 %s
+:::
 
-### 判準 / Stop criteria
+### [提示詞]{.zh}[Prompt]{.en}
 
+::: {.zh}
+```
+%s
+```
+:::
+
+::: {.en}
+```
+%s
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+%s
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+%s
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
 - **solved**: %s
 - **reopen**: %s
+:::
 
-### 延伸閱讀 / Links
+### [延伸閱讀]{.zh}[Links]{.en}
 
 %s
 
-### 實測記錄 / Tested with
+### [實測記錄]{.zh}[Tested with]{.en}
 
 %s
 '
 
   sprintf(
     glue_tpl,
-    entry$title$zh, entry$title$en,
-    entry$title$zh, entry$title$en,
+    bilingual_title,
+    bilingual_title,
     entry$analysis, entry$design, entry$stat_goal, entry$persona,
-    entry$scenario$zh, entry$scenario$en,
+    entry$scenario$zh,
+    entry$scenario$en,
     fmt_list(entry$prerequisites),
-    entry$prompt$zh, entry$prompt$en,
+    entry$prompt$zh,
+    entry$prompt$en,
     fmt_list(entry$expected),
     fmt_check(entry$check),
     entry$stop_criteria$solved, entry$stop_criteria$reopen,

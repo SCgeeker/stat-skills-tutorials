@@ -380,7 +380,7 @@ tested_with:
 ### 7.2 語言策略
 
 - **繁中為主、英文為必要子集**：L1 六課與 L3 查核流程做完整雙語（呼應 F9 的成對慣例，也因為 askLLM 的 Persona 支援 en／zh，使用者兩種語言都會用）。L2 條目說明頁**亦為完整雙語**（Q5 已拍板）：`prompt`、`expected`、查核點與說明文字都需人工撰寫或校對的英文，不接受機器翻譯佔位——因為要向英文教材原作者徵求回饋。schema 須把英文欄位列為必填並由 validator 強制。`external/reading-map` 單一英文頁（教材全是英文）。
-- 實作：`_quarto.yml` 為 zh-TW 主 profile，`_quarto-en.yml` 覆寫 `lang`、sidebar 與 `render` 清單；輸出到 `docs/` 與 `docs/en/`。
+- **實作（2026-09-08 修正）：單一站台 + 語言切換鈕，不做雙站。** 原設計為 `_quarto-en.yml` profile 輸出到 `docs/en/`，實作後發現行不通——內容是中英對照寫在同一檔，profile 只能換掉 navbar 與 `lang` 屬性，切不出單語頁面，兩站內容完全相同（實測同為 1,082 個中文字元），且 `docs/en` 位於 `docs/` 之內會被中文站 render 清空。改為：內容以 `[中文]{.zh}[English]{.en}`（標題、行內）與 `::: {.zh}` / `::: {.en}`（區塊）標記，`assets/lang.css` 依 `<html>` 的 `lang-zh`／`lang-en` class 隱藏另一語言，`_includes/lang-init.html` 在 `<head>` 內先定語言（localStorage → 瀏覽器語言 → 預設中文）避免閃爍，`_includes/lang-toggle.html` 提供右上角切換鈕並記憶選擇。`_quarto-en.yml` 已刪除。程式碼區塊與語言中立的表格不包 div，兩種語言都顯示。
 - 提示詞 JSON（`docs/prompts.json`）語言無關，供 askLLM 或其他工具日後讀取（F7 的 `learn-r.json` 已是同型先例）。
 
 ### 7.3 測試與 CI

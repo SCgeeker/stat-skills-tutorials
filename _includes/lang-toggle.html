@@ -1,0 +1,23 @@
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>

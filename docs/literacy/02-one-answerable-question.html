@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence – stat-skills-tutorials</title>
+<title>第二課：把研究問題寫成一句可回答的問題Turning Your Question into One Answerable Sentence – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../literacy/01-what-the-llm-sees.html" aria-current="page"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -122,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/02-one-answerable-question.html">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/02-one-answerable-question.html"><span class="zh">第二課：把研究問題寫成一句可回答的問題</span><span class="en">Turning Your Question into One Answerable Sentence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,37 +152,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
+ <span class="menu-text"><span class="zh">第一課：LLM 看得到什麼、看不到什麼</span><span class="en">What the LLM Sees, and What It Doesn’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/02-one-answerable-question.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</span></a>
+ <span class="menu-text"><span class="zh">第二課：把研究問題寫成一句可回答的問題</span><span class="en">Turning Your Question into One Answerable Sentence</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
+ <span class="menu-text"><span class="zh">第三課：先寫判準再送出</span><span class="en">Write Your Criteria Before You Submit</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/04-which-analysis-which-persona.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</span></a>
+ <span class="menu-text"><span class="zh">第四課：選對分析、選對 Persona</span><span class="en">Choosing the Right Analysis and Persona</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/05-beyond-the-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</span></a>
+ <span class="menu-text"><span class="zh">第五課：摘要之外的事自己來</span><span class="en">What Summary Statistics Can’t Tell You</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/06-after-the-answer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第六課：問完之後 / After You Get an Answer</span></a>
+ <span class="menu-text"><span class="zh">第六課：問完之後</span><span class="en">After You Get an Answer</span></span></a>
   </div>
 </li>
     </ul>
@@ -180,11 +195,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
-  <li><a href="#askllm-是單輪問答-askllm-is-single-turn" id="toc-askllm-是單輪問答-askllm-is-single-turn" class="nav-link" data-scroll-target="#askllm-是單輪問答-askllm-is-single-turn">askLLM 是單輪問答 / askLLM is single-turn</a></li>
-  <li><a href="#八組改寫前-改寫後對照-eight-beforeafter-rewrites" id="toc-八組改寫前-改寫後對照-eight-beforeafter-rewrites" class="nav-link" data-scroll-target="#八組改寫前-改寫後對照-eight-beforeafter-rewrites">八組改寫前 / 改寫後對照 / Eight before/after rewrites</a></li>
-  <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
-  <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
+  <li><a href="#為什麼這件事會出錯why-this-goes-wrong" id="toc-為什麼這件事會出錯why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></a></li>
+  <li><a href="#askllm-是單輪問答askllm-is-single-turn" id="toc-askllm-是單輪問答askllm-is-single-turn" class="nav-link" data-scroll-target="#askllm-是單輪問答askllm-is-single-turn"><span class="zh">askLLM 是單輪問答</span><span class="en">askLLM is single-turn</span></a></li>
+  <li><a href="#八組改寫前改寫後對照eight-beforeafter-rewrites" id="toc-八組改寫前改寫後對照eight-beforeafter-rewrites" class="nav-link" data-scroll-target="#八組改寫前改寫後對照eight-beforeafter-rewrites"><span class="zh">八組改寫前／改寫後對照</span><span class="en">Eight before/after rewrites</span></a></li>
+  <li><a href="#動手做5-分鐘try-it-5-minutes" id="toc-動手做5-分鐘try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></a></li>
+  <li><a href="#帶走這句話one-thing-to-remember" id="toc-帶走這句話one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></a></li>
   </ul>
 </nav>
     </div>
@@ -193,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</h1>
+<h1 class="title"><span class="zh">第二課：把研究問題寫成一句可回答的問題</span><span class="en">Turning Your Question into One Answerable Sentence</span></h1>
 </div>
 
 
@@ -210,18 +225,27 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
-<h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
+<section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
+<div class="zh">
 <p>有人在 askLLM 裡打了「幫我分析這個資料」，勾選 Submit,收到一段內容豐富、 但完全不對題的回覆——它猜了一個描述統計加一個相關分析，剛好都不是使用者真正 想問的問題。使用者接著在同一個問題欄後面補一句「不對，我是想問兩組有沒有差 異」，再次勾選 Submit。可是 askLLM <strong>沒有對話記憶</strong>:第二次送出時，LLM 完全 不知道「不對」是在回應什麼，只會把整段文字當成一個全新、獨立的問題重新回答。 模糊的指令加上單輪限制，結果就是來回猜測、浪費呼叫次數，答案還是對不上。</p>
+</div>
+<div class="en">
 <p>Someone typed “analyze this for me” into askLLM, ticked Submit, and got a long, confident reply — a description plus a correlation, neither of which was the question they actually had in mind. They then appended “no, I meant whether the two groups differ” to the same question box and submitted again. But askLLM has <strong>no conversation memory</strong>: the second call has no idea what “no” is responding to: it just re-answers the whole text as a brand-new, standalone question. A vague instruction combined with a single-turn design means guesswork, wasted calls, and an answer that still misses the point.</p>
+</div>
 </section>
-<section id="askllm-是單輪問答-askllm-is-single-turn" class="level2">
-<h2 class="anchored" data-anchor-id="askllm-是單輪問答-askllm-is-single-turn">askLLM 是單輪問答 / askLLM is single-turn</h2>
+<section id="askllm-是單輪問答askllm-is-single-turn" class="level2">
+<h2 class="anchored" data-anchor-id="askllm-是單輪問答askllm-is-single-turn"><span class="zh">askLLM 是單輪問答</span><span class="en">askLLM is single-turn</span></h2>
+<div class="zh">
 <p>每次勾選 Submit 都是一次獨立、完整的呼叫；沒有前一輪的記憶可以延續。askLLM 內建的防抖機制只在「這次的問題、摘要、persona、語言、system prompt 完全跟 上一次相同」時才會用快取結果，而不是把兩次問題串成對話。應用內建的操作提示 也明講：修改問題前要先取消 Submit 勾選，改好再重新勾選——因為每次改動都可能 觸發新的呼叫。這代表：<strong>提示詞必須自足</strong>,把背景、變項、比較方向一次寫完， 不能指望「下一句再補充」。</p>
+</div>
+<div class="en">
 <p>Every ticked Submit is one independent, complete call — there is no memory of the previous turn to build on. askLLM’s built-in debounce only reuses a cached result when the question, summary, persona, language, and system prompt are all identical to the last call; it never threads two questions into a conversation. The app’s own guidance says as much: untick Submit before editing your question, then re-tick it, because each edit can trigger a new call. The consequence: <strong>your prompt must be self-contained</strong> — state the background, variables, and comparison you want in one shot. There is no “I’ll clarify in the next message.”</p>
+</div>
 </section>
-<section id="八組改寫前-改寫後對照-eight-beforeafter-rewrites" class="level2">
-<h2 class="anchored" data-anchor-id="八組改寫前-改寫後對照-eight-beforeafter-rewrites">八組改寫前 / 改寫後對照 / Eight before/after rewrites</h2>
+<section id="八組改寫前改寫後對照eight-beforeafter-rewrites" class="level2">
+<h2 class="anchored" data-anchor-id="八組改寫前改寫後對照eight-beforeafter-rewrites"><span class="zh">八組改寫前／改寫後對照</span><span class="en">Eight before/after rewrites</span></h2>
+<div class="zh">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -230,79 +254,171 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>改寫前 / Before</th>
-<th>改寫後 / After</th>
-<th>補進了什麼 / What was added</th>
+<th>改寫前</th>
+<th>改寫後</th>
+<th>補進了什麼</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>幫我分析這個資料 / Analyze this data for me</td>
-<td>連續變項 score 在兩水準的類別變項 group(實驗組／對照組)之間是否有差異？請建議該用哪個 jamovi 分析。/ Does continuous variable <code>score</code> differ between the two levels of <code>group</code> (treatment/control)? Which jamovi analysis should I use?</td>
-<td>結果變項名稱與型態、分組變項名稱與水準數、設計(兩組比較)、要求的輸出(分析建議)。/ Outcome name and type, grouping variable and its levels, the design (two-group comparison), and the requested output.</td>
+<td>幫我分析這個資料</td>
+<td>連續變項 score 在兩水準的類別變項 group(實驗組／對照組)之間是否有差異？請建議該用哪個 jamovi 分析。</td>
+<td>結果變項名稱與型態、分組變項名稱與水準數、設計(兩組比較)、要求的輸出(分析建議)。</td>
 </tr>
 <tr class="even">
-<td>這個資料有問題嗎？ / Is something wrong with this data?</td>
-<td>變項 income 的遺漏比例是多少？我該先用哪個分析檢查遺漏是否集中在特定組別？/ What is the missing rate for <code>income</code>? Which analysis should I use first to see whether the missingness clusters by group?</td>
-<td>具體變項名稱、想檢查的現象(遺漏型態)、期望得到的下一步。/ The specific variable, the pattern being checked (missingness), and the desired next step.</td>
+<td>這個資料有問題嗎？</td>
+<td>變項 income 的遺漏比例是多少？我該先用哪個分析檢查遺漏是否集中在特定組別？</td>
+<td>具體變項名稱、想檢查的現象(遺漏型態)、期望得到的下一步。</td>
 </tr>
 <tr class="odd">
-<td>幫我做統計 / Do the stats for me</td>
-<td>連續變項 anxiety 和連續變項 sleep_hours 之間有沒有關聯？該用哪個相關分析？/ Is there an association between continuous variables <code>anxiety</code> and <code>sleep_hours</code>? Which correlation analysis fits?</td>
-<td>兩個變項的名稱與型態、關係類型(關聯而非差異)、要求的輸出。/ Both variable names and types, the relationship type (association, not difference), and the requested output.</td>
+<td>幫我做統計</td>
+<td>連續變項 anxiety 和連續變項 sleep_hours 之間有沒有關聯？該用哪個相關分析？</td>
+<td>兩個變項的名稱與型態、關係類型(關聯而非差異)、要求的輸出。</td>
 </tr>
 <tr class="even">
-<td>這個結果好嗎？ / Is this result good?</td>
-<td>跑完 t 檢定後，如果 Levene’s test 顯著，我該看 Welch 還是 Student 的結果列？/ After running a t-test, if Levene’s test is significant, should I read the Welch or Student row?</td>
-<td>已完成的步驟(跑過 t 檢定)、判斷依據(Levene’s test 顯著與否)、想決定的具體問題。/ The step already done (a t-test was run), the decision criterion (Levene’s test), and the specific choice to make.</td>
+<td>這個結果好嗎？</td>
+<td>跑完 t 檢定後，如果 Levene’s test 顯著，我該看 Welch 還是 Student 的結果列？</td>
+<td>已完成的步驟(跑過 t 檢定)、判斷依據(Levene’s test 顯著與否)、想決定的具體問題。</td>
 </tr>
 <tr class="odd">
-<td>幫我選模型 / Help me pick a model</td>
-<td>結果變項 satisfaction 是連續的，分組變項 department 有三個水準，該用哪個 ANOVA,以及事後檢定該選哪一種？/ <code>satisfaction</code> is continuous, <code>department</code> has three levels — which ANOVA, and which post-hoc test?</td>
-<td>變項型態、水準數(三組需要事後比較)、明確要求(事後檢定選擇)。/ Variable types, the number of levels (three groups implies post-hoc comparisons), and the explicit request (post-hoc choice).</td>
+<td>幫我選模型</td>
+<td>結果變項 satisfaction 是連續的，分組變項 department 有三個水準，該用哪個 ANOVA,以及事後檢定該選哪一種？</td>
+<td>變項型態、水準數(三組需要事後比較)、明確要求(事後檢定選擇)。</td>
 </tr>
 <tr class="even">
-<td>我要跑迴歸 / I want to run a regression</td>
-<td>用連續變項 age 和 hours_studied 預測連續結果變項 exam_score,該用哪個迴歸分析，如何檢查共線性？/ Predict continuous <code>exam_score</code> from continuous <code>age</code> and <code>hours_studied</code> — which regression, and how do I check collinearity?</td>
-<td>預測變項與結果變項的名稱、型態、數量、分析目標(預測)、想要的額外檢查。/ Predictor and outcome names, types, count, the goal (prediction), and the extra check requested.</td>
+<td>我要跑迴歸</td>
+<td>用連續變項 age 和 hours_studied 預測連續結果變項 exam_score,該用哪個迴歸分析，如何檢查共線性？</td>
+<td>預測變項與結果變項的名稱、型態、數量、分析目標(預測)、想要的額外檢查。</td>
 </tr>
 <tr class="odd">
-<td>資料有離群值嗎？ / Does the data have outliers?</td>
-<td>變項 reaction_time 的摘要顯示 max 遠大於 mean,我該用哪個分析畫圖檢查是否為離群值？/ The summary shows <code>reaction_time</code>’s max is far above its mean — which analysis should I use to plot and check for outliers?</td>
-<td>具體變項、觀察到的線索(摘要中的 max 與 mean 差距)、想要的輸出(可執行的分析建議)。/ The specific variable, the observed clue (the max-vs-mean gap in the summary), and the desired output (an actionable analysis suggestion).</td>
+<td>資料有離群值嗎？</td>
+<td>變項 reaction_time 的摘要顯示 max 遠大於 mean,我該用哪個分析畫圖檢查是否為離群值？</td>
+<td>具體變項、觀察到的線索(摘要中的 max 與 mean 差距)、想要的輸出(可執行的分析建議)。</td>
 </tr>
 <tr class="even">
-<td>這兩組一樣嗎？ / Are these two groups the same?</td>
-<td>類別變項 pass_fail(通過／不通過)在類別變項 condition(A／B)之間的分布是否有關聯？該用哪個分析？/ Is there an association between the distribution of categorical <code>pass_fail</code> (pass/fail) and categorical <code>condition</code> (A/B)? Which analysis fits?</td>
-<td>兩個變項皆為類別、各自水準數、關聯類型(列聯表關聯而非平均數比較)、明確要求分析建議。/ Both variables are categorical, their level counts, the relationship type (a contingency association, not a mean comparison), and the explicit request for an analysis.</td>
+<td>這兩組一樣嗎？</td>
+<td>類別變項 pass_fail(通過／不通過)在類別變項 condition(A／B)之間的分布是否有關聯？該用哪個分析？</td>
+<td>兩個變項皆為類別、各自水準數、關聯類型(列聯表關聯而非平均數比較)、明確要求分析建議。</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="en">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Before</th>
+<th>After</th>
+<th>What was added</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Analyze this data for me</td>
+<td>Does continuous variable <code>score</code> differ between the two levels of <code>group</code> (treatment/control)? Which jamovi analysis should I use?</td>
+<td>Outcome name and type, grouping variable and its levels, the design (two-group comparison), and the requested output.</td>
+</tr>
+<tr class="even">
+<td>Is something wrong with this data?</td>
+<td>What is the missing rate for <code>income</code>? Which analysis should I use first to see whether the missingness clusters by group?</td>
+<td>The specific variable, the pattern being checked (missingness), and the desired next step.</td>
+</tr>
+<tr class="odd">
+<td>Do the stats for me</td>
+<td>Is there an association between continuous variables <code>anxiety</code> and <code>sleep_hours</code>? Which correlation analysis fits?</td>
+<td>Both variable names and types, the relationship type (association, not difference), and the requested output.</td>
+</tr>
+<tr class="even">
+<td>Is this result good?</td>
+<td>After running a t-test, if Levene’s test is significant, should I read the Welch or Student row?</td>
+<td>The step already done (a t-test was run), the decision criterion (Levene’s test), and the specific choice to make.</td>
+</tr>
+<tr class="odd">
+<td>Help me pick a model</td>
+<td><code>satisfaction</code> is continuous, <code>department</code> has three levels — which ANOVA, and which post-hoc test?</td>
+<td>Variable types, the number of levels (three groups implies post-hoc comparisons), and the explicit request (post-hoc choice).</td>
+</tr>
+<tr class="even">
+<td>I want to run a regression</td>
+<td>Predict continuous <code>exam_score</code> from continuous <code>age</code> and <code>hours_studied</code> — which regression, and how do I check collinearity?</td>
+<td>Predictor and outcome names, types, count, the goal (prediction), and the extra check requested.</td>
+</tr>
+<tr class="odd">
+<td>Does the data have outliers?</td>
+<td>The summary shows <code>reaction_time</code>’s max is far above its mean — which analysis should I use to plot and check for outliers?</td>
+<td>The specific variable, the observed clue (the max-vs-mean gap in the summary), and the desired output (an actionable analysis suggestion).</td>
+</tr>
+<tr class="even">
+<td>Are these two groups the same?</td>
+<td>Is there an association between the distribution of categorical <code>pass_fail</code> (pass/fail) and categorical <code>condition</code> (A/B)? Which analysis fits?</td>
+<td>Both variables are categorical, their level counts, the relationship type (a contingency association, not a mean comparison), and the explicit request for an analysis.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-<section id="動手做5-分鐘-try-it-5-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
+<section id="動手做5-分鐘try-it-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></h2>
+<div class="zh">
 <ol type="1">
-<li><p>挑一個你正想問 askLLM 的問題，先寫下目前腦中的版本(通常很模糊)。</p></li>
-<li><p>對照上表，補進四件事：變項名稱、變項型態(連續／類別)、比較或關聯的方向、 你想要的具體輸出(例如「建議分析」或「該看哪個結果列」)。</p></li>
-<li><p>把改寫後的一句話整段貼進 askLLM 的 Your question,勾選 Submit。</p></li>
-<li><p>讀回覆，確認它回答的正是你改寫後的那句話，而不是原本模糊版本可能被誤解 的方向。</p></li>
-<li><p>若還想追問，先取消 Submit 勾選，把追問內容也寫進同一個自足的問題裡， 再重新勾選——不要指望它記得上一次的內容。</p></li>
-<li><p>Pick a question you actually want to ask askLLM, and write down the vague version currently in your head.</p></li>
-<li><p>Using the table above, add four things: variable names, variable types (continuous/categorical), the direction of comparison or association, and the specific output you want (e.g.&nbsp;“suggest an analysis” or “which result row to read”).</p></li>
-<li><p>Paste the rewritten sentence into askLLM’s Your question box and tick Submit.</p></li>
-<li><p>Read the reply and confirm it answers exactly the rewritten question, not a possible misreading of the original vague one.</p></li>
-<li><p>If you want to follow up, untick Submit, fold the follow-up into the same self-contained question, and re-tick — don’t expect it to remember the previous call.</p></li>
+<li>挑一個你正想問 askLLM 的問題，先寫下目前腦中的版本(通常很模糊)。</li>
+<li>對照上表，補進四件事：變項名稱、變項型態(連續／類別)、比較或關聯的方向、 你想要的具體輸出(例如「建議分析」或「該看哪個結果列」)。</li>
+<li>把改寫後的一句話整段貼進 askLLM 的 Your question,勾選 Submit。</li>
+<li>讀回覆，確認它回答的正是你改寫後的那句話，而不是原本模糊版本可能被誤解 的方向。</li>
+<li>若還想追問，先取消 Submit 勾選，把追問內容也寫進同一個自足的問題裡， 再重新勾選——不要指望它記得上一次的內容。</li>
 </ol>
+</div>
+<div class="en">
+<ol type="1">
+<li>Pick a question you actually want to ask askLLM, and write down the vague version currently in your head.</li>
+<li>Using the table above, add four things: variable names, variable types (continuous/categorical), the direction of comparison or association, and the specific output you want (e.g.&nbsp;“suggest an analysis” or “which result row to read”).</li>
+<li>Paste the rewritten sentence into askLLM’s Your question box and tick Submit.</li>
+<li>Read the reply and confirm it answers exactly the rewritten question, not a possible misreading of the original vague one.</li>
+<li>If you want to follow up, untick Submit, fold the follow-up into the same self-contained question, and re-tick — don’t expect it to remember the previous call.</li>
+</ol>
+</div>
 </section>
-<section id="帶走這句話-one-thing-to-remember" class="level2">
-<h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
+<section id="帶走這句話one-thing-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></h2>
+<div class="zh">
 <p>askLLM 每次 Submit 都是一次全新的獨立問答，沒有上一句可以依靠，所以你的問題 要在送出的那一刻就自己講完整個故事。</p>
+</div>
+<div class="en">
 <p>Every Submit to askLLM starts a brand-new, independent exchange with nothing carried over — so your question has to tell the whole story by itself, the moment you send it.</p>
+</div>
 
 
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

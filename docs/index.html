@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="assets/lang.css">
 </head>
 
 <body class="nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./literacy/01-what-the-llm-sees.html"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -127,9 +142,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這是什麼" id="toc-這是什麼" class="nav-link active" data-scroll-target="#這是什麼">這是什麼</a></li>
-  <li><a href="#目前狀態" id="toc-目前狀態" class="nav-link" data-scroll-target="#目前狀態">目前狀態</a></li>
-  <li><a href="#english" id="toc-english" class="nav-link" data-scroll-target="#english">English</a></li>
+  <li><a href="#這是什麼" id="toc-這是什麼" class="nav-link active" data-scroll-target="#這是什麼"><span class="zh">這是什麼</span></a></li>
+  <li><a href="#目前狀態" id="toc-目前狀態" class="nav-link" data-scroll-target="#目前狀態"><span class="zh">目前狀態</span></a></li>
+  <li><a href="#english" id="toc-english" class="nav-link" data-scroll-target="#english"><span class="en">English</span></a></li>
   </ul>
 </nav>
     </div>
@@ -156,7 +171,8 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="這是什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這是什麼">這是什麼</h2>
+<h2 class="anchored" data-anchor-id="這是什麼"><span class="zh">這是什麼</span></h2>
+<div class="zh">
 <p><code>stat-skills-tutorials</code> 是給 jamovi 模組 <code>askLLM</code> 使用者的原創教程與提示詞庫， 教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教 統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節 （見「外部教材導讀」）。</p>
 <p>本站分三層，對應 README 提到的三件事：</p>
 <ol type="1">
@@ -164,19 +180,47 @@ ul.task-list li input[type="checkbox"] {
 <li><strong><a href="./prompts/index.html">提示詞庫</a></strong>：情境化、可直接複製進 askLLM <code>question</code> 欄的提示詞，附查核點與判準；每條有結構化 schema（見 <code>prompts/_schema.yaml</code>）。</li>
 <li><strong><a href="./verify/workflow.html">生成結果查核</a></strong>：AI 回覆不是自己說了算，要拿 jamovi 介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。</li>
 </ol>
+</div>
 </section>
 <section id="目前狀態" class="level2">
-<h2 class="anchored" data-anchor-id="目前狀態">目前狀態</h2>
+<h2 class="anchored" data-anchor-id="目前狀態"><span class="zh">目前狀態</span></h2>
+<div class="zh">
 <p>本站正在 <strong>Phase 0（骨架與可行性）</strong>：目錄結構、提示詞 schema、3 條示範提示詞、 1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。 詳細規劃見 repo 內的 <code>PROPOSAL.zh-TW.md</code>。</p>
+</div>
 </section>
 <section id="english" class="level2">
-<h2 class="anchored" data-anchor-id="english">English</h2>
+<h2 class="anchored" data-anchor-id="english"><span class="en">English</span></h2>
+<div class="en">
 <p>This site teaches jamovi <code>askLLM</code> users how to collaborate with a consulting LLM (the Module Guider or the R code tutor), not statistics or R themselves — for those, see <a href="./external/reading-map.html">外部教材導讀</a>. It has three layers: AI-collaboration literacy, a scenario-based prompt library, and a verification workflow for checking what the AI actually said against your own jamovi session. The site is currently in Phase 0 (scaffolding); see <code>PROPOSAL.zh-TW.md</code> for the roadmap.</p>
+</div>
 
 
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

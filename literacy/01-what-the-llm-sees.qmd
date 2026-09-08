@@ -1,15 +1,18 @@
 ---
-title: "第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn't"
+title: "[第一課：LLM 看得到什麼、看不到什麼]{.zh}[What the LLM Sees, and What It Doesn't]{.en}"
 ---
 
-## 為什麼這件事會出錯 / Why this goes wrong
+## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
+::: {.zh}
 有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第
 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM
 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的
 **摘要統計**,它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤
 之所以危險，是因為語氣跟講對的時候一模一樣。
+:::
 
+::: {.en}
 A user asked askLLM whether the data had outliers. The reply was confident:
 "I checked the data — row 47 is clearly high, I'd exclude it." That sounds
 expert, but it is fabricated from start to finish. askLLM never sends row 47,
@@ -17,11 +20,14 @@ or any raw row, to the LLM. The LLM only receives **summary statistics** for
 the variables you selected. It cannot name "row 47" because it never saw
 rows at all. This kind of error is dangerous precisely because it sounds
 exactly like a correct answer.
+:::
 
-## askLLM 實際送出的內容 / What askLLM actually sends
+## [askLLM 實際送出的內容]{.zh}[What askLLM actually sends]{.en}
 
+::: {.zh}
 askLLM 的資料摘要函式 `summarize_data()` 為每個變項產生固定格式的區塊。連續
 變項(數值型)長這樣：
+:::
 
 ```
 age [numeric]:
@@ -29,7 +35,9 @@ age [numeric]:
   mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61
 ```
 
+::: {.zh}
 類別變項(factor)長這樣：
+:::
 
 ```
 group [factor]:
@@ -37,10 +45,13 @@ group [factor]:
   levels by count: control(61), treatment(59)
 ```
 
+::: {.zh}
 就這樣——沒有第三行。**LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。**
 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全
 是在憑空猜測。
+:::
 
+::: {.en}
 `summarize_data()`, askLLM's data-summarizer, produces a fixed-format block
 per variable. A continuous variable looks like the block above; a
 categorical variable reports level counts the same way. An ordered factor
@@ -48,9 +59,11 @@ adds one more line, `level order: low < medium < high`. Beyond that there is
 nothing — **the LLM receives exactly what you just read, nothing more.**
 This block is attached only when "Attach data summary to prompt" is ticked;
 untick it and the LLM is guessing with no data at all.
+:::
 
-## 摘要看不到什麼 / What the summary cannot show
+## [摘要看不到什麼]{.zh}[What the summary cannot show]{.en}
 
+::: {.zh}
 n、遺漏數、mean、sd、median、min、max(連續變項)與各水準次數(類別變項)——
 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM **原則上不可能
 真的檢查過**,即使它宣稱檢查過：
@@ -61,7 +74,9 @@ n、遺漏數、mean、sd、median、min、max(連續變項)與各水準次數(�
 - 變項背後的實際測量方式或研究設計
 
 看到回覆聲稱做了以上任何一件事，那就是越界(overreaching),要打折扣看待。
+:::
 
+::: {.en}
 The summary's entire vocabulary is: n, missing, mean, sd, median, min, max
 (continuous) and level counts (categorical). Raw rows are absent, so the
 following are things the LLM **cannot actually have checked**, even if it
@@ -75,9 +90,11 @@ claims to have:
 
 If a reply claims to have checked any of these, treat that claim as
 overreaching and discount it.
+:::
 
-## 動手做（5 分鐘）/ Try it (5 minutes)
+## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
 
+::: {.zh}
 1. 在 jamovi 開啟你的資料，任選三個變項(至少一個連續、一個類別)。
 2. 開啟 askLLM 的 jamovi Module Guider,把這三個變項勾進 Variables to describe。
 3. 確認「Attach data summary to prompt」是勾選的。
@@ -86,7 +103,9 @@ overreaching and discount it.
    各水準次數——逐一對回 Exploration ▸ Descriptives 的輸出，看有沒有對不上。
 6. 檢查回覆有沒有提到摘要裡不存在的東西(例如「第幾筆資料」「常態性」「離群值」
    這類需要看原始列或做額外檢定才能判斷的內容)。有的話，標記為越界。
+:::
 
+::: {.en}
 1. Open your dataset in jamovi and pick three variables (at least one
    continuous, one categorical).
 2. Open askLLM's jamovi Module Guider and tick those three variables into
@@ -100,11 +119,16 @@ overreaching and discount it.
 6. Check whether the reply mentions anything the summary cannot support
    (a specific row, normality, outliers). If it does, flag it as
    overreaching.
+:::
 
-## 帶走這句話 / One thing to remember
+## [帶走這句話]{.zh}[One thing to remember]{.en}
 
+::: {.zh}
 LLM 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都
 看不到。
+:::
 
+::: {.en}
 The LLM only ever sees the summary numbers for the variables you selected —
 never a single row of the raw data you see in jamovi.
+:::

@@ -1,16 +1,19 @@
 ---
-title: "第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence"
+title: "[第二課：把研究問題寫成一句可回答的問題]{.zh}[Turning Your Question into One Answerable Sentence]{.en}"
 ---
 
-## 為什麼這件事會出錯 / Why this goes wrong
+## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
+::: {.zh}
 有人在 askLLM 裡打了「幫我分析這個資料」，勾選 Submit,收到一段內容豐富、
 但完全不對題的回覆——它猜了一個描述統計加一個相關分析，剛好都不是使用者真正
 想問的問題。使用者接著在同一個問題欄後面補一句「不對，我是想問兩組有沒有差
 異」，再次勾選 Submit。可是 askLLM **沒有對話記憶**:第二次送出時，LLM 完全
 不知道「不對」是在回應什麼，只會把整段文字當成一個全新、獨立的問題重新回答。
 模糊的指令加上單輪限制，結果就是來回猜測、浪費呼叫次數，答案還是對不上。
+:::
 
+::: {.en}
 Someone typed "analyze this for me" into askLLM, ticked Submit, and got a
 long, confident reply — a description plus a correlation, neither of which
 was the question they actually had in mind. They then appended "no, I meant
@@ -19,16 +22,20 @@ But askLLM has **no conversation memory**: the second call has no idea what
 "no" is responding to: it just re-answers the whole text as a brand-new,
 standalone question. A vague instruction combined with a single-turn design
 means guesswork, wasted calls, and an answer that still misses the point.
+:::
 
-## askLLM 是單輪問答 / askLLM is single-turn
+## [askLLM 是單輪問答]{.zh}[askLLM is single-turn]{.en}
 
+::: {.zh}
 每次勾選 Submit 都是一次獨立、完整的呼叫；沒有前一輪的記憶可以延續。askLLM
 內建的防抖機制只在「這次的問題、摘要、persona、語言、system prompt 完全跟
 上一次相同」時才會用快取結果，而不是把兩次問題串成對話。應用內建的操作提示
 也明講：修改問題前要先取消 Submit 勾選，改好再重新勾選——因為每次改動都可能
 觸發新的呼叫。這代表：**提示詞必須自足**,把背景、變項、比較方向一次寫完，
 不能指望「下一句再補充」。
+:::
 
+::: {.en}
 Every ticked Submit is one independent, complete call — there is no memory
 of the previous turn to build on. askLLM's built-in debounce only reuses a
 cached result when the question, summary, persona, language, and system
@@ -38,22 +45,39 @@ before editing your question, then re-tick it, because each edit can trigger
 a new call. The consequence: **your prompt must be self-contained** — state
 the background, variables, and comparison you want in one shot. There is no
 "I'll clarify in the next message."
+:::
 
-## 八組改寫前 / 改寫後對照 / Eight before/after rewrites
+## [八組改寫前／改寫後對照]{.zh}[Eight before/after rewrites]{.en}
 
-| 改寫前 / Before | 改寫後 / After | 補進了什麼 / What was added |
+::: {.zh}
+| 改寫前 | 改寫後 | 補進了什麼 |
 |---|---|---|
-| 幫我分析這個資料 / Analyze this data for me | 連續變項 score 在兩水準的類別變項 group(實驗組／對照組)之間是否有差異？請建議該用哪個 jamovi 分析。/ Does continuous variable `score` differ between the two levels of `group` (treatment/control)? Which jamovi analysis should I use? | 結果變項名稱與型態、分組變項名稱與水準數、設計(兩組比較)、要求的輸出(分析建議)。/ Outcome name and type, grouping variable and its levels, the design (two-group comparison), and the requested output. |
-| 這個資料有問題嗎？ / Is something wrong with this data? | 變項 income 的遺漏比例是多少？我該先用哪個分析檢查遺漏是否集中在特定組別？/ What is the missing rate for `income`? Which analysis should I use first to see whether the missingness clusters by group? | 具體變項名稱、想檢查的現象(遺漏型態)、期望得到的下一步。/ The specific variable, the pattern being checked (missingness), and the desired next step. |
-| 幫我做統計 / Do the stats for me | 連續變項 anxiety 和連續變項 sleep_hours 之間有沒有關聯？該用哪個相關分析？/ Is there an association between continuous variables `anxiety` and `sleep_hours`? Which correlation analysis fits? | 兩個變項的名稱與型態、關係類型(關聯而非差異)、要求的輸出。/ Both variable names and types, the relationship type (association, not difference), and the requested output. |
-| 這個結果好嗎？ / Is this result good? | 跑完 t 檢定後，如果 Levene's test 顯著，我該看 Welch 還是 Student 的結果列？/ After running a t-test, if Levene's test is significant, should I read the Welch or Student row? | 已完成的步驟(跑過 t 檢定)、判斷依據(Levene's test 顯著與否)、想決定的具體問題。/ The step already done (a t-test was run), the decision criterion (Levene's test), and the specific choice to make. |
-| 幫我選模型 / Help me pick a model | 結果變項 satisfaction 是連續的，分組變項 department 有三個水準，該用哪個 ANOVA,以及事後檢定該選哪一種？/ `satisfaction` is continuous, `department` has three levels — which ANOVA, and which post-hoc test? | 變項型態、水準數(三組需要事後比較)、明確要求(事後檢定選擇)。/ Variable types, the number of levels (three groups implies post-hoc comparisons), and the explicit request (post-hoc choice). |
-| 我要跑迴歸 / I want to run a regression | 用連續變項 age 和 hours_studied 預測連續結果變項 exam_score,該用哪個迴歸分析，如何檢查共線性？/ Predict continuous `exam_score` from continuous `age` and `hours_studied` — which regression, and how do I check collinearity? | 預測變項與結果變項的名稱、型態、數量、分析目標(預測)、想要的額外檢查。/ Predictor and outcome names, types, count, the goal (prediction), and the extra check requested. |
-| 資料有離群值嗎？ / Does the data have outliers? | 變項 reaction_time 的摘要顯示 max 遠大於 mean,我該用哪個分析畫圖檢查是否為離群值？/ The summary shows `reaction_time`'s max is far above its mean — which analysis should I use to plot and check for outliers? | 具體變項、觀察到的線索(摘要中的 max 與 mean 差距)、想要的輸出(可執行的分析建議)。/ The specific variable, the observed clue (the max-vs-mean gap in the summary), and the desired output (an actionable analysis suggestion). |
-| 這兩組一樣嗎？ / Are these two groups the same? | 類別變項 pass_fail(通過／不通過)在類別變項 condition(A／B)之間的分布是否有關聯？該用哪個分析？/ Is there an association between the distribution of categorical `pass_fail` (pass/fail) and categorical `condition` (A/B)? Which analysis fits? | 兩個變項皆為類別、各自水準數、關聯類型(列聯表關聯而非平均數比較)、明確要求分析建議。/ Both variables are categorical, their level counts, the relationship type (a contingency association, not a mean comparison), and the explicit request for an analysis. |
+| 幫我分析這個資料 | 連續變項 score 在兩水準的類別變項 group(實驗組／對照組)之間是否有差異？請建議該用哪個 jamovi 分析。 | 結果變項名稱與型態、分組變項名稱與水準數、設計(兩組比較)、要求的輸出(分析建議)。 |
+| 這個資料有問題嗎？ | 變項 income 的遺漏比例是多少？我該先用哪個分析檢查遺漏是否集中在特定組別？ | 具體變項名稱、想檢查的現象(遺漏型態)、期望得到的下一步。 |
+| 幫我做統計 | 連續變項 anxiety 和連續變項 sleep_hours 之間有沒有關聯？該用哪個相關分析？ | 兩個變項的名稱與型態、關係類型(關聯而非差異)、要求的輸出。 |
+| 這個結果好嗎？ | 跑完 t 檢定後，如果 Levene's test 顯著，我該看 Welch 還是 Student 的結果列？ | 已完成的步驟(跑過 t 檢定)、判斷依據(Levene's test 顯著與否)、想決定的具體問題。 |
+| 幫我選模型 | 結果變項 satisfaction 是連續的，分組變項 department 有三個水準，該用哪個 ANOVA,以及事後檢定該選哪一種？ | 變項型態、水準數(三組需要事後比較)、明確要求(事後檢定選擇)。 |
+| 我要跑迴歸 | 用連續變項 age 和 hours_studied 預測連續結果變項 exam_score,該用哪個迴歸分析，如何檢查共線性？ | 預測變項與結果變項的名稱、型態、數量、分析目標(預測)、想要的額外檢查。 |
+| 資料有離群值嗎？ | 變項 reaction_time 的摘要顯示 max 遠大於 mean,我該用哪個分析畫圖檢查是否為離群值？ | 具體變項、觀察到的線索(摘要中的 max 與 mean 差距)、想要的輸出(可執行的分析建議)。 |
+| 這兩組一樣嗎？ | 類別變項 pass_fail(通過／不通過)在類別變項 condition(A／B)之間的分布是否有關聯？該用哪個分析？ | 兩個變項皆為類別、各自水準數、關聯類型(列聯表關聯而非平均數比較)、明確要求分析建議。 |
+:::
 
-## 動手做（5 分鐘）/ Try it (5 minutes)
+::: {.en}
+| Before | After | What was added |
+|---|---|---|
+| Analyze this data for me | Does continuous variable `score` differ between the two levels of `group` (treatment/control)? Which jamovi analysis should I use? | Outcome name and type, grouping variable and its levels, the design (two-group comparison), and the requested output. |
+| Is something wrong with this data? | What is the missing rate for `income`? Which analysis should I use first to see whether the missingness clusters by group? | The specific variable, the pattern being checked (missingness), and the desired next step. |
+| Do the stats for me | Is there an association between continuous variables `anxiety` and `sleep_hours`? Which correlation analysis fits? | Both variable names and types, the relationship type (association, not difference), and the requested output. |
+| Is this result good? | After running a t-test, if Levene's test is significant, should I read the Welch or Student row? | The step already done (a t-test was run), the decision criterion (Levene's test), and the specific choice to make. |
+| Help me pick a model | `satisfaction` is continuous, `department` has three levels — which ANOVA, and which post-hoc test? | Variable types, the number of levels (three groups implies post-hoc comparisons), and the explicit request (post-hoc choice). |
+| I want to run a regression | Predict continuous `exam_score` from continuous `age` and `hours_studied` — which regression, and how do I check collinearity? | Predictor and outcome names, types, count, the goal (prediction), and the extra check requested. |
+| Does the data have outliers? | The summary shows `reaction_time`'s max is far above its mean — which analysis should I use to plot and check for outliers? | The specific variable, the observed clue (the max-vs-mean gap in the summary), and the desired output (an actionable analysis suggestion). |
+| Are these two groups the same? | Is there an association between the distribution of categorical `pass_fail` (pass/fail) and categorical `condition` (A/B)? Which analysis fits? | Both variables are categorical, their level counts, the relationship type (a contingency association, not a mean comparison), and the explicit request for an analysis. |
+:::
 
+## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
+
+::: {.zh}
 1. 挑一個你正想問 askLLM 的問題，先寫下目前腦中的版本(通常很模糊)。
 2. 對照上表，補進四件事：變項名稱、變項型態(連續／類別)、比較或關聯的方向、
    你想要的具體輸出(例如「建議分析」或「該看哪個結果列」)。
@@ -62,7 +86,9 @@ the background, variables, and comparison you want in one shot. There is no
    的方向。
 5. 若還想追問，先取消 Submit 勾選，把追問內容也寫進同一個自足的問題裡，
    再重新勾選——不要指望它記得上一次的內容。
+:::
 
+::: {.en}
 1. Pick a question you actually want to ask askLLM, and write down the vague
    version currently in your head.
 2. Using the table above, add four things: variable names, variable types
@@ -76,12 +102,17 @@ the background, variables, and comparison you want in one shot. There is no
 5. If you want to follow up, untick Submit, fold the follow-up into the
    same self-contained question, and re-tick — don't expect it to remember
    the previous call.
+:::
 
-## 帶走這句話 / One thing to remember
+## [帶走這句話]{.zh}[One thing to remember]{.en}
 
+::: {.zh}
 askLLM 每次 Submit 都是一次全新的獨立問答，沒有上一句可以依靠，所以你的問題
 要在送出的那一刻就自己講完整個故事。
+:::
 
+::: {.en}
 Every Submit to askLLM starts a brand-new, independent exchange with nothing
 carried over — so your question has to tell the whole story by itself, the
 moment you send it.
+:::

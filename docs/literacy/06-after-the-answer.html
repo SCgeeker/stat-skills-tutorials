@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第六課：問完之後 / After You Get an Answer – stat-skills-tutorials</title>
+<title>第六課：問完之後After You Get an Answer – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../literacy/01-what-the-llm-sees.html" aria-current="page"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -122,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/06-after-the-answer.html">第六課：問完之後 / After You Get an Answer</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/06-after-the-answer.html"><span class="zh">第六課：問完之後</span><span class="en">After You Get an Answer</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,37 +152,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
+ <span class="menu-text"><span class="zh">第一課：LLM 看得到什麼、看不到什麼</span><span class="en">What the LLM Sees, and What It Doesn’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/02-one-answerable-question.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</span></a>
+ <span class="menu-text"><span class="zh">第二課：把研究問題寫成一句可回答的問題</span><span class="en">Turning Your Question into One Answerable Sentence</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
+ <span class="menu-text"><span class="zh">第三課：先寫判準再送出</span><span class="en">Write Your Criteria Before You Submit</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/04-which-analysis-which-persona.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</span></a>
+ <span class="menu-text"><span class="zh">第四課：選對分析、選對 Persona</span><span class="en">Choosing the Right Analysis and Persona</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/05-beyond-the-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</span></a>
+ <span class="menu-text"><span class="zh">第五課：摘要之外的事自己來</span><span class="en">What Summary Statistics Can’t Tell You</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/06-after-the-answer.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">第六課：問完之後 / After You Get an Answer</span></a>
+ <span class="menu-text"><span class="zh">第六課：問完之後</span><span class="en">After You Get an Answer</span></span></a>
   </div>
 </li>
     </ul>
@@ -180,12 +195,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
-  <li><a href="#改問題前先取消-submit-untick-submit-before-changing-your-question" id="toc-改問題前先取消-submit-untick-submit-before-changing-your-question" class="nav-link" data-scroll-target="#改問題前先取消-submit-untick-submit-before-changing-your-question">改問題前先取消 Submit / Untick Submit before changing your question</a></li>
-  <li><a href="#換模型或換-persona-再問一次-ask-again-with-a-different-model-or-persona" id="toc-換模型或換-persona-再問一次-ask-again-with-a-different-model-or-persona" class="nav-link" data-scroll-target="#換模型或換-persona-再問一次-ask-again-with-a-different-model-or-persona">換模型或換 persona 再問一次 / Ask again with a different model or persona</a></li>
-  <li><a href="#記錄協作日誌-keep-a-collaboration-log" id="toc-記錄協作日誌-keep-a-collaboration-log" class="nav-link" data-scroll-target="#記錄協作日誌-keep-a-collaboration-log">記錄協作日誌 / Keep a collaboration log</a></li>
-  <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
-  <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
+  <li><a href="#為什麼這件事會出錯why-this-goes-wrong" id="toc-為什麼這件事會出錯why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></a></li>
+  <li><a href="#改問題前先取消-submituntick-submit-before-changing-your-question" id="toc-改問題前先取消-submituntick-submit-before-changing-your-question" class="nav-link" data-scroll-target="#改問題前先取消-submituntick-submit-before-changing-your-question"><span class="zh">改問題前先取消 Submit</span><span class="en">Untick Submit before changing your question</span></a></li>
+  <li><a href="#換模型或換-persona-再問一次ask-again-with-a-different-model-or-persona" id="toc-換模型或換-persona-再問一次ask-again-with-a-different-model-or-persona" class="nav-link" data-scroll-target="#換模型或換-persona-再問一次ask-again-with-a-different-model-or-persona"><span class="zh">換模型或換 persona 再問一次</span><span class="en">Ask again with a different model or persona</span></a></li>
+  <li><a href="#記錄協作日誌keep-a-collaboration-log" id="toc-記錄協作日誌keep-a-collaboration-log" class="nav-link" data-scroll-target="#記錄協作日誌keep-a-collaboration-log"><span class="zh">記錄協作日誌</span><span class="en">Keep a collaboration log</span></a></li>
+  <li><a href="#動手做5-分鐘try-it-5-minutes" id="toc-動手做5-分鐘try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></a></li>
+  <li><a href="#帶走這句話one-thing-to-remember" id="toc-帶走這句話one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></a></li>
   </ul>
 </nav>
     </div>
@@ -194,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第六課：問完之後 / After You Get an Answer</h1>
+<h1 class="title"><span class="zh">第六課：問完之後</span><span class="en">After You Get an Answer</span></h1>
 </div>
 
 
@@ -211,25 +226,42 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
-<h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
+<section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
+<div class="zh">
 <p>有位同學在 Module Guider 裡勾了 Submit、拿到回覆後，直接在 <code>question</code> 欄 把問題改了一個字，沒有取消 Submit 再重新勾選——結果畫面上出現的還是舊回 覆，<code>meta</code> 欄多了一個「· cached」，他以為 LLM 沒有理解新問題，其實是被自 己的舊答案回放了。這不是隨機的怪異行為，而是 askLLM 內建的防抖快取： <code>.askllm_decide()</code> 只有三種結果，<code>guide</code>（未勾 Submit 或問題是空的）、 <code>cached</code>（新 payload 跟上次快取的 payload 完全相同）、<code>call</code>（其餘情況）。 只要 Submit 一直維持勾選，同一個 payload 就有機會被判定為 <code>cached</code> 而不重 新呼叫 API；guide text 裡也白紙黑字寫著「修改問題前請先取消『Submit』勾 選，改好後再重新勾選」。這一課要處理的，是回覆到手之後你還要做的三件事。</p>
+</div>
+<div class="en">
 <p>A student ticked Submit in the Module Guider, got a reply, then edited one word in the <code>question</code> field without first unticking and re-ticking Submit — and the screen still showed the old reply, now labeled “· cached” in the meta line. He assumed the LLM had ignored his new question; in fact his own old answer had been replayed. This is not random flakiness — it is askLLM’s built-in debounce cache. <code>.askllm_decide()</code> has exactly three outcomes: <code>guide</code> (Submit unticked or the question is empty), <code>cached</code> (the new payload is identical to the last cached payload), and <code>call</code> (everything else). As long as Submit stays ticked, an unchanged payload can be judged <code>cached</code> and skip the API call entirely; the guide text says so directly: “Untick ‘Submit’ before editing your question, then re-tick it.” This lesson covers the three things you should still do after a reply arrives.</p>
+</div>
 </section>
-<section id="改問題前先取消-submit-untick-submit-before-changing-your-question" class="level2">
-<h2 class="anchored" data-anchor-id="改問題前先取消-submit-untick-submit-before-changing-your-question">改問題前先取消 Submit / Untick Submit before changing your question</h2>
+<section id="改問題前先取消-submituntick-submit-before-changing-your-question" class="level2">
+<h2 class="anchored" data-anchor-id="改問題前先取消-submituntick-submit-before-changing-your-question"><span class="zh">改問題前先取消 Submit</span><span class="en">Untick Submit before changing your question</span></h2>
+<div class="zh">
 <p>防抖快取比對的 payload 包含問題、資料摘要、base URL、模型、模組目錄文字、 <code>role</code>、<code>promptLang</code>、<code>system_prompt</code>、<code>systemPromptVar</code> 這些欄位——只要有 一項不同，就不會被判定為 <code>cached</code>，會重新呼叫 API；但如果你只是在 Submit 仍勾著的狀態下改了問題文字，某些互動路徑下畫面可能還沒重新觸發計算。最保 險的習慣是：每次要換問題、換 persona、換模型，一律先取消 Submit，改完再重 新勾選，這樣不會誤觸快取回放，也不會因為忘記勾選而一直卡在 <code>guide</code> 狀態。</p>
+</div>
+<div class="en">
 <p>The debounce cache compares a payload built from the question, the data summary, base URL, model, catalog text, <code>role</code>, <code>promptLang</code>, <code>system_prompt</code>, and <code>systemPromptVar</code> — change any one of these and the result will not be judged <code>cached</code>; it triggers a fresh API call. But the safe habit is still to untick Submit every time before changing the question, the persona, or the model, then re-tick it. That way you never accidentally get a cached replay, and you never get stuck in the <code>guide</code> state because you forgot to re-tick.</p>
+</div>
 </section>
-<section id="換模型或換-persona-再問一次-ask-again-with-a-different-model-or-persona" class="level2">
-<h2 class="anchored" data-anchor-id="換模型或換-persona-再問一次-ask-again-with-a-different-model-or-persona">換模型或換 persona 再問一次 / Ask again with a different model or persona</h2>
+<section id="換模型或換-persona-再問一次ask-again-with-a-different-model-or-persona" class="level2">
+<h2 class="anchored" data-anchor-id="換模型或換-persona-再問一次ask-again-with-a-different-model-or-persona"><span class="zh">換模型或換 persona 再問一次</span><span class="en">Ask again with a different model or persona</span></h2>
+<div class="zh">
 <p>第 4 課教過，<code>role</code> 與 <code>promptLang</code> 都會被算進防抖快取的 payload 裡，所以 換 persona 或換模型重問，一定會是新的一次呼叫，不會被舊答案卡住。這正是查 核流程（<code>verify/workflow.qmd</code>）裡的 <strong>V5 交叉核對</strong>：換一個 persona （consultant / tutor / explainer）或換一個模型，針對同一個 <code>Question:</code> 再 問一次，看兩次的結論是不是一致；但路徑仍要各自逐條核對，不能因為兩次都提 到同一條路徑就省略 V1。兩次結論一致，可信度較高；兩次結論不一致，代表這題 本身可能需要更多背景資訊才能回答。</p>
+</div>
+<div class="en">
 <p>Lesson 4 explained that <code>role</code> and <code>promptLang</code> both feed the debounce cache’s payload, so switching persona or model always triggers a fresh call — it will never be blocked by the old answer. This is exactly step <strong>V5 (cross-check)</strong> in the verification workflow (<code>verify/workflow.qmd</code>): ask the same <code>Question:</code> again with a different persona (consultant / tutor / explainer) or a different model, and see whether the two conclusions agree. Still repeat the path check (V1) for the second reply — agreement between two replies does not excuse skipping it. Agreement across two replies raises your confidence; disagreement usually means the question needs more context before it can be answered reliably.</p>
+</div>
 </section>
-<section id="記錄協作日誌-keep-a-collaboration-log" class="level2">
-<h2 class="anchored" data-anchor-id="記錄協作日誌-keep-a-collaboration-log">記錄協作日誌 / Keep a collaboration log</h2>
+<section id="記錄協作日誌keep-a-collaboration-log" class="level2">
+<h2 class="anchored" data-anchor-id="記錄協作日誌keep-a-collaboration-log"><span class="zh">記錄協作日誌</span><span class="en">Keep a collaboration log</span></h2>
+<div class="zh">
 <p>每一次查核收尾，都對應 <code>verify/workflow.qmd</code> 的 <strong>C2</strong>：填寫「問題／判準／ 回覆摘要／查核結果」四欄。這四欄合起來就是一筆可教、可重複、可交作業的紀 錄——判準來自第 3 課的 P0，回覆摘要與查核結果來自你在 V1–V5 做的核對。下面 是可以直接複製使用的表格範本：</p>
+</div>
+<div class="en">
 <p>Every verification closes with <strong>C2</strong> in <code>verify/workflow.qmd</code>: fill in four columns — question, criteria, reply summary, verification result. Together these four columns form one teachable, repeatable, gradable record: the criteria column comes from P0 in Lesson 3, and the reply-summary and verification-result columns come from what you checked in V1–V5. Here is a template you can copy directly:</p>
+</div>
+<div class="zh">
 <table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
@@ -239,42 +271,110 @@ ul.task-list li input[type="checkbox"] {
 </colgroup>
 <thead>
 <tr class="header">
-<th>問題 / Question</th>
-<th>判準 / Criteria</th>
-<th>回覆摘要 / Reply summary</th>
-<th>查核結果 / Verification result</th>
+<th>問題</th>
+<th>判準</th>
+<th>回覆摘要</th>
+<th>查核結果</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>（貼上你送出的 <code>Question:</code> 原文）/ (paste the exact <code>Question:</code> you submitted)</td>
-<td>（P0 寫下的、你會接受什麼答案）/ (P0: what answer you would accept)</td>
-<td>（回覆的重點，2–3 句）/ (key points of the reply, 2–3 sentences)</td>
-<td>（V1–V5 打勾結果 + solved / reopen）/ (V1–V5 check results + solved / reopen)</td>
+<td>（貼上你送出的 <code>Question:</code> 原文）</td>
+<td>（P0 寫下的、你會接受什麼答案）</td>
+<td>（回覆的重點，2–3 句）</td>
+<td>（V1–V5 打勾結果 + solved / reopen）</td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="en">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question</th>
+<th>Criteria</th>
+<th>Reply summary</th>
+<th>Verification result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(paste the exact <code>Question:</code> you submitted)</td>
+<td>(P0: what answer you would accept)</td>
+<td>(key points of the reply, 2–3 sentences)</td>
+<td>(V1–V5 check results + solved / reopen)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="zh">
 <p>完整流程與逐項核對步驟見 <a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a>； 若你用的是 Module Guider，可以直接用 <a href="../verify/checklist-guider.html"><code>verify/checklist-guider.qmd</code></a> 逐條打勾。</p>
+</div>
+<div class="en">
 <p>See <a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a> for the full process and step-by-step checks. If you used the Module Guider, you can check off items directly with <a href="../verify/checklist-guider.html"><code>verify/checklist-guider.qmd</code></a>.</p>
+</div>
 </section>
-<section id="動手做5-分鐘-try-it-5-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
+<section id="動手做5-分鐘try-it-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></h2>
+<div class="zh">
 <ol type="1">
-<li>對 Module Guider 問一個問題，勾選 Submit，等回覆出現。 <em>Ask the Module Guider a question, tick Submit, and wait for the reply.</em></li>
-<li>不取消 Submit，直接在 <code>question</code> 欄改一個字再送出，觀察 <code>meta</code> 欄是否 出現「· cached」；接著取消再重新勾選 Submit，比較行為差異。 <em>Without unticking Submit, edit one word in <code>question</code> and submit again; watch whether the meta line shows “· cached.” Then untick and re-tick Submit and compare the behavior.</em></li>
-<li>把 persona 換成另一個，針對同一句 <code>Question:</code> 重問一次（記得先取消再 勾選 Submit），比較兩次結論是否一致（V5）。 <em>Switch to a different persona and ask the same <code>Question:</code> again (untick and re-tick Submit first); compare whether the two conclusions agree (V5).</em></li>
-<li>用本課的四欄表格範本，把這次的問題、判準、回覆摘要、查核結果各填一 行。 <em>Use this lesson’s four-column template to fill in one row: the question, the criteria, the reply summary, and the verification result.</em></li>
+<li>對 Module Guider 問一個問題，勾選 Submit，等回覆出現。</li>
+<li>不取消 Submit，直接在 <code>question</code> 欄改一個字再送出，觀察 <code>meta</code> 欄是否 出現「· cached」；接著取消再重新勾選 Submit，比較行為差異。</li>
+<li>把 persona 換成另一個，針對同一句 <code>Question:</code> 重問一次（記得先取消再 勾選 Submit），比較兩次結論是否一致（V5）。</li>
+<li>用本課的四欄表格範本，把這次的問題、判準、回覆摘要、查核結果各填一 行。</li>
 </ol>
+</div>
+<div class="en">
+<ol type="1">
+<li>Ask the Module Guider a question, tick Submit, and wait for the reply.</li>
+<li>Without unticking Submit, edit one word in <code>question</code> and submit again; watch whether the meta line shows “· cached.” Then untick and re-tick Submit and compare the behavior.</li>
+<li>Switch to a different persona and ask the same <code>Question:</code> again (untick and re-tick Submit first); compare whether the two conclusions agree (V5).</li>
+<li>Use this lesson’s four-column template to fill in one row: the question, the criteria, the reply summary, and the verification result.</li>
+</ol>
+</div>
 </section>
-<section id="帶走這句話-one-thing-to-remember" class="level2">
-<h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
+<section id="帶走這句話one-thing-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></h2>
+<div class="zh">
 <p>回覆到手不是結束，是核對、比較、記錄這三件事的開始。</p>
+</div>
+<div class="en">
 <p>Getting a reply is not the end — it’s the start of checking it, comparing it, and writing it down.</p>
+</div>
 
 
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

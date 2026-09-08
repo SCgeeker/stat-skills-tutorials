@@ -1,9 +1,10 @@
 ---
-title: "第六課：問完之後 / After You Get an Answer"
+title: "[第六課：問完之後]{.zh}[After You Get an Answer]{.en}"
 ---
 
-## 為什麼這件事會出錯 / Why this goes wrong
+## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
+::: {.zh}
 有位同學在 Module Guider 裡勾了 Submit、拿到回覆後，直接在 `question` 欄
 把問題改了一個字，沒有取消 Submit 再重新勾選——結果畫面上出現的還是舊回
 覆，`meta` 欄多了一個「· cached」，他以為 LLM 沒有理解新問題，其實是被自
@@ -13,7 +14,9 @@ title: "第六課：問完之後 / After You Get an Answer"
 只要 Submit 一直維持勾選，同一個 payload 就有機會被判定為 `cached` 而不重
 新呼叫 API；guide text 裡也白紙黑字寫著「修改問題前請先取消『Submit』勾
 選，改好後再重新勾選」。這一課要處理的，是回覆到手之後你還要做的三件事。
+:::
 
+::: {.en}
 A student ticked Submit in the Module Guider, got a reply, then edited one
 word in the `question` field without first unticking and re-ticking
 Submit — and the screen still showed the old reply, now labeled "· cached" in
@@ -26,16 +29,20 @@ else). As long as Submit stays ticked, an unchanged payload can be judged
 `cached` and skip the API call entirely; the guide text says so directly:
 "Untick 'Submit' before editing your question, then re-tick it." This lesson
 covers the three things you should still do after a reply arrives.
+:::
 
-## 改問題前先取消 Submit / Untick Submit before changing your question
+## [改問題前先取消 Submit]{.zh}[Untick Submit before changing your question]{.en}
 
+::: {.zh}
 防抖快取比對的 payload 包含問題、資料摘要、base URL、模型、模組目錄文字、
 `role`、`promptLang`、`system_prompt`、`systemPromptVar` 這些欄位——只要有
 一項不同，就不會被判定為 `cached`，會重新呼叫 API；但如果你只是在 Submit
 仍勾著的狀態下改了問題文字，某些互動路徑下畫面可能還沒重新觸發計算。最保
 險的習慣是：每次要換問題、換 persona、換模型，一律先取消 Submit，改完再重
 新勾選，這樣不會誤觸快取回放，也不會因為忘記勾選而一直卡在 `guide` 狀態。
+:::
 
+::: {.en}
 The debounce cache compares a payload built from the question, the data
 summary, base URL, model, catalog text, `role`, `promptLang`,
 `system_prompt`, and `systemPromptVar` — change any one of these and the
@@ -44,9 +51,11 @@ safe habit is still to untick Submit every time before changing the
 question, the persona, or the model, then re-tick it. That way you never
 accidentally get a cached replay, and you never get stuck in the `guide`
 state because you forgot to re-tick.
+:::
 
-## 換模型或換 persona 再問一次 / Ask again with a different model or persona
+## [換模型或換 persona 再問一次]{.zh}[Ask again with a different model or persona]{.en}
 
+::: {.zh}
 第 4 課教過，`role` 與 `promptLang` 都會被算進防抖快取的 payload 裡，所以
 換 persona 或換模型重問，一定會是新的一次呼叫，不會被舊答案卡住。這正是查
 核流程（`verify/workflow.qmd`）裡的 **V5 交叉核對**：換一個 persona
@@ -54,7 +63,9 @@ state because you forgot to re-tick.
 問一次，看兩次的結論是不是一致；但路徑仍要各自逐條核對，不能因為兩次都提
 到同一條路徑就省略 V1。兩次結論一致，可信度較高；兩次結論不一致，代表這題
 本身可能需要更多背景資訊才能回答。
+:::
 
+::: {.en}
 Lesson 4 explained that `role` and `promptLang` both feed the debounce
 cache's payload, so switching persona or model always triggers a fresh call —
 it will never be blocked by the old answer. This is exactly step **V5
@@ -65,55 +76,81 @@ Still repeat the path check (V1) for the second reply — agreement between two
 replies does not excuse skipping it. Agreement across two replies raises your
 confidence; disagreement usually means the question needs more context
 before it can be answered reliably.
+:::
 
-## 記錄協作日誌 / Keep a collaboration log
+## [記錄協作日誌]{.zh}[Keep a collaboration log]{.en}
 
+::: {.zh}
 每一次查核收尾，都對應 `verify/workflow.qmd` 的 **C2**：填寫「問題／判準／
 回覆摘要／查核結果」四欄。這四欄合起來就是一筆可教、可重複、可交作業的紀
 錄——判準來自第 3 課的 P0，回覆摘要與查核結果來自你在 V1–V5 做的核對。下面
 是可以直接複製使用的表格範本：
+:::
 
+::: {.en}
 Every verification closes with **C2** in `verify/workflow.qmd`: fill in four
 columns — question, criteria, reply summary, verification result. Together
 these four columns form one teachable, repeatable, gradable record: the
 criteria column comes from P0 in Lesson 3, and the reply-summary and
 verification-result columns come from what you checked in V1–V5. Here is a
 template you can copy directly:
+:::
 
-| 問題 / Question | 判準 / Criteria | 回覆摘要 / Reply summary | 查核結果 / Verification result |
+::: {.zh}
+| 問題 | 判準 | 回覆摘要 | 查核結果 |
 |---|---|---|---|
-| （貼上你送出的 `Question:` 原文）/ (paste the exact `Question:` you submitted) | （P0 寫下的、你會接受什麼答案）/ (P0: what answer you would accept) | （回覆的重點，2–3 句）/ (key points of the reply, 2–3 sentences) | （V1–V5 打勾結果 + solved / reopen）/ (V1–V5 check results + solved / reopen) |
+| （貼上你送出的 `Question:` 原文） | （P0 寫下的、你會接受什麼答案） | （回覆的重點，2–3 句） | （V1–V5 打勾結果 + solved / reopen） |
+:::
 
+::: {.en}
+| Question | Criteria | Reply summary | Verification result |
+|---|---|---|---|
+| (paste the exact `Question:` you submitted) | (P0: what answer you would accept) | (key points of the reply, 2–3 sentences) | (V1–V5 check results + solved / reopen) |
+:::
+
+::: {.zh}
 完整流程與逐項核對步驟見 [`verify/workflow.qmd`](../verify/workflow.qmd)；
 若你用的是 Module Guider，可以直接用
 [`verify/checklist-guider.qmd`](../verify/checklist-guider.qmd) 逐條打勾。
+:::
 
+::: {.en}
 See [`verify/workflow.qmd`](../verify/workflow.qmd) for the full process and
 step-by-step checks. If you used the Module Guider, you can check off items
 directly with [`verify/checklist-guider.qmd`](../verify/checklist-guider.qmd).
+:::
 
-## 動手做（5 分鐘）/ Try it (5 minutes)
+## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
 
+::: {.zh}
 1. 對 Module Guider 問一個問題，勾選 Submit，等回覆出現。
-   *Ask the Module Guider a question, tick Submit, and wait for the reply.*
 2. 不取消 Submit，直接在 `question` 欄改一個字再送出，觀察 `meta` 欄是否
    出現「· cached」；接著取消再重新勾選 Submit，比較行為差異。
-   *Without unticking Submit, edit one word in `question` and submit again;
-   watch whether the meta line shows "· cached." Then untick and re-tick
-   Submit and compare the behavior.*
 3. 把 persona 換成另一個，針對同一句 `Question:` 重問一次（記得先取消再
    勾選 Submit），比較兩次結論是否一致（V5）。
-   *Switch to a different persona and ask the same `Question:` again
-   (untick and re-tick Submit first); compare whether the two conclusions
-   agree (V5).*
 4. 用本課的四欄表格範本，把這次的問題、判準、回覆摘要、查核結果各填一
    行。
-   *Use this lesson's four-column template to fill in one row: the
-   question, the criteria, the reply summary, and the verification result.*
+:::
 
-## 帶走這句話 / One thing to remember
+::: {.en}
+1. Ask the Module Guider a question, tick Submit, and wait for the reply.
+2. Without unticking Submit, edit one word in `question` and submit again;
+   watch whether the meta line shows "· cached." Then untick and re-tick
+   Submit and compare the behavior.
+3. Switch to a different persona and ask the same `Question:` again
+   (untick and re-tick Submit first); compare whether the two conclusions
+   agree (V5).
+4. Use this lesson's four-column template to fill in one row: the
+   question, the criteria, the reply summary, and the verification result.
+:::
 
+## [帶走這句話]{.zh}[One thing to remember]{.en}
+
+::: {.zh}
 回覆到手不是結束，是核對、比較、記錄這三件事的開始。
+:::
 
+::: {.en}
 Getting a reply is not the end — it's the start of checking it, comparing
 it, and writing it down.
+:::

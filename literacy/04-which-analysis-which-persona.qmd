@@ -1,9 +1,10 @@
 ---
-title: "第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona"
+title: "[第四課：選對分析、選對 Persona]{.zh}[Choosing the Right Analysis and Persona]{.en}"
 ---
 
-## 為什麼這件事會出錯 / Why this goes wrong
+## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
+::: {.zh}
 有位同學在 **jamovi Module Guider**（`askllm`）裡問：「幫我寫一段跑獨立樣本
 t 檢定的 R 程式碼」，結果沒拿到程式碼，只看到回覆說要改用另一個分析。他以為
 工具壞了，其實是踩到了 askLLM 設計裡的一條硬規則：Module Guider 的定位是
@@ -12,7 +13,9 @@ t 檢定的 R 程式碼」，結果沒拿到程式碼，只看到回覆說要改
 哪個 persona、哪個語言。反過來，如果在 **R code tutor**（`askllmr`）裡問
 「這筆資料該用哪個 jamovi 選單」，它也一定會請你改用「jamovi Module
 Guider」，而不是自己亂猜選單路徑。這是雙向、寫死、不能關閉的邊界句。
+:::
 
+::: {.en}
 A student asked the **jamovi Module Guider** (`askllm`), "write me R code for
 an independent-samples t-test." No code came back — just a reply telling her
 to use a different analysis. She assumed the tool was broken. In fact she had
@@ -24,16 +27,20 @@ selected. The reverse holds too: if you ask the **R code tutor** (`askllmr`)
 which jamovi menu to use, it will tell you to switch to the "jamovi Module
 Guider" instead of guessing a menu path itself. This boundary runs both ways,
 is hard-coded, and cannot be turned off.
+:::
 
-## 兩種分析怎麼分工 / How the two analyses divide the work
+## [兩種分析怎麼分工]{.zh}[How the two analyses divide the work]{.en}
 
+::: {.zh}
 一個模組、兩個分析：`askllm`（jamovi Module Guider，選單標題就是「jamovi
 Module Guider」）負責「該跑哪個分析、選單路徑是什麼」；`askllmr`（R code
 tutor）負責「這段邏輯的 R 程式碼怎麼寫，貼進 Rj Editor 能跑」。兩者共用同一
 套摘要統計、同一組 persona，但角色互斥且互相導流：問錯棚會被請去對的棚，不
 會得到將就的答案。開啟 Rj 的路徑是 `Analyses ▸ R ▸ Rj ▸ Rj Editor`；若本機
 沒裝 Rj，R code tutor 的結果面板會提示 `Modules ▸ jamovi library` 去安裝。
+:::
 
+::: {.en}
 One module, two analyses. `askllm` (menu title "jamovi Module Guider")
 answers "which analysis, which menu path." `askllmr` (R code tutor) answers
 "what R code implements this, ready to paste into the Rj Editor." Both share
@@ -42,16 +49,20 @@ mutually exclusive and each redirects the other: ask the wrong one and you
 get redirected to the right one, not a half-answer. Rj Editor opens at
 `Analyses ▸ R ▸ Rj ▸ Rj Editor`; if Rj is not installed, the R code tutor's
 result panel points you to `Modules ▸ jamovi library` to install it.
+:::
 
-## 三種 Persona 怎麼選 / Choosing among the three personas
+## [三種 Persona 怎麼選]{.zh}[Choosing among the three personas]{.en}
 
+::: {.zh}
 Persona 選項（`role`）有三個值：**consultant**（🧭 顧問）、**tutor**（🎓
 導師）、**explainer**（💡 解說員），每個都有獨立的 en/zh system prompt 模
 板。consultant 的設定是「精簡、準確、務實」，直接給結論；tutor 採「蘇格拉
 底式教學」，不直接給答案，而是用提問引導你自己推理；explainer 假設你完全
 沒有統計背景，逐步解釋並定義每個統計名詞。這三者不分優劣，只看你要的是效
 率還是理解。下表是情境對照：
+:::
 
+::: {.en}
 The persona option (`role`) has three values: **consultant** (🧭), **tutor**
 (🎓), and **explainer** (💡), each with its own English/Chinese system-prompt
 template. Consultant is built to be "concise, accurate, practical" and gives
@@ -60,18 +71,33 @@ the final answer, but asks guiding questions so you reason it out yourself.
 Explainer assumes no statistics background at all and defines every term it
 uses. None is objectively better; it depends on whether you want speed or
 understanding. The table below maps scenarios to choices:
+:::
 
-| 情境 / Scenario | 選哪個分析 / Which analysis | 選哪個 persona / Which persona |
+::: {.zh}
+| 情境 | 選哪個分析 | 選哪個 persona |
 |---|---|---|
-| 不知道該跑哪個分析，想要選單路徑 / Don't know which analysis to run, want a menu path | Module Guider | consultant（快速拿結論 / fast answer） |
-| 已經知道分析，想理解「為什麼是這個」/ Know the analysis, want to understand "why this one" | Module Guider | tutor |
-| 完全零基礎，需要每個統計名詞被解釋 / Complete beginner, needs every term defined | Module Guider 或 R code tutor | explainer |
-| 需要貼進 Rj Editor 就能跑的 R 程式碼 / Need R code ready to paste into Rj Editor | R code tutor | consultant 或 explainer（視背景） |
-| 課堂上教零基礎學生寫 R / Teaching R to beginners in class | R code tutor | explainer |
-| 想要蘇格拉底式自學，不想被直接餵答案 / Want Socratic self-study, not a direct answer | Module Guider 或 R code tutor | tutor |
+| 不知道該跑哪個分析，想要選單路徑 | Module Guider | consultant（快速拿結論） |
+| 已經知道分析，想理解「為什麼是這個」 | Module Guider | tutor |
+| 完全零基礎，需要每個統計名詞被解釋 | Module Guider 或 R code tutor | explainer |
+| 需要貼進 Rj Editor 就能跑的 R 程式碼 | R code tutor | consultant 或 explainer（視背景） |
+| 課堂上教零基礎學生寫 R | R code tutor | explainer |
+| 想要蘇格拉底式自學，不想被直接餵答案 | Module Guider 或 R code tutor | tutor |
+:::
 
-## 進階：用變數 Description 自訂 system prompt / Advanced: a variable's Description as a custom system prompt
+::: {.en}
+| Scenario | Which analysis | Which persona |
+|---|---|---|
+| Don't know which analysis to run, want a menu path | Module Guider | consultant (fast answer) |
+| Know the analysis, want to understand "why this one" | Module Guider | tutor |
+| Complete beginner, needs every term defined | Module Guider or R code tutor | explainer |
+| Need R code ready to paste into Rj Editor | R code tutor | consultant or explainer (depending on background) |
+| Teaching R to beginners in class | R code tutor | explainer |
+| Want Socratic self-study, not a direct answer | Module Guider or R code tutor | tutor |
+:::
 
+## [進階：用變數 Description 自訂 system prompt]{.zh}[Advanced: a variable's Description as a custom system prompt]{.en}
+
+::: {.zh}
 兩個分析都有一個選項 `systemPromptVar`，標題是「Use a variable's Description
 as the system prompt」，型別是 Variable，預設 `NULL`。用法：在資料裡選一個
 變數，到它的 Setup 面板填入 Description 文字，再到 `systemPromptVar` 選項
@@ -80,7 +106,9 @@ as the system prompt」，型別是 Variable，預設 `NULL`。用法：在資�
 模板」）。這讓你（或整班）可以固定一套教學語氣或角色設定，不必每次都重寫
 提問。要提醒的是，這是 askLLM 讀取變數 metadata 的一種設計，並非 jamovi 官
 方文件逐條記載的通用機制，若行為與這裡描述不同，請以你實際測試到的為準。
+:::
 
+::: {.en}
 Both analyses share an option called `systemPromptVar`, titled "Use a
 variable's Description as the system prompt," of type Variable, defaulting to
 `NULL`. To use it: pick a variable in your data, open its Setup panel, type
@@ -93,36 +121,46 @@ into every question. One caveat: this is a design choice in how askLLM reads
 variable metadata, not a generic mechanism documented in jamovi's own
 manuals; if your installation behaves differently, trust what you actually
 observe over this description.
+:::
 
-## 動手做（5 分鐘）/ Try it (5 minutes)
+## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
 
+::: {.zh}
 1. 在 Module Guider 裡，用預設的 consultant persona 問一個統計問題（例如
    「這兩組的平均數有差異嗎？」），記下回覆的語氣與長度。
-   *In the Module Guider, ask a statistics question (e.g. "is there a
-   difference between the two group means?") with the default consultant
-   persona, and note the tone and length of the reply.*
 2. 把 persona 改成 tutor，問一模一樣的問題（記得先取消再重新勾選
    Submit），比較這次回覆是不是變成提問而不是直接給答案。
-   *Switch the persona to tutor and ask the exact same question (untick and
-   re-tick Submit first), and check whether the reply now asks you questions
-   instead of giving a direct answer.*
 3. 在 Module Guider 裡問一句要求 R 程式碼的問題，確認回覆是不是把你導向
    `Analyses ▸ askLLM ▸ R code tutor`，而不是直接生成程式碼。
-   *In the Module Guider, ask for R code and confirm the reply redirects you
-   to `Analyses ▸ askLLM ▸ R code tutor` instead of generating code directly.*
 4. 找一個變數，在 Setup 面板的 Description 欄填一句系統提示（例如「請永遠
    用一句話總結」），到 `systemPromptVar` 選它，重問一次同一個問題，觀察
    語氣是否照你寫的規則改變。
-   *Pick a variable, type a one-line system prompt into its Description
+:::
+
+::: {.en}
+1. In the Module Guider, ask a statistics question (e.g. "is there a
+   difference between the two group means?") with the default consultant
+   persona, and note the tone and length of the reply.
+2. Switch the persona to tutor and ask the exact same question (untick and
+   re-tick Submit first), and check whether the reply now asks you questions
+   instead of giving a direct answer.
+3. In the Module Guider, ask for R code and confirm the reply redirects you
+   to `Analyses ▸ askLLM ▸ R code tutor` instead of generating code directly.
+4. Pick a variable, type a one-line system prompt into its Description
    field (e.g. "always summarize in one sentence"), select it in
    `systemPromptVar`, ask the same question again, and see whether the tone
-   follows your instruction.*
+   follows your instruction.
+:::
 
-## 帶走這句話 / One thing to remember
+## [帶走這句話]{.zh}[One thing to remember]{.en}
 
+::: {.zh}
 分析選錯棚、persona 選錯調性，askLLM 會把你導回正確的分析，但語氣與深度永
 遠要你自己配對到情境。
+:::
 
+::: {.en}
 Pick the wrong analysis or the wrong persona tone, and askLLM will redirect
 you to the right analysis — but matching tone and depth to your situation is
 always on you.
+:::

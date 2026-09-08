@@ -1,12 +1,15 @@
 ---
-title: "故意找錯練習 / Spot the Error"
+title: "[故意找錯練習]{.zh}[Spot the Error]{.en}"
 ---
 
+::: {.zh}
 > 狀態：Phase 0 placeholder，內容待 Phase 2 撰寫（見 `PROPOSAL.zh-TW.md` §5.4、
 > §8 Phase 2）。
+:::
 
-## 這一頁要做什麼
+## [這一頁要做什麼]{.zh}
 
+::: {.zh}
 直接取材 `askLLM/docs/LIMITATIONS.zh-TW.md` 表格裡的真實錯誤路徑（例如
 `分析 > 比較 > 獨立樣本t檢定`、`探索 > 相關性`、
 `Regression > General Linear Model > Linear Regression` 等已記錄的幻覺案例），
@@ -18,9 +21,11 @@ title: "故意找錯練習 / Spot the Error"
 每題附答案與對應的查核步驟編號（例如「見 V1」「見 V4a」），讓學生練習親身
 發現幻覺、而不是被動接受 LIMITATIONS 文件裡的結論。這是 Phase 2（課堂驗證）
 的產出物，Phase 0 只先佔位、註明取材來源與題型設計。
+:::
 
-## English (placeholder)
+## [English (placeholder)]{.en}
 
+::: {.en}
 This page will turn real hallucinated menu paths and code red flags recorded
 in `askLLM/docs/LIMITATIONS.zh-TW.md` into a graded practice set: 8-10
 "what's wrong with this path" questions (practicing the V1 path check) and
@@ -28,3 +33,4 @@ in `askLLM/docs/LIMITATIONS.zh-TW.md` into a graded practice set: 8-10
 code-read check), each with an answer key pointing back to the relevant
 workflow step. This is a Phase 2 deliverable; Phase 0 only reserves the page
 and documents its intended source material and question format.
+:::

@@ -34,17 +34,17 @@ website:
   navbar:
     left:
       - href: index.qmd
-        text: 首頁
+        text: 首頁 / Home
       - href: literacy/01-what-the-llm-sees.qmd
-        text: 協作素養
+        text: 協作素養 / Literacy
       - href: prompts/index.qmd
-        text: 提示詞庫
+        text: 提示詞庫 / Prompts
       - href: verify/workflow.qmd
-        text: 結果查核
+        text: 結果查核 / Verification
       - href: external/reading-map.qmd
-        text: 外部教材導讀
+        text: 外部教材導讀 / Reading Map
   sidebar:
-    - title: 協作素養
+    - title: "協作素養 / Literacy"
       contents:
         - literacy/01-what-the-llm-sees.qmd
         - literacy/02-one-answerable-question.qmd
@@ -52,16 +52,16 @@ website:
         - literacy/04-which-analysis-which-persona.qmd
         - literacy/05-beyond-the-summary.qmd
         - literacy/06-after-the-answer.qmd
-    - title: 提示詞庫
+    - title: "提示詞庫 / Prompts"
       contents:
         - prompts/index.qmd
-    - title: 生成結果查核
+    - title: "生成結果查核 / Verification"
       contents:
         - verify/workflow.qmd
         - verify/checklist-guider.qmd
         - verify/checklist-rtutor.qmd
         - verify/spot-the-error.qmd
-    - title: 外部教材導讀
+    - title: "外部教材導讀 / Reading Map"
       contents:
         - external/reading-map.qmd
 
@@ -70,3 +70,11 @@ format:
     theme: cosmo
     toc: true
     lang: zh-TW
+    # 語言切換：單一站台同時含中英內容，由 assets/lang.css + _includes 控制
+    # 顯示哪一語言（見 PROPOSAL §7.2）。內容頁以 ::: {.zh} / ::: {.en} 標記。
+    css:
+      - assets/lang.css
+    include-in-header:
+      - _includes/lang-init.html
+    include-after-body:
+      - _includes/lang-toggle.html

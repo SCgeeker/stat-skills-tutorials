@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You – stat-skills-tutorials</title>
+<title>第五課：摘要之外的事自己來What Summary Statistics Can’t Tell You – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../literacy/01-what-the-llm-sees.html" aria-current="page"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -122,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/05-beyond-the-summary.html">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/05-beyond-the-summary.html"><span class="zh">第五課：摘要之外的事自己來</span><span class="en">What Summary Statistics Can’t Tell You</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,37 +152,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
+ <span class="menu-text"><span class="zh">第一課：LLM 看得到什麼、看不到什麼</span><span class="en">What the LLM Sees, and What It Doesn’t</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/02-one-answerable-question.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</span></a>
+ <span class="menu-text"><span class="zh">第二課：把研究問題寫成一句可回答的問題</span><span class="en">Turning Your Question into One Answerable Sentence</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
+ <span class="menu-text"><span class="zh">第三課：先寫判準再送出</span><span class="en">Write Your Criteria Before You Submit</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/04-which-analysis-which-persona.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</span></a>
+ <span class="menu-text"><span class="zh">第四課：選對分析、選對 Persona</span><span class="en">Choosing the Right Analysis and Persona</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/05-beyond-the-summary.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</span></a>
+ <span class="menu-text"><span class="zh">第五課：摘要之外的事自己來</span><span class="en">What Summary Statistics Can’t Tell You</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/06-after-the-answer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第六課：問完之後 / After You Get an Answer</span></a>
+ <span class="menu-text"><span class="zh">第六課：問完之後</span><span class="en">After You Get an Answer</span></span></a>
   </div>
 </li>
     </ul>
@@ -180,11 +195,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
-  <li><a href="#自己在-jamovi-做這些檢查-run-these-checks-yourself-in-jamovi" id="toc-自己在-jamovi-做這些檢查-run-these-checks-yourself-in-jamovi" class="nav-link" data-scroll-target="#自己在-jamovi-做這些檢查-run-these-checks-yourself-in-jamovi">自己在 jamovi 做這些檢查 / Run these checks yourself in jamovi</a></li>
-  <li><a href="#把檢查結果寫回提示詞-feed-your-check-results-back-into-the-prompt" id="toc-把檢查結果寫回提示詞-feed-your-check-results-back-into-the-prompt" class="nav-link" data-scroll-target="#把檢查結果寫回提示詞-feed-your-check-results-back-into-the-prompt">把檢查結果寫回提示詞 / Feed your check results back into the prompt</a></li>
-  <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
-  <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
+  <li><a href="#為什麼這件事會出錯why-this-goes-wrong" id="toc-為什麼這件事會出錯why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></a></li>
+  <li><a href="#自己在-jamovi-做這些檢查run-these-checks-yourself-in-jamovi" id="toc-自己在-jamovi-做這些檢查run-these-checks-yourself-in-jamovi" class="nav-link" data-scroll-target="#自己在-jamovi-做這些檢查run-these-checks-yourself-in-jamovi"><span class="zh">自己在 jamovi 做這些檢查</span><span class="en">Run these checks yourself in jamovi</span></a></li>
+  <li><a href="#把檢查結果寫回提示詞feed-your-check-results-back-into-the-prompt" id="toc-把檢查結果寫回提示詞feed-your-check-results-back-into-the-prompt" class="nav-link" data-scroll-target="#把檢查結果寫回提示詞feed-your-check-results-back-into-the-prompt"><span class="zh">把檢查結果寫回提示詞</span><span class="en">Feed your check results back into the prompt</span></a></li>
+  <li><a href="#動手做5-分鐘try-it-5-minutes" id="toc-動手做5-分鐘try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></a></li>
+  <li><a href="#帶走這句話one-thing-to-remember" id="toc-帶走這句話one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></a></li>
   </ul>
 </nav>
     </div>
@@ -193,7 +208,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</h1>
+<h1 class="title"><span class="zh">第五課：摘要之外的事自己來</span><span class="en">What Summary Statistics Can’t Tell You</span></h1>
 </div>
 
 
@@ -210,39 +225,88 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
-<h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
+<section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
+<div class="zh">
 <p>有位同學問 askLLM：「這兩組數據該用 t 檢定嗎？」得到的回覆聽起來很專業， 列出了平均數與標準差，語氣自信。但如果回覆進一步說「我檢查過資料的常態性 與離群值，看起來沒問題」（示意範例），這句話本身就不可能是真的——askLLM 送給 LLM 的從來不是你的原始資料列，而是 <code>summarize_data()</code> 算出來的摘要統 計：每個連續變項的 n、遺漏數、mean、sd、median、min、max；每個類別變項的 水準次數。常態性、離群值、遺漏值型態（是隨機遺漏還是系統性遺漏）這些問題， 都需要看每一筆觀測值才能回答，而 LLM 從頭到尾看不到任何一筆。凡是回覆聲稱 「檢查過」這類東西，最多是根據摘要數字的猜測，不是真的檢查。</p>
+</div>
+<div class="en">
 <p>A student asked askLLM, “should I use a t-test for these two groups?” The reply sounded confident and professional, listing means and standard deviations. But if the reply went on to say “I checked normality and outliers in your data and they look fine” (illustrative example), that claim cannot be true. What askLLM sends the LLM is never your raw data rows — it is the summary statistics computed by <code>summarize_data()</code>: for each continuous variable, n, missing count, mean, sd, median, min, max; for each categorical variable, level counts. Normality, outliers, and missing-data patterns (missing at random vs.&nbsp;systematic) all require looking at individual observations, and the LLM never sees a single row of them. Any reply that claims to have “checked” these things is, at best, a guess from summary numbers — not an actual check.</p>
+</div>
 </section>
-<section id="自己在-jamovi-做這些檢查-run-these-checks-yourself-in-jamovi" class="level2">
-<h2 class="anchored" data-anchor-id="自己在-jamovi-做這些檢查-run-these-checks-yourself-in-jamovi">自己在 jamovi 做這些檢查 / Run these checks yourself in jamovi</h2>
+<section id="自己在-jamovi-做這些檢查run-these-checks-yourself-in-jamovi" class="level2">
+<h2 class="anchored" data-anchor-id="自己在-jamovi-做這些檢查run-these-checks-yourself-in-jamovi"><span class="zh">自己在 jamovi 做這些檢查</span><span class="en">Run these checks yourself in jamovi</span></h2>
+<div class="zh">
 <p><code>docs/LIMITATIONS.zh-TW.md</code> 講得很直接：「假設檢查請用 jamovi 內建的 Assumption Checks，不要問 LLM。」實際做法是：在你要跑的分析（例如 T-Tests 或 ANOVA）設定視窗裡展開 Assumption Checks 這個區塊，勾選 Normality Test、 Homogeneity Test（Levene’s test）等項目，讓 jamovi 用你的真實資料算出檢定 結果；離群值可以搭配該分析提供的圖形（如 Q-Q plot）目視或用 Descriptives 的盒鬚圖檢查；遺漏值型態則回頭看 Descriptives 或原始資料視圖，確認遺漏是 不是集中在特定條件或時間點。這些都不是 askLLM 能替你做的事，做完之後，你手 上會有一個具體的檢定結果（例如「Levene’s test, p = .03」），可以拿來做下一 步判斷。</p>
+</div>
+<div class="en">
 <p><code>docs/LIMITATIONS.zh-TW.md</code> says it plainly: “run assumption checks with jamovi’s built-in Assumption Checks; don’t ask the LLM.” In practice: open the analysis you plan to run (e.g.&nbsp;T-Tests or ANOVA), expand its Assumption Checks section, and tick Normality Test and Homogeneity Test (Levene’s test) so jamovi computes the result from your actual data. Check for outliers visually with the plots that analysis provides (e.g.&nbsp;a Q-Q plot) or with a box plot from Descriptives. For missing-data patterns, go back to Descriptives or the raw data view and check whether missingness clusters around a particular condition or time point. None of this is something askLLM can do for you — but once you’re done, you have a concrete result (e.g.&nbsp;“Levene’s test, p = .03”) to act on.</p>
+</div>
 </section>
-<section id="把檢查結果寫回提示詞-feed-your-check-results-back-into-the-prompt" class="level2">
-<h2 class="anchored" data-anchor-id="把檢查結果寫回提示詞-feed-your-check-results-back-into-the-prompt">把檢查結果寫回提示詞 / Feed your check results back into the prompt</h2>
+<section id="把檢查結果寫回提示詞feed-your-check-results-back-into-the-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="把檢查結果寫回提示詞feed-your-check-results-back-into-the-prompt"><span class="zh">把檢查結果寫回提示詞</span><span class="en">Feed your check results back into the prompt</span></h2>
+<div class="zh">
 <p>因為 askLLM 是單輪問答（沒有對話歷史），最有效的做法不是追問「那我該怎麼 辦」，而是把你自己做出來的檢定結果直接寫進下一次的 <code>Question:</code>，讓 LLM 針 對「已知事實」給建議，而不是要它憑空猜。範例寫法（示意）：「我用 jamovi 的 Assumption Checks 做了 Levene’s test，結果顯著（p = .03），代表變異數不同 質，請問我該改用哪一種 t 檢定並說明原因」；或「Shapiro-Wilk 常態性檢定在 兩組都顯著（p &lt; .05），樣本數各 15，這種情況該用母數還是無母數的比較方 法？」。這樣寫的好處是：判準明確、LLM 不需要猜你有沒有做過檢查，回覆也更 容易用第 3 課教的「先寫判準」去核對。</p>
+</div>
+<div class="en">
 <p>Because askLLM is a single-turn tool with no conversation history, the most effective move is not to ask a follow-up like “so what should I do” — it is to write your own check results directly into the next <code>Question:</code>, so the LLM reasons from a known fact instead of guessing. Example phrasing (illustrative): “I ran Levene’s test in jamovi’s Assumption Checks and it was significant (p = .03), meaning unequal variances — which version of the t-test should I use, and why?” Or: “Shapiro-Wilk normality tests were significant in both groups (p &lt; .05), n = 15 each — should I use a parametric or non-parametric comparison here?” Writing it this way keeps the criteria explicit, removes any guesswork about whether you checked, and makes the reply easier to verify against the criteria you wrote down in Lesson 3.</p>
+</div>
 </section>
-<section id="動手做5-分鐘-try-it-5-minutes" class="level2">
-<h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
+<section id="動手做5-分鐘try-it-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></h2>
+<div class="zh">
 <ol type="1">
-<li>挑一個連續變項與一個兩水準的分組變項，在 Independent Samples T-Test（或 同類分析）裡展開 Assumption Checks，勾選 Homogeneity Test（Levene’s test）。 <em>Pick one continuous variable and one two-level grouping variable, open Independent Samples T-Test (or an equivalent analysis), expand Assumption Checks, and tick Homogeneity Test (Levene’s test).</em></li>
-<li>記下 Levene’s test 的 p 值。 <em>Write down the p-value from Levene’s test.</em></li>
-<li>到 Module Guider 問一次「這兩組該用哪種 t 檢定」，先不附檢定結果，記下 回覆內容。 <em>Ask the Module Guider once, “which t-test should I use for these two groups,” without mentioning your test result, and note the reply.</em></li>
-<li>取消再重新勾選 Submit，把 Levene’s test 的結果寫進問題（例如「Levene’s test 顯著，p = .03，請改用 Welch’s t-test 的版本並說明原因」），重問一 次，比較兩次回覆的差異。 <em>Untick and re-tick Submit, add your Levene’s test result to the question (e.g.&nbsp;“Levene’s test is significant, p = .03 — should I switch to Welch’s t-test, and why?”), ask again, and compare the two replies.</em></li>
+<li>挑一個連續變項與一個兩水準的分組變項，在 Independent Samples T-Test（或 同類分析）裡展開 Assumption Checks，勾選 Homogeneity Test（Levene’s test）。</li>
+<li>記下 Levene’s test 的 p 值。</li>
+<li>到 Module Guider 問一次「這兩組該用哪種 t 檢定」，先不附檢定結果，記下 回覆內容。</li>
+<li>取消再重新勾選 Submit，把 Levene’s test 的結果寫進問題（例如「Levene’s test 顯著，p = .03，請改用 Welch’s t-test 的版本並說明原因」），重問一 次，比較兩次回覆的差異。</li>
 </ol>
+</div>
+<div class="en">
+<ol type="1">
+<li>Pick one continuous variable and one two-level grouping variable, open Independent Samples T-Test (or an equivalent analysis), expand Assumption Checks, and tick Homogeneity Test (Levene’s test).</li>
+<li>Write down the p-value from Levene’s test.</li>
+<li>Ask the Module Guider once, “which t-test should I use for these two groups,” without mentioning your test result, and note the reply.</li>
+<li>Untick and re-tick Submit, add your Levene’s test result to the question (e.g.&nbsp;“Levene’s test is significant, p = .03 — should I switch to Welch’s t-test, and why?”), ask again, and compare the two replies.</li>
+</ol>
+</div>
 </section>
-<section id="帶走這句話-one-thing-to-remember" class="level2">
-<h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
+<section id="帶走這句話one-thing-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></h2>
+<div class="zh">
 <p>假設檢定、離群值、遺漏值型態，永遠是你在 jamovi 自己查出來的事實，不是 askLLM 幫你查的事實。</p>
+</div>
+<div class="en">
 <p>Assumption checks, outliers, and missing-data patterns are always facts you looked up yourself in jamovi — never facts askLLM looked up for you.</p>
+</div>
 
 
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

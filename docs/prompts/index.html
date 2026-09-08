@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../literacy/01-what-the-llm-sees.html"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../prompts/index.html" aria-current="page"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../verify/workflow.html"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -150,35 +165,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#情境-scenario" id="toc-情境-scenario" class="nav-link active" data-scroll-target="#情境-scenario">情境 / Scenario</a></li>
-  <li><a href="#送出前必做-prerequisites" id="toc-送出前必做-prerequisites" class="nav-link" data-scroll-target="#送出前必做-prerequisites">送出前必做 / Prerequisites</a></li>
-  <li><a href="#提示詞-prompt" id="toc-提示詞-prompt" class="nav-link" data-scroll-target="#提示詞-prompt">提示詞 / Prompt</a></li>
-  <li><a href="#期望回覆要素-expected-elements" id="toc-期望回覆要素-expected-elements" class="nav-link" data-scroll-target="#期望回覆要素-expected-elements">期望回覆要素 / Expected elements</a></li>
-  <li><a href="#查核點-check" id="toc-查核點-check" class="nav-link" data-scroll-target="#查核點-check">查核點 / Check</a></li>
-  <li><a href="#判準-stop-criteria" id="toc-判準-stop-criteria" class="nav-link" data-scroll-target="#判準-stop-criteria">判準 / Stop criteria</a></li>
-  <li><a href="#延伸閱讀-links" id="toc-延伸閱讀-links" class="nav-link" data-scroll-target="#延伸閱讀-links">延伸閱讀 / Links</a></li>
-  <li><a href="#實測記錄-tested-with" id="toc-實測記錄-tested-with" class="nav-link" data-scroll-target="#實測記錄-tested-with">實測記錄 / Tested with</a></li>
-  <li><a href="#混合設計-anova-前的資料整形-reshaping-data-for-a-mixed-anova" id="toc-混合設計-anova-前的資料整形-reshaping-data-for-a-mixed-anova" class="nav-link" data-scroll-target="#混合設計-anova-前的資料整形-reshaping-data-for-a-mixed-anova">混合設計 ANOVA 前的資料整形 / Reshaping data for a mixed ANOVA</a>
+  <li><a href="#情境scenario" id="toc-情境scenario" class="nav-link active" data-scroll-target="#情境scenario"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites" id="toc-送出前必做prerequisites" class="nav-link" data-scroll-target="#送出前必做prerequisites"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt" id="toc-提示詞prompt" class="nav-link" data-scroll-target="#提示詞prompt"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements" id="toc-期望回覆要素expected-elements" class="nav-link" data-scroll-target="#期望回覆要素expected-elements"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check" id="toc-查核點check" class="nav-link" data-scroll-target="#查核點check"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria" id="toc-判準stop-criteria" class="nav-link" data-scroll-target="#判準stop-criteria"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links" id="toc-延伸閱讀links" class="nav-link" data-scroll-target="#延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with" id="toc-實測記錄tested-with" class="nav-link" data-scroll-target="#實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
+  <li><a href="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" id="toc-混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" class="nav-link" data-scroll-target="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova"><span class="zh">混合設計 ANOVA 前的資料整形</span><span class="en">Reshaping data for a mixed ANOVA</span></a>
   <ul class="collapse">
-  <li><a href="#情境-scenario-1" id="toc-情境-scenario-1" class="nav-link" data-scroll-target="#情境-scenario-1">情境 / Scenario</a></li>
-  <li><a href="#送出前必做-prerequisites-1" id="toc-送出前必做-prerequisites-1" class="nav-link" data-scroll-target="#送出前必做-prerequisites-1">送出前必做 / Prerequisites</a></li>
-  <li><a href="#提示詞-prompt-1" id="toc-提示詞-prompt-1" class="nav-link" data-scroll-target="#提示詞-prompt-1">提示詞 / Prompt</a></li>
-  <li><a href="#期望回覆要素-expected-elements-1" id="toc-期望回覆要素-expected-elements-1" class="nav-link" data-scroll-target="#期望回覆要素-expected-elements-1">期望回覆要素 / Expected elements</a></li>
-  <li><a href="#查核點-check-1" id="toc-查核點-check-1" class="nav-link" data-scroll-target="#查核點-check-1">查核點 / Check</a></li>
-  <li><a href="#判準-stop-criteria-1" id="toc-判準-stop-criteria-1" class="nav-link" data-scroll-target="#判準-stop-criteria-1">判準 / Stop criteria</a></li>
-  <li><a href="#延伸閱讀-links-1" id="toc-延伸閱讀-links-1" class="nav-link" data-scroll-target="#延伸閱讀-links-1">延伸閱讀 / Links</a></li>
-  <li><a href="#實測記錄-tested-with-1" id="toc-實測記錄-tested-with-1" class="nav-link" data-scroll-target="#實測記錄-tested-with-1">實測記錄 / Tested with</a></li>
+  <li><a href="#情境scenario-1" id="toc-情境scenario-1" class="nav-link" data-scroll-target="#情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites-1" id="toc-送出前必做prerequisites-1" class="nav-link" data-scroll-target="#送出前必做prerequisites-1"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt-1" id="toc-提示詞prompt-1" class="nav-link" data-scroll-target="#提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements-1" id="toc-期望回覆要素expected-elements-1" class="nav-link" data-scroll-target="#期望回覆要素expected-elements-1"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check-1" id="toc-查核點check-1" class="nav-link" data-scroll-target="#查核點check-1"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria-1" id="toc-判準stop-criteria-1" class="nav-link" data-scroll-target="#判準stop-criteria-1"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links-1" id="toc-延伸閱讀links-1" class="nav-link" data-scroll-target="#延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with-1" id="toc-實測記錄tested-with-1" class="nav-link" data-scroll-target="#實測記錄tested-with-1"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
   </ul></li>
-  <li><a href="#兩組比較前該檢查什麼-what-to-check-before-a-two-group-comparison" id="toc-兩組比較前該檢查什麼-what-to-check-before-a-two-group-comparison" class="nav-link" data-scroll-target="#兩組比較前該檢查什麼-what-to-check-before-a-two-group-comparison">兩組比較前該檢查什麼 / What to check before a two-group comparison</a>
+  <li><a href="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" id="toc-兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" class="nav-link" data-scroll-target="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison"><span class="zh">兩組比較前該檢查什麼</span><span class="en">What to check before a two-group comparison</span></a>
   <ul class="collapse">
-  <li><a href="#情境-scenario-2" id="toc-情境-scenario-2" class="nav-link" data-scroll-target="#情境-scenario-2">情境 / Scenario</a></li>
-  <li><a href="#送出前必做-prerequisites-2" id="toc-送出前必做-prerequisites-2" class="nav-link" data-scroll-target="#送出前必做-prerequisites-2">送出前必做 / Prerequisites</a></li>
-  <li><a href="#提示詞-prompt-2" id="toc-提示詞-prompt-2" class="nav-link" data-scroll-target="#提示詞-prompt-2">提示詞 / Prompt</a></li>
-  <li><a href="#期望回覆要素-expected-elements-2" id="toc-期望回覆要素-expected-elements-2" class="nav-link" data-scroll-target="#期望回覆要素-expected-elements-2">期望回覆要素 / Expected elements</a></li>
-  <li><a href="#查核點-check-2" id="toc-查核點-check-2" class="nav-link" data-scroll-target="#查核點-check-2">查核點 / Check</a></li>
-  <li><a href="#判準-stop-criteria-2" id="toc-判準-stop-criteria-2" class="nav-link" data-scroll-target="#判準-stop-criteria-2">判準 / Stop criteria</a></li>
-  <li><a href="#延伸閱讀-links-2" id="toc-延伸閱讀-links-2" class="nav-link" data-scroll-target="#延伸閱讀-links-2">延伸閱讀 / Links</a></li>
-  <li><a href="#實測記錄-tested-with-2" id="toc-實測記錄-tested-with-2" class="nav-link" data-scroll-target="#實測記錄-tested-with-2">實測記錄 / Tested with</a></li>
+  <li><a href="#情境scenario-2" id="toc-情境scenario-2" class="nav-link" data-scroll-target="#情境scenario-2"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites-2" id="toc-送出前必做prerequisites-2" class="nav-link" data-scroll-target="#送出前必做prerequisites-2"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt-2" id="toc-提示詞prompt-2" class="nav-link" data-scroll-target="#提示詞prompt-2"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements-2" id="toc-期望回覆要素expected-elements-2" class="nav-link" data-scroll-target="#期望回覆要素expected-elements-2"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check-2" id="toc-查核點check-2" class="nav-link" data-scroll-target="#查核點check-2"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria-2" id="toc-判準stop-criteria-2" class="nav-link" data-scroll-target="#判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links-2" id="toc-延伸閱讀links-2" class="nav-link" data-scroll-target="#延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with-2" id="toc-實測記錄tested-with-2" class="nav-link" data-scroll-target="#實測記錄tested-with-2"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -206,25 +221,28 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>本頁由 <code>tools/build-prompts.R</code> 依 <code>prompts/entries/*.yaml</code> 自動產生，<strong>請勿手動修改本頁內容</strong>—— 要修改條目請改對應的 yaml 檔後重新執行 build 腳本。</p>
-<p>This page is generated by <code>tools/build-prompts.R</code> from <code>prompts/entries/*.yaml</code>. <strong>Do not edit this page by hand</strong> – edit the corresponding YAML entry and rerun the build script instead. ## 遺漏值先分流再處理 / Triage missing data before you treat it</p>
+<p>This page is generated by <code>tools/build-prompts.R</code> from <code>prompts/entries/*.yaml</code>. <strong>Do not edit this page by hand</strong> – edit the corresponding YAML entry and rerun the build script instead. ## <span class="zh">遺漏值先分流再處理</span><span class="en">Triage missing data before you treat it</span></p>
 <p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>none</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>screen</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>explainer</code></p>
-<section id="情境-scenario" class="level3">
-<h3 class="anchored" data-anchor-id="情境-scenario">情境 / Scenario</h3>
+<section id="情境scenario" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
 <p>摘要顯示某些變項遺漏比例不低，想知道先該做什麼、哪些決定 LLM 不能替你做。</p>
+</div>
+<div class="en">
 <p>The summary shows non-trivial missingness in some variables. You want to know what to do first, and which decisions an LLM cannot make for you.</p>
+</div>
 </section>
-<section id="送出前必做-prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做-prerequisites">送出前必做 / Prerequisites</h3>
+<section id="送出前必做prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
 <ul>
 <li>勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）</li>
 </ul>
+</div>
 </section>
-<section id="提示詞-prompt" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞-prompt">提示詞 / Prompt</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">繁體中文</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">English</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<section id="提示詞prompt" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
 <pre><code>摘要裡 {var_a} 遺漏 {pct_a}%、{var_b} 遺漏 {pct_b}%。
 
 請用初學者聽得懂的方式回答：
@@ -232,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 2. 我該先在 jamovi 用哪個分析看遺漏是否集中在某些組別（請給逐字選單路徑）？
 3. 哪些處理方式（例如刪除或插補）的選擇需要我自己根據研究設計決定、你無法替我判斷？</code></pre>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="en">
 <pre><code>The summary shows {var_a} has {pct_a}% missing and {var_b} has {pct_b}% missing.
 
 In beginner-friendly terms, please answer:
@@ -240,66 +258,73 @@ In beginner-friendly terms, please answer:
 2. Which jamovi analysis (exact menu path) lets me see whether missingness clusters by group?
 3. Which treatment decisions (e.g. deletion vs. imputation) depend on my research design, so you cannot make them for me?</code></pre>
 </div>
-</div>
-</div>
 </section>
-<section id="期望回覆要素-expected-elements" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素-expected-elements">期望回覆要素 / Expected elements</h3>
+<section id="期望回覆要素expected-elements" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
 <ul>
 <li>明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）</li>
 <li>建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈</li>
 <li>把「刪除 vs.&nbsp;插補」的決定交回使用者，並說明依據</li>
 </ul>
+</div>
 </section>
-<section id="查核點-check" class="level3">
-<h3 class="anchored" data-anchor-id="查核點-check">查核點 / Check</h3>
+<section id="查核點check" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
 <ul>
 <li><strong>path</strong>: 路徑逐字核對</li>
 <li><strong>number</strong>: 遺漏比例與 Descriptives 的 Missing 欄一致</li>
 <li><strong>cross-check</strong>: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致</li>
 </ul>
+</div>
 </section>
-<section id="判準-stop-criteria" class="level3">
-<h3 class="anchored" data-anchor-id="判準-stop-criteria">判準 / Stop criteria</h3>
+<section id="判準stop-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
 <ul>
 <li><strong>solved</strong>: 回覆明確承認摘要的極限且建議的觀察步驟可執行</li>
 <li><strong>reopen</strong>: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習</li>
 </ul>
+</div>
 </section>
-<section id="延伸閱讀-links" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀-links">延伸閱讀 / Links</h3>
+<section id="延伸閱讀links" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://davidfoxcroft.github.io/lsj-book/">lsj-book ch.6 (data handling)</a>（CC BY-SA 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄-tested-with" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄-tested-with">實測記錄 / Tested with</h3>
+<section id="實測記錄tested-with" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-08 | pending | pending | <strong>pending</strong> | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄</li>
 </ul>
 <hr>
 </section>
-<section id="混合設計-anova-前的資料整形-reshaping-data-for-a-mixed-anova" class="level2">
-<h2 class="anchored" data-anchor-id="混合設計-anova-前的資料整形-reshaping-data-for-a-mixed-anova">混合設計 ANOVA 前的資料整形 / Reshaping data for a mixed ANOVA</h2>
+<section id="混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" class="level2">
+<h2 class="anchored" data-anchor-id="混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova"><span class="zh">混合設計 ANOVA 前的資料整形</span><span class="en">Reshaping data for a mixed ANOVA</span></h2>
 <p><strong>analysis</strong>: <code>rtutor</code> &nbsp;|&nbsp; <strong>design</strong>: <code>mixed</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>compare-k</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>tutor</code></p>
-<section id="情境-scenario-1" class="level3">
-<h3 class="anchored" data-anchor-id="情境-scenario-1">情境 / Scenario</h3>
+<section id="情境scenario-1" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
 <p>資料是寬格式（每個受試者一列、三個時間點三欄）加一個組別欄；想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑 Repeated Measures ANOVA。</p>
+</div>
+<div class="en">
 <p>Data is in wide format (one row per subject, three time-point columns) plus a group column. You want to verify a long-format reshape in Rj before running the RM ANOVA in jamovi.</p>
+</div>
 </section>
-<section id="送出前必做-prerequisites-1" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做-prerequisites-1">送出前必做 / Prerequisites</h3>
+<section id="送出前必做prerequisites-1" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-1"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
 <ul>
 <li>確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）</li>
 <li>三個時間點欄名記下來</li>
 </ul>
+</div>
 </section>
-<section id="提示詞-prompt-1" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞-prompt-1">提示詞 / Prompt</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">繁體中文</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">English</a></li></ul>
-<div class="tab-content">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<section id="提示詞prompt-1" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
 <pre><code>資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。
 
 請依下列規則引導我，不要直接給完整解答：
@@ -307,7 +332,7 @@ In beginner-friendly terms, please answer:
 2. 印出每個受試者 × 時間點的列數，讓我自己核對。
 3. 不要幫我跑 ANOVA。</code></pre>
 </div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="en">
 <pre><code>data has {id}, {group}, and three time columns {t1}, {t2}, {t3}.
 
 Please guide me under these rules, without giving the full solution:
@@ -316,67 +341,74 @@ Please guide me under these rules, without giving the full solution:
 2. Print the row count per subject x time point so I can verify it myself.
 3. Do not run the ANOVA for me.</code></pre>
 </div>
-</div>
-</div>
 </section>
-<section id="期望回覆要素-expected-elements-1" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素-expected-elements-1">期望回覆要素 / Expected elements</h3>
+<section id="期望回覆要素expected-elements-1" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-1"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
 <ul>
 <li>只用 <code>data</code>，不出現 read.csv / install.packages（R tutor 的硬規則）</li>
 <li>長格式列數 = n 受試者 × 3</li>
 <li>有一行驗證輸出（table 或 nrow）</li>
 </ul>
+</div>
 </section>
-<section id="查核點-check-1" class="level3">
-<h3 class="anchored" data-anchor-id="查核點-check-1">查核點 / Check</h3>
+<section id="查核點check-1" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-1"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
 <ul>
 <li><strong>code-read</strong>: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件</li>
 <li><strong>code-run</strong>: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題</li>
 <li><strong>cross-check</strong>: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致</li>
 </ul>
+</div>
 </section>
-<section id="判準-stop-criteria-1" class="level3">
-<h3 class="anchored" data-anchor-id="判準-stop-criteria-1">判準 / Stop criteria</h3>
+<section id="判準stop-criteria-1" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-1"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
 <ul>
 <li><strong>solved</strong>: code-run 列數正確且 cross-check 描述統計一致</li>
 <li><strong>reopen</strong>: 列數不對或程式碼用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版</li>
 </ul>
+</div>
 </section>
-<section id="延伸閱讀-links-1" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀-links-1">延伸閱讀 / Links</h3>
+<section id="延伸閱讀links-1" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://psyteachr.github.io/quant-fun-v3/">psyteachr quant-fun (wrangling / ANOVA)</a>（CC BY-SA 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄-tested-with-1" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄-tested-with-1">實測記錄 / Tested with</h3>
+<section id="實測記錄tested-with-1" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-1"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-08 | pending | pending | <strong>pending</strong> | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄</li>
 </ul>
 <hr>
 </section>
 </section>
-<section id="兩組比較前該檢查什麼-what-to-check-before-a-two-group-comparison" class="level2">
-<h2 class="anchored" data-anchor-id="兩組比較前該檢查什麼-what-to-check-before-a-two-group-comparison">兩組比較前該檢查什麼 / What to check before a two-group comparison</h2>
+<section id="兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison"><span class="zh">兩組比較前該檢查什麼</span><span class="en">What to check before a two-group comparison</span></h2>
 <p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>between</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>compare-2</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>consultant</code></p>
-<section id="情境-scenario-2" class="level3">
-<h3 class="anchored" data-anchor-id="情境-scenario-2">情境 / Scenario</h3>
+<section id="情境scenario-2" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-2"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
 <p>資料集有一個連續結果變項與一個兩水準分組變項，想知道該用哪個 t 檢定、以及前提不符時的替代方案。</p>
+</div>
+<div class="en">
 <p>Your data has one continuous outcome and one two-level grouping variable. You want to know which t-test to use, and what to do if its assumptions are not met.</p>
+</div>
 </section>
-<section id="送出前必做-prerequisites-2" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做-prerequisites-2">送出前必做 / Prerequisites</h3>
+<section id="送出前必做prerequisites-2" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-2"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
 <ul>
 <li>已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd</li>
 <li>兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）</li>
 </ul>
+</div>
 </section>
-<section id="提示詞-prompt-2" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞-prompt-2">提示詞 / Prompt</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">繁體中文</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">English</a></li></ul>
-<div class="tab-content">
-<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<section id="提示詞prompt-2" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-2"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
 <pre><code>{outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。
 
 請回答以下三件事：
@@ -384,7 +416,7 @@ Please guide me under these rules, without giving the full solution:
 2. 我應該在 jamovi 的 Assumption Checks 勾選哪些項目（給逐字選單路徑）？
 3. 若前提不符，請給一個非參數替代方案，並引用該分析的逐字選單路徑。</code></pre>
 </div>
-<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="en">
 <pre><code>{outcome} is continuous; {group} has two levels (n = {n1}, {n2}).
 
 Please answer all three:
@@ -392,41 +424,45 @@ Please answer all three:
 2. Which Assumption Checks boxes should I tick in jamovi (give the exact menu path)?
 3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?</code></pre>
 </div>
-</div>
-</div>
 </section>
-<section id="期望回覆要素-expected-elements-2" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素-expected-elements-2">期望回覆要素 / Expected elements</h3>
+<section id="期望回覆要素expected-elements-2" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-2"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
 <ul>
 <li>指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）</li>
 <li>提到 Welch 為預設較穩健、或以變異數同質性為選擇依據</li>
 <li>列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）</li>
 <li>給出 Mann-Whitney U 作為替代且路徑正確</li>
 </ul>
+</div>
 </section>
-<section id="查核點-check-2" class="level3">
-<h3 class="anchored" data-anchor-id="查核點-check-2">查核點 / Check</h3>
+<section id="查核點check-2" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-2"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
 <ul>
 <li><strong>path</strong>: 回覆中每條 “Analyses ▸ …” 路徑在你的 jamovi 選單裡點得到</li>
 <li><strong>number</strong>: 回覆引用的 n 與你在 Descriptives 看到的一致</li>
 <li><strong>assumption</strong>: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下</li>
 </ul>
+</div>
 </section>
-<section id="判準-stop-criteria-2" class="level3">
-<h3 class="anchored" data-anchor-id="判準-stop-criteria-2">判準 / Stop criteria</h3>
+<section id="判準stop-criteria-2" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
 <ul>
 <li><strong>solved</strong>: 四個 expected 全命中且 path 查核零錯 → 依建議執行</li>
 <li><strong>reopen</strong>: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章</li>
 </ul>
+</div>
 </section>
-<section id="延伸閱讀-links-2" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀-links-2">延伸閱讀 / Links</h3>
+<section id="延伸閱讀links-2" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://davidfoxcroft.github.io/lsj-book/">lsj-book ch.11 Comparing two means</a>（CC BY-SA 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄-tested-with-2" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄-tested-with-2">實測記錄 / Tested with</h3>
+<section id="實測記錄tested-with-2" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-2"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-08 | pending | pending | <strong>pending</strong> | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄</li>
 </ul>
@@ -436,6 +472,29 @@ Please answer all three:
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>故意找錯練習 / Spot the Error – stat-skills-tutorials</title>
+<title>故意找錯練習Spot the Error – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -70,8 +70,23 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "搜尋"
   }
 }</script>
+<!-- 在 <head> 內先決定語言，避免頁面載入後才切換造成閃爍。
+     優先序：使用者上次選擇（localStorage）→ 瀏覽器語言 → 預設中文。 -->
+<script>
+(function () {
+  var stored = null;
+  try { stored = localStorage.getItem('site-lang'); } catch (e) {}
+  var lang = stored;
+  if (lang !== 'zh' && lang !== 'en') {
+    var nav = (navigator.language || 'zh').toLowerCase();
+    lang = nav.indexOf('zh') === 0 ? 'zh' : 'en';
+  }
+  document.documentElement.classList.add('lang-' + lang);
+})();
+</script>
 
 
+<link rel="stylesheet" href="../assets/lang.css">
 </head>
 
 <body class="nav-sidebar floating nav-fixed quarto-light">
@@ -93,23 +108,23 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
-<span class="menu-text">首頁</span></a>
+<span class="menu-text">首頁 / Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../literacy/01-what-the-llm-sees.html"> 
-<span class="menu-text">協作素養</span></a>
+<span class="menu-text">協作素養 / Literacy</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../prompts/index.html"> 
-<span class="menu-text">提示詞庫</span></a>
+<span class="menu-text">提示詞庫 / Prompts</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="../verify/workflow.html" aria-current="page"> 
-<span class="menu-text">結果查核</span></a>
+<span class="menu-text">結果查核 / Verification</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../external/reading-map.html"> 
-<span class="menu-text">外部教材導讀</span></a>
+<span class="menu-text">外部教材導讀 / Reading Map</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -122,7 +137,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../verify/spot-the-error.html">故意找錯練習 / Spot the Error</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../verify/spot-the-error.html"><span class="zh">故意找錯練習</span><span class="en">Spot the Error</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,25 +152,25 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../verify/workflow.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">可重複的查核流程 / A repeatable verification workflow</span></a>
+ <span class="menu-text"><span class="zh">可重複的查核流程</span><span class="en">A repeatable verification workflow</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../verify/checklist-guider.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Module Guider 查核清單 / Module Guider Verification Checklist</span></a>
+ <span class="menu-text"><span class="zh">Module Guider 查核清單</span><span class="en">Module Guider Verification Checklist</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../verify/checklist-rtutor.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R code tutor 查核清單 / R Code Tutor Verification Checklist</span></a>
+ <span class="menu-text"><span class="zh">R code tutor 查核清單</span><span class="en">R Code Tutor Verification Checklist</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../verify/spot-the-error.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">故意找錯練習 / Spot the Error</span></a>
+ <span class="menu-text"><span class="zh">故意找錯練習</span><span class="en">Spot the Error</span></span></a>
   </div>
 </li>
     </ul>
@@ -168,8 +183,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這一頁要做什麼" id="toc-這一頁要做什麼" class="nav-link active" data-scroll-target="#這一頁要做什麼">這一頁要做什麼</a></li>
-  <li><a href="#english-placeholder" id="toc-english-placeholder" class="nav-link" data-scroll-target="#english-placeholder">English (placeholder)</a></li>
+  <li><a href="#這一頁要做什麼" id="toc-這一頁要做什麼" class="nav-link active" data-scroll-target="#這一頁要做什麼"><span class="zh">這一頁要做什麼</span></a></li>
+  <li><a href="#english-placeholder" id="toc-english-placeholder" class="nav-link" data-scroll-target="#english-placeholder"><span class="en">English (placeholder)</span></a></li>
   </ul>
 </nav>
     </div>
@@ -178,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">故意找錯練習 / Spot the Error</h1>
+<h1 class="title"><span class="zh">故意找錯練習</span><span class="en">Spot the Error</span></h1>
 </div>
 
 
@@ -195,26 +210,55 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="zh">
 <blockquote class="blockquote">
 <p>狀態：Phase 0 placeholder，內容待 Phase 2 撰寫（見 <code>PROPOSAL.zh-TW.md</code> §5.4、 §8 Phase 2）。</p>
 </blockquote>
+</div>
 <section id="這一頁要做什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這一頁要做什麼">這一頁要做什麼</h2>
+<h2 class="anchored" data-anchor-id="這一頁要做什麼"><span class="zh">這一頁要做什麼</span></h2>
+<div class="zh">
 <p>直接取材 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格裡的真實錯誤路徑（例如 <code>分析 &gt; 比較 &gt; 獨立樣本t檢定</code>、<code>探索 &gt; 相關性</code>、 <code>Regression &gt; General Linear Model &gt; Linear Regression</code> 等已記錄的幻覺案例）， 做成：</p>
 <ul>
 <li>8–10 題「這條路徑錯在哪」（練習 V1 路徑核對）</li>
 <li>3–4 題「這段 R 違反哪條紅旗」（練習 V4a 讀碼核對）</li>
 </ul>
 <p>每題附答案與對應的查核步驟編號（例如「見 V1」「見 V4a」），讓學生練習親身 發現幻覺、而不是被動接受 LIMITATIONS 文件裡的結論。這是 Phase 2（課堂驗證） 的產出物，Phase 0 只先佔位、註明取材來源與題型設計。</p>
+</div>
 </section>
 <section id="english-placeholder" class="level2">
-<h2 class="anchored" data-anchor-id="english-placeholder">English (placeholder)</h2>
+<h2 class="anchored" data-anchor-id="english-placeholder"><span class="en">English (placeholder)</span></h2>
+<div class="en">
 <p>This page will turn real hallucinated menu paths and code red flags recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a graded practice set: 8-10 “what’s wrong with this path” questions (practicing the V1 path check) and 3-4 “which red flag does this R code violate” questions (practicing the V4a code-read check), each with an answer key pointing back to the relevant workflow step. This is a Phase 2 deliverable; Phase 0 only reserves the page and documents its intended source material and question format.</p>
+</div>
 
 
 </section>
 
 </main> <!-- /main -->
+<div class="lang-toggle" role="group" aria-label="Language / 語言">
+  <button type="button" data-lang="zh">中文</button>
+  <button type="button" data-lang="en">EN</button>
+</div>
+<script>
+(function () {
+  var root = document.documentElement;
+  var buttons = document.querySelectorAll('.lang-toggle button');
+  function apply(lang) {
+    root.classList.remove('lang-zh', 'lang-en');
+    root.classList.add('lang-' + lang);
+    root.setAttribute('lang', lang === 'zh' ? 'zh-TW' : 'en');
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('site-lang', lang); } catch (e) {}
+  }
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () { apply(b.dataset.lang); });
+  });
+  apply(root.classList.contains('lang-en') ? 'en' : 'zh');
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
