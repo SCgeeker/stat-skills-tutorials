@@ -66,6 +66,7 @@ stop_criteria:
     zh: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章
     en: Any path cannot be clicked, or the reply omits Assumption Checks -> switch to the explainer persona and ask again; if it still fails, check lsj-book chapter 11 instead.
 links:
-  - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
+  - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html", license: "CC BY-SA 4.0"}
+  - {title: "psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)", url: "https://psyteachr.github.io/analysis-v4/07-independent.html", license: "CC BY 4.0"}
 tested_with:
   - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}

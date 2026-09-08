@@ -394,7 +394,7 @@ agostino.test(data$score)
 ::: {.zh}
 **答案**：第一行 `install.packages("moments")` 直接違反 `askLLM/R/llm-adapter.R`
 第 172–177 行明文禁止的指令清單——system prompt 明確要求「never suggest
-install.packages()」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入
+install.packages（）」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入
 權限去安裝新套件，而且 askLLM 應該只引用 `<rj_environment>` 清單裡**已經
 裝好**的套件。對應查核步驟：**V4a 讀**（見 `checklist-rtutor.qmd` 的紅旗
 字串表）。

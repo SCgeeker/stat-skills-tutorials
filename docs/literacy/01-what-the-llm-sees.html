@@ -228,10 +228,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
 <div class="zh">
-<p>有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的 <strong>摘要統計</strong>,它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤 之所以危險，是因為語氣跟講對的時候一模一樣。</p>
+<p>有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的 <strong>摘要統計</strong>，它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤 之所以危險，是因為語氣跟講對的時候一模一樣。</p>
 </div>
 <div class="en">
 <p>A user asked askLLM whether the data had outliers. The reply was confident: “I checked the data — row 47 is clearly high, I’d exclude it.” That sounds expert, but it is fabricated from start to finish. askLLM never sends row 47, or any raw row, to the LLM. The LLM only receives <strong>summary statistics</strong> for the variables you selected. It cannot name “row 47” because it never saw rows at all. This kind of error is dangerous precisely because it sounds exactly like a correct answer.</p>
+</div>
+<div class="zh">
+<p>這個對話是<strong>示意範例</strong>，不是實際記錄。但同一類錯誤真的發生過：askLLM 的實測記錄 裡，在未勾選 Attach data summary 的情況下，模型憑空生出「8 個樣本、Saguaro 與 Palo Verde 三個物種」這種與手上資料毫無關係的內容（見母專案的 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>）。模型沒有資料時不會說「我沒有資料」，它會 編一份出來。</p>
+</div>
+<div class="en">
+<p>That exchange is <strong>illustrative</strong>, not a transcript. The same class of error is real, however. askLLM’s own testing records a reply that invented “8 samples across three species, Saguaro and Palo Verde” for a dataset containing nothing of the kind, produced with the data summary switched off. The record is in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> in the parent project. Given no data, the model does not say it has no data. It makes some up.</p>
 </div>
 </section>
 <section id="askllm-實際送出的內容what-askllm-actually-sends" class="level2">
@@ -264,14 +270,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="摘要看不到什麼what-the-summary-cannot-show" class="level2">
 <h2 class="anchored" data-anchor-id="摘要看不到什麼what-the-summary-cannot-show"><span class="zh">摘要看不到什麼</span><span class="en">What the summary cannot show</span></h2>
 <div class="zh">
-<p>n、遺漏數、mean、sd、median、min、max(連續變項)與各水準次數(類別變項)—— 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM <strong>原則上不可能 真的檢查過</strong>,即使它宣稱檢查過：</p>
+<p>n、遺漏數、mean、sd、median、min、max（連續變項）與各水準次數（類別變項）—— 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM <strong>原則上不可能 真的檢查過</strong>，即使它宣稱檢查過：</p>
 <ul>
-<li>哪一筆資料是離群值(只知道 min 和 max,不知道哪一列)</li>
-<li>資料是否常態分布(min/max/median 不足以判斷分布形狀)</li>
-<li>遺漏值集中在哪些組別(只知道遺漏「總數」，不知道遺漏的樣式)</li>
+<li>哪一筆資料是離群值（只知道 min 和 max，不知道哪一列）</li>
+<li>資料是否常態分布（min/max/median 不足以判斷分布形狀）</li>
+<li>遺漏值集中在哪些組別（只知道遺漏「總數」，不知道遺漏的樣式）</li>
 <li>變項背後的實際測量方式或研究設計</li>
 </ul>
-<p>看到回覆聲稱做了以上任何一件事，那就是越界(overreaching),要打折扣看待。</p>
+<p>看到回覆聲稱做了以上任何一件事，那就是越界（overreaching），要打折扣看待。</p>
 </div>
 <div class="en">
 <p>The summary’s entire vocabulary is: n, missing, mean, sd, median, min, max (continuous) and level counts (categorical). Raw rows are absent, so the following are things the LLM <strong>cannot actually have checked</strong>, even if it claims to have:</p>
@@ -288,12 +294,12 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="動手做5-分鐘try-it-5-minutes"><span class="zh">動手做（5 分鐘）</span><span class="en">Try it (5 minutes)</span></h2>
 <div class="zh">
 <ol type="1">
-<li>在 jamovi 開啟你的資料，任選三個變項(至少一個連續、一個類別)。</li>
-<li>開啟 askLLM 的 jamovi Module Guider,把這三個變項勾進 Variables to describe。</li>
+<li>在 jamovi 開啟你的資料，任選三個變項（至少一個連續、一個類別）。</li>
+<li>開啟 askLLM 的 jamovi Module Guider，把這三個變項勾進 Variables to describe。</li>
 <li>確認「Attach data summary to prompt」是勾選的。</li>
 <li>問一句簡單的問題，例如「請描述這三個變項的分布」，勾選 Submit 送出。</li>
 <li>收到回覆後，把回覆裡提到的每一個數字——n、mean、sd、median、min、max、 各水準次數——逐一對回 Exploration ▸ Descriptives 的輸出，看有沒有對不上。</li>
-<li>檢查回覆有沒有提到摘要裡不存在的東西(例如「第幾筆資料」「常態性」「離群值」 這類需要看原始列或做額外檢定才能判斷的內容)。有的話，標記為越界。</li>
+<li>檢查回覆有沒有提到摘要裡不存在的東西（例如「第幾筆資料」「常態性」「離群值」 這類需要看原始列或做額外檢定才能判斷的內容）。有的話，標記為越界。</li>
 </ol>
 </div>
 <div class="en">

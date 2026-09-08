@@ -555,7 +555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：第一行 <code>install.packages("moments")</code> 直接違反 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行明文禁止的指令清單——system prompt 明確要求「never suggest install.packages()」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入 權限去安裝新套件，而且 askLLM 應該只引用 <code>&lt;rj_environment&gt;</code> 清單裡<strong>已經 裝好</strong>的套件。對應查核步驟：<strong>V4a 讀</strong>（見 <code>checklist-rtutor.qmd</code> 的紅旗 字串表）。</p>
+<p><strong>答案</strong>：第一行 <code>install.packages("moments")</code> 直接違反 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行明文禁止的指令清單——system prompt 明確要求「never suggest install.packages（）」。這行不能執行：你的 Rj 環境不保證有網路權限或寫入 權限去安裝新套件，而且 askLLM 應該只引用 <code>&lt;rj_environment&gt;</code> 清單裡<strong>已經 裝好</strong>的套件。對應查核步驟：<strong>V4a 讀</strong>（見 <code>checklist-rtutor.qmd</code> 的紅旗 字串表）。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: the first line, <code>install.packages("moments")</code>, directly violates the instruction list explicitly forbidden in <code>askLLM/R/llm-adapter.R</code> lines 172–177 — the system prompt explicitly requires “never suggest install.packages()”. This line cannot be run safely: your Rj environment isn’t guaranteed to have network or write access to install a new package, and askLLM is supposed to cite only packages <strong>already installed</strong>, from the <code>&lt;rj_environment&gt;</code> list. Verification step: <strong>V4a, read</strong> (see the red-flag table in <code>checklist-rtutor.qmd</code>).</p>

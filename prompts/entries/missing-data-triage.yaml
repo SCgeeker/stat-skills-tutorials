@@ -61,6 +61,6 @@ stop_criteria:
     zh: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習
     en: The reply picks an imputation method for you outright without stating its assumptions -> log it as an "overconfidence" case and use it in the spot-the-error exercise.
 links:
-  - {title: "lsj-book ch.6 (data handling)", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
+  - {title: "psyteachr quant-fun ch.11 Screening data", url: "https://psyteachr.github.io/quant-fun-v3/11-screening-data.html", license: "CC BY-SA 4.0"}
 tested_with:
   - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}

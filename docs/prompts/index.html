@@ -316,7 +316,7 @@ In beginner-friendly terms, please answer:
 <section id="延伸閱讀links" class="level3">
 <h3 class="anchored" data-anchor-id="延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
-<li><a href="https://davidfoxcroft.github.io/lsj-book/">lsj-book ch.6 (data handling)</a>（CC BY-SA 4.0）</li>
+<li><a href="https://psyteachr.github.io/quant-fun-v3/11-screening-data.html">psyteachr quant-fun ch.11 Screening data</a>（CC BY-SA 4.0）</li>
 </ul>
 </section>
 <section id="實測記錄tested-with" class="level3">
@@ -332,10 +332,10 @@ In beginner-friendly terms, please answer:
 <section id="情境scenario-1" class="level3">
 <h3 class="anchored" data-anchor-id="情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></h3>
 <div class="zh">
-<p>資料是寬格式（每個受試者一列、三個時間點三欄）加一個組別欄；想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑 Repeated Measures ANOVA。</p>
+<p>資料是寬格式：每位受試者一列，兩個時間點各一欄（事前預測與事後實際），另有一個兩水準的組別欄。想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑混合設計 ANOVA。</p>
 </div>
 <div class="en">
-<p>Data is in wide format (one row per subject, three time-point columns) plus a group column. You want to verify a long-format reshape in Rj before running the RM ANOVA in jamovi.</p>
+<p>Data is in wide format: one row per participant, one column for each of two time points (a prediction beforehand and the actual rating afterwards), plus a two-level group column. You want to verify a long-format reshape in Rj before running the mixed ANOVA in jamovi.</p>
 </div>
 </section>
 <section id="送出前必做prerequisites-1" class="level3">
@@ -343,20 +343,20 @@ In beginner-friendly terms, please answer:
 <div class="zh">
 <ul>
 <li>確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）</li>
-<li>三個時間點欄名記下來</li>
+<li>兩個時間點欄名記下來</li>
 </ul>
 </div>
 <div class="en">
 <ul>
 <li>Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).</li>
-<li>Write down the three time-point column names.</li>
+<li>Write down the two time-point column names.</li>
 </ul>
 </div>
 </section>
 <section id="提示詞prompt-1" class="level3">
 <h3 class="anchored" data-anchor-id="提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
 <div class="zh">
-<pre><code>資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。
+<pre><code>資料 data 有 {id}、{group} 與兩個時間點欄 {t1}、{t2}。
 
 請依下列規則引導我，不要直接給完整解答：
 1. 只給程式骨架與 TODO 註解，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。
@@ -364,7 +364,7 @@ In beginner-friendly terms, please answer:
 3. 不要幫我跑 ANOVA。</code></pre>
 </div>
 <div class="en">
-<pre><code>data has {id}, {group}, and three time columns {t1}, {t2}, {t3}.
+<pre><code>data has {id}, {group}, and two time columns {t1}, {t2}.
 
 Please guide me under these rules, without giving the full solution:
 1. Give only a skeleton with TODO comments, guiding me to reshape to long
@@ -378,14 +378,14 @@ Please guide me under these rules, without giving the full solution:
 <div class="zh">
 <ul>
 <li>只用 <code>data</code>，不出現 read.csv / install.packages（R tutor 的硬規則）</li>
-<li>長格式列數 = n 受試者 × 3</li>
+<li>長格式列數 = n 受試者 × 2</li>
 <li>有一行驗證輸出（table 或 nrow）</li>
 </ul>
 </div>
 <div class="en">
 <ul>
 <li>Uses only <code>data</code>, with no read.csv / install.packages (a hard rule for the R tutor)</li>
-<li>The long-format row count equals n subjects x 3</li>
+<li>The long-format row count equals n subjects x 2</li>
 <li>Includes one line of verification output (a table or nrow)</li>
 </ul>
 </div>
@@ -395,14 +395,14 @@ Please guide me under these rules, without giving the full solution:
 <div class="zh">
 <ul>
 <li><strong>code-read</strong>: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件</li>
-<li><strong>code-run</strong>: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題</li>
+<li><strong>code-run</strong>: 貼進 Rj 執行；nrow 是否等於 n × 2；有錯誤訊息就原文貼回下一次問題</li>
 <li><strong>cross-check</strong>: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致</li>
 </ul>
 </div>
 <div class="en">
 <ul>
 <li><strong>code-read</strong>: Read line by line for setwd, file paths, or packages not listed in rj_environment</li>
-<li><strong>code-run</strong>: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question</li>
+<li><strong>code-run</strong>: Paste it into Rj and run it; check whether nrow equals n x 2; if there is an error message, paste it back verbatim in the next question</li>
 <li><strong>cross-check</strong>: Go back to jamovi and run ANOVA ▸ Repeated Measures ANOVA on the original wide-format data, then compare the descriptive statistics against the long-format ones</li>
 </ul>
 </div>
@@ -426,6 +426,7 @@ Please guide me under these rules, without giving the full solution:
 <h3 class="anchored" data-anchor-id="延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://psyteachr.github.io/quant-fun-v3/">psyteachr quant-fun (wrangling / ANOVA)</a>（CC BY-SA 4.0）</li>
+<li><a href="https://psyteachr.github.io/analysis-v4/13-factorial-anova.html">psyteachr analysis ch.13 Factorial ANOVA (Zhang et al.&nbsp;2014 time capsule)</a>（CC BY 4.0）</li>
 </ul>
 </section>
 <section id="實測記錄tested-with-1" class="level3">
@@ -536,7 +537,8 @@ Please answer all three:
 <section id="延伸閱讀links-2" class="level3">
 <h3 class="anchored" data-anchor-id="延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
-<li><a href="https://davidfoxcroft.github.io/lsj-book/">lsj-book ch.11 Comparing two means</a>（CC BY-SA 4.0）</li>
+<li><a href="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html">lsj-book ch.11 Comparing two means</a>（CC BY-SA 4.0）</li>
+<li><a href="https://psyteachr.github.io/analysis-v4/07-independent.html">psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)</a>（CC BY 4.0）</li>
 </ul>
 </section>
 <section id="實測記錄tested-with-2" class="level3">

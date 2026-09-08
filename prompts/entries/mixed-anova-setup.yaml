@@ -4,11 +4,12 @@ title:
   en: Reshaping data for a mixed ANOVA
 analysis: rtutor
 scenario:
-  zh: 資料是寬格式（每個受試者一列、三個時間點三欄）加一個組別欄；想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑 Repeated Measures ANOVA。
+  zh: 資料是寬格式：每位受試者一列，兩個時間點各一欄（事前預測與事後實際），另有一個兩水準的組別欄。想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑混合設計 ANOVA。
   en: >-
-    Data is in wide format (one row per subject, three time-point columns)
-    plus a group column. You want to verify a long-format reshape in Rj
-    before running the RM ANOVA in jamovi.
+    Data is in wide format: one row per participant, one column for each of two
+    time points (a prediction beforehand and the actual rating afterwards), plus
+    a two-level group column. You want to verify a long-format reshape in Rj
+    before running the mixed ANOVA in jamovi.
 variables:
   - {role: id, type: nominal, n_levels: null}
   - {role: grouping, type: nominal, n_levels: 2}
@@ -18,19 +19,19 @@ stat_goal: compare-k
 prerequisites:
   - zh: 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
     en: Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
-  - zh: 三個時間點欄名記下來
-    en: Write down the three time-point column names.
+  - zh: 兩個時間點欄名記下來
+    en: Write down the two time-point column names.
 persona: tutor
 prompt:
   zh: |-
-    資料 data 有 {id}、{group} 與三個時間點欄 {t1}、{t2}、{t3}。
+    資料 data 有 {id}、{group} 與兩個時間點欄 {t1}、{t2}。
 
     請依下列規則引導我，不要直接給完整解答：
     1. 只給程式骨架與 TODO 註解，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。
     2. 印出每個受試者 × 時間點的列數，讓我自己核對。
     3. 不要幫我跑 ANOVA。
   en: |-
-    data has {id}, {group}, and three time columns {t1}, {t2}, {t3}.
+    data has {id}, {group}, and two time columns {t1}, {t2}.
 
     Please guide me under these rules, without giving the full solution:
     1. Give only a skeleton with TODO comments, guiding me to reshape to long
@@ -41,8 +42,8 @@ system_prompt_override: null
 expected:
   - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
     en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
-  - zh: 長格式列數 = n 受試者 × 3
-    en: The long-format row count equals n subjects x 3
+  - zh: 長格式列數 = n 受試者 × 2
+    en: The long-format row count equals n subjects x 2
   - zh: 有一行驗證輸出（table 或 nrow）
     en: Includes one line of verification output (a table or nrow)
 check:
@@ -52,8 +53,8 @@ check:
       en: Read line by line for setwd, file paths, or packages not listed in rj_environment
   - step: code-run
     what:
-      zh: 貼進 Rj 執行；nrow 是否等於 n × 3；有錯誤訊息就原文貼回下一次問題
-      en: Paste it into Rj and run it; check whether nrow equals n x 3; if there is an error message, paste it back verbatim in the next question
+      zh: 貼進 Rj 執行；nrow 是否等於 n × 2；有錯誤訊息就原文貼回下一次問題
+      en: Paste it into Rj and run it; check whether nrow equals n x 2; if there is an error message, paste it back verbatim in the next question
   - step: cross-check
     what:
       zh: 回 jamovi 用 ANOVA ▸ Repeated Measures ANOVA 跑寬格式原資料，比對描述統計是否與長格式一致
@@ -67,5 +68,6 @@ stop_criteria:
     en: The row count is wrong, or the code uses a package not available in the environment -> paste the error message back and ask the consultant persona for the full solution.
 links:
   - {title: "psyteachr quant-fun (wrangling / ANOVA)", url: "https://psyteachr.github.io/quant-fun-v3/", license: "CC BY-SA 4.0"}
+  - {title: "psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule)", url: "https://psyteachr.github.io/analysis-v4/13-factorial-anova.html", license: "CC BY 4.0"}
 tested_with:
   - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}
