@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第三課：先寫判準再送出 / Write Your Criteria Before You Submit – stat-skills-tutorials</title>
+<title>第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t – stat-skills-tutorials (English)</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -82,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">stat-skills-tutorials</span>
+    <span class="navbar-title">stat-skills-tutorials (English)</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="搜尋"></div>
@@ -111,6 +111,26 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../external/reading-map.html"> 
 <span class="menu-text">外部教材導讀</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../literacy/01-what-the-llm-sees.html"> 
+<span class="menu-text">Collaboration Literacy</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../prompts/index.html"> 
+<span class="menu-text">Prompt Library</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../verify/workflow.html"> 
+<span class="menu-text">Verification</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../external/reading-map.html"> 
+<span class="menu-text">External Reading Map</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -122,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/03-criteria-first.html">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/01-what-the-llm-sees.html">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -136,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link">
+  <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
   </div>
 </li>
@@ -148,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link active">
+  <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
   </div>
 </li>
@@ -181,8 +201,8 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
-  <li><a href="#判準長什麼樣子-what-a-criterion-looks-like" id="toc-判準長什麼樣子-what-a-criterion-looks-like" class="nav-link" data-scroll-target="#判準長什麼樣子-what-a-criterion-looks-like">判準長什麼樣子 / What a criterion looks like</a></li>
-  <li><a href="#判準怎麼接上查核流程-how-criteria-feed-the-verification-workflow" id="toc-判準怎麼接上查核流程-how-criteria-feed-the-verification-workflow" class="nav-link" data-scroll-target="#判準怎麼接上查核流程-how-criteria-feed-the-verification-workflow">判準怎麼接上查核流程 / How criteria feed the verification workflow</a></li>
+  <li><a href="#askllm-實際送出的內容-what-askllm-actually-sends" id="toc-askllm-實際送出的內容-what-askllm-actually-sends" class="nav-link" data-scroll-target="#askllm-實際送出的內容-what-askllm-actually-sends">askLLM 實際送出的內容 / What askLLM actually sends</a></li>
+  <li><a href="#摘要看不到什麼-what-the-summary-cannot-show" id="toc-摘要看不到什麼-what-the-summary-cannot-show" class="nav-link" data-scroll-target="#摘要看不到什麼-what-the-summary-cannot-show">摘要看不到什麼 / What the summary cannot show</a></li>
   <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
   <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
   </ul>
@@ -193,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</h1>
+<h1 class="title">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</h1>
 </div>
 
 
@@ -212,54 +232,62 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
-<p>askLLM 的 <code>LIMITATIONS.zh-TW.md</code> 記錄過一次實測：有人拿 iris 資料集問問題， 卻沒有勾選「Attach data summary to prompt」——結果 LLM 完全是在憑空回答， 憑空生出「8 個樣本、Saguaro/Palo Verde 三個物種」這種與 iris 資料八竿子打不 著的內容(iris 其實有 150 筆、三個物種是 setosa/versicolor/virginica)。如果 使用者送出前沒有先想好「什麼樣的回覆我才會接受」，看到一段語氣篤定、格式工整 的答案，很容易就直接信了。判準要在<strong>收到回覆之前</strong>寫好，不然人會被回覆本身 的自信說服，失去自己原本的判斷基準。</p>
-<p>askLLM’s <code>LIMITATIONS.zh-TW.md</code> documents a real test run: someone asked a question about the iris dataset without ticking “Attach data summary to prompt.” The LLM then answered from pure guesswork, inventing “8 samples, three species named Saguaro and Palo Verde” — nothing like the real iris data (150 rows, species setosa/versicolor/virginica). If you haven’t decided in advance what answer you’d actually accept, a confident, well-formatted reply is easy to believe at face value. Criteria have to be written <strong>before</strong> the reply arrives, or the reply’s own confidence will overwrite your judgment.</p>
+<p>有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的 <strong>摘要統計</strong>,它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤 之所以危險，是因為語氣跟講對的時候一模一樣。</p>
+<p>A user asked askLLM whether the data had outliers. The reply was confident: “I checked the data — row 47 is clearly high, I’d exclude it.” That sounds expert, but it is fabricated from start to finish. askLLM never sends row 47, or any raw row, to the LLM. The LLM only receives <strong>summary statistics</strong> for the variables you selected. It cannot name “row 47” because it never saw rows at all. This kind of error is dangerous precisely because it sounds exactly like a correct answer.</p>
 </section>
-<section id="判準長什麼樣子-what-a-criterion-looks-like" class="level2">
-<h2 class="anchored" data-anchor-id="判準長什麼樣子-what-a-criterion-looks-like">判準長什麼樣子 / What a criterion looks like</h2>
-<p>一條好判準要具體到「看得出來有沒有命中」，不能只是「答得好」這種空話。 <code>verify/checklist-guider.qmd</code> 給的範本是：</p>
-<blockquote class="blockquote">
-<p>回覆必須指名一個 T-Tests 底下的分析，並說明為何不是 ANOVA。</p>
-</blockquote>
-<p>這句話同時做了兩件事：界定「哪個分析家族」(T-Tests,而非隨便一個統計名詞), 以及要求「說明理由」(不是只給名稱)。用 iris 的例子練習，判準可以寫成：</p>
-<blockquote class="blockquote">
-<p>回覆必須提到 iris 的物種變項有三個水準，若建議做組間比較，必須指名一個 ANOVA 而非兩組 t 檢定；若引用樣本數或物種名稱，必須與我勾選變項後看到的 摘要一致。</p>
-</blockquote>
-<p>這條判準把「LIMITATIONS 記錄過的失效模式」(物種數量、樣本數被編造)直接寫 進了驗收條件裡，回覆一送到就能對著這幾點逐條檢查。</p>
-<p>A good criterion is specific enough that you can tell, on sight, whether it was met — not a vague “a good answer.” The template in <code>verify/checklist-guider.qmd</code> reads:</p>
-<blockquote class="blockquote">
-<p>The reply must name a specific analysis under T-Tests and explain why it is not an ANOVA.</p>
-</blockquote>
-<p>That sentence does two things: it pins down which analysis family is expected (T-Tests, not just any statistical term), and it demands a reason, not just a label. Practicing with the iris example, a criterion could read:</p>
-<blockquote class="blockquote">
-<p>The reply must recognize that iris’s species variable has three levels; if it recommends a group comparison, it must name an ANOVA rather than a two-group t-test; and any sample size or species name it cites must match the summary I see after selecting my variables.</p>
-</blockquote>
-<p>That criterion writes the exact failure mode documented in LIMITATIONS (invented species counts and sample sizes) straight into the acceptance condition, so the moment a reply arrives, you have specific points to check it against.</p>
+<section id="askllm-實際送出的內容-what-askllm-actually-sends" class="level2">
+<h2 class="anchored" data-anchor-id="askllm-實際送出的內容-what-askllm-actually-sends">askLLM 實際送出的內容 / What askLLM actually sends</h2>
+<p>askLLM 的資料摘要函式 <code>summarize_data()</code> 為每個變項產生固定格式的區塊。連續 變項(數值型)長這樣：</p>
+<pre><code>age [numeric]:
+  n: 118, missing: 2
+  mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61</code></pre>
+<p>類別變項(factor)長這樣：</p>
+<pre><code>group [factor]:
+  n: 120, missing: 0, 2 levels
+  levels by count: control(61), treatment(59)</code></pre>
+<p>就這樣——沒有第三行。<strong>LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。</p>
+<p><code>summarize_data()</code>, askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous variable looks like the block above; a categorical variable reports level counts the same way. An ordered factor adds one more line, <code>level order: low &lt; medium &lt; high</code>. Beyond that there is nothing — <strong>the LLM receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.</p>
 </section>
-<section id="判準怎麼接上查核流程-how-criteria-feed-the-verification-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="判準怎麼接上查核流程-how-criteria-feed-the-verification-workflow">判準怎麼接上查核流程 / How criteria feed the verification workflow</h2>
-<p>先寫判準這件事，在 <a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a> 的流程裡 叫 <strong>P0</strong>(送出前寫判準),對應的是 README 提到的「設定問題獲得解決或需要 再探討的明確指標」。收到回覆後，拿判準逐條核對的步驟叫 <strong>C1</strong>(結案時對照 判準),結果只有兩種：solved(全部命中，依建議執行)或 reopen(任一項沒過， 要換個問法或換個 persona 再試)。P0 與 C1 是一組：沒有事先寫好的判準，C1 就沒有東西可以對照，只能憑感覺覺得「這回覆聽起來不錯」——而 iris 的例子已 經證明，聽起來不錯不等於是真的。</p>
-<p>Writing criteria first is step <strong>P0</strong> in the <a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a> process (write criteria before submitting), which answers the README’s call for “a clear indicator of whether the problem is solved or needs further exploration.” Checking the reply against those criteria once it arrives is step <strong>C1</strong> (compare against criteria when closing out), with exactly two outcomes: solved (everything checks out — proceed with the recommendation) or reopen (something failed — rephrase the question or try a different persona). P0 and C1 are a pair: without criteria written in advance, C1 has nothing to check against, and you’re left judging by how convincing the reply sounds — and the iris example already shows that “sounds convincing” is not the same as “is correct.”</p>
+<section id="摘要看不到什麼-what-the-summary-cannot-show" class="level2">
+<h2 class="anchored" data-anchor-id="摘要看不到什麼-what-the-summary-cannot-show">摘要看不到什麼 / What the summary cannot show</h2>
+<p>n、遺漏數、mean、sd、median、min、max(連續變項)與各水準次數(類別變項)—— 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM <strong>原則上不可能 真的檢查過</strong>,即使它宣稱檢查過：</p>
+<ul>
+<li>哪一筆資料是離群值(只知道 min 和 max,不知道哪一列)</li>
+<li>資料是否常態分布(min/max/median 不足以判斷分布形狀)</li>
+<li>遺漏值集中在哪些組別(只知道遺漏「總數」，不知道遺漏的樣式)</li>
+<li>變項背後的實際測量方式或研究設計</li>
+</ul>
+<p>看到回覆聲稱做了以上任何一件事，那就是越界(overreaching),要打折扣看待。</p>
+<p>The summary’s entire vocabulary is: n, missing, mean, sd, median, min, max (continuous) and level counts (categorical). Raw rows are absent, so the following are things the LLM <strong>cannot actually have checked</strong>, even if it claims to have:</p>
+<ul>
+<li>which specific row is an outlier (min/max tell you the range, not which row)</li>
+<li>whether the data are normally distributed (min/max/median can’t reveal shape)</li>
+<li>whether missingness clusters in particular groups (only the missing count is known, not the pattern)</li>
+<li>what the variable actually measures or how the study was designed</li>
+</ul>
+<p>If a reply claims to have checked any of these, treat that claim as overreaching and discount it.</p>
 </section>
 <section id="動手做5-分鐘-try-it-5-minutes" class="level2">
 <h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
 <ol type="1">
-<li><p>在送出問題<strong>之前</strong>,先在紙上或筆記軟體寫一句判準，格式仿照：「回覆必須 指名 __ 底下的分析，並說明為何不是 __」。</p></li>
-<li><p>把你打算問的問題，連同勾選的變項，送進 askLLM 的 jamovi Module Guider。 這次刻意<strong>取消勾選</strong>「Attach data summary to prompt」一次，觀察回覆是 否出現你意料之外、與你資料完全無關的數字或名稱(對照 LIMITATIONS 記錄 的 iris 案例)。</p></li>
-<li><p>重新勾選「Attach data summary to prompt」，再送出同一個問題。</p></li>
-<li><p>拿出你在步驟 1 寫的判準，逐條核對這次的回覆：命中幾條？哪一條沒過？</p></li>
-<li><p>依 C1 的兩種結果做結論：全部命中 → solved,依建議執行；任一項沒過 → reopen,記下要換的問法或 persona,留到下一課的協作日誌裡。</p></li>
-<li><p><strong>Before</strong> you submit anything, write one criterion on paper or in a note, following the pattern: “The reply must name an analysis under <strong> and explain why it is not </strong>.”</p></li>
-<li><p>Submit your question, with your selected variables, to askLLM’s jamovi Module Guider. This time, deliberately <strong>untick</strong> “Attach data summary to prompt” once, and watch for numbers or names that have nothing to do with your actual data (compare against the iris case in LIMITATIONS).</p></li>
-<li><p>Re-tick “Attach data summary to prompt” and submit the same question again.</p></li>
-<li><p>Take the criterion you wrote in step 1 and check this reply against it, point by point: how many did it meet? Which one failed?</p></li>
-<li><p>Conclude using the two C1 outcomes: everything met → solved, proceed with the recommendation; anything failed → reopen, and note what question or persona to try next — you’ll use this in the collaboration log in a later lesson.</p></li>
+<li><p>在 jamovi 開啟你的資料，任選三個變項(至少一個連續、一個類別)。</p></li>
+<li><p>開啟 askLLM 的 jamovi Module Guider,把這三個變項勾進 Variables to describe。</p></li>
+<li><p>確認「Attach data summary to prompt」是勾選的。</p></li>
+<li><p>問一句簡單的問題，例如「請描述這三個變項的分布」，勾選 Submit 送出。</p></li>
+<li><p>收到回覆後，把回覆裡提到的每一個數字——n、mean、sd、median、min、max、 各水準次數——逐一對回 Exploration ▸ Descriptives 的輸出，看有沒有對不上。</p></li>
+<li><p>檢查回覆有沒有提到摘要裡不存在的東西(例如「第幾筆資料」「常態性」「離群值」 這類需要看原始列或做額外檢定才能判斷的內容)。有的話，標記為越界。</p></li>
+<li><p>Open your dataset in jamovi and pick three variables (at least one continuous, one categorical).</p></li>
+<li><p>Open askLLM’s jamovi Module Guider and tick those three variables into Variables to describe.</p></li>
+<li><p>Make sure “Attach data summary to prompt” is ticked.</p></li>
+<li><p>Ask a simple question, e.g.&nbsp;“Describe the distribution of these three variables,” and tick Submit.</p></li>
+<li><p>When the reply arrives, match every number it cites — n, mean, sd, median, min, max, level counts — against the Exploration ▸ Descriptives output. Note any mismatch.</p></li>
+<li><p>Check whether the reply mentions anything the summary cannot support (a specific row, normality, outliers). If it does, flag it as overreaching.</p></li>
 </ol>
 </section>
 <section id="帶走這句話-one-thing-to-remember" class="level2">
 <h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
-<p>判準要在回覆出現之前寫好，因為回覆一旦出現，它的自信語氣會讓你忘記自己原本 想核對什麼。</p>
-<p>Write your criteria before the reply exists — once it exists, its confident tone will make you forget what you meant to check.</p>
+<p>LLM 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都 看不到。</p>
+<p>The LLM only ever sees the summary numbers for the variables you selected — never a single row of the raw data you see in jamovi.</p>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第四課：選對分析、選對 Persona – stat-skills-tutorials</title>
+<title>第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/04-which-analysis-which-persona.html">第四課：選對分析、選對 Persona</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/04-which-analysis-which-persona.html">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,37 +137,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第一課：它看得到什麼、看不到什麼</span></a>
+ <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/02-one-answerable-question.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第二課：把研究問題寫成一句可回答的問題</span></a>
+ <span class="menu-text">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第三課：先寫判準再送出</span></a>
+ <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/04-which-analysis-which-persona.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">第四課：選對分析、選對 Persona</span></a>
+ <span class="menu-text">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/05-beyond-the-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第五課：摘要之外的事自己來</span></a>
+ <span class="menu-text">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/06-after-the-answer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第六課：問完之後</span></a>
+ <span class="menu-text">第六課：問完之後 / After You Get an Answer</span></a>
   </div>
 </li>
     </ul>
@@ -180,8 +180,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這一課要教什麼" id="toc-這一課要教什麼" class="nav-link active" data-scroll-target="#這一課要教什麼">這一課要教什麼</a></li>
-  <li><a href="#english-placeholder" id="toc-english-placeholder" class="nav-link" data-scroll-target="#english-placeholder">English (placeholder)</a></li>
+  <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
+  <li><a href="#兩種分析怎麼分工-how-the-two-analyses-divide-the-work" id="toc-兩種分析怎麼分工-how-the-two-analyses-divide-the-work" class="nav-link" data-scroll-target="#兩種分析怎麼分工-how-the-two-analyses-divide-the-work">兩種分析怎麼分工 / How the two analyses divide the work</a></li>
+  <li><a href="#三種-persona-怎麼選-choosing-among-the-three-personas" id="toc-三種-persona-怎麼選-choosing-among-the-three-personas" class="nav-link" data-scroll-target="#三種-persona-怎麼選-choosing-among-the-three-personas">三種 Persona 怎麼選 / Choosing among the three personas</a></li>
+  <li><a href="#進階用變數-description-自訂-system-prompt-advanced-a-variables-description-as-a-custom-system-prompt" id="toc-進階用變數-description-自訂-system-prompt-advanced-a-variables-description-as-a-custom-system-prompt" class="nav-link" data-scroll-target="#進階用變數-description-自訂-system-prompt-advanced-a-variables-description-as-a-custom-system-prompt">進階：用變數 Description 自訂 system prompt / Advanced: a variable’s Description as a custom system prompt</a></li>
+  <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
+  <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
   </ul>
 </nav>
     </div>
@@ -190,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第四課：選對分析、選對 Persona</h1>
+<h1 class="title">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</h1>
 </div>
 
 
@@ -207,16 +211,85 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<p>狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 <code>PROPOSAL.zh-TW.md</code> §3.2 第 4 課）。</p>
-</blockquote>
-<section id="這一課要教什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這一課要教什麼">這一課要教什麼</h2>
-<p>askLLM 有兩種分析模式（互相導流）：<strong>Module Guider</strong>（<code>askllm</code>，推薦分析＋逐字 選單路徑）與 <strong>R code tutor</strong>（<code>askllmr</code>，產出貼進 Rj Editor 的 R 程式碼）； 另外有三種 Persona（consultant / tutor / explainer）× 兩種語言（en / zh）。這 一課會說明什麼情境該選哪個分析、哪個 Persona，並示範哪些條目可以用「進階版」 ——把一段 system prompt 貼進變數的 Description 當自訂 system prompt。</p>
+<section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
+<p>有位同學在 <strong>jamovi Module Guider</strong>（<code>askllm</code>）裡問：「幫我寫一段跑獨立樣本 t 檢定的 R 程式碼」，結果沒拿到程式碼，只看到回覆說要改用另一個分析。他以為 工具壞了，其實是踩到了 askLLM 設計裡的一條硬規則：Module Guider 的定位是 推薦 jamovi GUI 分析、逐字引用選單路徑，不是 R 產碼助理；只要問題涉及 R 程式碼，它一定會把你導去 <code>Analyses ▸ askLLM ▸ R code tutor</code>，不論你選的是 哪個 persona、哪個語言。反過來，如果在 <strong>R code tutor</strong>（<code>askllmr</code>）裡問 「這筆資料該用哪個 jamovi 選單」，它也一定會請你改用「jamovi Module Guider」，而不是自己亂猜選單路徑。這是雙向、寫死、不能關閉的邊界句。</p>
+<p>A student asked the <strong>jamovi Module Guider</strong> (<code>askllm</code>), “write me R code for an independent-samples t-test.” No code came back — just a reply telling her to use a different analysis. She assumed the tool was broken. In fact she had hit a hard rule built into askLLM: the Module Guider’s job is to recommend a jamovi GUI analysis and quote menu paths verbatim, not to write R code. Whenever a question asks for R code, it always redirects to <code>Analyses ▸ askLLM ▸ R code tutor</code>, no matter which persona or language is selected. The reverse holds too: if you ask the <strong>R code tutor</strong> (<code>askllmr</code>) which jamovi menu to use, it will tell you to switch to the “jamovi Module Guider” instead of guessing a menu path itself. This boundary runs both ways, is hard-coded, and cannot be turned off.</p>
 </section>
-<section id="english-placeholder" class="level2">
-<h2 class="anchored" data-anchor-id="english-placeholder">English (placeholder)</h2>
-<p>askLLM has two analysis modes that redirect to each other (Module Guider vs. R code tutor) and three personas (consultant / tutor / explainer) in two languages. This lesson will explain which mode and persona fit which situation, and how to use a variable’s Description field as a custom system prompt for advanced entries.</p>
+<section id="兩種分析怎麼分工-how-the-two-analyses-divide-the-work" class="level2">
+<h2 class="anchored" data-anchor-id="兩種分析怎麼分工-how-the-two-analyses-divide-the-work">兩種分析怎麼分工 / How the two analyses divide the work</h2>
+<p>一個模組、兩個分析：<code>askllm</code>（jamovi Module Guider，選單標題就是「jamovi Module Guider」）負責「該跑哪個分析、選單路徑是什麼」；<code>askllmr</code>（R code tutor）負責「這段邏輯的 R 程式碼怎麼寫，貼進 Rj Editor 能跑」。兩者共用同一 套摘要統計、同一組 persona，但角色互斥且互相導流：問錯棚會被請去對的棚，不 會得到將就的答案。開啟 Rj 的路徑是 <code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>；若本機 沒裝 Rj，R code tutor 的結果面板會提示 <code>Modules ▸ jamovi library</code> 去安裝。</p>
+<p>One module, two analyses. <code>askllm</code> (menu title “jamovi Module Guider”) answers “which analysis, which menu path.” <code>askllmr</code> (R code tutor) answers “what R code implements this, ready to paste into the Rj Editor.” Both share the same summary statistics and the same personas, but their roles are mutually exclusive and each redirects the other: ask the wrong one and you get redirected to the right one, not a half-answer. Rj Editor opens at <code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>; if Rj is not installed, the R code tutor’s result panel points you to <code>Modules ▸ jamovi library</code> to install it.</p>
+</section>
+<section id="三種-persona-怎麼選-choosing-among-the-three-personas" class="level2">
+<h2 class="anchored" data-anchor-id="三種-persona-怎麼選-choosing-among-the-three-personas">三種 Persona 怎麼選 / Choosing among the three personas</h2>
+<p>Persona 選項（<code>role</code>）有三個值：<strong>consultant</strong>（🧭 顧問）、<strong>tutor</strong>（🎓 導師）、<strong>explainer</strong>（💡 解說員），每個都有獨立的 en/zh system prompt 模 板。consultant 的設定是「精簡、準確、務實」，直接給結論；tutor 採「蘇格拉 底式教學」，不直接給答案，而是用提問引導你自己推理；explainer 假設你完全 沒有統計背景，逐步解釋並定義每個統計名詞。這三者不分優劣，只看你要的是效 率還是理解。下表是情境對照：</p>
+<p>The persona option (<code>role</code>) has three values: <strong>consultant</strong> (🧭), <strong>tutor</strong> (🎓), and <strong>explainer</strong> (💡), each with its own English/Chinese system-prompt template. Consultant is built to be “concise, accurate, practical” and gives you a conclusion directly. Tutor uses “Socratic dialogue” — it will not give the final answer, but asks guiding questions so you reason it out yourself. Explainer assumes no statistics background at all and defines every term it uses. None is objectively better; it depends on whether you want speed or understanding. The table below maps scenarios to choices:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>情境 / Scenario</th>
+<th>選哪個分析 / Which analysis</th>
+<th>選哪個 persona / Which persona</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>不知道該跑哪個分析，想要選單路徑 / Don’t know which analysis to run, want a menu path</td>
+<td>Module Guider</td>
+<td>consultant（快速拿結論 / fast answer）</td>
+</tr>
+<tr class="even">
+<td>已經知道分析，想理解「為什麼是這個」/ Know the analysis, want to understand “why this one”</td>
+<td>Module Guider</td>
+<td>tutor</td>
+</tr>
+<tr class="odd">
+<td>完全零基礎，需要每個統計名詞被解釋 / Complete beginner, needs every term defined</td>
+<td>Module Guider 或 R code tutor</td>
+<td>explainer</td>
+</tr>
+<tr class="even">
+<td>需要貼進 Rj Editor 就能跑的 R 程式碼 / Need R code ready to paste into Rj Editor</td>
+<td>R code tutor</td>
+<td>consultant 或 explainer（視背景）</td>
+</tr>
+<tr class="odd">
+<td>課堂上教零基礎學生寫 R / Teaching R to beginners in class</td>
+<td>R code tutor</td>
+<td>explainer</td>
+</tr>
+<tr class="even">
+<td>想要蘇格拉底式自學，不想被直接餵答案 / Want Socratic self-study, not a direct answer</td>
+<td>Module Guider 或 R code tutor</td>
+<td>tutor</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="進階用變數-description-自訂-system-prompt-advanced-a-variables-description-as-a-custom-system-prompt" class="level2">
+<h2 class="anchored" data-anchor-id="進階用變數-description-自訂-system-prompt-advanced-a-variables-description-as-a-custom-system-prompt">進階：用變數 Description 自訂 system prompt / Advanced: a variable’s Description as a custom system prompt</h2>
+<p>兩個分析都有一個選項 <code>systemPromptVar</code>，標題是「Use a variable’s Description as the system prompt」，型別是 Variable，預設 <code>NULL</code>。用法：在資料裡選一個 變數，到它的 Setup 面板填入 Description 文字，再到 <code>systemPromptVar</code> 選項 選那個變數——askLLM 會把這段 Description 文字當成自訂 system prompt，取代 原本 consultant/tutor/explainer 的模板（優先序是「自訂內容非空 &gt; persona 模板」）。這讓你（或整班）可以固定一套教學語氣或角色設定，不必每次都重寫 提問。要提醒的是，這是 askLLM 讀取變數 metadata 的一種設計，並非 jamovi 官 方文件逐條記載的通用機制，若行為與這裡描述不同，請以你實際測試到的為準。</p>
+<p>Both analyses share an option called <code>systemPromptVar</code>, titled “Use a variable’s Description as the system prompt,” of type Variable, defaulting to <code>NULL</code>. To use it: pick a variable in your data, open its Setup panel, type your text into the Description field, then select that variable in the <code>systemPromptVar</code> option. askLLM will use that Description text as a custom system prompt, replacing the built-in consultant/tutor/explainer template (priority is “non-empty custom text over the persona template”). This lets you — or a whole class — fix one teaching voice or role without retyping it into every question. One caveat: this is a design choice in how askLLM reads variable metadata, not a generic mechanism documented in jamovi’s own manuals; if your installation behaves differently, trust what you actually observe over this description.</p>
+</section>
+<section id="動手做5-分鐘-try-it-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
+<ol type="1">
+<li>在 Module Guider 裡，用預設的 consultant persona 問一個統計問題（例如 「這兩組的平均數有差異嗎？」），記下回覆的語氣與長度。 <em>In the Module Guider, ask a statistics question (e.g.&nbsp;“is there a difference between the two group means?”) with the default consultant persona, and note the tone and length of the reply.</em></li>
+<li>把 persona 改成 tutor，問一模一樣的問題（記得先取消再重新勾選 Submit），比較這次回覆是不是變成提問而不是直接給答案。 <em>Switch the persona to tutor and ask the exact same question (untick and re-tick Submit first), and check whether the reply now asks you questions instead of giving a direct answer.</em></li>
+<li>在 Module Guider 裡問一句要求 R 程式碼的問題，確認回覆是不是把你導向 <code>Analyses ▸ askLLM ▸ R code tutor</code>，而不是直接生成程式碼。 <em>In the Module Guider, ask for R code and confirm the reply redirects you to <code>Analyses ▸ askLLM ▸ R code tutor</code> instead of generating code directly.</em></li>
+<li>找一個變數，在 Setup 面板的 Description 欄填一句系統提示（例如「請永遠 用一句話總結」），到 <code>systemPromptVar</code> 選它，重問一次同一個問題，觀察 語氣是否照你寫的規則改變。 <em>Pick a variable, type a one-line system prompt into its Description field (e.g.&nbsp;“always summarize in one sentence”), select it in <code>systemPromptVar</code>, ask the same question again, and see whether the tone follows your instruction.</em></li>
+</ol>
+</section>
+<section id="帶走這句話-one-thing-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
+<p>分析選錯棚、persona 選錯調性，askLLM 會把你導回正確的分析，但語氣與深度永 遠要你自己配對到情境。</p>
+<p>Pick the wrong analysis or the wrong persona tone, and askLLM will redirect you to the right analysis — but matching tone and depth to your situation is always on you.</p>
 
 
 </section>

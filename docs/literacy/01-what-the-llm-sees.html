@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>第一課：它看得到什麼、看不到什麼 – stat-skills-tutorials</title>
+<title>第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t – stat-skills-tutorials</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/01-what-the-llm-sees.html">第一課：它看得到什麼、看不到什麼</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../literacy/01-what-the-llm-sees.html">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="切換側邊欄導航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,37 +137,37 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/01-what-the-llm-sees.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">第一課：它看得到什麼、看不到什麼</span></a>
+ <span class="menu-text">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/02-one-answerable-question.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第二課：把研究問題寫成一句可回答的問題</span></a>
+ <span class="menu-text">第二課：把研究問題寫成一句可回答的問題 / Turning Your Question into One Answerable Sentence</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/03-criteria-first.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第三課：先寫判準再送出</span></a>
+ <span class="menu-text">第三課：先寫判準再送出 / Write Your Criteria Before You Submit</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/04-which-analysis-which-persona.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第四課：選對分析、選對 Persona</span></a>
+ <span class="menu-text">第四課：選對分析、選對 Persona / Choosing the Right Analysis and Persona</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/05-beyond-the-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第五課：摘要之外的事自己來</span></a>
+ <span class="menu-text">第五課：摘要之外的事自己來 / What Summary Statistics Can’t Tell You</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../literacy/06-after-the-answer.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">第六課：問完之後</span></a>
+ <span class="menu-text">第六課：問完之後 / After You Get an Answer</span></a>
   </div>
 </li>
     </ul>
@@ -180,8 +180,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#這一課要教什麼" id="toc-這一課要教什麼" class="nav-link active" data-scroll-target="#這一課要教什麼">這一課要教什麼</a></li>
-  <li><a href="#english-placeholder" id="toc-english-placeholder" class="nav-link" data-scroll-target="#english-placeholder">English (placeholder)</a></li>
+  <li><a href="#為什麼這件事會出錯-why-this-goes-wrong" id="toc-為什麼這件事會出錯-why-this-goes-wrong" class="nav-link active" data-scroll-target="#為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</a></li>
+  <li><a href="#askllm-實際送出的內容-what-askllm-actually-sends" id="toc-askllm-實際送出的內容-what-askllm-actually-sends" class="nav-link" data-scroll-target="#askllm-實際送出的內容-what-askllm-actually-sends">askLLM 實際送出的內容 / What askLLM actually sends</a></li>
+  <li><a href="#摘要看不到什麼-what-the-summary-cannot-show" id="toc-摘要看不到什麼-what-the-summary-cannot-show" class="nav-link" data-scroll-target="#摘要看不到什麼-what-the-summary-cannot-show">摘要看不到什麼 / What the summary cannot show</a></li>
+  <li><a href="#動手做5-分鐘-try-it-5-minutes" id="toc-動手做5-分鐘-try-it-5-minutes" class="nav-link" data-scroll-target="#動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</a></li>
+  <li><a href="#帶走這句話-one-thing-to-remember" id="toc-帶走這句話-one-thing-to-remember" class="nav-link" data-scroll-target="#帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</a></li>
   </ul>
 </nav>
     </div>
@@ -190,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">第一課：它看得到什麼、看不到什麼</h1>
+<h1 class="title">第一課：LLM 看得到什麼、看不到什麼 / What the LLM Sees, and What It Doesn’t</h1>
 </div>
 
 
@@ -207,17 +210,64 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<p>狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 <code>PROPOSAL.zh-TW.md</code> §3.2 第 1 課、§8 Phase 1）。</p>
-</blockquote>
-<section id="這一課要教什麼" class="level2">
-<h2 class="anchored" data-anchor-id="這一課要教什麼">這一課要教什麼</h2>
-<p>askLLM 送給 LLM 的資料只有使用者所選變項的<strong>摘要統計</strong>——n、遺漏數、mean、sd、 median、min、max（連續變項），以及水準次數（類別變項）；LLM <strong>絕對看不到</strong>原始 資料列。這一課會用 <code>docs/LIMITATIONS.zh-TW.md</code> 與 <code>summarize_data()</code> 的實際輸出 當範例，讓學生實際比對「LLM 收到的」跟自己在 jamovi Descriptives 看到的是否一致。</p>
-<p><strong>練習（Phase 1 撰寫）</strong>：在 jamovi 裡勾三個變項，把 askLLM 回覆裡提到的每一個 數字對回 Exploration ▸ Descriptives 的輸出，記錄有沒有對不上的地方。</p>
+<section id="為什麼這件事會出錯-why-this-goes-wrong" class="level2">
+<h2 class="anchored" data-anchor-id="為什麼這件事會出錯-why-this-goes-wrong">為什麼這件事會出錯 / Why this goes wrong</h2>
+<p>有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的 <strong>摘要統計</strong>,它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤 之所以危險，是因為語氣跟講對的時候一模一樣。</p>
+<p>A user asked askLLM whether the data had outliers. The reply was confident: “I checked the data — row 47 is clearly high, I’d exclude it.” That sounds expert, but it is fabricated from start to finish. askLLM never sends row 47, or any raw row, to the LLM. The LLM only receives <strong>summary statistics</strong> for the variables you selected. It cannot name “row 47” because it never saw rows at all. This kind of error is dangerous precisely because it sounds exactly like a correct answer.</p>
 </section>
-<section id="english-placeholder" class="level2">
-<h2 class="anchored" data-anchor-id="english-placeholder">English (placeholder)</h2>
-<p>This lesson will show that askLLM only sends the LLM summary statistics (n, missing, mean, sd, median, min, max for continuous variables; level counts for categorical ones) — never raw data rows. Students will compare what the LLM received against what they see in jamovi’s own Descriptives output. Full English content is planned for Phase 1.</p>
+<section id="askllm-實際送出的內容-what-askllm-actually-sends" class="level2">
+<h2 class="anchored" data-anchor-id="askllm-實際送出的內容-what-askllm-actually-sends">askLLM 實際送出的內容 / What askLLM actually sends</h2>
+<p>askLLM 的資料摘要函式 <code>summarize_data()</code> 為每個變項產生固定格式的區塊。連續 變項(數值型)長這樣：</p>
+<pre><code>age [numeric]:
+  n: 118, missing: 2
+  mean: 34.6, sd: 9.82, median: 33, min: 19, max: 61</code></pre>
+<p>類別變項(factor)長這樣：</p>
+<pre><code>group [factor]:
+  n: 120, missing: 0, 2 levels
+  levels by count: control(61), treatment(59)</code></pre>
+<p>就這樣——沒有第三行。<strong>LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。</p>
+<p><code>summarize_data()</code>, askLLM’s data-summarizer, produces a fixed-format block per variable. A continuous variable looks like the block above; a categorical variable reports level counts the same way. An ordered factor adds one more line, <code>level order: low &lt; medium &lt; high</code>. Beyond that there is nothing — <strong>the LLM receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.</p>
+</section>
+<section id="摘要看不到什麼-what-the-summary-cannot-show" class="level2">
+<h2 class="anchored" data-anchor-id="摘要看不到什麼-what-the-summary-cannot-show">摘要看不到什麼 / What the summary cannot show</h2>
+<p>n、遺漏數、mean、sd、median、min、max(連續變項)與各水準次數(類別變項)—— 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM <strong>原則上不可能 真的檢查過</strong>,即使它宣稱檢查過：</p>
+<ul>
+<li>哪一筆資料是離群值(只知道 min 和 max,不知道哪一列)</li>
+<li>資料是否常態分布(min/max/median 不足以判斷分布形狀)</li>
+<li>遺漏值集中在哪些組別(只知道遺漏「總數」，不知道遺漏的樣式)</li>
+<li>變項背後的實際測量方式或研究設計</li>
+</ul>
+<p>看到回覆聲稱做了以上任何一件事，那就是越界(overreaching),要打折扣看待。</p>
+<p>The summary’s entire vocabulary is: n, missing, mean, sd, median, min, max (continuous) and level counts (categorical). Raw rows are absent, so the following are things the LLM <strong>cannot actually have checked</strong>, even if it claims to have:</p>
+<ul>
+<li>which specific row is an outlier (min/max tell you the range, not which row)</li>
+<li>whether the data are normally distributed (min/max/median can’t reveal shape)</li>
+<li>whether missingness clusters in particular groups (only the missing count is known, not the pattern)</li>
+<li>what the variable actually measures or how the study was designed</li>
+</ul>
+<p>If a reply claims to have checked any of these, treat that claim as overreaching and discount it.</p>
+</section>
+<section id="動手做5-分鐘-try-it-5-minutes" class="level2">
+<h2 class="anchored" data-anchor-id="動手做5-分鐘-try-it-5-minutes">動手做（5 分鐘）/ Try it (5 minutes)</h2>
+<ol type="1">
+<li><p>在 jamovi 開啟你的資料，任選三個變項(至少一個連續、一個類別)。</p></li>
+<li><p>開啟 askLLM 的 jamovi Module Guider,把這三個變項勾進 Variables to describe。</p></li>
+<li><p>確認「Attach data summary to prompt」是勾選的。</p></li>
+<li><p>問一句簡單的問題，例如「請描述這三個變項的分布」，勾選 Submit 送出。</p></li>
+<li><p>收到回覆後，把回覆裡提到的每一個數字——n、mean、sd、median、min、max、 各水準次數——逐一對回 Exploration ▸ Descriptives 的輸出，看有沒有對不上。</p></li>
+<li><p>檢查回覆有沒有提到摘要裡不存在的東西(例如「第幾筆資料」「常態性」「離群值」 這類需要看原始列或做額外檢定才能判斷的內容)。有的話，標記為越界。</p></li>
+<li><p>Open your dataset in jamovi and pick three variables (at least one continuous, one categorical).</p></li>
+<li><p>Open askLLM’s jamovi Module Guider and tick those three variables into Variables to describe.</p></li>
+<li><p>Make sure “Attach data summary to prompt” is ticked.</p></li>
+<li><p>Ask a simple question, e.g.&nbsp;“Describe the distribution of these three variables,” and tick Submit.</p></li>
+<li><p>When the reply arrives, match every number it cites — n, mean, sd, median, min, max, level counts — against the Exploration ▸ Descriptives output. Note any mismatch.</p></li>
+<li><p>Check whether the reply mentions anything the summary cannot support (a specific row, normality, outliers). If it does, flag it as overreaching.</p></li>
+</ol>
+</section>
+<section id="帶走這句話-one-thing-to-remember" class="level2">
+<h2 class="anchored" data-anchor-id="帶走這句話-one-thing-to-remember">帶走這句話 / One thing to remember</h2>
+<p>LLM 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都 看不到。</p>
+<p>The LLM only ever sees the summary numbers for the variables you selected — never a single row of the raw data you see in jamovi.</p>
 
 
 </section>
