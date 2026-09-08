@@ -1,0 +1,52 @@
+id: ttest-assumptions
+title:
+  zh: 兩組比較前該檢查什麼
+  en: What to check before a two-group comparison
+analysis: guider
+scenario:
+  zh: 資料集有一個連續結果變項與一個兩水準分組變項，想知道該用哪個 t 檢定、以及前提不符時的替代方案。
+  en: >-
+    Your data has one continuous outcome and one two-level grouping variable.
+    You want to know which t-test to use, and what to do if its assumptions
+    are not met.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+design: between
+stat_goal: compare-2
+prerequisites:
+  - 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
+  - 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
+persona: consultant
+prompt:
+  zh: |-
+    {outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。
+
+    請回答以下三件事：
+    1. 該用哪一個 t 檢定？Welch 與 Student 的選擇依據是什麼？
+    2. 我應該在 jamovi 的 Assumption Checks 勾選哪些項目（給逐字選單路徑）？
+    3. 若前提不符，請給一個非參數替代方案，並引用該分析的逐字選單路徑。
+  en: |-
+    {outcome} is continuous; {group} has two levels (n = {n1}, {n2}).
+
+    Please answer all three:
+    1. Which t-test should I run? How do I choose between Welch and Student?
+    2. Which Assumption Checks boxes should I tick in jamovi (give the exact menu path)?
+    3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?
+system_prompt_override: null
+expected:
+  - 指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）
+  - 提到 Welch 為預設較穩健、或以變異數同質性為選擇依據
+  - 列出 Assumption Checks 內的 Normality 與 Homogeneity（Levene）
+  - 給出 Mann-Whitney U 作為替代且路徑正確
+check:
+  - {step: path, what: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡點得到}
+  - {step: number, what: 回覆引用的 n 與你在 Descriptives 看到的一致}
+  - {step: assumption, what: 你自己跑 Assumption Checks，結果與回覆的預期一致或不一致都記下}
+stop_criteria:
+  solved: 四個 expected 全命中且 path 查核零錯 → 依建議執行
+  reopen: 任一路徑點不到，或回覆未提 Assumption Checks → 換 explainer persona 重問一次；仍失敗則改查 lsj-book 第 11 章
+links:
+  - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}

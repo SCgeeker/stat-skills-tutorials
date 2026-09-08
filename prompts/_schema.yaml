@@ -1,0 +1,160 @@
+# prompts/_schema.yaml
+# ---------------------------------------------------------------------------
+# 提示詞條目（entries/*.yaml）的 schema 定義。
+# 本檔案是「文件化的規格」，實際驗證邏輯由 tools/validate-prompts.R 實作並以
+# tests/testthat 鎖住；本檔不是可執行的 JSON Schema，而是給人與 R 腳本共同
+#參照的單一真相來源說明。
+#
+# 對應 PROPOSAL.zh-TW.md §4.1。
+#
+# Q5（已拍板）：本站要向英文教材原作者徵求回饋，因此 L2 條目的所有面向使用者
+# 欄位（title / scenario / prompt / expected 的英文對照）都是「必填、且必須
+# 是人工撰寫品質的英文」，validator 只能做「有沒有填、格式對不對」的機械檢查，
+# 無法檢查文字品質——品質靠人工審稿把關，不在本檔案範圍內。
+# ---------------------------------------------------------------------------
+
+fields:
+  id:
+    type: string
+    required: true
+    pattern: "^[a-z0-9]+(-[a-z0-9]+)*$"   # kebab-case
+    note: 必須與檔名（不含副檔名）一致
+
+  title:
+    type: bilingual_string
+    required: true
+    zh_required: true
+    en_required: true   # Q5：英文必填
+
+  analysis:
+    type: enum
+    required: true
+    values: [guider, rtutor]   # F1
+
+  scenario:
+    type: bilingual_string
+    required: true
+    zh_required: true
+    en_required: true   # Q5
+
+  variables:
+    type: list
+    required: true
+    min_items: 1
+    item_fields:
+      role:
+        type: enum
+        required: true
+        values: [outcome, predictor, grouping, id, covariate]
+      type:
+        type: enum
+        required: true
+        values: [continuous, nominal, ordinal]
+      n_levels:
+        type: integer_or_null
+        required: false   # 只有類別變項才填；未填視為 null
+
+  design:
+    type: enum
+    required: true
+    values: [between, within, mixed, none]
+
+  stat_goal:
+    type: enum
+    required: true
+    values: [describe, compare-2, compare-k, associate, predict, reliability, screen]
+
+  prerequisites:
+    type: list_of_string
+    required: true
+    min_items: 1
+
+  persona:
+    type: enum
+    required: true
+    values: [consultant, tutor, explainer]   # F5
+
+  prompt:
+    type: bilingual_string
+    required: true
+    zh_required: true
+    en_required: true   # Q5
+    # Q4 已判定（2026-09-08）：askLLM 的 question 欄實際由 <textarea rows="5">
+    # 承接（askllm.js / askllmr.js），換行完整送進 API；askllm.b.R 只用
+    # trimws() 清頭尾空白，不會吃掉中間換行。故 prompt 允許多行、可用條列式
+    # 判準（呼應 PROPOSAL §5 查核清單的形式），不強制單行。
+    # 但 trimws() 只清「頭尾」，中間/結尾的多餘空白行會原樣送出（浪費 token、
+    # 可能干擾模型），所以 validator 改為檢查「結尾不得有多餘空白行」。
+    single_line: false
+    no_trailing_blank_lines: true
+
+  system_prompt_override:
+    type: bilingual_string_or_null
+    required: false
+    default: null
+    # 若非 null，zh/en 兩欄仍須同時存在（Q5 邏輯延伸：一旦要用英文介面就不能只有中文）
+
+  expected:
+    type: list_of_string
+    required: true
+    min_items: 1
+    lang: zh_or_en_note   # expected 目前以條目撰寫語言為主，供人工核對用；
+                          # Q5 範圍內 expected 不強制雙語，但建議雙語（見下方 validator 規則）
+
+  check:
+    type: list
+    required: true
+    min_items: 2
+    item_fields:
+      step:
+        type: enum
+        required: true
+        values: [path, number, assumption, code-read, code-run, cross-check]
+      what:
+        type: string
+        required: true
+    extra_rule: "analysis == rtutor 時，check 必須同時包含 code-read 與 code-run"
+
+  stop_criteria:
+    type: object
+    required: true
+    fields:
+      solved: {type: string, required: true}
+      reopen: {type: string, required: true}
+
+  links:
+    type: list
+    required: false
+    min_items: 0
+    item_fields:
+      title: {type: string, required: true}
+      url: {type: string, required: true}
+      license: {type: string, required: true}
+
+  tested_with:
+    type: list
+    required: true
+    min_items: 1
+    item_fields:
+      date: {type: date, required: true}
+      provider: {type: string, required: true}
+      model: {type: string, required: true}
+      # result 判準：pass=expected 全中且 check 零錯；partial=命中>=半數但有 check 失敗或有漏；fail=命中<半數，或回覆含錯誤資訊（幻覺選單路徑等）一律 fail；pending=未實測，不得造假。完整判準與理由見 PROPOSAL §4.1。
+      result:
+        type: enum
+        required: true
+        values: [pass, partial, fail, pending]
+      note:
+        type: string
+        required: true
+        note: 若 result == pending，note 必須明確寫出「尚未實測」等待測說明
+
+validator_rules:
+  - "prompt.zh 與 prompt.en 允許多行（Q4 已判定 askLLM 的 question 欄以 textarea 承接、換行完整送進 API）"
+  - "prompt.zh 與 prompt.en 結尾不得有多餘空白行（trimws() 只清頭尾，中間/結尾空行會原樣送出並浪費 token）"
+  - "check 至少 2 條，且每條 step 都在受控清單內"
+  - "tested_with 至少 1 筆"
+  - "analysis: rtutor 的條目，check 必含 step: code-read 與 step: code-run"
+  - "title / scenario / prompt 的 zh 與 en 欄位皆不得為空字串或 NA（Q5 強制英文）"
+  - "id 必須是 kebab-case，且與檔名（不含 .yaml）相同"
+  - "stat_goal 必須在受控詞彙表內，非法值視為 FAIL"

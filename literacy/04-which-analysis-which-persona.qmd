@@ -1,0 +1,21 @@
+---
+title: "第四課：選對分析、選對 Persona"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §3.2 第 4 課）。
+
+## 這一課要教什麼
+
+askLLM 有兩種分析模式（互相導流）：**Module Guider**（`askllm`，推薦分析＋逐字
+選單路徑）與 **R code tutor**（`askllmr`，產出貼進 Rj Editor 的 R 程式碼）；
+另外有三種 Persona（consultant / tutor / explainer）× 兩種語言（en / zh）。這
+一課會說明什麼情境該選哪個分析、哪個 Persona，並示範哪些條目可以用「進階版」
+——把一段 system prompt 貼進變數的 Description 當自訂 system prompt。
+
+## English (placeholder)
+
+askLLM has two analysis modes that redirect to each other (Module Guider vs.
+R code tutor) and three personas (consultant / tutor / explainer) in two
+languages. This lesson will explain which mode and persona fit which
+situation, and how to use a variable's Description field as a custom system
+prompt for advanced entries.

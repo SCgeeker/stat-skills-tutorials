@@ -1,0 +1,28 @@
+id: rtutor-missing-code-checks
+title: {zh: rtutor 缺 code-read+code-run 的測試條目, en: Fixture rtutor entry missing code-read/code-run checks}
+analysis: rtutor
+scenario:
+  zh: 這條 analysis 為 rtutor，但 check 只有 path/number，用來測試 validator 是否強制 code-read 與 code-run。
+  en: This rtutor fixture omits code-read/code-run to test the validator's enforcement rule.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+design: none
+stat_goal: describe
+prerequisites:
+  - 測試用前置條件
+persona: tutor
+prompt:
+  zh: "這是一行測試用提示詞。"
+  en: "This is a single-line fixture prompt."
+system_prompt_override: null
+expected:
+  - 測試用期望項目一
+check:
+  - {step: path, what: 測試用查核點一}
+  - {step: number, what: 測試用查核點二}
+stop_criteria:
+  solved: 測試用 solved 說明
+  reopen: 測試用 reopen 說明
+links: []
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測"}

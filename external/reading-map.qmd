@@ -1,0 +1,29 @@
+---
+title: "External Reading Map"
+---
+
+> Status: Phase 0 placeholder; full content pending Phase 1 (see
+> `PROPOSAL.zh-TW.md` §6).
+
+## What this page will contain
+
+A single table mapping "your situation" (`stat_goal` x `design`, using the
+same controlled vocabulary as the prompt-library schema in
+`prompts/_schema.yaml`) to the matching chapter in one of the seven verified
+external textbooks, each row tagged with its license:
+
+| Textbook | License |
+|---|---|
+| psyteachr data-skills | CC BY-SA 4.0 |
+| psyteachr analysis | CC BY 4.0 |
+| psyteachr stat-models | CC BY-SA 4.0 |
+| psyteachr quant-fun | CC BY-SA 4.0 |
+| psyteachr reprores | CC BY |
+| lsj-book (Foxcroft / Navarro) | CC BY-SA 4.0 |
+| bradduthie/stats | CC BY-NC-SA 4.0 (link only, no excerpting) |
+
+This page is English-only (the source textbooks are all in English) and its
+table is meant to be generated from the `links` field of each prompt-library
+entry (`prompts/entries/*.yaml`), so the mapping is maintained in one place.
+That generation step is out of scope for Phase 0; this page is a scaffold
+placeholder only.

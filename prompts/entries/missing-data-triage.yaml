@@ -1,0 +1,49 @@
+id: missing-data-triage
+title:
+  zh: 遺漏值先分流再處理
+  en: Triage missing data before you treat it
+analysis: guider
+scenario:
+  zh: 摘要顯示某些變項遺漏比例不低，想知道先該做什麼、哪些決定 LLM 不能替你做。
+  en: >-
+    The summary shows non-trivial missingness in some variables. You want to
+    know what to do first, and which decisions an LLM cannot make for you.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+design: none
+stat_goal: screen
+prerequisites:
+  - 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）
+persona: explainer
+prompt:
+  zh: |-
+    摘要裡 {var_a} 遺漏 {pct_a}%、{var_b} 遺漏 {pct_b}%。
+
+    請用初學者聽得懂的方式回答：
+    1. 這個遺漏比例算不算嚴重？
+    2. 我該先在 jamovi 用哪個分析看遺漏是否集中在某些組別（請給逐字選單路徑）？
+    3. 哪些處理方式（例如刪除或插補）的選擇需要我自己根據研究設計決定、你無法替我判斷？
+  en: |-
+    The summary shows {var_a} has {pct_a}% missing and {var_b} has {pct_b}% missing.
+
+    In beginner-friendly terms, please answer:
+    1. Is this level of missingness serious?
+    2. Which jamovi analysis (exact menu path) lets me see whether missingness clusters by group?
+    3. Which treatment decisions (e.g. deletion vs. imputation) depend on my research design, so you cannot make them for me?
+system_prompt_override: null
+expected:
+  - 明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）
+  - 建議 Exploration ▸ Descriptives（Split by）或 Frequencies 之類真實路徑觀察分佈
+  - 把「刪除 vs. 插補」的決定交回使用者，並說明依據
+check:
+  - {step: path, what: 路徑逐字核對}
+  - {step: number, what: 遺漏比例與 Descriptives 的 Missing 欄一致}
+  - {step: cross-check, what: 換 consultant persona 再問一次，兩次的「交回使用者決定」清單是否一致}
+stop_criteria:
+  solved: 回覆明確承認摘要的極限且建議的觀察步驟可執行
+  reopen: 回覆直接替你選了插補方法而未說明前提 → 記為「過度自信」案例，進 spot-the-error 練習
+links:
+  - {title: "lsj-book ch.6 (data handling)", url: "https://davidfoxcroft.github.io/lsj-book/", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}

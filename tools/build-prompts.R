@@ -1,0 +1,228 @@
+# tools/build-prompts.R
+# ---------------------------------------------------------------------------
+# 把 prompts/entries/*.yaml 轉成：
+#   1. prompts.json（機讀索引，語言無關，仿 askLLM 的 learn-r.json 先例）
+#   2. prompts/<id>.qmd（每條一頁，中英並列的簡化版頁面產生器）
+#
+# 純函式：read_entries / build_prompts_json / write_prompts_json /
+#         render_entry_qmd / write_entry_qmds
+# 可被 tests/testthat 直接 source，也可用 Rscript 當 CLI／Quarto pre-render
+# hook 執行。
+# ---------------------------------------------------------------------------
+
+suppressWarnings(suppressMessages({
+  if (!requireNamespace("yaml", quietly = TRUE)) stop("需要 yaml 套件")
+  if (!requireNamespace("jsonlite", quietly = TRUE)) stop("需要 jsonlite 套件")
+}))
+
+#' 讀入目錄下所有條目，以 id（=檔名）為 list 的 name
+#' @param dir character(1) entries 目錄路徑
+#' @return named list，每個元素是 yaml::read_yaml() 讀入的條目
+read_entries <- function(dir) {
+  files <- list.files(dir, pattern = "\\.ya?ml$", full.names = TRUE)
+  ids <- tools::file_path_sans_ext(basename(files))
+  entries <- lapply(files, yaml::read_yaml)
+  names(entries) <- ids
+  entries
+}
+
+#' 將條目 list 轉成適合輸出為 JSON 的結構（保留所有欄位，id 統一補齊）
+#' @param entries named list，來自 read_entries()
+#' @return list（未命名，逐條為一個 element，方便輸出為 JSON array）
+build_prompts_json <- function(entries) {
+  ids <- names(entries)
+  out <- lapply(ids, function(id) {
+    e <- entries[[id]]
+    e$id <- id
+    e
+  })
+  out
+}
+
+#' 將 build_prompts_json() 的結果寫成合法 JSON 檔
+#' @param entries named list，來自 read_entries()
+#' @param out_path character(1) 輸出路徑
+write_prompts_json <- function(entries, out_path) {
+  built <- build_prompts_json(entries)
+  jsonlite::write_json(built, out_path, auto_unbox = TRUE, pretty = TRUE, null = "null")
+  invisible(out_path)
+}
+
+#' 將單一條目轉成簡化版 Quarto qmd 內容（中英並列）
+#' Phase 0 範圍：先求「能產出、可讀」，排版細節留待 Phase 1 擴充。
+#' @param entry list，單一條目（含 id）
+#' @return character(1)，qmd 全文
+render_entry_qmd <- function(entry) {
+  id <- if (!is.null(entry$id)) entry$id else "unknown"
+  fmt_list <- function(x) paste(sprintf("- %s", x), collapse = "\n")
+  fmt_check <- function(check) {
+    paste(vapply(check, function(c_i) sprintf("- **%s**: %s", c_i$step, c_i$what), character(1)),
+          collapse = "\n")
+  }
+  fmt_links <- function(links) {
+    if (is.null(links) || length(links) == 0) return("_（無）_")
+    paste(vapply(links, function(l) sprintf("- [%s](%s)（%s）", l$title, l$url, l$license), character(1)),
+          collapse = "\n")
+  }
+  fmt_tested <- function(tw) {
+    paste(vapply(tw, function(t_i) sprintf("- %s | %s | %s | **%s** | %s",
+                                             t_i$date, t_i$provider, t_i$model, t_i$result, t_i$note),
+                 character(1)),
+          collapse = "\n")
+  }
+
+  glue_tpl <- '---
+title: "%s / %s"
+---
+
+## %s / %s
+
+**analysis**: `%s` &nbsp;|&nbsp; **design**: `%s` &nbsp;|&nbsp; **stat_goal**: `%s` &nbsp;|&nbsp; **persona**: `%s`
+
+### 情境 / Scenario
+
+%s
+
+%s
+
+### 送出前必做 / Prerequisites
+
+%s
+
+### 提示詞 / Prompt
+
+::: {.panel-tabset}
+
+## 繁體中文
+
+```
+%s
+```
+
+## English
+
+```
+%s
+```
+
+:::
+
+### 期望回覆要素 / Expected elements
+
+%s
+
+### 查核點 / Check
+
+%s
+
+### 判準 / Stop criteria
+
+- **solved**: %s
+- **reopen**: %s
+
+### 延伸閱讀 / Links
+
+%s
+
+### 實測記錄 / Tested with
+
+%s
+'
+
+  sprintf(
+    glue_tpl,
+    entry$title$zh, entry$title$en,
+    entry$title$zh, entry$title$en,
+    entry$analysis, entry$design, entry$stat_goal, entry$persona,
+    entry$scenario$zh, entry$scenario$en,
+    fmt_list(entry$prerequisites),
+    entry$prompt$zh, entry$prompt$en,
+    fmt_list(entry$expected),
+    fmt_check(entry$check),
+    entry$stop_criteria$solved, entry$stop_criteria$reopen,
+    fmt_links(entry$links),
+    fmt_tested(entry$tested_with)
+  )
+}
+
+#' 為目錄下每條條目各自寫出一個 <id>.qmd
+#' @param entries named list，來自 read_entries()
+#' @param out_dir character(1) 輸出目錄
+write_entry_qmds <- function(entries, out_dir) {
+  if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+  paths <- character()
+  for (id in names(entries)) {
+    e <- entries[[id]]
+    e$id <- id
+    qmd <- render_entry_qmd(e)
+    path <- file.path(out_dir, paste0(id, ".qmd"))
+    writeLines(qmd, path, useBytes = TRUE)
+    paths <- c(paths, path)
+  }
+  invisible(paths)
+}
+
+#' 把所有條目合併成單一總表頁（prompts/index.qmd）
+#' 對應 PROPOSAL §3.3 目錄結構：「index.qmd（由 build 腳本產生的總表，勿手改）」。
+#' 作法：重用 render_entry_qmd() 產出的每條內容，去掉各自的 YAML frontmatter
+#' 後以分隔線接起來，最外層只留一份總表用的 frontmatter。
+#' @param entries named list，來自 read_entries()
+#' @return character(1)，index.qmd 全文
+render_index_qmd <- function(entries) {
+  bodies <- vapply(names(entries), function(id) {
+    e <- entries[[id]]
+    e$id <- id
+    qmd <- render_entry_qmd(e)
+    sub("^---\\n.*?\\n---\\n\\n", "", qmd)
+  }, character(1))
+
+  header <- paste(
+    "---",
+    "title: \"提示詞庫 / Prompt Library\"",
+    "---",
+    "",
+    "本頁由 `tools/build-prompts.R` 依 `prompts/entries/*.yaml` 自動產生，**請勿手動修改本頁內容**——",
+    "要修改條目請改對應的 yaml 檔後重新執行 build 腳本。",
+    "",
+    "This page is generated by `tools/build-prompts.R` from `prompts/entries/*.yaml`.",
+    "**Do not edit this page by hand** -- edit the corresponding YAML entry and rerun the build script instead.",
+    "",
+    sep = "\n"
+  )
+
+  paste0(header, paste(bodies, collapse = "\n\n---\n\n"))
+}
+
+#' 寫出 prompts/index.qmd 總表
+#' @param entries named list，來自 read_entries()
+#' @param out_path character(1) 輸出路徑（通常是 prompts/index.qmd）
+write_index_qmd <- function(entries, out_path) {
+  writeLines(render_index_qmd(entries), out_path, useBytes = TRUE)
+  invisible(out_path)
+}
+
+# CLI 進入點 ----------------------------------------------------------------
+if (identical(environment(), globalenv()) && sys.nframe() == 0 && !interactive()) {
+  file_arg <- grep("--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+  this_file <- normalizePath(sub("--file=", "", file_arg))
+  base_dir <- normalizePath(file.path(dirname(this_file), ".."))
+
+  entries_dir <- file.path(base_dir, "prompts", "entries")
+  json_out <- file.path(base_dir, "docs", "prompts.json")
+  qmd_out_dir <- file.path(base_dir, "prompts", "generated")
+  index_out <- file.path(base_dir, "prompts", "index.qmd")
+
+  cat(sprintf("讀入條目目錄：%s\n", entries_dir))
+  entries <- read_entries(entries_dir)
+  cat(sprintf("共讀入 %d 條條目：%s\n", length(entries), paste(names(entries), collapse = ", ")))
+
+  dir.create(dirname(json_out), recursive = TRUE, showWarnings = FALSE)
+  write_prompts_json(entries, json_out)
+  cat(sprintf("已寫出 JSON：%s\n", json_out))
+
+  write_entry_qmds(entries, qmd_out_dir)
+  cat(sprintf("已寫出 %d 個 qmd 頁面於：%s\n", length(entries), qmd_out_dir))
+
+  write_index_qmd(entries, index_out)
+  cat(sprintf("已寫出總表：%s\n", index_out))
+}

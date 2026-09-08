@@ -1,0 +1,20 @@
+---
+title: "第二課：把研究問題寫成一句可回答的問題"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §3.2 第 2 課）。
+
+## 這一課要教什麼
+
+從「幫我分析」這種模糊指令，改寫成「變項 X（連續）在 Y（兩組）之間是否有差異」
+這種一句可回答的問題。因為 askLLM 是**單輪問答**（沒有對話歷史，勾 submit 才送
+出），提示詞必須是「一次講完」的自足句，不能設計多輪追問腳本。這一課會提供
+8 組「改寫前 / 改寫後」對照，讓學生練習把自己的研究問題壓縮成一句話。
+
+## English (placeholder)
+
+This lesson teaches how to turn a vague instruction ("analyze this for me")
+into one answerable question ("does continuous outcome X differ between the
+two levels of Y?"). Because askLLM is single-turn (no conversation history;
+nothing is sent until Submit is ticked), a prompt must be self-contained.
+Eight before/after rewrite pairs are planned for Phase 1.

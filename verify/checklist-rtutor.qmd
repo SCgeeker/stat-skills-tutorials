@@ -1,0 +1,29 @@
+---
+title: "R code tutor 查核清單 / R Code Tutor Verification Checklist"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §5.3）。
+
+## 這一頁要做什麼
+
+這是 `verify/workflow.qmd` 的第二份查核清單，涵蓋 P0–P1、V2–V4、V5、C1–C2，
+給用 **R code tutor**（`askllmr`）取得 R 程式碼的情境。與 `checklist-guider.qmd`
+最大的差異在 V4（程式碼核對）分三段：
+
+- **4a 讀**：逐行讀程式碼——只用 `data`？`library()` 引用的套件都在
+  `rj_environment` 清單內？沒有 `setwd`、絕對路徑、`system(`？
+- **4b 跑**：把程式碼原封不動貼進 Rj Editor 執行，記錄輸出或錯誤原文。
+- **4c 對**：同一個分析改用 jamovi GUI（或 Syntax Mode 的 `jmv::` 呼叫）跑
+  一次，比較關鍵數字是否一致。
+
+Phase 1 會加入「紅旗字串表」（`install.packages`、`read.csv`、`setwd`、
+`system(`、絕對路徑、`library(` 後接不在 `rj_environment` 清單的套件），並把
+本頁做成跟 `checklist-guider.qmd` 一樣的可列印格式。
+
+## English (placeholder)
+
+This is the second verification checklist (steps P0–P1, V2–V4, V5, C1–C2) for
+sessions using the R code tutor (`askllmr`). It differs from
+`checklist-guider.qmd` mainly in step V4 (code check), split into read (4a),
+run (4b), and cross-check against the jamovi GUI (4c). A red-flag string table
+and a fully printable bilingual layout are planned for Phase 1.

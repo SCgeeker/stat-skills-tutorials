@@ -1,0 +1,23 @@
+---
+title: "第一課：它看得到什麼、看不到什麼"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §3.2 第 1 課、§8 Phase 1）。
+
+## 這一課要教什麼
+
+askLLM 送給 LLM 的資料只有使用者所選變項的**摘要統計**——n、遺漏數、mean、sd、
+median、min、max（連續變項），以及水準次數（類別變項）；LLM **絕對看不到**原始
+資料列。這一課會用 `docs/LIMITATIONS.zh-TW.md` 與 `summarize_data()` 的實際輸出
+當範例，讓學生實際比對「LLM 收到的」跟自己在 jamovi Descriptives 看到的是否一致。
+
+**練習（Phase 1 撰寫）**：在 jamovi 裡勾三個變項，把 askLLM 回覆裡提到的每一個
+數字對回 Exploration ▸ Descriptives 的輸出，記錄有沒有對不上的地方。
+
+## English (placeholder)
+
+This lesson will show that askLLM only sends the LLM summary statistics
+(n, missing, mean, sd, median, min, max for continuous variables; level
+counts for categorical ones) — never raw data rows. Students will compare
+what the LLM received against what they see in jamovi's own Descriptives
+output. Full English content is planned for Phase 1.

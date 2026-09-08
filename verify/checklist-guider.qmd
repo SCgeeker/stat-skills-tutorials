@@ -1,0 +1,84 @@
+---
+title: "Module Guider 查核清單 / Module Guider Verification Checklist"
+---
+
+本頁對應 `PROPOSAL.zh-TW.md` §5.3 的第一份查核清單：涵蓋 `verify/workflow.qmd`
+流程裡的 P0–P1、V1–V3、V5、C1–C2 步驟，設計成可列印的一頁。適用對象是使用
+**Module Guider**（`askllm`）取得推薦分析與選單路徑的情境；若你用的是 R code
+tutor（`askllmr`），請改用 `checklist-rtutor.qmd`。
+
+This page is the first of the two verification checklists described in
+`PROPOSAL.zh-TW.md` §5.3. It covers steps P0–P1, V1–V3, V5, and C1–C2 of the
+workflow in `verify/workflow.qmd`, laid out as a single printable page. Use it
+when you asked the **Module Guider** (`askllm`) for a recommended analysis and
+menu path. If you used the R code tutor (`askllmr`) instead, use
+`checklist-rtutor.qmd`.
+
+## 送出前 / Before you submit
+
+- [ ] **P0** 我已經寫下「我會接受什麼答案」（例如：回覆必須指名一個 T-Tests
+      底下的分析，並說明為何不是 ANOVA）。
+      *I have written down what answer I will accept (e.g. "the reply must
+      name a specific analysis under T-Tests and explain why it is not an
+      ANOVA").*
+- [ ] **P1** 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數），
+      這些數字之後要拿來跟回覆核對。
+      *I have written down the key numbers from the summary (n, mean, sd,
+      missing count per group) so I can check the reply against them later.*
+
+## 收到回覆後 / After you receive a reply
+
+- [ ] **V1 路徑核對 / Path check** — 回覆裡每一條 `Analyses ▸ …` 選單路徑，
+      我都在自己的 jamovi 裡逐字點得到（模組名稱、分析名稱、子選項都要對得
+      上，不是「差不多」）。
+      *Every `Analyses ▸ …` menu path in the reply can be clicked, verbatim,
+      in my own jamovi installation (module name, analysis name, and
+      sub-option must match exactly — "close enough" does not count).*
+- [ ] **V2 數字核對 / Number check** — 回覆裡引用的 n、mean、sd 等數字，跟我在
+      P1 記下的、以及在 Descriptives 面板看到的一致。
+      *The n, mean, sd, etc. cited in the reply match what I wrote down in P1
+      and what I see in the Descriptives panel.*
+- [ ] **V3 範圍核對 / Scope check** — 回覆有沒有宣稱它「看不到」的東西（例如
+      常態性、離群值、原始資料列）？如果有，這是「越界」，代表回覆超出摘要
+      統計能支持的範圍，應打折扣看待。
+      *Does the reply make claims about things it cannot actually see (e.g.
+      normality, outliers, raw data rows)? If so, flag this as
+      "overreaching" — the claim exceeds what summary statistics can
+      support, and should be discounted.*
+- [ ] **V5 交叉核對 / Cross-check** — 換一個 persona（consultant / tutor /
+      explainer）或換一個模型，針對同一個 `Question:` 再問一次；兩次的結論
+      是否一致？（路徑仍須各自逐條核對，不能因為兩次都提到同一條路徑就省略
+      V1。）
+      *Ask the same `Question:` again with a different persona
+      (consultant/tutor/explainer) or a different model. Do the conclusions
+      agree? (Still repeat V1 for the second reply — agreement between two
+      replies does not substitute for checking each path individually.)*
+
+## 結案 / Closing out
+
+- [ ] **C1** 對照 P0 寫下的判準：solved（全部命中，依建議執行）還是 reopen
+      （任一項沒通過，需要換個問法或換個 persona 再試）。
+      *Compare the reply against the P0 criteria: solved (everything checks
+      out — proceed with the recommendation) or reopen (something failed —
+      rephrase the question or try a different persona).*
+- [ ] **C2** 填寫協作日誌四欄：問題 / 判準 / 回覆摘要 / 查核結果。
+      *Fill in the four-column collaboration log: question / criteria / reply
+      summary / verification result.*
+
+## 紅旗（任一項出現就先標「越界」，不要照做）/ Red flags (flag as overreaching, do not act on it yet)
+
+- 回覆聲稱「我檢查過資料的常態性／離群值」——摘要統計不含這些資訊，這不可能
+  是真的檢查，最多是猜測。
+  *The reply claims to have "checked normality/outliers in the data" — the
+  summary it received cannot support this claim; at best it is a guess.*
+- 回覆引用的選單路徑在你的 jamovi 版本或已安裝模組裡完全找不到對應項目。
+  *A cited menu path has no matching item anywhere in your jamovi version or
+  installed modules.*
+- 回覆引用的 n 或其他數字跟你在 Descriptives 看到的對不起來。
+  *A cited n or other number does not match what you see in Descriptives.*
+
+## 相關頁面 / Related pages
+
+- 完整流程說明：[`verify/workflow.qmd`](workflow.qmd)
+- R code tutor 版查核清單（Phase 0 placeholder）：[`verify/checklist-rtutor.qmd`](checklist-rtutor.qmd)
+- 已知錯誤範例：`askLLM/docs/LIMITATIONS.zh-TW.md`（母專案文件，不在本站範圍內修改）

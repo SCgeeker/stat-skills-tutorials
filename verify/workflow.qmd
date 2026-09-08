@@ -1,0 +1,49 @@
+---
+title: "可重複的查核流程 / A repeatable verification workflow"
+---
+
+> 狀態：Phase 0 placeholder，流程骨架已定，逐步展開待 Phase 1（見
+> `PROPOSAL.zh-TW.md` §5.2）。`checklist-guider.qmd` 已是完整版；本頁與
+> `checklist-rtutor.qmd`、`spot-the-error.qmd` 仍待撰寫成教學文字。
+
+## 原則
+
+- 查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始
+  資料、你的研究設計——去對。
+- 兩條路線難度不對等：Module Guider 的輸出有有限集合可核（選單路徑）；
+  R code tutor 的輸出只能靠流程（讀碼、跑碼、跟 GUI 對照）。
+- 每次查核產出一筆「協作日誌」（見第六課），這是可教、可重複、可交作業的單位。
+
+## 流程步驟
+
+```
+送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課
+         P1 記下摘要裡的關鍵數字（n、mean、遺漏）
+
+收到後   V1 路徑核對（Guider）：每條 Analyses ▸ … 在選單點得到？逐條打勾
+         V2 數字核對：回覆引用的數字 = P1 記下的？
+         V3 範圍核對：回覆有沒有宣稱它「看不到」的事（常態性、離群值、原始列）？有 → 標「越界」
+         V4 程式碼核對（R tutor）：
+              4a 讀：只用 data？library() 都在 rj_environment？無 setwd／路徑／system？
+              4b 跑：貼進 Rj，記錄輸出或錯誤原文
+              4c 對：同一分析在 jamovi GUI 跑一次，關鍵數字一致？（Syntax Mode 的 jmv:: 呼叫可作第二對照）
+         V5 交叉：換 persona 或換模型再問一次，結論一致？路徑仍須各自核對
+
+結案     C1 對照 P0 判準：solved / reopen
+         C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）
+```
+
+## 兩份查核清單
+
+- [`checklist-guider.qmd`](checklist-guider.qmd)：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。
+- [`checklist-rtutor.qmd`](checklist-rtutor.qmd)：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。
+
+## English
+
+Verification is not "asking the AI again" — it is checking the AI's reply
+against things it cannot see: your jamovi interface, your raw data, your
+research design. The Module Guider path is easier to check mechanically
+(menu paths are a finite, verifiable set); the R code tutor path can only be
+checked through a process (read the code, run it, cross-check against the
+GUI). Full English prose for this page is planned for Phase 1; the checklist
+above already exists in complete bilingual form.

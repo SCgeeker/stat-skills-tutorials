@@ -1,0 +1,34 @@
+id: trailing-blank-line
+title: {zh: 提示詞結尾多空白行的測試條目, en: Fixture entry whose prompt ends with blank lines}
+analysis: guider
+scenario:
+  zh: 這條的 prompt.en 故意在結尾多留空白行，用來測試 validator 的「結尾不得有多餘空白行」規則。
+  en: This fixture's prompt.en deliberately ends with blank lines to test the trailing-blank-line rule.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+design: none
+stat_goal: describe
+prerequisites:
+  - 測試用前置條件
+persona: consultant
+prompt:
+  zh: "這是一段測試用提示詞，\n可以有多行，這是判準列表：\n- 判準一\n- 判準二"
+  en: |+
+    This is a multi-line fixture prompt.
+    Please check the following:
+    - criterion one
+    - criterion two
+
+
+system_prompt_override: null
+expected:
+  - 測試用期望項目一
+check:
+  - {step: path, what: 測試用查核點一}
+  - {step: number, what: 測試用查核點二}
+stop_criteria:
+  solved: 測試用 solved 說明
+  reopen: 測試用 reopen 說明
+links: []
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測"}

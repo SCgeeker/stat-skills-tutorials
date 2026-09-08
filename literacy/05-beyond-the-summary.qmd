@@ -1,0 +1,19 @@
+---
+title: "第五課：摘要之外的事自己來"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §3.2 第 5 課）。
+
+## 這一課要教什麼
+
+假設檢定、離群值檢查、遺漏值型態——這些都需要看原始資料，LLM 看不到（它只收到
+摘要統計）。這一課教學生在 jamovi 的 Assumption Checks 自己做這些檢查，並把
+結果寫回下一次問題裡（例如「Levene 檢定顯著，請改用 Welch」），示範怎麼把
+自己做的檢查回饋進提示詞。
+
+## English (placeholder)
+
+Assumption checks, outlier screening, and missing-data patterns all require
+raw data that the LLM never sees. This lesson teaches students to run these
+checks themselves in jamovi's Assumption Checks panel, then feed the result
+back into their next prompt.

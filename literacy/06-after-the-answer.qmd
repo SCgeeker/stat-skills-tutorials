@@ -1,0 +1,19 @@
+---
+title: "第六課：問完之後"
+---
+
+> 狀態：Phase 0 placeholder，內容待 Phase 1 撰寫（見 `PROPOSAL.zh-TW.md` §3.2 第 6 課）。
+
+## 這一課要教什麼
+
+三件收尾的事：(1) 改問題前要先取消 Submit（否則同一個 payload 會被快取回放）；
+(2) 用不同模型或不同 persona 重問一次，比較結論是否一致；(3) 記錄「協作日誌」
+——問題、判準、回覆摘要、查核結果四欄，這是可教、可重複、可交作業的最小單位，
+本課會提供範本，並串到 `verify/workflow.qmd` 的 C2。
+
+## English (placeholder)
+
+Three wrap-up habits: untick Submit before changing a question (otherwise a
+cached reply for the same payload is replayed), compare results across models
+or personas, and keep a four-column collaboration log (question, criteria,
+reply summary, verification result) linked to step C2 of `verify/workflow.qmd`.

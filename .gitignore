@@ -1,0 +1,16 @@
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto
+/.quarto/
+/_site/
+
+# build artifacts（由 tools/build-prompts.R 於 pre-render 產生）
+/prompts/generated/
+
+# OS
+Thumbs.db
+.DS_Store

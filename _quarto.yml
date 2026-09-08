@@ -1,0 +1,72 @@
+# _quarto.yml
+# ---------------------------------------------------------------------------
+# 主設定（zh-TW profile）。對應 PROPOSAL.zh-TW.md §7.2：
+#   繁中為主、英文為必要子集，用 Quarto profiles（本檔 + _quarto-en.yml）分開建。
+#
+# Phase 0 範圍：只求骨架可 render，不做 GitHub Pages / Actions 設定
+# （授權與 repo 形態 Q1/Q2 尚未拍板，見 PROPOSAL §9）。
+# ---------------------------------------------------------------------------
+
+project:
+  type: website
+  output-dir: docs
+  # 明確列出要 render 的內容，避免 Quarto 把根目錄下非站內文件
+  # （PROPOSAL.zh-TW.md、README.md）當成站內頁面發佈；
+  # prompts/generated/ 是 build-prompts.R 產出的「每條一頁」中間產物，
+  # 內容已整併進 prompts/index.qmd，故不重複 render 成獨立頁面。
+  render:
+    - "*.qmd"
+    - "literacy/*.qmd"
+    - "prompts/*.qmd"
+    - "verify/*.qmd"
+    - "external/*.qmd"
+    - "!PROPOSAL.zh-TW.md"
+    - "!README.md"
+    - "!prompts/generated/"
+  pre-render:
+    - "Rscript tools/build-prompts.R"
+
+lang: zh-TW
+
+website:
+  title: "stat-skills-tutorials"
+  description: "與 AI 協作做統計的素養教程、情境化提示詞庫與生成結果查核清單"
+  navbar:
+    left:
+      - href: index.qmd
+        text: 首頁
+      - href: literacy/01-what-the-llm-sees.qmd
+        text: 協作素養
+      - href: prompts/index.qmd
+        text: 提示詞庫
+      - href: verify/workflow.qmd
+        text: 結果查核
+      - href: external/reading-map.qmd
+        text: 外部教材導讀
+  sidebar:
+    - title: 協作素養
+      contents:
+        - literacy/01-what-the-llm-sees.qmd
+        - literacy/02-one-answerable-question.qmd
+        - literacy/03-criteria-first.qmd
+        - literacy/04-which-analysis-which-persona.qmd
+        - literacy/05-beyond-the-summary.qmd
+        - literacy/06-after-the-answer.qmd
+    - title: 提示詞庫
+      contents:
+        - prompts/index.qmd
+    - title: 生成結果查核
+      contents:
+        - verify/workflow.qmd
+        - verify/checklist-guider.qmd
+        - verify/checklist-rtutor.qmd
+        - verify/spot-the-error.qmd
+    - title: 外部教材導讀
+      contents:
+        - external/reading-map.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    lang: zh-TW

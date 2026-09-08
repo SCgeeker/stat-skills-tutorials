@@ -1,0 +1,29 @@
+id: bad-statgoal
+title: {zh: 非法 stat_goal 的測試條目, en: Fixture entry with an illegal stat_goal}
+analysis: guider
+scenario:
+  zh: 這條故意用不在受控詞彙表內的 stat_goal，用來測試 validator 會不會擋下來。
+  en: This fixture uses a stat_goal outside the controlled vocabulary.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+design: between
+stat_goal: do-everything
+prerequisites:
+  - 測試用前置條件
+persona: consultant
+prompt:
+  zh: "這是一行測試用提示詞。"
+  en: "This is a single-line fixture prompt."
+system_prompt_override: null
+expected:
+  - 測試用期望項目一
+check:
+  - {step: path, what: 測試用查核點一}
+  - {step: number, what: 測試用查核點二}
+stop_criteria:
+  solved: 測試用 solved 說明
+  reopen: 測試用 reopen 說明
+links: []
+tested_with:
+  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測"}
