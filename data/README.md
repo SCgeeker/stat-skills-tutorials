@@ -3,14 +3,17 @@
 本目錄存放提示詞條目的實測記錄。每個 `.omv` 是一次完整的 jamovi 工作階段，內含 askLLM 的實際
 回覆與用來查核的後續分析。條目 `tested_with` 欄位的 note 會引用這裡的檔名。
 
-命名規則：`<條目 id>_<第一作者><年>_<語言>.omv`
+命名規則：`<條目 id>_<第一作者><年>_<語言>.omv`。`missing-data-triage` 的 `check` 含 cross-check
+步驟（同一題換 persona 再問一次比對），需要兩次執行並存，故額外加 `_<persona>` 後綴。
 
 | 檔案 | 條目 | 語言 | 內含分析 |
 |---|---|---|---|
 | `ttest-assumptions_zwaan2018_zhTW.omv` | `ttest-assumptions` | 繁中 | askllm、ttestIS |
 | `ttest-assumptions_zwaan2018_en.omv` | `ttest-assumptions` | 英文 | askllm、ttestIS、anovaNP |
-| `missing-data-triage_dawtry2015_zhTW.omv` | `missing-data-triage` | 繁中 | askllm、descriptives |
-| `missing-data-triage_dawtry2015_en.omv` | `missing-data-triage` | 英文 | askllm |
+| `missing-data-triage_dawtry2015_zhTW_explainer.omv` | `missing-data-triage` | 繁中 | askllm（explainer）、descriptives |
+| `missing-data-triage_dawtry2015_zhTW_consultant.omv` | `missing-data-triage` | 繁中 | askllm（consultant）、descriptives |
+| `missing-data-triage_dawtry2015_en_explainer.omv` | `missing-data-triage` | 英文 | askllm（explainer） |
+| `missing-data-triage_dawtry2015_en_consultant.omv` | `missing-data-triage` | 英文 | askllm（consultant）、descriptives |
 | `mixed-anova-setup_zhang2014_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj |
 | `mixed-anova-setup_zhang2014_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj |
 

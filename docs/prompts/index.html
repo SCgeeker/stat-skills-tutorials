@@ -327,8 +327,8 @@ In beginner-friendly terms, please answer:
 <section id="實測記錄tested-with" class="level3">
 <h3 class="anchored" data-anchor-id="實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
-<li>2026-09-08 | gemini | gemini-flash-latest | <strong>partial</strong> | zh 版實測（data/missing-data-triage_dawtry2015_zhTW.omv）。expected 3/3 全中，且未被提問誘導——問「算不算嚴重」時直接答「不算嚴重，低於 5% 影響極小」。path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組）。記 partial 而非 pass 的原因：cross-check（換 consultant persona 重問）的執行結果未保留在最終 .omv 內，無法佐證。</li>
-<li>2026-09-08 | gemini | gemini-flash-latest | <strong>partial</strong> | en 版實測（data/missing-data-triage_dawtry2015_en.omv）。expected 3/3，同樣未被誘導。partial 原因同 zh 版：cross-check 證據不在最終 artifact 內。</li>
+<li>2026-09-08 | gemini | gemini-flash-latest | <strong>pass</strong> | zh 版實測。explainer 見 data/missing-data-triage_dawtry2015_zhTW_explainer.omv，consultant 見同名 _consultant.omv。expected 3/3 全中，且未被提問誘導——問「算不算嚴重」時直接答「不算嚴重，低於 5% 影響極小」。path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組）。cross-check 通過：兩個 persona 的問題文字逐字相同，交回使用者的決定清單核心一致（遺漏機制、刪除 vs.&nbsp;插補），consultant 另多給一項資料合理性檢查。</li>
+<li>2026-09-08 | gemini | gemini-flash-latest | <strong>pass</strong> | en 版實測，兩個 persona 的證據見 data/missing-data-triage_dawtry2015_en_{explainer,consultant}.omv。expected 3/3，同樣未被誘導。cross-check 通過，清單核心一致；consultant 另建議以 Frequencies ▸ Contingency Tables ▸ Independent Samples 檢定遺漏是否與組別關聯，該路徑存在。</li>
 </ul>
 <hr>
 </section>
