@@ -1,3 +1,5 @@
+> **繁體中文** · [English](README.en.md)
+
 # 實測證據檔（`.omv`）
 
 本目錄存放提示詞條目的實測記錄。每個 `.omv` 是一次完整的 jamovi 工作階段，內含 askLLM 的實際
@@ -17,7 +19,8 @@
 | `mixed-anova-setup_zhang2014_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj |
 | `mixed-anova-setup_zhang2014_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj |
 
-實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。
+實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。`missing-data-triage`
+的中文 explainer 那次於 2026-09-09 重跑，原因見最後一節。
 
 ## 資料來源與授權（重要）
 
