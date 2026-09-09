@@ -113,7 +113,8 @@ In beginner-friendly terms, please answer:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-08 | pending | pending | **pending** | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄
+- 2026-09-08 | gemini | gemini-flash-latest | **partial** | zh 版實測（data/missing-data-triage_dawtry2015_zhTW.omv）。expected 3/3 全中，且未被提問誘導——問「算不算嚴重」時直接答「不算嚴重，低於 5% 影響極小」。path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組）。記 partial 而非 pass 的原因：cross-check（換 consultant persona 重問）的執行結果未保留在最終 .omv 內，無法佐證。
+- 2026-09-08 | gemini | gemini-flash-latest | **partial** | en 版實測（data/missing-data-triage_dawtry2015_en.omv）。expected 3/3，同樣未被誘導。partial 原因同 zh 版：cross-check 證據不在最終 artifact 內。
 
 
 ---
@@ -216,7 +217,8 @@ Please guide me under these rules, without giving the full solution:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-08 | pending | pending | **pending** | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄
+- 2026-09-08 | gemini | gemini-flash-latest | **fail** | zh 版實測（data/mixed-anova-setup_zhang2014_zhTW.omv）。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是模型把 TODO 註解寫進 c() 括號內（cols = c(# TODO: ...)），註解吃掉右括號使運算式無法收尾。R code tutor 的交付物是可執行的骨架，不能執行即未交付，故記 fail。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。
+- 2026-09-08 | gemini | gemini-flash-latest | **fail** | en 版實測（data/mixed-anova-setup_zhang2014_en.omv）。同一根因，錯誤位置 <text>:21:1。此版另有 table(data_long$# TODO: ...)，破壞更嚴重。此失效模式可重現，已列為 spot-the-error 候選題材。
 
 
 ---
@@ -320,5 +322,6 @@ Please answer all three:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-08 | pending | pending | **pending** | Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄
+- 2026-09-08 | gemini | gemini-flash-latest | **pass** | zh 版實測（data/ttest-assumptions_zwaan2018_zhTW.omv）。expected 4/4：逐字路徑、Welch 與 Student 的判準、Assumption Checks 的 Normality 與 Homogeneity、Mann-Whitney U 替代皆命中。path 與 assumption 查核通過；模型以 > 而非 ▸ 作分隔，視為命中。
+- 2026-09-08 | gemini | gemini-flash-latest | **pass** | en 版實測（data/ttest-assumptions_zwaan2018_en.omv）。expected 4/4，另給出 Kruskal-Wallis 作為第二條替代路徑，實跑存在。
 

@@ -77,9 +77,23 @@ Please answer all three:
 - [ ] **number** — 回覆引用的 n 與 Descriptives 一致
 - [ ] **assumption** — 自己跑一次 Assumption Checks
 
-**assumption 的標準答案**（psyteachr ch.7 已算好，可直接對）：
-Levene `F(1,158) = 0.73, p = .395`（變異數同質）；Welch `t(157.14) = −0.92, p = .360, d = 0.15`。
-若模型宣稱的前提檢定結論與此相反，記 `fail`。
+**⚠️ assumption 的標準答案有前提，2026-09-09 修正**
+
+psyteachr ch.7 頁面寫的是 Levene `F(1,158) = 0.73, p = .395`、Welch `t(157.14) = −0.92, p = .360,
+d = 0.15`。這組數字**只在特定條件下才重現得出來**，直接拿去對會製造假的不一致：
+
+1. **`simon_effect` 的定義**：psyteachr 的 `congruent` / `incongruent` 是**兩個 session 的平均**。
+   若只用 session 1（`session1_incongruent − session1_congruent`），得到的是
+   Levene `F = 0.01, p = .922`、Student `t(158) = −1.42, p = .159`——兩者都對，只是算的不是同一個東西。
+2. **Levene 的中心化方式**：即使改用兩 session 平均，jamovi 也不會印出 `F = 0.73`，而是 `F = 0.67,
+   p = .416`。因為 `car::leveneTest` 預設 `center = median`，而 jamovi 的 ttestIS 用 `mean`。
+   psyteachr 那個 0.73 是中位數中心版。
+
+**所以：不要用這組數字判 `fail`。** 模型在這一題的正確行為是說明「Welch 與 Student 的選擇依據」，
+而不是預測你的資料會得到什麼數值——它看不到原始資料，本來就不該預測。`assumption` 這一步要查的是
+「模型給的判準邏輯」與「你自己跑出來的結果」是否相容，不是數字是否等於教材。
+
+（此修正源自 laptop session 用本機 R 4.6.1 對三種定義逐一重算的結果。）
 
 ---
 
@@ -186,8 +200,9 @@ Please guide me under these rules, without giving the full solution:
 - [ ] **code-run** — 貼進 Rj 執行，`nrow` 是否等於 n × 2；有錯誤訊息原文貼回下一次問題
 - [ ] **cross-check** — 回 jamovi 用 `ANOVA ▸ Repeated Measures ANOVA` 跑寬格式原資料，比對描述統計
 
-**`code-run` 的基準有陷阱**：n = 130 是篩掉 `T2_Finished` 未完成者之後的數字。若直接載入未篩選
-的原始檔，列數會大於 130，長格式就不是 260 列。**先確認你手上實際列數，再拿那個數字 × 2 當標準。**
+**`code-run` 的基準（2026-09-09 實測確認）**：資料檔實際為 **152 列**（35 欄，`T2_Finished` 未篩選），
+所以長格式應為 **304 列**。psyteachr 文中的 n = 130 是篩掉 `T2_Finished` 未完成者之後的數字，
+不是檔案原始列數。另注意 id 欄已由 `ID` 改名為 `Participant_ID`。
 
 ---
 
@@ -198,6 +213,44 @@ Please guide me under these rules, without giving the full solution:
 | `pass` | `expected` 全部命中，且所有 `check` 步驟零錯 |
 | `partial` | `expected` 命中 ≥ 半數（無條件進位），但有任一 `check` 失敗，或 `expected` 有漏 |
 | `fail` | `expected` 命中 < 半數；**或**回覆含錯誤資訊（幻覺選單路徑、不存在的選項、與資料不符的數字）——後者一律 `fail`，不論命中數 |
+
+---
+
+# 實測結果（2026-09-08 完成，laptop 執行）
+
+六次實測全部使用 **gemini-flash-latest**，證據存於 `data/`：
+
+| 條目 | 語言 | result | expected | 關鍵發現 |
+|---|---|---|---|---|
+| ttest-assumptions | zh / en | **pass** | 4/4 | 逐字路徑、Welch/Student 判準、Normality+Levene、Mann-Whitney 全中；en 版另給 Kruskal-Wallis，路徑實際存在 |
+| missing-data-triage | zh / en | **partial** | 3/3 | 未被提問誘導，直接答「不算嚴重，低於 5% 影響極小」。partial 的原因是 cross-check 證據未留在最終 .omv |
+| mixed-anova-setup | zh / en | **fail** | 2/3 | 兩版都在 Rj 跑出 `unexpected symbol`，程式碼無法執行 |
+
+結果已寫進三條 `prompts/entries/*.yaml` 的 `tested_with`（各兩筆，中英分列）。首頁的「尚未實測」
+警語因此自動消失——`pending_notice()` 依 `docs/prompts.json` 的 result 判斷，不需手改文字。
+
+## mixed-anova 的失效模式（可重現，已列為 spot-the-error 題材）
+
+模型把 TODO 註解寫進括號內：
+
+```r
+cols = c(# TODO: 填入要轉換的兩個時間點欄位名稱),
+```
+
+`#` 之後整行成為註解，右括號被吃掉，運算式無法收尾。en 版更嚴重，另有
+`table(data_long$# TODO: ...)`。錯誤位置 zh 為 `<text>:23:1`、en 為 `<text>:21:1`。
+
+**`library(tidyverse)` 不是紅旗**——本機 Rj 套件庫確實有 tidyverse（連同 readr、haven、rio、
+lubridate、dbplyr）。fail 的理由純粹是程式碼不能執行。
+
+（附帶觀察，不影響判定：askLLM 送給模型的 `<rj_environment>` 套件清單有 900 字元預算會截斷，
+見 askLLM `R/rj-env.R:99`，所以模型看到的清單可能不完整。但 code-read 判準問的是環境有沒有，
+不是模型知不知道。）
+
+## 待補
+
+- [ ] `missing-data-triage` 若要升為 `pass`，需重跑一次 consultant persona 並存回 .omv，
+      讓 cross-check 的證據留在 artifact 內
 
 ---
 

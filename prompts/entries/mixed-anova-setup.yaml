@@ -70,4 +70,5 @@ links:
   - {title: "psyteachr quant-fun (wrangling / ANOVA)", url: "https://psyteachr.github.io/quant-fun-v3/", license: "CC BY-SA 4.0"}
   - {title: "psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule)", url: "https://psyteachr.github.io/analysis-v4/13-factorial-anova.html", license: "CC BY 4.0"}
 tested_with:
-  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}
+  - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: fail, note: "zh 版實測（data/mixed-anova-setup_zhang2014_zhTW.omv）。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是模型把 TODO 註解寫進 c() 括號內（cols = c(# TODO: ...)），註解吃掉右括號使運算式無法收尾。R code tutor 的交付物是可執行的骨架，不能執行即未交付，故記 fail。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。"}
+  - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: fail, note: "en 版實測（data/mixed-anova-setup_zhang2014_en.omv）。同一根因，錯誤位置 <text>:21:1。此版另有 table(data_long$# TODO: ...)，破壞更嚴重。此失效模式可重現，已列為 spot-the-error 候選題材。"}

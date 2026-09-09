@@ -69,4 +69,5 @@ links:
   - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html", license: "CC BY-SA 4.0"}
   - {title: "psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)", url: "https://psyteachr.github.io/analysis-v4/07-independent.html", license: "CC BY 4.0"}
 tested_with:
-  - {date: 2026-09-08, provider: pending, model: pending, result: pending, note: "Phase 0 未實測；schema 與流程已就緒，待 Phase 1 補實測記錄"}
+  - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: pass, note: "zh 版實測（data/ttest-assumptions_zwaan2018_zhTW.omv）。expected 4/4：逐字路徑、Welch 與 Student 的判準、Assumption Checks 的 Normality 與 Homogeneity、Mann-Whitney U 替代皆命中。path 與 assumption 查核通過；模型以 > 而非 ▸ 作分隔，視為命中。"}
+  - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: pass, note: "en 版實測（data/ttest-assumptions_zwaan2018_en.omv）。expected 4/4，另給出 Kruskal-Wallis 作為第二條替代路徑，實跑存在。"}
