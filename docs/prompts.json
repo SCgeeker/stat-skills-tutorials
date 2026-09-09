@@ -95,8 +95,8 @@
         "date": "2026-09-08",
         "provider": "gemini",
         "model": "gemini-flash-latest",
-        "result": "pass",
-        "note": "zh 版實測。explainer 見 data/missing-data-triage_dawtry2015_zhTW_explainer.omv，consultant 見同名 _consultant.omv。expected 3/3 全中，且未被提問誘導——問「算不算嚴重」時直接答「不算嚴重，低於 5% 影響極小」。path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組）。cross-check 通過：兩個 persona 的問題文字逐字相同，交回使用者的決定清單核心一致（遺漏機制、刪除 vs. 插補），consultant 另多給一項資料合理性檢查。"
+        "result": "partial",
+        "note": "zh 版實測。explainer 見 data/missing-data-triage_dawtry2015_zhTW_explainer.omv，consultant 見同名 _consultant.omv。expected 3/3 全中，未被提問誘導；path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組）。cross-check 未成立：兩次執行同時變動了 persona 與 promptLang（explainer 那次未設 promptLang，預設為 en；consultant 那次設為 zh），非單一變項比較，無法斷定結論一致是否來自 persona 不變。兩次的交回使用者決定清單實質相同，但需以 promptLang 一致的執行重測才能升 pass。"
       },
       {
         "date": "2026-09-08",

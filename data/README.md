@@ -48,3 +48,24 @@ CC BY-SA 4.0 的素材（Dawtry）以相同方式分享。
 
 **Zhang 資料的列數**：檔案原始為 152 列（35 欄，`T2_Finished` 未篩選），長格式應為 304 列。
 psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。
+
+## cross-check 的變項控制（2026-09-09 記）
+
+`missing-data-triage` 的 `check` 第三步是「換 consultant persona 再問一次，比對兩次的交回使用者
+決定清單」。這是**單一變項比較**：除了 `role`，其餘設定都必須相同。
+
+英文那組符合：兩份都未設 `promptLang`（預設 `en`），只有 `role` 不同。
+
+**中文那組不符合**：`_zhTW_explainer` 未設 `promptLang`（因此是預設的 `en`），`_zhTW_consultant`
+設為 `zh`。兩次同時變動了 persona 與 prompt 語言，因此結論一致無法歸因於 persona 不變。該筆
+記為 `partial`，待以一致的 `promptLang` 重跑後再議。
+
+驗證方式（不要只看 `index.html` 的呈現，要直讀 analysis payload）：
+
+```bash
+unzip -o -q <檔名>.omv -d <目錄>
+strings "<目錄>/NN askllm/analysis" | grep -oE 'promptLang = "[a-z]+"|role = "[a-z]+"'
+```
+
+未列出的參數代表採用 `askllm.a.yaml` 的預設值：`role` 預設 `consultant`（第 95 行）、
+`promptLang` 預設 `en`（第 105 行）。**參數沒出現不等於沒有作用**，這是最容易誤判的地方。
