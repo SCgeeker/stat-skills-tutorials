@@ -56,9 +56,9 @@ psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。
 
 英文那組符合：兩份都未設 `promptLang`（預設 `en`），只有 `role` 不同。
 
-**中文那組不符合**：`_zhTW_explainer` 未設 `promptLang`（因此是預設的 `en`），`_zhTW_consultant`
-設為 `zh`。兩次同時變動了 persona 與 prompt 語言，因此結論一致無法歸因於 persona 不變。該筆
-記為 `partial`，待以一致的 `promptLang` 重跑後再議。
+中文那組**原本不符合**：`_zhTW_explainer` 未設 `promptLang`（因此是預設的 `en`），`_zhTW_consultant`
+設為 `zh`，兩次同時變動了 persona 與 prompt 語言。已於 2026-09-09 以 `promptLang = zh` 重跑
+explainer 修正，現在兩份僅 `role` 不同，問題文字 sha1 相同，比較成立。
 
 驗證方式（不要只看 `index.html` 的呈現，要直讀 analysis payload）：
 
