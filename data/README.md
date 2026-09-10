@@ -98,8 +98,15 @@ returns early and replaces the results area with guidance text, so the reply is 
 
 **What follows for the records.** A `tested_with[].note` must state that its verdict rests on the
 code pasted into Rj and the result of running it, not on whatever reply the `.omv` happens to
-display. Save the full reply text somewhere else as well, in a worksheet or as a
-`spot-the-error.qmd` item. The `.omv` alone does not preserve it.
+display.
+
+The full reply text is therefore kept separately, in `data/replies/`. One Markdown file per `.omv`,
+sharing its base name, holding the run's options, the question that was sent, and the reply
+verbatim. Those files sit next to the `.omv` on purpose: they are part of the same evidence chain,
+and anyone who later questions a verdict can read what the model actually said. A working document
+would have been the wrong home, because working documents go stale and get retired.
+
+Where a stored reply is known not to be the one that was executed, the file says so at the top.
 
 For what it is worth, all three English samples satisfied the revised format rules. That is
 evidence the prompt fix is robust rather than noise.

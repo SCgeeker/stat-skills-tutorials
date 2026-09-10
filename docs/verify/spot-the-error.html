@@ -228,6 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code" id="toc-第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code" class="nav-link" data-scroll-target="#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code"><span class="zh">第 8 題（示意範例）：程式碼裡的安裝指令</span><span class="en">Question 8 (illustrative): an install call in the code</span></a></li>
   <li><a href="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" id="toc-第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" class="nav-link" data-scroll-target="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code"><span class="zh">第 9 題（示意範例）：程式碼裡的檔案讀取</span><span class="en">Question 9 (illustrative): a file read in the code</span></a></li>
   <li><a href="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" id="toc-第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" class="nav-link" data-scroll-target="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package"><span class="zh">第 10 題（示意範例）：引用一個沒裝的套件</span><span class="en">Question 10 (illustrative): citing an uninstalled package</span></a></li>
+  <li><a href="#第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking" id="toc-第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking" class="nav-link" data-scroll-target="#第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking"><span class="zh">第 11 題：同一個模型，兩種問法</span><span class="en">Question 11: same model, two ways of asking</span></a></li>
   <li><a href="#相關頁面related-pages" id="toc-相關頁面related-pages" class="nav-link" data-scroll-target="#相關頁面related-pages"><span class="zh">相關頁面</span><span class="en">Related pages</span></a></li>
   </ul>
 </nav>
@@ -261,10 +262,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This page turns the real errors recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an LLM reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code> — the point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
 </div>
 <div class="zh">
-<p><strong>題目來源說明</strong>：第 1–7 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行 設計的<strong>示意範例</strong>，用來練習 V4a 的程式碼紅旗核對——這三題<strong>不是</strong>任何 LLM 的真實輸出，只是依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成的教學 用例，題目本身會清楚標示「示意範例」。目前共 10 題，本頁會在課堂驗證後補進新的實測案例持續擴充。第 1–7 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點與句式不 遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套規範 改寫。</p>
+<p><strong>題目來源說明</strong>：第 1–7 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行 設計的<strong>示意範例</strong>，用來練習 V4a 的程式碼紅旗核對——這三題<strong>不是</strong>任何 LLM 的真實輸出，只是依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成的教學 用例，題目本身會清楚標示「示意範例」。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文）。目前共 11 題，本頁會在 課堂驗證後補進新的實測案例持續擴充。</p>
+<p>第 1–7 題與第 11 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套 規範改寫。</p>
 </div>
 <div class="en">
-<p><strong>Where the questions come from</strong>: Questions 1–7 are taken verbatim from the real error paths and real observations recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 8–10 are <strong>illustrative examples</strong> designed for this page to practice the V4a code red-flag check — these three are <strong>not</strong> real output from any LLM; they are teaching examples built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids, and each is clearly labeled “illustrative.” There are 10 questions here today, and the set will grow as classroom use turns up new cases. The LLM replies in questions 1–7 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 8–10 have been rewritten to follow it.</p>
+<p><strong>Where the questions come from</strong>: Questions 1–7 are taken verbatim from the real error paths and real observations recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 8–10 are <strong>illustrative examples</strong> designed for this page to practice the V4a code red-flag check — these three are <strong>not</strong> real output from any LLM; they are teaching examples built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids, and each is clearly labeled “illustrative.” Question 11 comes from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 11 questions here today, and the set will grow as classroom use turns up new cases.</p>
+<p>The LLM replies in questions 1–7 and question 11 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 8–10 have been rewritten to follow it.</p>
 </div>
 <section id="第-1-題比較選單question-1-the-compare-menu" class="level2">
 <h2 class="anchored" data-anchor-id="第-1-題比較選單question-1-the-compare-menu"><span class="zh">第 1 題：「比較」選單</span><span class="en">Question 1: the “Compare” menu</span></h2>
@@ -643,6 +646,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="en">
 <p><strong>Answer</strong>: look carefully here. <code>MASS</code> ships with base R and exists in most R installations by default, so citing <code>MASS</code> is not automatically wrong. <strong>The point is to check, not to memorize a blocklist.</strong> The real check is: open the <code>&lt;rj_environment&gt;</code> block sent to the LLM for this call, and confirm verbatim whether <code>MASS</code> is actually listed. If it is, this code does not violate a red flag. If it is not listed, meaning your Rj scan didn’t find it, running this code will immediately produce <code>there is no package called 'MASS'</code>. In that case, go back and rephrase the question, for example “use only base R for a robust estimate,” rather than manually installing a package just to make the LLM’s reply work. Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong> (the V4b error message is exactly what confirms whether the V4a judgment was correct).</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking" class="level2">
+<h2 class="anchored" data-anchor-id="第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking"><span class="zh">第 11 題：同一個模型，兩種問法</span><span class="en">Question 11: same model, two ways of asking</span></h2>
+<div class="zh">
+<blockquote class="blockquote">
+<p>本題取自 <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。</p>
+</blockquote>
+<p><strong>情境</strong>：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求 「只給程式骨架與 TODO 註解」。模型是 <code>gemini-flash-latest</code>。</p>
+<p><strong>LLM 回覆</strong>（節錄）：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="co"># </span><span class="al">TODO</span><span class="co">: 填入要轉換的兩個時間點欄位名稱),</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"# TODO: 指定時間點的新欄位名稱 (例如 'Time')"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"# TODO: 指定測量分數的新欄位名稱 (例如 'Interest')"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>問題</strong>：這段程式碼貼進 Rj 會發生什麼事？錯在模型，還是錯在問法？</p>
+</div>
+<div class="en">
+<blockquote class="blockquote">
+<p>This question comes from the recorded test in <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code>. The reply is quoted verbatim, with no editing.</p>
+</blockquote>
+<p><strong>Scenario</strong>: The user asked the R code tutor to reshape wide data into long format, and the prompt asked for “only a skeleton with TODO comments.” The model was <code>gemini-flash-latest</code>.</p>
+<p><strong>LLM reply</strong> (excerpt):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="co"># </span><span class="al">TODO</span><span class="co">: fill in the two time-point column names),</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"# TODO: name for the new time column"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"# TODO: name for the new score column"</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Question</strong>: What happens when this is pasted into Rj? Is the fault the model’s, or the question’s?</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+註釋
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="zh">
+<p><strong>答案</strong>：貼進 Rj 會立刻得到 <code>&lt;text&gt;:23:1: unexpected symbol</code>，程式碼一行都跑 不了。原因是 R 的 <code>#</code> 會讓該行<strong>剩下的所有內容</strong>成為註解——包括 <code>c(</code> 需要的那個 右括號。運算式因此永遠收不了尾，解析器在後面第一個非空白符號處報錯。英文版的 同一次實測更嚴重，還出現 <code>table(data_long$# TODO: ...)</code>。</p>
+<p><strong>錯的是問法。</strong> 提示詞說「只給程式骨架與 TODO 註解」，等於邀請模型把註解填在 該放值的位置。同一個模型、同一份資料、同一個 persona、同一種提示詞語言，只把 那一句改成「待填處寫成開頭的變數指派、值放字串佔位符」之後，產出就變成：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>target_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TODO_填入T1欄位名稱"</span>, <span class="st">"TODO_填入T2欄位名稱"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>time_col_name <span class="ot">&lt;-</span> <span class="st">"Time"</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">all_of</span>(target_cols), <span class="at">names_to =</span> time_col_name, ...)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>待填處還在，但它們是字串，程式碼在你填值之前就能通過語法檢查。實測結果從 <code>fail</code> 變成 <code>pass</code>（見提示詞庫該條目的 <code>tested_with</code>）。</p>
+<p>這一題真正要示範的不是那個 bug，而是<strong>查核方法本身</strong>：兩次執行只差一個因子， 所以差異可以歸因。這正是 <a href="../verify/workflow.html"><code>workflow.qmd</code></a> 的 cross-check 與第六課 「換模型或換 persona 重問一次」在教的事。如果那兩次同時換了模型又換了問法， 你就無法說出是哪一個造成差異。</p>
+<p>對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>。這也是為什麼 V4b 不能省略——這段程式碼 「讀起來」很合理，錯誤只有執行才會現形。</p>
+</div>
+<div class="en">
+<p><strong>Answer</strong>: pasting this into Rj immediately produces <code>&lt;text&gt;:23:1: unexpected symbol</code>, and not a line of it runs. R’s <code>#</code> turns <strong>everything remaining on that line</strong> into a comment, including the closing bracket that <code>c(</code> needs. The expression never terminates, and the parser reports the error at the first non-blank symbol after it. The English run of the same test was worse still, producing <code>table(data_long$# TODO: ...)</code>.</p>
+<p><strong>The fault is the question’s.</strong> The prompt asked for “only a skeleton with TODO comments,” which invites the model to put comments where values belong. Same model, same data, same persona, same prompt language: change that one sentence to “put every blank as a variable assignment at the top, with a string placeholder as its value,” and the output becomes:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>target_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"column name here"</span>, <span class="st">"column name here"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>time_col_name <span class="ot">&lt;-</span> <span class="st">"Time"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">all_of</span>(target_cols), <span class="at">names_to =</span> time_col_name, ...)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The blanks are still there, but they are strings, so the code parses before you fill anything in. The recorded result went from <code>fail</code> to <code>pass</code> (see the entry’s <code>tested_with</code> in the prompt library).</p>
+<p>What this question really demonstrates is not the bug but <strong>the verification method</strong>. The two runs differed by exactly one factor, so the difference can be attributed. That is what the cross-check in <a href="../verify/workflow.html"><code>workflow.qmd</code></a> and Lesson 6’s “ask again with a different model or persona” are teaching. Had those two runs changed the model <em>and</em> the wording, you could not say which one caused the difference.</p>
+<p>Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong>. This is also why V4b cannot be skipped: the code <em>reads</em> perfectly sensibly, and the error appears only when it runs.</p>
 </div>
 </div>
 </div>

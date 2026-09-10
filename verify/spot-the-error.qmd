@@ -25,10 +25,13 @@ documentation's word for it.
 表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行
 設計的**示意範例**，用來練習 V4a 的程式碼紅旗核對——這三題**不是**任何 LLM
 的真實輸出，只是依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成的教學
-用例，題目本身會清楚標示「示意範例」。目前共 10 題，本頁會在課堂驗證後補進新的實測案例持續擴充。第
-1–7 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點與句式不
-遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套規範
-改寫。
+用例，題目本身會清楚標示「示意範例」。第 11 題取自本站自己的實測記錄
+（`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文）。目前共 11 題，本頁會在
+課堂驗證後補進新的實測案例持續擴充。
+
+第 1–7 題與第 11 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
+與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套
+規範改寫。
 :::
 
 ::: {.en}
@@ -39,12 +42,15 @@ Questions 8–10 are **illustrative examples** designed for this page to
 practice the V4a code red-flag check — these three are **not** real output
 from any LLM; they are teaching examples built from the instruction list
 that `askLLM/R/llm-adapter.R` explicitly forbids, and each is clearly labeled
-"illustrative." There are 10 questions here today, and the set will grow as classroom use
-turns up new cases. The
-LLM replies in questions 1–7 are quoted verbatim from the real-test record,
-with no stylistic editing, so their punctuation and sentence patterns do not
-follow this site's prose style guide (Pinker Rules 7–10); the illustrative
-replies in questions 8–10 have been rewritten to follow it.
+"illustrative." Question 11 comes from this site's own test records, the
+`.omv` files under `data/` and the full replies in `data/replies/`. There are
+11 questions here today, and the set will grow as classroom use turns up new
+cases.
+
+The LLM replies in questions 1–7 and question 11 are quoted verbatim from the
+real-test record, with no stylistic editing, so their punctuation and sentence
+patterns do not follow this site's prose style guide (Pinker Rules 7–10); the
+illustrative replies in questions 8–10 have been rewritten to follow it.
 :::
 
 ## [第 1 題：「比較」選單]{.zh}[Question 1: the "Compare" menu]{.en}
@@ -535,6 +541,123 @@ question, for example "use only base R for a robust estimate," rather than
 manually installing a package just to make the LLM's reply work. Verification
 steps: **V4a, read** and **V4b, run** (the V4b error message is exactly what
 confirms whether the V4a judgment was correct).
+:::
+:::
+
+## [第 11 題：同一個模型，兩種問法]{.zh}[Question 11: same model, two ways of asking]{.en}
+
+::: {.zh}
+> 本題取自 `data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv` 的實測記錄，
+> 回覆逐字引用，未經修飾。
+
+**情境**：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求
+「只給程式骨架與 TODO 註解」。模型是 `gemini-flash-latest`。
+
+**LLM 回覆**（節錄）：
+
+```r
+data_long <- data %>%
+  pivot_longer(
+    cols = c(# TODO: 填入要轉換的兩個時間點欄位名稱),
+    names_to = "# TODO: 指定時間點的新欄位名稱 (例如 'Time')",
+    values_to = "# TODO: 指定測量分數的新欄位名稱 (例如 'Interest')"
+  )
+```
+
+**問題**：這段程式碼貼進 Rj 會發生什麼事？錯在模型，還是錯在問法？
+:::
+
+::: {.en}
+> This question comes from the recorded test in
+> `data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv`. The reply is quoted
+> verbatim, with no editing.
+
+**Scenario**: The user asked the R code tutor to reshape wide data into long
+format, and the prompt asked for "only a skeleton with TODO comments." The
+model was `gemini-flash-latest`.
+
+**LLM reply** (excerpt):
+
+```r
+data_long <- data %>%
+  pivot_longer(
+    cols = c(# TODO: fill in the two time-point column names),
+    names_to = "# TODO: name for the new time column",
+    values_to = "# TODO: name for the new score column"
+  )
+```
+
+**Question**: What happens when this is pasted into Rj? Is the fault the
+model's, or the question's?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：貼進 Rj 會立刻得到 `<text>:23:1: unexpected symbol`，程式碼一行都跑
+不了。原因是 R 的 `#` 會讓該行**剩下的所有內容**成為註解——包括 `c(` 需要的那個
+右括號。運算式因此永遠收不了尾，解析器在後面第一個非空白符號處報錯。英文版的
+同一次實測更嚴重，還出現 `table(data_long$# TODO: ...)`。
+
+**錯的是問法。** 提示詞說「只給程式骨架與 TODO 註解」，等於邀請模型把註解填在
+該放值的位置。同一個模型、同一份資料、同一個 persona、同一種提示詞語言，只把
+那一句改成「待填處寫成開頭的變數指派、值放字串佔位符」之後，產出就變成：
+
+```r
+target_cols   <- c("TODO_填入T1欄位名稱", "TODO_填入T2欄位名稱")
+time_col_name <- "Time"
+
+data_long <- data %>%
+  pivot_longer(cols = all_of(target_cols), names_to = time_col_name, ...)
+```
+
+待填處還在，但它們是字串，程式碼在你填值之前就能通過語法檢查。實測結果從 `fail`
+變成 `pass`（見提示詞庫該條目的 `tested_with`）。
+
+這一題真正要示範的不是那個 bug，而是**查核方法本身**：兩次執行只差一個因子，
+所以差異可以歸因。這正是 [`workflow.qmd`](workflow.qmd) 的 cross-check 與第六課
+「換模型或換 persona 重問一次」在教的事。如果那兩次同時換了模型又換了問法，
+你就無法說出是哪一個造成差異。
+
+對應查核步驟：**V4a 讀** 與 **V4b 跑**。這也是為什麼 V4b 不能省略——這段程式碼
+「讀起來」很合理，錯誤只有執行才會現形。
+:::
+
+::: {.en}
+**Answer**: pasting this into Rj immediately produces
+`<text>:23:1: unexpected symbol`, and not a line of it runs. R's `#` turns
+**everything remaining on that line** into a comment, including the closing
+bracket that `c(` needs. The expression never terminates, and the parser
+reports the error at the first non-blank symbol after it. The English run of
+the same test was worse still, producing `table(data_long$# TODO: ...)`.
+
+**The fault is the question's.** The prompt asked for "only a skeleton with
+TODO comments," which invites the model to put comments where values belong.
+Same model, same data, same persona, same prompt language: change that one
+sentence to "put every blank as a variable assignment at the top, with a
+string placeholder as its value," and the output becomes:
+
+```r
+target_cols <- c("column name here", "column name here")
+time_col_name <- "Time"
+
+data_long <- data %>%
+  pivot_longer(cols = all_of(target_cols), names_to = time_col_name, ...)
+```
+
+The blanks are still there, but they are strings, so the code parses before
+you fill anything in. The recorded result went from `fail` to `pass` (see the
+entry's `tested_with` in the prompt library).
+
+What this question really demonstrates is not the bug but **the verification
+method**. The two runs differed by exactly one factor, so the difference can
+be attributed. That is what the cross-check in [`workflow.qmd`](workflow.qmd)
+and Lesson 6's "ask again with a different model or persona" are teaching. Had
+those two runs changed the model *and* the wording, you could not say which
+one caused the difference.
+
+Verification steps: **V4a, read** and **V4b, run**. This is also why V4b cannot
+be skipped: the code *reads* perfectly sensibly, and the error appears only
+when it runs.
 :::
 :::
 

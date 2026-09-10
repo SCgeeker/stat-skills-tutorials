@@ -7,8 +7,8 @@
     },
     "analysis": "guider",
     "scenario": {
-      "zh": "摘要顯示某些變項遺漏比例不低，想知道先該做什麼、哪些決定 LLM 不能替你做。",
-      "en": "The summary shows non-trivial missingness in some variables. You want to know what to do first, and which decisions an LLM cannot make for you."
+      "zh": "摘要顯示某些變項有遺漏值，想知道這個比例要不要緊、先該做什麼、以及哪些決定 LLM 不能替你做。",
+      "en": "The summary shows missing values in some variables. You want to know whether that level of missingness matters, what to do first, and which decisions an LLM cannot make for you."
     },
     "variables": [
       {
