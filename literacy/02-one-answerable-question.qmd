@@ -15,13 +15,14 @@ title: "[第二課：把研究問題寫成一句可回答的問題]{.zh}[Turning
 
 ::: {.en}
 Someone typed "analyze this for me" into askLLM, ticked Submit, and got a
-long, confident reply — a description plus a correlation, neither of which
-was the question they actually had in mind. They then appended "no, I meant
-whether the two groups differ" to the same question box and submitted again.
-But askLLM has **no conversation memory**: the second call has no idea what
-"no" is responding to: it just re-answers the whole text as a brand-new,
-standalone question. A vague instruction combined with a single-turn design
-means guesswork, wasted calls, and an answer that still misses the point.
+long, confident reply. It guessed at a description plus a correlation.
+Neither was the question the user actually had in mind. The user then
+appended "no, I meant whether the two groups differ" to the same question
+box and ticked Submit again. But askLLM has **no conversation memory**. On
+the second call the AI has no idea what "no" is responding to. It simply
+re-answers the whole text as a brand-new, standalone question. A vague
+instruction plus a single-turn design produces guesswork, wasted calls, and
+an answer still off the point.
 :::
 
 ## [askLLM 是單輪問答]{.zh}[askLLM is single-turn]{.en}
@@ -36,14 +37,14 @@ means guesswork, wasted calls, and an answer that still misses the point.
 :::
 
 ::: {.en}
-Every ticked Submit is one independent, complete call — there is no memory
-of the previous turn to build on. askLLM's built-in debounce only reuses a
-cached result when the question, summary, persona, language, and system
-prompt are all identical to the last call; it never threads two questions
-into a conversation. The app's own guidance says as much: untick Submit
-before editing your question, then re-tick it, because each edit can trigger
-a new call. The consequence: **your prompt must be self-contained** — state
-the background, variables, and comparison you want in one shot. There is no
+Every ticked Submit is one independent, complete call. No memory of the
+previous turn carries over. askLLM's built-in debounce reuses a cached
+result only when the question, summary, persona, language, and system prompt
+are all identical to the last call. It never threads two questions into a
+conversation. The app's own guidance says as much: untick Submit before
+editing your question, then re-tick it. Every edit can trigger a new call.
+This means **your prompt must be self-contained**. State the background,
+variables, and comparison you want in one shot. You cannot count on
 "I'll clarify in the next message."
 :::
 
@@ -100,8 +101,8 @@ the background, variables, and comparison you want in one shot. There is no
 4. Read the reply and confirm it answers exactly the rewritten question,
    not a possible misreading of the original vague one.
 5. If you want to follow up, untick Submit, fold the follow-up into the
-   same self-contained question, and re-tick — don't expect it to remember
-   the previous call.
+   same self-contained question, and re-tick it. Do not expect it to
+   remember the previous call.
 :::
 
 ## [帶走這句話]{.zh}[One thing to remember]{.en}
@@ -113,7 +114,7 @@ askLLM 每次 Submit 都是一次全新的獨立問答，沒有上一句可以�
 
 ::: {.en}
 Every Submit to askLLM starts a brand-new, independent exchange with nothing
-carried over — so your question has to tell the whole story by itself, the
+carried over. So your question has to tell the whole story by itself, the
 moment you send it.
 :::
 

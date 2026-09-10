@@ -13,7 +13,7 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 :::
 
 ::: {.en}
-- Verification is not "asking the AI again" — it is checking what the AI
+- Verification is not "asking the AI again." It means checking what the AI
   said against things it cannot see: your jamovi interface, your raw data,
   your research design.
 - The two paths are not equally hard to verify: the Module Guider's output
@@ -21,7 +21,7 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
   tutor's output can only be checked through a process (read the code, run
   it, cross-check against the GUI).
 - Every verification pass produces one "collaboration log" entry (see
-  Lesson 6) — a unit that can be taught, repeated, and turned into an
+  Lesson 6). You can teach that unit, repeat it, and turn it into an
   assignment.
 :::
 
@@ -52,8 +52,8 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 :::
 
 ::: {.en}
-- [`checklist-guider.qmd`](checklist-guider.qmd): P0–P1, V1–V3, V5, C1–C2 —
-  a single printable page.
+- [`checklist-guider.qmd`](checklist-guider.qmd): P0–P1, V1–V3, V5, C1–C2,
+  on a single printable page.
 - [`checklist-rtutor.qmd`](checklist-rtutor.qmd): P0–P1, V2–V4, V5, C1–C2.
 
 :::

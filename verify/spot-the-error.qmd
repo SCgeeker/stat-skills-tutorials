@@ -16,7 +16,7 @@ This page turns the errors and warnings recorded in
 into a "spot the error" practice set: you will see a scenario and an AI
 reply with an error hidden in it, try to find the problem yourself, then open
 the answer to check. This is a hands-on way to practice V1 (path check), V3
-(scope check), and V4a (code-read check) from `verify/workflow.qmd` — the
+(scope check), and V4a (code-read check) from `verify/workflow.qmd`. The
 point is to **discover** the hallucination yourself rather than take the
 documentation's word for it.
 :::
@@ -96,8 +96,8 @@ T-Test`."
 **Answer**: jamovi has no "Compare" menu level. The independent-samples
 t-test actually lives under the **T-Tests** menu. This is the textbook case
 LIMITATIONS records where "the AI reasoned correctly but wrote the wrong
-path" — it correctly identified the right family of analysis but invented an
-intermediate menu that does not exist. Verification step: **V1, path check**.
+path." It correctly identified the right family of analysis, then invented
+an intermediate menu that does not exist. Verification step: **V1, path check**.
 :::
 :::
 
@@ -215,9 +215,9 @@ in kind from questions 1–3?
 
 ::: {.en}
 **Answer**: LIMITATIONS explicitly records that "jamovi's built-in menus have
-no such menu or analysis at all" — this is not "the menu is in the wrong
-place," it is that **the entire path, including the analysis itself, is
-fabricated**. Unlike questions 1–3, where the analysis exists and only the
+no such menu or analysis at all." This is not "the menu is in the wrong
+place." **The entire path, including the analysis itself, is
+fabricated.** Unlike questions 1–3, where the analysis exists and only the
 menu location is wrong, here the analysis does not exist anywhere in jamovi's
 built-in scope. The right move is not to go looking for "the real location" —
 it's to first confirm whether jamovi (including your installed modules)
@@ -262,11 +262,11 @@ Regression`."
 :::
 
 ::: {.en}
-**Answer**: LIMITATIONS records this as "a fabricated nesting level" — `Linear
-Regression` really is under **Regression**, but an extra, nonexistent
+**Answer**: LIMITATIONS records this as "a fabricated nesting level."
+`Linear Regression` really is under **Regression**, but an extra, nonexistent
 `General Linear Model` sub-menu has been inserted in between. This kind of
 error is especially hard to catch because the first and last segments are
-both correct — only the middle level is invented. You only catch it by
+both correct. Only the middle level is invented. You only catch it by
 checking every level of the path, not just whether the first and last
 segments look right. Verification step: **V1, path check**.
 :::
@@ -307,11 +307,11 @@ label literally reads "linear-linear").
 
 ::: {.en}
 **Answer**: LIMITATIONS specifically flags that "even the Chinese label has a
-typo" — `線性線性` ("linear-linear") is a duplicated word that never appears
+typo." `線性線性` ("linear-linear") is a duplicated word that never appears
 anywhere in jamovi's actual interface. This is a reminder that the path check
-isn't satisfied by something that "roughly makes sense" — the label's exact
-wording has to match what you see in your own jamovi, because confident tone
-has nothing to do with correctness. Verification step: **V1, path check**.
+isn't satisfied by something that "roughly makes sense." The label's exact
+wording has to match what you see in your own jamovi. Confident tone has
+nothing to do with correctness. Verification step: **V1, path check**.
 :::
 :::
 
@@ -368,13 +368,12 @@ summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8
 "Attach data summary" unticked, the AI has no visibility into your data at
 all, yet it still produces a specific number (8 samples) and specific group
 names. Saguaro, Palo Verde, and Ironwood are not `iris` species at all. They
-are fabricated plant names. The root cause is not "the AI miscalculated"
-— it's that **it never received any information about the data in the first
-place**, yet answered with the same confident tone it would use if it had.
-Verification step: **V3, scope check** — a reply that claims to know
-something it cannot actually see should be discounted entirely, and you
-should go back and confirm whether the data summary was actually attached
-when you submitted the question.
+are fabricated plant names. The root cause is not "the AI miscalculated."
+**It never received any information about the data in the first place**, yet
+answered with the same confident tone it would use if it had.
+Verification step: **V3, scope check**. Discount entirely any reply claiming
+to know something it cannot actually see, then go back and confirm whether
+the data summary was actually attached when you submitted the question.
 :::
 :::
 

@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>本頁把 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 裡記錄的錯誤與示警，改寫成一組「找碴」 練習：你會先看到一段情境與一段 AI 回覆，回覆裡藏著一個錯誤，練習先自己找出 問題所在，再打開答案核對。這是練習 <code>verify/workflow.qmd</code> 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你<strong>親身發現</strong>幻覺， 而不是被動接受文件裡的結論。</p>
 </div>
 <div class="en">
-<p>This page turns the errors and warnings recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an AI reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code> — the point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
+<p>This page turns the errors and warnings recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an AI reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code>. The point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
 </div>
 <div class="zh">
 <p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>， 題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的 「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成 教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文）。目前共 11 題，本頁會在 課堂驗證後補進新的實測案例持續擴充。</p>
@@ -299,7 +299,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>答案</strong>：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 <strong>T-Tests</strong> 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核 步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the <strong>T-Tests</strong> menu. This is the textbook case LIMITATIONS records where “the AI reasoned correctly but wrote the wrong path” — it correctly identified the right family of analysis but invented an intermediate menu that does not exist. Verification step: <strong>V1, path check</strong>.</p>
+<p><strong>Answer</strong>: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the <strong>T-Tests</strong> menu. This is the textbook case LIMITATIONS records where “the AI reasoned correctly but wrote the wrong path.” It correctly identified the right family of analysis, then invented an intermediate menu that does not exist. Verification step: <strong>V1, path check</strong>.</p>
 </div>
 </div>
 </div>
@@ -407,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>答案</strong>：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是 「選單掛錯位置」，而是<strong>整條路徑（含分析本身）都是虛構的</strong>。跟前三題不同： 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身 （含已安裝模組）是否真的有這個功能——沒有的話就是 AI 純粹幻覺出一個功能。 對應查核步驟：<strong>V1 路徑核對</strong>（核對後結論應為「查無此路徑」）。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all” — this is not “the menu is in the wrong place,” it is that <strong>the entire path, including the analysis itself, is fabricated</strong>. Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the AI has simply hallucinated a feature. Verification step: <strong>V1, path check</strong> (the correct conclusion here is “no such path exists”).</p>
+<p><strong>Answer</strong>: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all.” This is not “the menu is in the wrong place.” <strong>The entire path, including the analysis itself, is fabricated.</strong> Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the AI has simply hallucinated a feature. Verification step: <strong>V1, path check</strong> (the correct conclusion here is “no such path exists”).</p>
 </div>
 </div>
 </div>
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>答案</strong>：LIMITATIONS 記錄這是「巢狀層級是編的」——<code>Linear Regression</code> 確實 在 <strong>Regression</strong> 選單之下，但中間多插了一層不存在的 <code>General Linear Model</code> 子選單。這種錯誤特別難抓，因為頭尾都對，只有中間一層是編的；逐條核對每一層 （不是只看第一層與最後一層對不對）才抓得到。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: LIMITATIONS records this as “a fabricated nesting level” — <code>Linear Regression</code> really is under <strong>Regression</strong>, but an extra, nonexistent <code>General Linear Model</code> sub-menu has been inserted in between. This kind of error is especially hard to catch because the first and last segments are both correct — only the middle level is invented. You only catch it by checking every level of the path, not just whether the first and last segments look right. Verification step: <strong>V1, path check</strong>.</p>
+<p><strong>Answer</strong>: LIMITATIONS records this as “a fabricated nesting level.” <code>Linear Regression</code> really is under <strong>Regression</strong>, but an extra, nonexistent <code>General Linear Model</code> sub-menu has been inserted in between. This kind of error is especially hard to catch because the first and last segments are both correct. Only the middle level is invented. You only catch it by checking every level of the path, not just whether the first and last segments look right. Verification step: <strong>V1, path check</strong>.</p>
 </div>
 </div>
 </div>
@@ -479,7 +479,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>答案</strong>：LIMITATIONS 特別點出「連中文標籤都出現錯字」——<code>線性線性</code> 是重複 詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看 「大致講得通」，連標籤的逐字拼寫都要對得上你自己 jamovi 裡看到的文字，因為 自信的語氣與正確性無關。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: LIMITATIONS specifically flags that “even the Chinese label has a typo” — <code>線性線性</code> (“linear-linear”) is a duplicated word that never appears anywhere in jamovi’s actual interface. This is a reminder that the path check isn’t satisfied by something that “roughly makes sense” — the label’s exact wording has to match what you see in your own jamovi, because confident tone has nothing to do with correctness. Verification step: <strong>V1, path check</strong>.</p>
+<p><strong>Answer</strong>: LIMITATIONS specifically flags that “even the Chinese label has a typo.” <code>線性線性</code> (“linear-linear”) is a duplicated word that never appears anywhere in jamovi’s actual interface. This is a reminder that the path check isn’t satisfied by something that “roughly makes sense.” The label’s exact wording has to match what you see in your own jamovi. Confident tone has nothing to do with correctness. Verification step: <strong>V1, path check</strong>.</p>
 </div>
 </div>
 </div>
@@ -521,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>答案</strong>：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體 物種名稱（Saguaro、Palo Verde、Ironwood，這三者都不是 <code>iris</code> 的品種，是憑空 生成的仙人掌／植物名稱）。根本原因不是「AI 算錯了」，是<strong>它從頭到尾沒有拿到任何 資料資訊</strong>，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：<strong>V3 範圍核對</strong> ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是 否真的附上了資料摘要。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: LIMITATIONS uses this made-up case to show the failure mode. With “Attach data summary” unticked, the AI has no visibility into your data at all, yet it still produces a specific number (8 samples) and specific group names. Saguaro, Palo Verde, and Ironwood are not <code>iris</code> species at all. They are fabricated plant names. The root cause is not “the AI miscalculated” — it’s that <strong>it never received any information about the data in the first place</strong>, yet answered with the same confident tone it would use if it had. Verification step: <strong>V3, scope check</strong> — a reply that claims to know something it cannot actually see should be discounted entirely, and you should go back and confirm whether the data summary was actually attached when you submitted the question.</p>
+<p><strong>Answer</strong>: LIMITATIONS uses this made-up case to show the failure mode. With “Attach data summary” unticked, the AI has no visibility into your data at all, yet it still produces a specific number (8 samples) and specific group names. Saguaro, Palo Verde, and Ironwood are not <code>iris</code> species at all. They are fabricated plant names. The root cause is not “the AI miscalculated.” <strong>It never received any information about the data in the first place</strong>, yet answered with the same confident tone it would use if it had. Verification step: <strong>V3, scope check</strong>. Discount entirely any reply claiming to know something it cannot actually see, then go back and confirm whether the data summary was actually attached when you submitted the question.</p>
 </div>
 </div>
 </div>

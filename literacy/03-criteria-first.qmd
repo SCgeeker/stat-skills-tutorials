@@ -15,15 +15,15 @@ askLLM 的 `LIMITATIONS.zh-TW.md` 用一個示意範例示警：有人拿 iris �
 :::
 
 ::: {.en}
-askLLM's `LIMITATIONS.zh-TW.md` illustrates the risk with a made-up example: someone asked a
-question about the iris dataset without ticking "Attach data summary to
-prompt." The AI then answered from pure guesswork, inventing "8 samples across
-Saguaro / Palo Verde / Ironwood" — nothing like the real iris
-data (150 rows, species setosa/versicolor/virginica). If you haven't decided
-in advance what answer you'd actually accept, a confident, well-formatted
-reply is easy to believe at face value. Criteria have to be written **before**
-the reply arrives, or the reply's own confidence will overwrite your
-judgment.
+askLLM's `LIMITATIONS.zh-TW.md` illustrates the risk with a made-up example:
+someone asked a question about the iris dataset without ticking "Attach data
+summary to prompt." The AI then answered from pure guesswork, inventing "8
+samples across Saguaro / Palo Verde / Ironwood." The real iris data holds 150
+rows across three species, setosa, versicolor, and virginica. Decide in
+advance what answer you would actually accept. Without that decision, a
+confident, well-formatted reply is easy to believe at face value. Write your
+criteria **before** the reply arrives, or the reply's own confidence will
+overwrite your judgment.
 :::
 
 ## [判準長什麼樣子]{.zh}[What a criterion looks like]{.en}
@@ -46,26 +46,27 @@ judgment.
 :::
 
 ::: {.en}
-A good criterion is specific enough that you can tell, on sight, whether it
-was met — not a vague "a good answer." The template in
+A good criterion is specific enough for you to tell, on sight, whether it
+was met. "A good answer" is too vague to qualify. The template in
 `verify/checklist-guider.qmd` reads:
 
 > The reply must name a specific analysis under T-Tests and explain why it
 > is not an ANOVA.
 
-That sentence does two things: it pins down which analysis family is
-expected (T-Tests, not just any statistical term), and it demands a reason,
-not just a label. Practicing with the iris example, a criterion could read:
+That sentence does two things. It pins down which analysis family is
+expected, namely T-Tests rather than any statistical term at all. It also
+demands a reason, not just a label. Practicing with the iris example, a
+criterion could read:
 
 > The reply must recognize that iris's species variable has three levels;
 > if it recommends a group comparison, it must name an ANOVA rather than a
 > two-group t-test; and any sample size or species name it cites must match
 > the summary I see after selecting my variables.
 
-That criterion writes the exact failure mode documented in LIMITATIONS
-(invented species counts and sample sizes) straight into the acceptance
-condition, so the moment a reply arrives, you have specific points to check
-it against.
+That criterion writes the exact failure mode documented in LIMITATIONS,
+including invented species counts and sample sizes, straight into the
+acceptance condition. The moment a reply arrives, you have specific points
+to check it against.
 :::
 
 ## [判準怎麼接上查核流程]{.zh}[How criteria feed the verification workflow]{.en}
@@ -82,17 +83,17 @@ it against.
 
 ::: {.en}
 Writing criteria first is step **P0** in the
-[`verify/workflow.qmd`](../verify/workflow.qmd) process (write criteria
-before submitting), which answers the README's call for "a clear indicator
-of whether the problem is solved or needs further exploration." Checking
-the reply against those criteria once it arrives is step **C1** (compare
-against criteria when closing out), with exactly two outcomes: solved
-(everything checks out — proceed with the recommendation) or reopen
-(something failed — rephrase the question or try a different persona). P0
-and C1 are a pair: without criteria written in advance, C1 has nothing to
-check against, and you're left judging by how convincing the reply sounds —
-and the iris example already shows that "sounds convincing" is not the same
-as "is correct."
+[`verify/workflow.qmd`](../verify/workflow.qmd) process, meaning you write
+your criteria before you submit. P0 answers the README's call for "a clear
+indicator of whether the problem is solved or needs further exploration."
+Checking the reply against those criteria once it arrives is step **C1**,
+the comparison you run when closing out. C1 has exactly two outcomes.
+Everything checks out, so the case is solved and you proceed with the
+recommendation. Or something failed, so you reopen it and either rephrase
+the question or try a different persona. P0 and C1 are a pair. Without
+criteria written in advance, C1 has nothing to check against, and you are
+left judging by how convincing the reply sounds. The iris example already
+shows that "sounds convincing" is not the same as "is correct."
 :::
 
 ## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
@@ -102,8 +103,8 @@ as "is correct."
    指名 __ 底下的分析，並說明為何不是 __」。
 2. 把你打算問的問題，連同勾選的變項，送進 askLLM 的 jamovi Module Guider。
    這次刻意**取消勾選**「Attach data summary to prompt」一次，觀察回覆是
-   否出現你意料之外、與你資料完全無關的數字或名稱（對照 LIMITATIONS 記錄
-   的 iris 案例）。
+   否出現你意料之外、與你資料完全無關的數字或名稱（對照 LIMITATIONS 的
+   iris 示意範例）。
 3. 重新勾選「Attach data summary to prompt」，再送出同一個問題。
 4. 拿出你在步驟 1 寫的判準，逐條核對這次的回覆：命中幾條？哪一條沒過？
 5. 依 C1 的兩種結果做結論：全部命中 → solved，依建議執行；任一項沒過 →
@@ -116,15 +117,15 @@ as "is correct."
    and explain why it is not __."
 2. Submit your question, with your selected variables, to askLLM's jamovi
    Module Guider. This time, deliberately **untick** "Attach data summary
-   to prompt" once, and watch for numbers or names that have nothing to do
-   with your actual data (compare against the iris case in LIMITATIONS).
+   to prompt" once, and watch for numbers or names with no connection to
+   your actual data. Compare against the iris illustration in LIMITATIONS.
 3. Re-tick "Attach data summary to prompt" and submit the same question
    again.
 4. Take the criterion you wrote in step 1 and check this reply against it,
    point by point: how many did it meet? Which one failed?
 5. Conclude using the two C1 outcomes: everything met → solved, proceed
    with the recommendation; anything failed → reopen, and note what
-   question or persona to try next — you'll use this in the collaboration
+   question or persona to try next. You will use this in the collaboration
    log in a later lesson.
 :::
 
@@ -136,6 +137,6 @@ as "is correct."
 :::
 
 ::: {.en}
-Write your criteria before the reply exists — once it exists, its confident
-tone will make you forget what you meant to check.
+Write your criteria before the reply exists. Its confident tone will make
+you forget what you meant to check.
 :::

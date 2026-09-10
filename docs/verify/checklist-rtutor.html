@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <p>與 <code>checklist-guider.qmd</code> 最大的差異在於：R code tutor 的答案空間不是有限 集合（不像選單路徑可以逐條核對），R 是 Turing-complete，沒有任何掃描能證明 一段任意生成的程式碼「如它所說地運作」。所以這裡沒有 V1 路徑核對，取而代之 的是 <strong>V4 程式碼核對</strong>，拆成讀（4a）、跑（4b）、對（4c）三段——這是流程性 的查核，不是機械性的查核。詳見 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈兩個分析， 兩種查證方式〉一節。</p>
 </div>
 <div class="en">
-<p>The key difference from <code>checklist-guider.qmd</code> is that the R code tutor’s output space is not a finite, checkable set the way menu paths are — R is Turing-complete, so no scan can prove that an arbitrary piece of generated code actually “works as claimed.” So there is no V1 path check here; instead there is <strong>V4, the code check</strong>, split into read (4a), run (4b), and cross-check (4c). This is a procedural check, not a mechanical one. See the “Two analyses, two ways to verify” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> for background.</p>
+<p>The key difference from <code>checklist-guider.qmd</code> is that the R code tutor’s output space is not a finite, checkable set the way menu paths are. R is Turing-complete, so no scan can prove that an arbitrary piece of generated code actually “works as claimed.” So there is no V1 path check here. Its place is taken by <strong>V4, the code check</strong>, split into read (4a), run (4b), and cross-check (4c). This is a procedural check, not a mechanical one. See the “Two analyses, two ways to verify” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> for background.</p>
 </div>
 <section id="送出前before-you-submit" class="level2">
 <h2 class="anchored" data-anchor-id="送出前before-you-submit"><span class="zh">送出前</span><span class="en">Before you submit</span></h2>
@@ -255,9 +255,9 @@ ul.task-list li input[type="checkbox"] {
 <div class="en">
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>V2 Number check</strong> — The numbers produced by running the code (n, mean, sd, etc.) match what I wrote down in P1 and what I see in the Descriptives panel.</label></li>
-<li><label><input type="checkbox"><strong>V3 Scope check</strong> — Does the reply make claims about things it cannot actually see (e.g.&nbsp;normality, outliers, the content of raw data rows)? If so, flag this as “overreaching” — the claim exceeds what summary statistics can support, and should be discounted.</label></li>
+<li><label><input type="checkbox"><strong>V3 Scope check</strong> — Does the reply make claims about things it cannot actually see (e.g.&nbsp;normality, outliers, the content of raw data rows)? If so, flag this as “overreaching.” The claim exceeds what summary statistics can support, and you should discount it.</label></li>
 <li><label><input type="checkbox"><strong>V4a Read</strong> — Read the entire code block line by line and confirm: - the data is referenced only through the object name <code>data</code>, with no other data source specified; - every <code>library(...)</code> call names a package that appears in the <code>&lt;rj_environment&gt;</code> package list askLLM sent the model, or is base R; - none of the red-flag instructions below appear. <strong>If any of these fails, do not run the code.</strong> Rephrase the question or try a different persona instead.</label></li>
-<li><label><input type="checkbox"><strong>V4b Run</strong> — Paste the code <strong>verbatim, unmodified</strong> into the Rj Editor (<code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>), press Run, and record the exact output or error message (record both a successful output and a failed error message — don’t only keep the successes).</label></li>
+<li><label><input type="checkbox"><strong>V4b Run</strong> — Paste the code <strong>verbatim, unmodified</strong> into the Rj Editor (<code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>), press Run, and record the exact output or error message. Record both a successful output and a failed error message, not only the successes.</label></li>
 <li><label><input type="checkbox"><strong>V4c Cross-check</strong> — Re-run the same analysis through an independent channel and compare the key numbers: run the equivalent analysis through the jamovi GUI; or check that analysis’s Syntax Mode for the <code>jmv::</code> call jamovi generates itself, as a second, independent comparison.</label></li>
 <li><label><input type="checkbox"><strong>V5 Cross-check (persona/model)</strong> — Ask the same “What should the R code do?” question again with a different persona (Consultant / Tutor / Explainer) or a different model. Do the two pieces of code agree in logic and output? (Still repeat V4a/V4b on the second piece of code — two replies “looking reasonable” is not a substitute for reading and running each one.)</label></li>
 </ul>
@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="en">
 <ul class="task-list">
-<li><label><input type="checkbox"><strong>C1</strong> Compare the reply against the P0 criteria: solved (everything checks out — the code is usable) or reopen (something failed — rephrase the question or try a different persona).</label></li>
+<li><label><input type="checkbox"><strong>C1</strong> Compare the reply against the P0 criteria, and reach one of two outcomes. Solved means everything checks out and the code is usable. Reopen means something failed, so rephrase the question or try a different persona.</label></li>
 <li><label><input type="checkbox"><strong>C2</strong> Fill in the four-column collaboration log: question / criteria / reply summary / verification result.</label></li>
 </ul>
 </div>
@@ -284,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
 <p>askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令 （見 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行）。若程式碼裡出現任何一項，代表 回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：</p>
 </div>
 <div class="en">
-<p>askLLM’s system prompt explicitly forbids the model from using the following in an R code tutor reply (see <code>askLLM/R/llm-adapter.R</code>, lines 172–177). If any of these appear in the code, the reply has violated askLLM’s own stated boundary — flag it as “do not run” and go back and rephrase the question:</p>
+<p>askLLM’s system prompt explicitly forbids the model from using the following in an R code tutor reply (see <code>askLLM/R/llm-adapter.R</code>, lines 172–177). If any of these appear in the code, the reply has violated askLLM’s own stated boundary. Flag it as “do not run” and go back and rephrase the question:</p>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -331,7 +331,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="en">
 <blockquote class="blockquote">
-<p>Note: the <code>&lt;rj_environment&gt;</code> package list is only attached when your jamovi has Rj installed and askLLM was able to scan its packages. If Rj is not installed, askLLM should instead teach you to use Syntax Mode rather than generating code you cannot actually run — in that case steps 4a/4b of this checklist do not apply, since there is no Rj Editor to paste into.</p>
+<p>Note: the <code>&lt;rj_environment&gt;</code> package list is only attached when your jamovi has Rj installed and askLLM was able to scan its packages. Without Rj installed, askLLM should instead teach you to use Syntax Mode rather than generating code you cannot actually run. Steps 4a/4b of this checklist then do not apply. There is no Rj Editor to paste into.</p>
 </blockquote>
 </div>
 </section>

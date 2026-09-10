@@ -52,17 +52,17 @@ menu path. If you used the R code tutor (`askllmr`) instead, use
 
 ::: {.en}
 - [ ] **V1 Path check** — Every `Analyses ▸ …` menu path in the reply can be clicked, verbatim,
-      in my own jamovi installation (module name, analysis name, and
-      sub-option must match exactly — "close enough" does not count).
+      in my own jamovi installation. Module name, analysis name, and
+      sub-option must match exactly, and "close enough" does not count.
 - [ ] **V2 Number check** — The n, mean, sd, etc. cited in the reply match what I wrote down in P1
       and what I see in the Descriptives panel.
 - [ ] **V3 Scope check** — Does the reply make claims about things it cannot actually see (e.g.
       normality, outliers, raw data rows)? If so, flag this as
-      "overreaching" — the claim exceeds what summary statistics can
-      support, and should be discounted.
+      "overreaching." The claim exceeds what summary statistics can
+      support, and you should discount it.
 - [ ] **V5 Cross-check** — Ask the same `Question:` again with a different persona
       (consultant/tutor/explainer) or a different model. Do the conclusions
-      agree? (Still repeat V1 for the second reply — agreement between two
+      agree? (Still repeat V1 for the second reply. Agreement between two
       replies does not substitute for checking each path individually.)
 :::
 
@@ -75,9 +75,10 @@ menu path. If you used the R code tutor (`askllmr`) instead, use
 :::
 
 ::: {.en}
-- [ ] **C1** Compare the reply against the P0 criteria: solved (everything checks
-      out — proceed with the recommendation) or reopen (something failed —
-      rephrase the question or try a different persona).
+- [ ] **C1** Compare the reply against the P0 criteria, and reach one of two
+      outcomes. Solved means everything checks out, so proceed with the
+      recommendation. Reopen means something failed, so rephrase the question
+      or try a different persona.
 - [ ] **C2** Fill in the four-column collaboration log: question / criteria / reply
       summary / verification result.
 :::
@@ -92,8 +93,8 @@ menu path. If you used the R code tutor (`askllmr`) instead, use
 :::
 
 ::: {.en}
-- The reply claims to have "checked normality/outliers in the data" — the
-  summary it received cannot support this claim; at best it is a guess.
+- The reply claims to have "checked normality/outliers in the data." The
+  summary it received cannot support this claim. At best it is a guess.
 - A cited menu path has no matching item anywhere in your jamovi version or
   installed modules.
 - A cited n or other number does not match what you see in Descriptives.
@@ -112,6 +113,6 @@ menu path. If you used the R code tutor (`askllmr`) instead, use
 - Full workflow: [`verify/workflow.qmd`](workflow.qmd)
 - Checklist for the R code tutor: [`verify/checklist-rtutor.qmd`](checklist-rtutor.qmd)
 - Spot-the-error drill: [`verify/spot-the-error.qmd`](spot-the-error.qmd)
-- Recorded real errors: `askLLM/docs/LIMITATIONS.zh-TW.md` (a document of the
+- Known error cases: `askLLM/docs/LIMITATIONS.zh-TW.md` (a document of the
   parent project; not edited from this site)
 :::

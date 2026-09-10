@@ -17,14 +17,14 @@ Guider」，而不是自己亂猜選單路徑。這是雙向、寫死、不能�
 
 ::: {.en}
 A student asked the **jamovi Module Guider** (`askllm`), "write me R code for
-an independent-samples t-test." No code came back — just a reply telling her
+an independent-samples t-test." No code came back. The reply simply told her
 to use a different analysis. She assumed the tool was broken. In fact she had
 hit a hard rule built into askLLM: the Module Guider's job is to recommend a
 jamovi GUI analysis and quote menu paths verbatim, not to write R code.
 Whenever a question asks for R code, it always redirects to
 `Analyses ▸ askLLM ▸ R code tutor`, no matter which persona or language is
-selected. The reverse holds too: if you ask the **R code tutor** (`askllmr`)
-which jamovi menu to use, it will tell you to switch to the "jamovi Module
+selected. The reverse holds too. Ask the **R code tutor** (`askllmr`) which
+jamovi menu to use, and it will tell you to switch to the "jamovi Module
 Guider" instead of guessing a menu path itself. This boundary runs both ways,
 is hard-coded, and cannot be turned off.
 :::
@@ -45,9 +45,9 @@ One module, two analyses. `askllm` (menu title "jamovi Module Guider")
 answers "which analysis, which menu path." `askllmr` (R code tutor) answers
 "what R code implements this, ready to paste into the Rj Editor." Both share
 the same summary statistics and the same personas, but their roles are
-mutually exclusive and each redirects the other: ask the wrong one and you
-get redirected to the right one, not a half-answer. Rj Editor opens at
-`Analyses ▸ R ▸ Rj ▸ Rj Editor`; if Rj is not installed, the R code tutor's
+mutually exclusive. Ask the wrong one and you get redirected to the right
+one, not a half-answer. Rj Editor opens at
+`Analyses ▸ R ▸ Rj ▸ Rj Editor`. Without Rj installed, the R code tutor's
 result panel points you to `Modules ▸ jamovi library` to install it.
 :::
 
@@ -66,11 +66,11 @@ Persona 選項（`role`）有三個值：**consultant**（🧭 顧問）、**tut
 The persona option (`role`) has three values: **consultant** (🧭), **tutor**
 (🎓), and **explainer** (💡), each with its own English/Chinese system-prompt
 template. Consultant is built to be "concise, accurate, practical" and gives
-you a conclusion directly. Tutor uses "Socratic dialogue" — it will not give
+you a conclusion directly. Tutor uses "Socratic dialogue." It will not give
 the final answer, but asks guiding questions so you reason it out yourself.
 Explainer assumes no statistics background at all and defines every term it
-uses. None is objectively better; it depends on whether you want speed or
-understanding. The table below maps scenarios to choices:
+uses. None is objectively better. The choice depends on whether you want
+speed or understanding. The table below maps scenarios to choices:
 :::
 
 ::: {.zh}
@@ -114,13 +114,13 @@ variable's Description as the system prompt," of type Variable, defaulting to
 `NULL`. To use it: pick a variable in your data, open its Setup panel, type
 your text into the Description field, then select that variable in the
 `systemPromptVar` option. askLLM will use that Description text as a custom
-system prompt, replacing the built-in consultant/tutor/explainer template
-(priority is "non-empty custom text over the persona template"). This lets
-you — or a whole class — fix one teaching voice or role without retyping it
-into every question. One caveat: this is a design choice in how askLLM reads
-variable metadata, not a generic mechanism documented in jamovi's own
-manuals; if your installation behaves differently, trust what you actually
-observe over this description.
+system prompt, replacing the built-in consultant/tutor/explainer template.
+Non-empty custom text always takes priority over the persona template. This
+lets you, or a whole class, fix one teaching voice or role without retyping
+it into every question. One caveat: this is a design choice in how askLLM
+reads variable metadata, not a generic mechanism documented in jamovi's own
+manuals. Trust what you actually observe over this description when your
+installation behaves differently.
 :::
 
 ## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
@@ -161,6 +161,6 @@ observe over this description.
 
 ::: {.en}
 Pick the wrong analysis or the wrong persona tone, and askLLM will redirect
-you to the right analysis — but matching tone and depth to your situation is
+you to the right analysis. But matching tone and depth to your situation is
 always on you.
 :::

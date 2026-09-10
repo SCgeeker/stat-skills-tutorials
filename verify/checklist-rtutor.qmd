@@ -28,10 +28,10 @@ Module Guider (`askllm`) instead, use `checklist-guider.qmd`.
 
 ::: {.en}
 The key difference from `checklist-guider.qmd` is that the R code tutor's
-output space is not a finite, checkable set the way menu paths are — R is
+output space is not a finite, checkable set the way menu paths are. R is
 Turing-complete, so no scan can prove that an arbitrary piece of generated
-code actually "works as claimed." So there is no V1 path check here; instead
-there is **V4, the code check**, split into read (4a), run (4b), and cross-check
+code actually "works as claimed." So there is no V1 path check here. Its
+place is taken by **V4, the code check**, split into read (4a), run (4b), and cross-check
 (4c). This is a procedural check, not a mechanical one. See the "Two
 analyses, two ways to verify" section of `askLLM/docs/LIMITATIONS.zh-TW.md`
 for background.
@@ -88,8 +88,8 @@ for background.
       Descriptives panel.
 - [ ] **V3 Scope check** — Does the reply make claims about things it cannot
       actually see (e.g. normality, outliers, the content of raw data rows)?
-      If so, flag this as "overreaching" — the claim exceeds what summary
-      statistics can support, and should be discounted.
+      If so, flag this as "overreaching." The claim exceeds what summary
+      statistics can support, and you should discount it.
 - [ ] **V4a Read** — Read the entire code block line by line and confirm:
       - the data is referenced only through the object name `data`, with no
         other data source specified;
@@ -100,8 +100,8 @@ for background.
       or try a different persona instead.
 - [ ] **V4b Run** — Paste the code **verbatim, unmodified** into the Rj Editor
       (`Analyses ▸ R ▸ Rj ▸ Rj Editor`), press Run, and record the exact
-      output or error message (record both a successful output and a failed
-      error message — don't only keep the successes).
+      output or error message. Record both a successful output and a failed
+      error message, not only the successes.
 - [ ] **V4c Cross-check** — Re-run the same analysis through an independent
       channel and compare the key numbers: run the equivalent analysis
       through the jamovi GUI; or check that analysis's Syntax Mode for the
@@ -124,9 +124,10 @@ for background.
 :::
 
 ::: {.en}
-- [ ] **C1** Compare the reply against the P0 criteria: solved (everything
-      checks out — the code is usable) or reopen (something failed —
-      rephrase the question or try a different persona).
+- [ ] **C1** Compare the reply against the P0 criteria, and reach one of two
+      outcomes. Solved means everything checks out and the code is usable.
+      Reopen means something failed, so rephrase the question or try a
+      different persona.
 - [ ] **C2** Fill in the four-column collaboration log: question / criteria /
       reply summary / verification result.
 :::
@@ -143,7 +144,7 @@ askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用�
 askLLM's system prompt explicitly forbids the model from using the following
 in an R code tutor reply (see `askLLM/R/llm-adapter.R`, lines 172–177). If any
 of these appear in the code, the reply has violated askLLM's own stated
-boundary — flag it as "do not run" and go back and rephrase the question:
+boundary. Flag it as "do not run" and go back and rephrase the question:
 :::
 
 | [紅旗]{.zh}[Red flag]{.en} | [為什麼]{.zh}[Why]{.en} |
@@ -164,10 +165,10 @@ boundary — flag it as "do not run" and go back and rephrase the question:
 
 ::: {.en}
 > Note: the `<rj_environment>` package list is only attached when your
-> jamovi has Rj installed and askLLM was able to scan its packages. If Rj is
-> not installed, askLLM should instead teach you to use Syntax Mode rather
-> than generating code you cannot actually run — in that case steps 4a/4b of
-> this checklist do not apply, since there is no Rj Editor to paste into.
+> jamovi has Rj installed and askLLM was able to scan its packages. Without
+> Rj installed, askLLM should instead teach you to use Syntax Mode rather
+> than generating code you cannot actually run. Steps 4a/4b of this checklist
+> then do not apply. There is no Rj Editor to paste into.
 :::
 
 ## [相關頁面]{.zh}[Related pages]{.en}

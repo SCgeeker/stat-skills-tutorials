@@ -232,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <p>有人在 askLLM 裡打了「幫我分析這個資料」，勾選 Submit，收到一段內容豐富、 但完全不對題的回覆——它猜了一個描述統計加一個相關分析，剛好都不是使用者真正 想問的問題。使用者接著在同一個問題欄後面補一句「不對，我是想問兩組有沒有差 異」，再次勾選 Submit。可是 askLLM <strong>沒有對話記憶</strong>：第二次送出時，AI 完全 不知道「不對」是在回應什麼，只會把整段文字當成一個全新、獨立的問題重新回答。 模糊的指令加上單輪限制，結果就是來回猜測、浪費呼叫次數，答案還是對不上。</p>
 </div>
 <div class="en">
-<p>Someone typed “analyze this for me” into askLLM, ticked Submit, and got a long, confident reply — a description plus a correlation, neither of which was the question they actually had in mind. They then appended “no, I meant whether the two groups differ” to the same question box and submitted again. But askLLM has <strong>no conversation memory</strong>: the second call has no idea what “no” is responding to: it just re-answers the whole text as a brand-new, standalone question. A vague instruction combined with a single-turn design means guesswork, wasted calls, and an answer that still misses the point.</p>
+<p>Someone typed “analyze this for me” into askLLM, ticked Submit, and got a long, confident reply. It guessed at a description plus a correlation. Neither was the question the user actually had in mind. The user then appended “no, I meant whether the two groups differ” to the same question box and ticked Submit again. But askLLM has <strong>no conversation memory</strong>. On the second call the AI has no idea what “no” is responding to. It simply re-answers the whole text as a brand-new, standalone question. A vague instruction plus a single-turn design produces guesswork, wasted calls, and an answer still off the point.</p>
 </div>
 </section>
 <section id="askllm-是單輪問答askllm-is-single-turn" class="level2">
@@ -241,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
 <p>每次勾選 Submit 都是一次獨立、完整的呼叫；沒有前一輪的記憶可以延續。askLLM 內建的防抖機制只在「這次的問題、摘要、persona、語言、system prompt 完全跟 上一次相同」時才會用快取結果，而不是把兩次問題串成對話。應用內建的操作提示 也明講：修改問題前要先取消 Submit 勾選，改好再重新勾選——因為每次改動都可能 觸發新的呼叫。這代表：<strong>提示詞必須自足</strong>，把背景、變項、比較方向一次寫完， 不能指望「下一句再補充」。</p>
 </div>
 <div class="en">
-<p>Every ticked Submit is one independent, complete call — there is no memory of the previous turn to build on. askLLM’s built-in debounce only reuses a cached result when the question, summary, persona, language, and system prompt are all identical to the last call; it never threads two questions into a conversation. The app’s own guidance says as much: untick Submit before editing your question, then re-tick it, because each edit can trigger a new call. The consequence: <strong>your prompt must be self-contained</strong> — state the background, variables, and comparison you want in one shot. There is no “I’ll clarify in the next message.”</p>
+<p>Every ticked Submit is one independent, complete call. No memory of the previous turn carries over. askLLM’s built-in debounce reuses a cached result only when the question, summary, persona, language, and system prompt are all identical to the last call. It never threads two questions into a conversation. The app’s own guidance says as much: untick Submit before editing your question, then re-tick it. Every edit can trigger a new call. This means <strong>your prompt must be self-contained</strong>. State the background, variables, and comparison you want in one shot. You cannot count on “I’ll clarify in the next message.”</p>
 </div>
 </section>
 <section id="八組改寫前改寫後對照eight-beforeafter-rewrites" class="level2">
@@ -380,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Using the table above, add four things: variable names, variable types (continuous/categorical), the direction of comparison or association, and the specific output you want (e.g.&nbsp;“suggest an analysis” or “which result row to read”).</li>
 <li>Paste the rewritten sentence into askLLM’s Your question box and tick Submit.</li>
 <li>Read the reply and confirm it answers exactly the rewritten question, not a possible misreading of the original vague one.</li>
-<li>If you want to follow up, untick Submit, fold the follow-up into the same self-contained question, and re-tick — don’t expect it to remember the previous call.</li>
+<li>If you want to follow up, untick Submit, fold the follow-up into the same self-contained question, and re-tick it. Do not expect it to remember the previous call.</li>
 </ol>
 </div>
 </section>
@@ -390,7 +390,7 @@ ul.task-list li input[type="checkbox"] {
 <p>askLLM 每次 Submit 都是一次全新的獨立問答，沒有上一句可以依靠，所以你的問題 要在送出的那一刻就自己講完整個故事。</p>
 </div>
 <div class="en">
-<p>Every Submit to askLLM starts a brand-new, independent exchange with nothing carried over — so your question has to tell the whole story by itself, the moment you send it.</p>
+<p>Every Submit to askLLM starts a brand-new, independent exchange with nothing carried over. So your question has to tell the whole story by itself, the moment you send it.</p>
 </div>
 </section>
 <section id="資料來源data-sources" class="level2">

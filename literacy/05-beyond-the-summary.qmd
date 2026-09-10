@@ -18,16 +18,16 @@ title: "[第五課：摘要之外的事自己來]{.zh}[What Summary Statistics C
 ::: {.en}
 A student asked askLLM, "should I use a t-test for these two groups?" The
 reply sounded confident and professional, listing means and standard
-deviations. But if the reply went on to say "I checked normality and outliers
-in your data and they look fine" (illustrative example), that claim cannot be
-true. What askLLM sends the AI is never your raw data rows — it is the
-summary statistics computed by `summarize_data()`: for each continuous
+deviations. Suppose the reply went on to say "I checked normality and
+outliers in your data and they look fine" (illustrative example). That claim
+cannot be true. What askLLM sends the AI is never your raw data rows. It is
+the summary statistics computed by `summarize_data()`: for each continuous
 variable, n, missing count, mean, sd, median, min, max; for each categorical
-variable, level counts. Normality, outliers, and missing-data patterns
-(missing at random vs. systematic) all require looking at individual
-observations, and the AI never sees a single row of them. Any reply that
-claims to have "checked" these things is, at best, a guess from summary
-numbers — not an actual check.
+variable, level counts. Normality, outliers, and missing-data patterns,
+including whether the data are missing at random or systematically, all
+require looking at individual observations. The AI never sees a single row of
+them. A reply claiming to have "checked" these things is, at best, a guess
+from summary numbers. It is not an actual check.
 :::
 
 ## [自己在 jamovi 做這些檢查]{.zh}[Run these checks yourself in jamovi]{.en}
@@ -54,7 +54,7 @@ visually with the plots that analysis provides (e.g. a Q-Q plot) or with a
 box plot from Descriptives. For missing-data patterns, go back to
 Descriptives or the raw data view and check whether missingness clusters
 around a particular condition or time point. None of this is something
-askLLM can do for you — but once you're done, you have a concrete result
+askLLM can do for you. But it leaves you with a concrete result
 (e.g. "Levene's test, p = .03") to act on.
 :::
 
@@ -72,9 +72,9 @@ Assumption Checks 做了 Levene's test，結果顯著（p = .03），代表變�
 :::
 
 ::: {.en}
-Because askLLM is a single-turn tool with no conversation history, the most
-effective move is not to ask a follow-up like "so what should I do" — it is
-to write your own check results directly into the next `Question:`, so the
+askLLM is a single-turn tool with no conversation history. So the most
+effective move is not to ask a follow-up like "so what should I do." Write
+your own check results directly into the next `Question:` instead, so the
 AI reasons from a known fact instead of guessing. Example phrasing
 (illustrative): "I ran Levene's test in jamovi's Assumption Checks and it was
 significant (p = .03), meaning unequal variances — which version of the
@@ -120,5 +120,5 @@ askLLM 幫你查的事實。
 
 ::: {.en}
 Assumption checks, outliers, and missing-data patterns are always facts you
-looked up yourself in jamovi — never facts askLLM looked up for you.
+looked up yourself in jamovi. They are never facts askLLM looked up for you.
 :::

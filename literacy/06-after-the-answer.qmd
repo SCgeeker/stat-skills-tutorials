@@ -18,15 +18,15 @@ title: "[第六課：問完之後]{.zh}[After You Get an Answer]{.en}"
 
 ::: {.en}
 A student ticked Submit in the Module Guider, got a reply, then edited one
-word in the `question` field without first unticking and re-ticking
-Submit — and the screen still showed the old reply, now labeled "· cached" in
-the meta line. He assumed the AI had ignored his new question; in fact his
-own old answer had been replayed. This is not random flakiness — it is
-askLLM's built-in debounce cache. `.askllm_decide()` has exactly three
+word in the `question` field without first unticking and re-ticking Submit.
+The screen still showed the old reply, now labeled "· cached" in the meta
+line. He assumed the AI had ignored his new question. In fact his own old
+answer had been replayed. This is not random flakiness. It is askLLM's
+built-in debounce cache. `.askllm_decide()` has exactly three
 outcomes: `guide` (Submit unticked or the question is empty), `cached` (the
 new payload is identical to the last cached payload), and `call` (everything
 else). As long as Submit stays ticked, an unchanged payload can be judged
-`cached` and skip the API call entirely; the guide text says so directly:
+`cached` and skip the API call entirely. The guide text says so directly:
 "Untick 'Submit' before editing your question, then re-tick it." This lesson
 covers the three things you should still do after a reply arrives.
 :::
@@ -45,12 +45,12 @@ covers the three things you should still do after a reply arrives.
 ::: {.en}
 The debounce cache compares a payload built from the question, the data
 summary, base URL, model, catalog text, `role`, `promptLang`,
-`system_prompt`, and `systemPromptVar` — change any one of these and the
-result will not be judged `cached`; it triggers a fresh API call. But the
+`system_prompt`, and `systemPromptVar`. Change any one of these and the
+result will not be judged `cached`. It triggers a fresh API call. But the
 safe habit is still to untick Submit every time before changing the
 question, the persona, or the model, then re-tick it. That way you never
 accidentally get a cached replay, and you never get stuck in the `guide`
-state because you forgot to re-tick.
+state after forgetting to re-tick.
 :::
 
 ## [換模型或換 persona 再問一次]{.zh}[Ask again with a different model or persona]{.en}
@@ -67,14 +67,14 @@ state because you forgot to re-tick.
 
 ::: {.en}
 Lesson 4 explained that `role` and `promptLang` both feed the debounce
-cache's payload, so switching persona or model always triggers a fresh call —
-it will never be blocked by the old answer. This is exactly step **V5
+cache's payload, so switching persona or model always triggers a fresh call.
+The old answer will never block it. This is exactly step **V5
 (cross-check)** in the verification workflow (`verify/workflow.qmd`): ask the
 same `Question:` again with a different persona (consultant / tutor /
 explainer) or a different model, and see whether the two conclusions agree.
-Still repeat the path check (V1) for the second reply — agreement between two
+Still repeat the path check (V1) for the second reply. Agreement between two
 replies does not excuse skipping it. Agreement across two replies raises your
-confidence; disagreement usually means the question needs more context
+confidence. Disagreement usually means the question needs more context
 before it can be answered reliably.
 :::
 
@@ -89,9 +89,9 @@ before it can be answered reliably.
 
 ::: {.en}
 Every verification closes with **C2** in `verify/workflow.qmd`: fill in four
-columns — question, criteria, reply summary, verification result. Together
-these four columns form one teachable, repeatable, gradable record: the
-criteria column comes from P0 in Lesson 3, and the reply-summary and
+columns, namely question, criteria, reply summary, and verification result.
+Together these four columns form one teachable, repeatable, gradable record.
+The criteria column comes from P0 in Lesson 3, and the reply-summary and
 verification-result columns come from what you checked in V1–V5. Here is a
 template you can copy directly:
 :::
@@ -116,8 +116,8 @@ template you can copy directly:
 
 ::: {.en}
 See [`verify/workflow.qmd`](../verify/workflow.qmd) for the full process and
-step-by-step checks. If you used the Module Guider, you can check off items
-directly with [`verify/checklist-guider.qmd`](../verify/checklist-guider.qmd).
+step-by-step checks. For the Module Guider, you can check off items directly
+with [`verify/checklist-guider.qmd`](../verify/checklist-guider.qmd).
 :::
 
 ## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
@@ -151,6 +151,6 @@ directly with [`verify/checklist-guider.qmd`](../verify/checklist-guider.qmd).
 :::
 
 ::: {.en}
-Getting a reply is not the end — it's the start of checking it, comparing
+Getting a reply is not the end. It is the start of checking it, comparing
 it, and writing it down.
 :::

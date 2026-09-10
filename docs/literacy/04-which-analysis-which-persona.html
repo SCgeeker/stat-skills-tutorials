@@ -232,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <p>有位同學在 <strong>jamovi Module Guider</strong>（<code>askllm</code>）裡問：「幫我寫一段跑獨立樣本 t 檢定的 R 程式碼」，結果沒拿到程式碼，只看到回覆說要改用另一個分析。他以為 工具壞了，其實是踩到了 askLLM 設計裡的一條硬規則：Module Guider 的定位是 推薦 jamovi GUI 分析、逐字引用選單路徑，不是 R 產碼助理；只要問題涉及 R 程式碼，它一定會把你導去 <code>Analyses ▸ askLLM ▸ R code tutor</code>，不論你選的是 哪個 persona、哪個語言。反過來，如果在 <strong>R code tutor</strong>（<code>askllmr</code>）裡問 「這筆資料該用哪個 jamovi 選單」，它也一定會請你改用「jamovi Module Guider」，而不是自己亂猜選單路徑。這是雙向、寫死、不能關閉的邊界句。</p>
 </div>
 <div class="en">
-<p>A student asked the <strong>jamovi Module Guider</strong> (<code>askllm</code>), “write me R code for an independent-samples t-test.” No code came back — just a reply telling her to use a different analysis. She assumed the tool was broken. In fact she had hit a hard rule built into askLLM: the Module Guider’s job is to recommend a jamovi GUI analysis and quote menu paths verbatim, not to write R code. Whenever a question asks for R code, it always redirects to <code>Analyses ▸ askLLM ▸ R code tutor</code>, no matter which persona or language is selected. The reverse holds too: if you ask the <strong>R code tutor</strong> (<code>askllmr</code>) which jamovi menu to use, it will tell you to switch to the “jamovi Module Guider” instead of guessing a menu path itself. This boundary runs both ways, is hard-coded, and cannot be turned off.</p>
+<p>A student asked the <strong>jamovi Module Guider</strong> (<code>askllm</code>), “write me R code for an independent-samples t-test.” No code came back. The reply simply told her to use a different analysis. She assumed the tool was broken. In fact she had hit a hard rule built into askLLM: the Module Guider’s job is to recommend a jamovi GUI analysis and quote menu paths verbatim, not to write R code. Whenever a question asks for R code, it always redirects to <code>Analyses ▸ askLLM ▸ R code tutor</code>, no matter which persona or language is selected. The reverse holds too. Ask the <strong>R code tutor</strong> (<code>askllmr</code>) which jamovi menu to use, and it will tell you to switch to the “jamovi Module Guider” instead of guessing a menu path itself. This boundary runs both ways, is hard-coded, and cannot be turned off.</p>
 </div>
 </section>
 <section id="兩種分析怎麼分工how-the-two-analyses-divide-the-work" class="level2">
@@ -241,7 +241,7 @@ ul.task-list li input[type="checkbox"] {
 <p>一個模組、兩個分析：<code>askllm</code>（jamovi Module Guider，選單標題就是「jamovi Module Guider」）負責「該跑哪個分析、選單路徑是什麼」；<code>askllmr</code>（R code tutor）負責「這段邏輯的 R 程式碼怎麼寫，貼進 Rj Editor 能跑」。兩者共用同一 套摘要統計、同一組 persona，但角色互斥且互相導流：問錯棚會被請去對的棚，不 會得到將就的答案。開啟 Rj 的路徑是 <code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>；若本機 沒裝 Rj，R code tutor 的結果面板會提示 <code>Modules ▸ jamovi library</code> 去安裝。</p>
 </div>
 <div class="en">
-<p>One module, two analyses. <code>askllm</code> (menu title “jamovi Module Guider”) answers “which analysis, which menu path.” <code>askllmr</code> (R code tutor) answers “what R code implements this, ready to paste into the Rj Editor.” Both share the same summary statistics and the same personas, but their roles are mutually exclusive and each redirects the other: ask the wrong one and you get redirected to the right one, not a half-answer. Rj Editor opens at <code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>; if Rj is not installed, the R code tutor’s result panel points you to <code>Modules ▸ jamovi library</code> to install it.</p>
+<p>One module, two analyses. <code>askllm</code> (menu title “jamovi Module Guider”) answers “which analysis, which menu path.” <code>askllmr</code> (R code tutor) answers “what R code implements this, ready to paste into the Rj Editor.” Both share the same summary statistics and the same personas, but their roles are mutually exclusive. Ask the wrong one and you get redirected to the right one, not a half-answer. Rj Editor opens at <code>Analyses ▸ R ▸ Rj ▸ Rj Editor</code>. Without Rj installed, the R code tutor’s result panel points you to <code>Modules ▸ jamovi library</code> to install it.</p>
 </div>
 </section>
 <section id="三種-persona-怎麼選choosing-among-the-three-personas" class="level2">
@@ -250,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Persona 選項（<code>role</code>）有三個值：<strong>consultant</strong>（🧭 顧問）、<strong>tutor</strong>（🎓 導師）、<strong>explainer</strong>（💡 解說員），每個都有獨立的 en/zh system prompt 模 板。consultant 的設定是「精簡、準確、務實」，直接給結論；tutor 採「蘇格拉 底式教學」，不直接給答案，而是用提問引導你自己推理；explainer 假設你完全 沒有統計背景，逐步解釋並定義每個統計名詞。這三者不分優劣，只看你要的是效 率還是理解。下表是情境對照：</p>
 </div>
 <div class="en">
-<p>The persona option (<code>role</code>) has three values: <strong>consultant</strong> (🧭), <strong>tutor</strong> (🎓), and <strong>explainer</strong> (💡), each with its own English/Chinese system-prompt template. Consultant is built to be “concise, accurate, practical” and gives you a conclusion directly. Tutor uses “Socratic dialogue” — it will not give the final answer, but asks guiding questions so you reason it out yourself. Explainer assumes no statistics background at all and defines every term it uses. None is objectively better; it depends on whether you want speed or understanding. The table below maps scenarios to choices:</p>
+<p>The persona option (<code>role</code>) has three values: <strong>consultant</strong> (🧭), <strong>tutor</strong> (🎓), and <strong>explainer</strong> (💡), each with its own English/Chinese system-prompt template. Consultant is built to be “concise, accurate, practical” and gives you a conclusion directly. Tutor uses “Socratic dialogue.” It will not give the final answer, but asks guiding questions so you reason it out yourself. Explainer assumes no statistics background at all and defines every term it uses. None is objectively better. The choice depends on whether you want speed or understanding. The table below maps scenarios to choices:</p>
 </div>
 <div class="zh">
 <table class="caption-top table">
@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 <p>兩個分析都有一個選項 <code>systemPromptVar</code>，標題是「Use a variable’s Description as the system prompt」，型別是 Variable，預設 <code>NULL</code>。用法：在資料裡選一個 變數，到它的 Setup 面板填入 Description 文字，再到 <code>systemPromptVar</code> 選項 選那個變數——askLLM 會把這段 Description 文字當成自訂 system prompt，取代 原本 consultant/tutor/explainer 的模板（優先序是「自訂內容非空 &gt; persona 模板」）。這讓你（或整班）可以固定一套教學語氣或角色設定，不必每次都重寫 提問。要提醒的是，這是 askLLM 讀取變數 metadata 的一種設計，並非 jamovi 官 方文件逐條記載的通用機制，若行為與這裡描述不同，請以你實際測試到的為準。</p>
 </div>
 <div class="en">
-<p>Both analyses share an option called <code>systemPromptVar</code>, titled “Use a variable’s Description as the system prompt,” of type Variable, defaulting to <code>NULL</code>. To use it: pick a variable in your data, open its Setup panel, type your text into the Description field, then select that variable in the <code>systemPromptVar</code> option. askLLM will use that Description text as a custom system prompt, replacing the built-in consultant/tutor/explainer template (priority is “non-empty custom text over the persona template”). This lets you — or a whole class — fix one teaching voice or role without retyping it into every question. One caveat: this is a design choice in how askLLM reads variable metadata, not a generic mechanism documented in jamovi’s own manuals; if your installation behaves differently, trust what you actually observe over this description.</p>
+<p>Both analyses share an option called <code>systemPromptVar</code>, titled “Use a variable’s Description as the system prompt,” of type Variable, defaulting to <code>NULL</code>. To use it: pick a variable in your data, open its Setup panel, type your text into the Description field, then select that variable in the <code>systemPromptVar</code> option. askLLM will use that Description text as a custom system prompt, replacing the built-in consultant/tutor/explainer template. Non-empty custom text always takes priority over the persona template. This lets you, or a whole class, fix one teaching voice or role without retyping it into every question. One caveat: this is a design choice in how askLLM reads variable metadata, not a generic mechanism documented in jamovi’s own manuals. Trust what you actually observe over this description when your installation behaves differently.</p>
 </div>
 </section>
 <section id="動手做5-分鐘try-it-5-minutes" class="level2">
@@ -383,7 +383,7 @@ ul.task-list li input[type="checkbox"] {
 <p>分析選錯棚、persona 選錯調性，askLLM 會把你導回正確的分析，但語氣與深度永 遠要你自己配對到情境。</p>
 </div>
 <div class="en">
-<p>Pick the wrong analysis or the wrong persona tone, and askLLM will redirect you to the right analysis — but matching tone and depth to your situation is always on you.</p>
+<p>Pick the wrong analysis or the wrong persona tone, and askLLM will redirect you to the right analysis. But matching tone and depth to your situation is always on you.</p>
 </div>
 
 
