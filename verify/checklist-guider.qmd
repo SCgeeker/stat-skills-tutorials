@@ -3,16 +3,16 @@ title: "[Module Guider 查核清單]{.zh}[Module Guider Verification Checklist]{
 ---
 
 ::: {.zh}
-本頁對應 `PROPOSAL.zh-TW.md` §5.3 的第一份查核清單：涵蓋 `verify/workflow.qmd`
+本站有兩份查核清單，這是其中第一份：涵蓋 `verify/workflow.qmd`
 流程裡的 P0–P1、V1–V3、V5、C1–C2 步驟，設計成可列印的一頁。適用對象是使用
 **Module Guider**（`askllm`）取得推薦分析與選單路徑的情境；若你用的是 R code
 tutor（`askllmr`），請改用 `checklist-rtutor.qmd`。
 :::
 
 ::: {.en}
-This page is the first of the two verification checklists described in
-`PROPOSAL.zh-TW.md` §5.3. It covers steps P0–P1, V1–V3, V5, and C1–C2 of the
-workflow in `verify/workflow.qmd`, laid out as a single printable page. Use it
+This is the first of the two verification checklists on this site. It covers
+steps P0–P1, V1–V3, V5, and C1–C2 of the workflow in `verify/workflow.qmd`,
+laid out as a single printable page. Use it
 when you asked the **Module Guider** (`askllm`) for a recommended analysis and
 menu path. If you used the R code tutor (`askllmr`) instead, use
 `checklist-rtutor.qmd`.

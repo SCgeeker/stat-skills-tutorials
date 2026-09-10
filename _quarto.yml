@@ -1,17 +1,15 @@
 # _quarto.yml
 # ---------------------------------------------------------------------------
-# 主設定（zh-TW profile）。對應 PROPOSAL.zh-TW.md §7.2：
-#   繁中為主、英文為必要子集，用 Quarto profiles（本檔 + _quarto-en.yml）分開建。
+# 主設定。單一站台同時含中英內容，由右上角的切換鈕決定顯示哪一種
+# （assets/lang.css + _includes/lang-*.html）。
 #
-# Phase 0 範圍：只求骨架可 render，不做 GitHub Pages / Actions 設定
-# （授權與 repo 形態 Q1/Q2 尚未拍板，見 PROPOSAL §9）。
 # ---------------------------------------------------------------------------
 
 project:
   type: website
   output-dir: docs
   # 明確列出要 render 的內容，避免 Quarto 把根目錄下非站內文件
-  # （PROPOSAL.zh-TW.md、README.md）當成站內頁面發佈；
+  # （README.md）當成站內頁面發佈；
   # prompts/generated/ 是 build-prompts.R 產出的「每條一頁」中間產物，
   # 內容已整併進 prompts/index.qmd，故不重複 render 成獨立頁面。
   render:
@@ -20,7 +18,6 @@ project:
     - "prompts/*.qmd"
     - "verify/*.qmd"
     - "external/*.qmd"
-    - "!PROPOSAL.zh-TW.md"
     - "!README.md"
     - "!prompts/generated/"
   pre-render:
@@ -71,7 +68,7 @@ format:
     toc: true
     lang: zh-TW
     # 語言切換：單一站台同時含中英內容，由 assets/lang.css + _includes 控制
-    # 顯示哪一語言（見 PROPOSAL §7.2）。內容頁以 ::: {.zh} / ::: {.en} 標記。
+    # 顯示哪一語言。內容頁以 ::: {.zh} / ::: {.en} 標記。
     css:
       - assets/lang.css
     include-in-header:

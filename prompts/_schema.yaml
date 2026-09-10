@@ -5,8 +5,6 @@
 # tests/testthat 鎖住；本檔不是可執行的 JSON Schema，而是給人與 R 腳本共同
 #參照的單一真相來源說明。
 #
-# 對應 PROPOSAL.zh-TW.md §4.1。
-#
 # Q5（已拍板）：本站要向英文教材原作者徵求回饋，因此 L2 條目的所有面向使用者
 # 欄位（title / scenario / prompt / expected 的英文對照）都是「必填、且必須
 # 是人工撰寫品質的英文」，validator 只能做「有沒有填、格式對不對」的機械檢查，
@@ -94,7 +92,7 @@ fields:
     # Q4 已判定（2026-09-08）：askLLM 的 question 欄實際由 <textarea rows="5">
     # 承接（askllm.js / askllmr.js），換行完整送進 API；askllm.b.R 只用
     # trimws() 清頭尾空白，不會吃掉中間換行。故 prompt 允許多行、可用條列式
-    # 判準（呼應 PROPOSAL §5 查核清單的形式），不強制單行。
+    # 判準（與查核清單同形式），不強制單行。
     # 但 trimws() 只清「頭尾」，中間/結尾的多餘空白行會原樣送出（浪費 token、
     # 可能干擾模型），所以 validator 改為檢查「結尾不得有多餘空白行」。
     single_line: false
@@ -170,7 +168,7 @@ fields:
       date: {type: date, required: true}
       provider: {type: string, required: true}
       model: {type: string, required: true}
-      # result 判準：pass=expected 全中且 check 零錯；partial=命中>=半數但有 check 失敗或有漏；fail=命中<半數，或回覆含錯誤資訊（幻覺選單路徑等）一律 fail；pending=未實測，不得造假。完整判準與理由見 PROPOSAL §4.1。
+      # result 判準：pass=expected 全中且 check 零錯；partial=命中>=半數但有 check 失敗或有漏；fail=命中<半數，或回覆含錯誤資訊（幻覺選單路徑等）一律 fail；pending=未實測，不得造假。判準要定死的理由：不定義的話同一份回覆會被不同人（或不同時間的自己）記成不同值，日後想從記錄統計「哪幾條最常需要重問」就不可靠。評定時以該條目 expected 的條目數為分母逐條核對。
       result:
         type: enum
         required: true

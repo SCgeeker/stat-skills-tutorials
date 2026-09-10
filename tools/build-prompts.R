@@ -300,7 +300,7 @@ render_pending_chunk <- function() {
 }
 
 #' 把所有條目合併成單一總表頁（prompts/index.qmd）
-#' 對應 PROPOSAL §3.3 目錄結構：「index.qmd（由 build 腳本產生的總表，勿手改）」。
+#' index.qmd 是由本腳本產生的總表，勿手改。
 #' 作法：重用 render_entry_qmd() 產出的每條內容，去掉各自的 YAML frontmatter
 #' 後以分隔線接起來，最外層只留一份總表用的 frontmatter。
 #' @param entries named list，來自 read_entries()

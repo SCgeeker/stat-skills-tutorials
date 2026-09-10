@@ -7,10 +7,10 @@ of the repository the material comes from.
 
 ## 1. Prose, teaching material, and documentation — CC BY-SA 4.0
 
-Applies to: `*.qmd`, `*.md` (including `README.md` and `PROPOSAL.zh-TW.md`),
+Applies to: `*.qmd` and `*.md` (including `README.md` and the two files in `data/`),
 and any rendered output derived from them under `docs/`.
 
-適用於：`*.qmd`、`*.md`（含 `README.md` 與 `PROPOSAL.zh-TW.md`），
+適用於：`*.qmd`、`*.md`（含 `README.md` 與 `data/` 底下兩份），
 以及 `docs/` 底下由這些檔案產生的網頁輸出。
 
 Licensed under the Creative Commons Attribution-ShareAlike 4.0 International
@@ -27,10 +27,10 @@ CC BY-SA 4.0）段落的餘地。
 ## 2. Prompt entries, schema, and code — MIT
 
 Applies to: `prompts/_schema.yaml`, `prompts/entries/*.yaml`, `tools/*.R`,
-`tests/**`, `_quarto.yml`, `_quarto-en.yml`, and `docs/prompts.json`.
+`tests/**`, `_quarto.yml`, `assets/lang.css`, `_includes/*.html`, and `docs/prompts.json`.
 
 適用於：`prompts/_schema.yaml`、`prompts/entries/*.yaml`、`tools/*.R`、
-`tests/**`、`_quarto.yml`、`_quarto-en.yml`、`docs/prompts.json`。
+`tests/**`、`_quarto.yml`、`assets/lang.css`、`_includes/*.html`、`docs/prompts.json`。
 
 Rationale: users copy prompts into jamovi and adapt them for their own data.
 They should not incur an attribution or share-alike obligation for doing so.

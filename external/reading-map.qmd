@@ -2,8 +2,8 @@
 title: "External Reading Map"
 ---
 
-> Status: Phase 0 placeholder; full content pending Phase 1 (see
-> `PROPOSAL.zh-TW.md` §6).
+> The mapping table below is not built yet. What is here today is the list of
+> source textbooks and their licences.
 
 ## What this page will contain
 
@@ -25,5 +25,5 @@ external textbooks, each row tagged with its license:
 This page is English-only (the source textbooks are all in English) and its
 table is meant to be generated from the `links` field of each prompt-library
 entry (`prompts/entries/*.yaml`), so the mapping is maintained in one place.
-That generation step is out of scope for Phase 0; this page is a scaffold
-placeholder only.
+That generation step is not built yet, so this page currently carries only the
+source list above.

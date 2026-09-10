@@ -25,8 +25,7 @@ documentation's word for it.
 表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行
 設計的**示意範例**，用來練習 V4a 的程式碼紅旗核對——這三題**不是**任何 LLM
 的真實輸出，只是依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成的教學
-用例，題目本身會清楚標示「示意範例」。目前共 10 題；PROPOSAL 的 Phase 2 目標
-是擴充到 10 題以上並加入課堂實測的新案例，本頁會在課堂驗證後持續擴充。第
+用例，題目本身會清楚標示「示意範例」。目前共 10 題，本頁會在課堂驗證後補進新的實測案例持續擴充。第
 1–7 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點與句式不
 遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套規範
 改寫。
@@ -40,8 +39,8 @@ Questions 8–10 are **illustrative examples** designed for this page to
 practice the V4a code red-flag check — these three are **not** real output
 from any LLM; they are teaching examples built from the instruction list
 that `askLLM/R/llm-adapter.R` explicitly forbids, and each is clearly labeled
-"illustrative." There are 10 questions here today; the PROPOSAL's Phase 2 goal
-is to grow this set further with new cases collected from classroom use. The
+"illustrative." There are 10 questions here today, and the set will grow as classroom use
+turns up new cases. The
 LLM replies in questions 1–7 are quoted verbatim from the real-test record,
 with no stylistic editing, so their punctuation and sentence patterns do not
 follow this site's prose style guide (Pinker Rules 7–10); the illustrative

@@ -2,20 +2,6 @@
 title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}"
 ---
 
-::: {.zh}
-> 狀態：Phase 0 placeholder，流程骨架已定，逐步展開待 Phase 1（見
-> `PROPOSAL.zh-TW.md` §5.2）。`checklist-guider.qmd` 已是完整版；本頁與
-> `checklist-rtutor.qmd`、`spot-the-error.qmd` 仍待撰寫成教學文字。
-:::
-
-::: {.en}
-> Status: Phase 0 placeholder. The workflow skeleton is fixed; the full
-> teaching prose is planned for Phase 1 (see `PROPOSAL.zh-TW.md` §5.2).
-> `checklist-guider.qmd` is already complete; this page,
-> `checklist-rtutor.qmd`, and `spot-the-error.qmd` still need to be written
-> up as teaching text.
-:::
-
 ## [原則]{.zh}[Principles]{.en}
 
 ::: {.zh}
@@ -62,13 +48,13 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 
 ::: {.zh}
 - [`checklist-guider.qmd`](checklist-guider.qmd)：P0–P1、V1–V3、V5、C1–C2，一頁可列印版。
-- [`checklist-rtutor.qmd`](checklist-rtutor.qmd)：P0–P1、V2–V4、V5、C1–C2（Phase 0 placeholder）。
+- [`checklist-rtutor.qmd`](checklist-rtutor.qmd)：P0–P1、V2–V4、V5、C1–C2。
 :::
 
 ::: {.en}
 - [`checklist-guider.qmd`](checklist-guider.qmd): P0–P1, V1–V3, V5, C1–C2 —
   a single printable page.
-- [`checklist-rtutor.qmd`](checklist-rtutor.qmd): P0–P1, V2–V4, V5, C1–C2
-  (Phase 0 placeholder).
+- [`checklist-rtutor.qmd`](checklist-rtutor.qmd): P0–P1, V2–V4, V5, C1–C2.
+
 :::
 
