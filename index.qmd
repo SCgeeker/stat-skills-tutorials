@@ -43,19 +43,4 @@ The site has three layers, matching the three things the README describes:
    tutor each have their own verification checklist.
 :::
 
-## [目前狀態]{.zh}[Current status]{.en}
-
-::: {.zh}
-本站正在 **Phase 0（骨架與可行性）**：目錄結構、提示詞 schema、3 條示範提示詞、
-1 份查核清單已上線；6 課協作素養短文與完整查核清單仍是待撰寫的 placeholder。
-詳細規劃見 repo 內的 `PROPOSAL.zh-TW.md`。
-:::
-
-::: {.en}
-The site is currently in **Phase 0 (scaffolding and feasibility)**: the
-directory structure, the prompt schema, three example prompts, and one
-verification checklist are already live. The six collaboration-literacy
-lessons and the remaining verification checklists are still placeholders
-awaiting content. See `PROPOSAL.zh-TW.md` in the repo for the full roadmap.
-:::
 </content>
