@@ -9,7 +9,8 @@ it. The `note` field of an entry's `tested_with` record refers to these filename
 Naming: `<entry id>_<first author><year>_<language>.omv`. The `check` list for
 `missing-data-triage` includes a cross-check step, which asks the same question again under a
 different persona and compares the two replies. That step needs both runs side by side, so those
-files carry an additional `_<persona>` suffix.
+files carry an additional `_<persona>` suffix. The `mixed-anova-setup` prompt was revised on
+2026-09-09, so its files carry `v1_fail` or `v2_fix` to say which wording produced them.
 
 | File | Entry | Language | Analyses inside |
 |---|---|---|---|
@@ -19,8 +20,10 @@ files carry an additional `_<persona>` suffix.
 | `missing-data-triage_dawtry2015_zhTW_consultant.omv` | `missing-data-triage` | Chinese | askllm (consultant), descriptives |
 | `missing-data-triage_dawtry2015_en_explainer.omv` | `missing-data-triage` | English | askllm (explainer) |
 | `missing-data-triage_dawtry2015_en_consultant.omv` | `missing-data-triage` | English | askllm (consultant), descriptives |
-| `mixed-anova-setup_zhang2014_zhTW.omv` | `mixed-anova-setup` | Chinese | askllmr, Rj |
-| `mixed-anova-setup_zhang2014_en.omv` | `mixed-anova-setup` | English | askllmr, Rj |
+| `mixed-anova-setup_zhang2014_v1_fail_zhTW.omv` | `mixed-anova-setup` | Chinese | askllmr, Rj (prompt before the fix) |
+| `mixed-anova-setup_zhang2014_v1_fail_en.omv` | `mixed-anova-setup` | English | askllmr, Rj (prompt before the fix) |
+| `mixed-anova-setup_zhang2014_v2_fix_zhTW.omv` | `mixed-anova-setup` | Chinese | askllmr, Rj, anovaRM (prompt after the fix) |
+| `mixed-anova-setup_zhang2014_v2_fix_en.omv` | `mixed-anova-setup` | English | askllmr, Rj, anovaRM (prompt after the fix) |
 
 Tested on 2026-09-08 with provider `gemini` and model `gemini-flash-latest`. The Chinese explainer
 run for `missing-data-triage` was repeated on 2026-09-09; the reason is in the last section.
@@ -55,7 +58,28 @@ mean, jamovi prints `F = 0.67, p = .416` rather than 0.73. `car::leveneTest` def
 
 **Row count of the Zhang data**: the file holds 152 rows and 35 columns, with `T2_Finished`
 unfiltered, so the long format should have 304 rows. The n = 130 quoted in psyteachr is the count
-after filtering, not the number of rows in the file.
+after filtering, not the number of rows in the file. The two figures do not contradict each other:
+`T2_Interest_Comp` has 22 missing values, and 152 - 22 = 130, so the 304 long-format rows hold 282
+valid observations. The repeated-measures ANOVA drops the incomplete cases, which is why its
+residual df is 128, that is 130 - 2 groups.
+
+## A reply stored in an `.omv` is not necessarily the one that was run
+
+While `submit` is ticked, jamovi re-runs the analysis whenever the file is opened or the data
+change. askLLM then calls the API again and overwrites the reply already on screen. The English
+`v2_fix` file went through three such samples, whose variable names were `id_col`, `time_cols` and
+`id_var`, and the code preserved in `08 Rjp` belongs to one of them.
+
+Unticking `submit` does not freeze the answer either. The guard at `askLLM/R/askllmr.b.R:58`
+returns early and replaces the results area with guidance text, so the reply is gone.
+
+**What follows for the records.** A `tested_with[].note` must state that its verdict rests on the
+code pasted into Rj and the result of running it, not on whatever reply the `.omv` happens to
+display. Save the full reply text somewhere else as well, in a worksheet or as a
+`spot-the-error.qmd` item. The `.omv` alone does not preserve it.
+
+For what it is worth, all three English samples satisfied the revised format rules. That is
+evidence the prompt fix is robust rather than noise.
 
 ## Controlling the variable in a cross-check (recorded 2026-09-09)
 

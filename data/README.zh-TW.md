@@ -6,7 +6,8 @@
 回覆與用來查核的後續分析。條目 `tested_with` 欄位的 note 會引用這裡的檔名。
 
 命名規則：`<條目 id>_<第一作者><年>_<語言>.omv`。`missing-data-triage` 的 `check` 含 cross-check
-步驟（同一題換 persona 再問一次比對），需要兩次執行並存，故額外加 `_<persona>` 後綴。
+步驟（同一題換 persona 再問一次比對），需要兩次執行並存，故額外加 `_<persona>` 後綴。`mixed-anova-setup` 的提示詞於 2026-09-09 修正過，故其檔案以
+`v1_fail` 或 `v2_fix` 標示是哪一版措辭產生的。
 
 | 檔案 | 條目 | 語言 | 內含分析 |
 |---|---|---|---|
@@ -16,8 +17,10 @@
 | `missing-data-triage_dawtry2015_zhTW_consultant.omv` | `missing-data-triage` | 繁中 | askllm（consultant）、descriptives |
 | `missing-data-triage_dawtry2015_en_explainer.omv` | `missing-data-triage` | 英文 | askllm（explainer） |
 | `missing-data-triage_dawtry2015_en_consultant.omv` | `missing-data-triage` | 英文 | askllm（consultant）、descriptives |
-| `mixed-anova-setup_zhang2014_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj |
-| `mixed-anova-setup_zhang2014_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj |
+| `mixed-anova-setup_zhang2014_v1_fail_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj（修正前的提示詞） |
+| `mixed-anova-setup_zhang2014_v1_fail_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj（修正前的提示詞） |
+| `mixed-anova-setup_zhang2014_v2_fix_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj、anovaRM（修正後的提示詞） |
+| `mixed-anova-setup_zhang2014_v2_fix_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj、anovaRM（修正後的提示詞） |
 
 實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。`missing-data-triage`
 的中文 explainer 那次於 2026-09-09 重跑，原因見最後一節。
@@ -50,7 +53,24 @@ CC BY-SA 4.0 的素材（Dawtry）以相同方式分享。
 用 `mean`。
 
 **Zhang 資料的列數**：檔案原始為 152 列（35 欄，`T2_Finished` 未篩選），長格式應為 304 列。
-psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。
+psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。兩個數字並不矛盾：`T2_Interest_Comp`
+有 22 筆遺漏，152 − 22 = 130，所以 304 列長格式裡有 282 筆有效觀察。重複量數 ANOVA 會排除
+不完整的個案，這就是它的 residual df 為 128（130 − 2 組）的原因。
+
+## `.omv` 裡存的回覆未必是當次執行的那一份
+
+只要 `submit` 還勾著，jamovi 每次開檔或資料變更都會重跑分析，askLLM 就再打一次 API 並覆蓋畫面上
+既有的回覆。英文 `v2_fix` 那份前後共產生三個樣本（變數名分別為 `id_col`、`time_cols`、`id_var`），
+而 `08 Rjp` 裡保存的程式碼只屬於其中一次。
+
+取消勾選 `submit` 也不能凍結答案：`askLLM/R/askllmr.b.R:58` 的守門會直接 return 並把結果區換成
+導引文字，回覆就沒了。
+
+**對記錄的要求**：`tested_with[].note` 必須寫明判定依據是「當次貼入 Rj 的程式碼與其執行結果」，
+而非 `.omv` 當下顯示的回覆。回覆全文要另存一份（工作稿或 `spot-the-error.qmd` 題目），光靠 `.omv`
+保不住。
+
+附帶一提，英文那三個樣本全都符合修正後的格式規範，這是提示詞修正穩健的旁證，不是雜訊。
 
 ## cross-check 的變項控制（2026-09-09 記）
 

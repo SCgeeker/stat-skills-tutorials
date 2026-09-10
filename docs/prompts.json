@@ -149,8 +149,8 @@
     ],
     "persona": "tutor",
     "prompt": {
-      "zh": "資料 data 有 {id}、{group} 與兩個時間點欄 {t1}、{t2}。\n\n請依下列規則引導我，不要直接給完整解答：\n1. 用 base R 或 rj_environment 裡有的套件轉成長格式。\n2. 要我自己填的部分，一律寫成程式碼開頭的變數指派，值先放字串佔位符，例如\n   time_cols <- c(\"填入欄名\", \"填入欄名\")。後面的程式碼直接引用這些變數。\n3. 說明文字一律另起一行寫成註解。**不要把註解寫在括號、函式引數或任何運算式內部**，\n   否則 R 會把該行剩下的內容連同右括號一起當成註解，程式碼無法解析。\n4. 你給的程式碼在我填入欄名之前就必須能通過語法檢查。\n5. 印出每個受試者 × 時間點的列數，讓我自己核對。\n6. 不要幫我跑 ANOVA。",
-      "en": "data has {id}, {group}, and two time columns {t1}, {t2}.\n\nPlease guide me under these rules, without giving the full solution:\n1. Reshape to long format using base R or packages already in rj_environment.\n2. Put every blank I need to fill in as a variable assignment at the top of\n   the script, with a string placeholder as its value, for example\n   time_cols <- c(\"column name here\", \"column name here\"). Later code refers\n   to those variables.\n3. Put explanatory text on its own line as a comment. **Never place a comment\n   inside brackets, function arguments, or any expression.** R treats the rest\n   of that line as comment text, including the closing bracket, and the code\n   will not parse.\n4. Your code must pass a syntax check before I fill in the column names.\n5. Print the row count per subject x time point so I can verify it myself.\n6. Do not run the ANOVA for me."
+      "zh": "資料 data 有 {id}、{group} 與兩個時間點欄 {t1}、{t2}。\n\n請依下列規則引導我，不要直接給完整解答：\n1. 待填處寫成開頭的變數指派、值放字串佔位符，引導我用 base R 或 rj_environment 裡有的套件轉成長格式。\n2. 印出每個受試者 × 時間點的列數，讓我自己核對。\n3. 不要幫我跑 ANOVA。",
+      "en": "data has {id}, {group}, and two time columns {t1}, {t2}.\n\nPlease guide me under these rules, without giving the full solution:\n1. Put every blank I need to fill in as a variable assignment at the top of\n   the script with a string placeholder as its value, and guide me to reshape\n   to long format using base R or packages already in rj_environment.\n2. Print the row count per subject x time point so I can verify it myself.\n3. Do not run the ANOVA for me."
     },
     "system_prompt_override": null,
     "expected": [
@@ -222,21 +222,28 @@
         "provider": "gemini",
         "model": "gemini-flash-latest",
         "result": "fail",
-        "note": "【針對 2026-09-09 修正前的提示詞】zh 版實測（data/mixed-anova-setup_zhang2014_zhTW.omv）。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是模型把 TODO 註解寫進 c() 括號內（cols = c(# TODO: ...)），註解吃掉右括號使運算式無法收尾。R code tutor 的交付物是可執行的骨架，不能執行即未交付，故記 fail。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。"
+        "note": "【修正前的提示詞】zh 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是當時的提示詞要求「只給程式骨架與 TODO 註解」，模型因此把註解寫進 c() 括號內（cols = c(# TODO: ...)），R 的 # 吃掉整行剩餘內容連同右括號，運算式無法收尾。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。"
       },
       {
         "date": "2026-09-08",
         "provider": "gemini",
         "model": "gemini-flash-latest",
         "result": "fail",
-        "note": "【針對 2026-09-09 修正前的提示詞】en 版實測（data/mixed-anova-setup_zhang2014_en.omv）。同一根因，錯誤位置 <text>:21:1。此版另有 table(data_long$# TODO: ...)，破壞更嚴重。此失效模式可重現，已列為 spot-the-error 候選題材。"
+        "note": "【修正前的提示詞】en 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_en.omv。同一根因，錯誤位置 <text>:21:1，另有 table(data_long$# TODO: ...)。此失效模式可重現，已列為 spot-the-error 題材。"
       },
       {
         "date": "2026-09-09",
-        "provider": "pending",
-        "model": "pending",
-        "result": "pending",
-        "note": "提示詞已於 2026-09-09 修正：待填處改為開頭的變數指派、明令不得在運算式內寫註解、並要求程式碼在填值前即可通過語法檢查。修正後尚未實測，待以 gemini-flash-latest 中英各跑一次驗證語法錯誤是否消失。"
+        "provider": "gemini",
+        "model": "gemini-flash-latest",
+        "result": "pass",
+        "note": "修正後重測，zh 版，證據 data/mixed-anova-setup_zhang2014_v2_fix_zhTW.omv。expected 4/4：只用 data、無 read.csv/install.packages；待填處為開頭的變數指派（target_cols 等）且值為字串佔位符，填值前即可 parse；長格式 304 列（152 × 2）；有 table() 驗證輸出。check 三項齊備：code-read 無紅旗，code-run 在 Rj 零錯誤且每格為 1，cross-check 的 anovaRM 已跑（within = Time[T1,T2]、between = Condition）。判定依據為當次貼入 Rj 的程式碼與其執行結果，非 .omv 內顯示的回覆（見 data/README.md 的 submit 重跑陷阱）。"
+      },
+      {
+        "date": "2026-09-09",
+        "provider": "gemini",
+        "model": "gemini-flash-latest",
+        "result": "pass",
+        "note": "修正後重測，en 版，證據 data/mixed-anova-setup_zhang2014_v2_fix_en.omv。expected 4/4，待填處為 id_var / time_cols / time_name / score_name 四個開頭指派。Rj 執行零錯誤、304 列、每格為 1，anovaRM 同上。附帶觀察：該檔因 submit 重跑共產生三個回覆樣本（變數名分別為 id_col / time_cols / id_var），三者皆符合修正後的格式規範，為提示詞修正穩健的旁證。判定依據同 zh 版。"
       }
     ]
   },
