@@ -25,6 +25,28 @@
 實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。`missing-data-triage`
 的中文 explainer 那次於 2026-09-09 重跑，原因見最後一節。
 
+## 重跑這些實測
+
+每條條目的 `prompt` 都帶 `{佔位符}`。下表是實測當時填入的值，以及各自的資料來源。三個下載連結
+於 2026-09-09 實測皆回 HTTP 200。
+
+| 條目 | 資料集 | 下載 |
+|---|---|---|
+| `ttest-assumptions` | Zwaan et al. (2018) Simon task | <https://psyteachr.github.io/analysis-v4/data/data_ch7.zip>（解壓後用 `MeansSimonTask.csv`） |
+| `missing-data-triage` | Dawtry et al. (2015) | <https://psyteachr.github.io/quant-fun-v3/data/Dawtry_2015_clean.csv> |
+| `mixed-anova-setup` | Zhang et al. (2014) Study 3 | <https://psyteachr.github.io/analysis-v4/data/data_ch13.zip>（含 `Zhang_2014_Study3.csv` 與 codebook） |
+
+| 條目 | 佔位符 | 值 |
+|---|---|---|
+| `ttest-assumptions` | `{outcome}` / `{group}` / `{n1}` / `{n2}` | `simon_effect` / `similarity`（same、different）/ 80 / 80 |
+| `missing-data-triage` | `{var_a}` / `{pct_a}` / `{var_b}` / `{pct_b}` | `Household_Income` / 1.3 / `Political_Preference` / 1.3 |
+| `mixed-anova-setup` | `{id}` / `{group}` / `{t1}` / `{t2}` | `Participant_ID` / `Condition` / `T1_Pred_Interest_Comp` / `T2_Interest_Comp` |
+
+看數字之前有兩件事要知道。`simon_effect` 不是檔案裡現成的欄位，實測時是以
+`session1_incongruent − session1_congruent` 算出來的，這就是它與 psyteachr 數字不同的原因
+（見下方陷阱一節）。另外 jamovi 的 Descriptives 面板顯示的遺漏是筆數不是百分比，上表的 1.3%
+是 305 筆裡的 4 筆。
+
 ## 資料來源與授權（重要）
 
 **這些 `.omv` 內嵌了外部教材的資料集。** 本專案的 `LICENSE` 第 3 節適用：第三方素材維持其原授權，

@@ -28,6 +28,29 @@ files carry an additional `_<persona>` suffix. The `mixed-anova-setup` prompt wa
 Tested on 2026-09-08 with provider `gemini` and model `gemini-flash-latest`. The Chinese explainer
 run for `missing-data-triage` was repeated on 2026-09-09; the reason is in the last section.
 
+## Reproducing these tests
+
+Each entry's `prompt` carries `{placeholder}` fields. The values below are what the recorded runs
+used, together with the dataset each one came from. All three download links returned HTTP 200 on
+2026-09-09.
+
+| Entry | Dataset | Download |
+|---|---|---|
+| `ttest-assumptions` | Zwaan et al. (2018) Simon task | <https://psyteachr.github.io/analysis-v4/data/data_ch7.zip> (use `MeansSimonTask.csv` after unzipping) |
+| `missing-data-triage` | Dawtry et al. (2015) | <https://psyteachr.github.io/quant-fun-v3/data/Dawtry_2015_clean.csv> |
+| `mixed-anova-setup` | Zhang et al. (2014) Study 3 | <https://psyteachr.github.io/analysis-v4/data/data_ch13.zip> (contains `Zhang_2014_Study3.csv` and a codebook) |
+
+| Entry | Placeholder | Value |
+|---|---|---|
+| `ttest-assumptions` | `{outcome}` / `{group}` / `{n1}` / `{n2}` | `simon_effect` / `similarity` (same, different) / 80 / 80 |
+| `missing-data-triage` | `{var_a}` / `{pct_a}` / `{var_b}` / `{pct_b}` | `Household_Income` / 1.3 / `Political_Preference` / 1.3 |
+| `mixed-anova-setup` | `{id}` / `{group}` / `{t1}` / `{t2}` | `Participant_ID` / `Condition` / `T1_Pred_Interest_Comp` / `T2_Interest_Comp` |
+
+Two things worth knowing before you read the numbers. `simon_effect` is not a column in the file;
+the recorded runs computed it as `session1_incongruent - session1_congruent`, which is why the
+figures differ from psyteachr's (see the traps section below). And jamovi's Descriptives panel
+reports missing values as a count, not a percentage, so the 1.3% above is 4 out of 305.
+
 ## Data sources and licensing (important)
 
 **These `.omv` files embed datasets from external teaching material.** Section 3 of this project's
