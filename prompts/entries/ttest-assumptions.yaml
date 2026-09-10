@@ -17,8 +17,8 @@ stat_goal: compare-2
 prerequisites:
   - zh: 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
     en: You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups' n, mean, and sd.
-  - zh: 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
-    en: Write down both groups' n and sd (the LLM will also receive them, but you need to be able to check them).
+  - zh: 兩組 n 與 sd 記下來（AI 也會收到，但你要能核對）
+    en: Write down both groups' n and sd (the AI will also receive them, but you need to be able to check them).
 persona: consultant
 prompt:
   zh: |-

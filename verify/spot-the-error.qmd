@@ -3,16 +3,17 @@ title: "[故意找錯練習]{.zh}[Spot the Error]{.en}"
 ---
 
 ::: {.zh}
-本頁把 `askLLM/docs/LIMITATIONS.zh-TW.md` 裡記錄的真實錯誤，改寫成一組「找碴」
-練習：你會先看到一段情境與一段 LLM 回覆，回覆裡藏著一個錯誤，練習先自己找出
+本頁把 `askLLM/docs/LIMITATIONS.zh-TW.md` 裡記錄的錯誤與示警，改寫成一組「找碴」
+練習：你會先看到一段情境與一段 AI 回覆，回覆裡藏著一個錯誤，練習先自己找出
 問題所在，再打開答案核對。這是練習 `verify/workflow.qmd` 裡 V1（路徑核對）、
 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你**親身發現**幻覺，
 而不是被動接受文件裡的結論。
 :::
 
 ::: {.en}
-This page turns the real errors recorded in `askLLM/docs/LIMITATIONS.zh-TW.md`
-into a "spot the error" practice set: you will see a scenario and an LLM
+This page turns the errors and warnings recorded in
+`askLLM/docs/LIMITATIONS.zh-TW.md`
+into a "spot the error" practice set: you will see a scenario and an AI
 reply with an error hidden in it, try to find the problem yourself, then open
 the answer to check. This is a hands-on way to practice V1 (path check), V3
 (scope check), and V4a (code-read check) from `verify/workflow.qmd` — the
@@ -21,36 +22,41 @@ documentation's word for it.
 :::
 
 ::: {.zh}
-**題目來源說明**：第 1–7 題逐字取材自 `askLLM/docs/LIMITATIONS.zh-TW.md`
-表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行
-設計的**示意範例**，用來練習 V4a 的程式碼紅旗核對——這三題**不是**任何 LLM
-的真實輸出，只是依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成的教學
-用例，題目本身會清楚標示「示意範例」。第 11 題取自本站自己的實測記錄
+**題目來源說明**：第 1–6 題逐字取材自 `askLLM/docs/LIMITATIONS.zh-TW.md`
+表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是**示意範例**，
+題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的
+「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子，
+LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習
+V4a 的程式碼紅旗核對，依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成
+教學用例。這四題**都不是**任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄
 （`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文）。目前共 11 題，本頁會在
 課堂驗證後補進新的實測案例持續擴充。
 
-第 1–7 題與第 11 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
-與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套
+第 1–6 題與第 11 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
+與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套
 規範改寫。
 :::
 
 ::: {.en}
-**Where the questions come from**: Questions 1–7 are taken verbatim from the
-real error paths and real observations recorded in the tables of
+**Where the questions come from**: Questions 1–6 are taken verbatim from the
+real error paths recorded in the tables of
 `askLLM/docs/LIMITATIONS.zh-TW.md`; the source is noted on each question.
-Questions 8–10 are **illustrative examples** designed for this page to
-practice the V4a code red-flag check — these three are **not** real output
-from any LLM; they are teaching examples built from the instruction list
-that `askLLM/R/llm-adapter.R` explicitly forbids, and each is clearly labeled
-"illustrative." Question 11 comes from this site's own test records, the
+Questions 7 through 10 are **illustrative examples**, and each is clearly
+labeled. Question 7 is adapted from point 3 of the "overall recommendations"
+in LIMITATIONS, where "8 samples across Saguaro / Palo Verde / Ironwood" is a
+made-up example written to show the failure mode. LIMITATIONS itself now says
+plainly that it is not a recorded test result. Questions 8–10 are designed for
+this page to practice the V4a code red-flag check, built from the instruction
+list that `askLLM/R/llm-adapter.R` explicitly forbids. None of these four is
+real output from any AI. Question 11 comes from this site's own test records, the
 `.omv` files under `data/` and the full replies in `data/replies/`. There are
 11 questions here today, and the set will grow as classroom use turns up new
 cases.
 
-The LLM replies in questions 1–7 and question 11 are quoted verbatim from the
+The AI replies in questions 1–6 and question 11 are quoted verbatim from the
 real-test record, with no stylistic editing, so their punctuation and sentence
 patterns do not follow this site's prose style guide (Pinker Rules 7–10); the
-illustrative replies in questions 8–10 have been rewritten to follow it.
+illustrative replies in questions 7–10 have been rewritten to follow it.
 :::
 
 ## [第 1 題：「比較」選單]{.zh}[Question 1: the "Compare" menu]{.en}
@@ -60,7 +66,7 @@ illustrative replies in questions 8–10 have been rewritten to follow it.
 
 **情境**：使用者用 Module Guider 問「哪一個分析適合比較兩組平均數？」
 
-**LLM 回覆**：「你可以使用 `分析 > 比較 > 獨立樣本t檢定`。」
+**AI 回覆**：「你可以使用 `分析 > 比較 > 獨立樣本t檢定`。」
 
 **問題**：這條路徑錯在哪裡？
 :::
@@ -72,7 +78,7 @@ illustrative replies in questions 8–10 have been rewritten to follow it.
 **Scenario**: A user asks the Module Guider "which analysis compares two
 group means?"
 
-**LLM reply**: "You can use `Analyses > Compare > Independent Samples
+**AI reply**: "You can use `Analyses > Compare > Independent Samples
 T-Test`."
 
 **Question**: What is wrong with this path?
@@ -81,7 +87,7 @@ T-Test`."
 ::: {.callout-note collapse="true"}
 ::: {.zh}
 **答案**：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於
-**T-Tests** 選單之下。這是 LIMITATIONS 記錄「LLM 判斷正確、路徑寫錯」的典型
+**T-Tests** 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型
 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核
 步驟：**V1 路徑核對**。
 :::
@@ -89,7 +95,7 @@ T-Test`."
 ::: {.en}
 **Answer**: jamovi has no "Compare" menu level. The independent-samples
 t-test actually lives under the **T-Tests** menu. This is the textbook case
-LIMITATIONS records where "the LLM reasoned correctly but wrote the wrong
+LIMITATIONS records where "the AI reasoned correctly but wrote the wrong
 path" — it correctly identified the right family of analysis but invented an
 intermediate menu that does not exist. Verification step: **V1, path check**.
 :::
@@ -102,7 +108,7 @@ intermediate menu that does not exist. Verification step: **V1, path check**.
 
 **情境**：使用者問「我想看兩個連續變項的相關係數，該用哪個分析？」
 
-**LLM 回覆**：「請用 `探索 > 相關性`。」
+**AI 回覆**：「請用 `探索 > 相關性`。」
 
 **問題**：這條路徑錯在哪裡？
 :::
@@ -114,7 +120,7 @@ intermediate menu that does not exist. Verification step: **V1, path check**.
 **Scenario**: A user asks "I want the correlation between two continuous
 variables — which analysis?"
 
-**LLM reply**: "Use `Exploration > Correlation`."
+**AI reply**: "Use `Exploration > Correlation`."
 
 **Question**: What is wrong with this path?
 :::
@@ -122,13 +128,13 @@ variables — which analysis?"
 ::: {.callout-note collapse="true"}
 ::: {.zh}
 **答案**：相關矩陣實際位於 **Regression** 選單之下，不在 Exploration。跟
-第 1 題一樣，LLM 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。
+第 1 題一樣，AI 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。
 對應查核步驟：**V1 路徑核對**。
 :::
 
 ::: {.en}
 **Answer**: the correlation matrix actually lives under the **Regression**
-menu, not Exploration. As in question 1, the LLM correctly identified "this
+menu, not Exploration. As in question 1, the AI correctly identified "this
 calls for a correlation analysis" but hung it under the wrong top-level menu.
 Verification step: **V1, path check**.
 :::
@@ -141,7 +147,7 @@ Verification step: **V1, path check**.
 
 **情境**：使用者問「我想對這幾個連續變項做主成分分析。」
 
-**LLM 回覆**：「可以到 `探索 > 主成分分析`。」
+**AI 回覆**：「可以到 `探索 > 主成分分析`。」
 
 **問題**：這條路徑錯在哪裡？
 :::
@@ -153,7 +159,7 @@ Verification step: **V1, path check**.
 **Scenario**: A user asks "I want to run a principal component analysis on
 these continuous variables."
 
-**LLM reply**: "Go to `Exploration > Principal Component Analysis`."
+**AI reply**: "Go to `Exploration > Principal Component Analysis`."
 
 **Question**: What is wrong with this path?
 :::
@@ -178,7 +184,7 @@ it's hung under is wrong. Verification step: **V1, path check**.
 
 **情境**：使用者問「我想做判別分析來分類這幾個組別。」
 
-**LLM 回覆**：「請用 `分類 > 判別分析`，或者 `機器學習 > 分類器`。」
+**AI 回覆**：「請用 `分類 > 判別分析`，或者 `機器學習 > 分類器`。」
 
 **問題**：這兩條路徑錯在哪裡？跟前三題的錯誤性質有什麼不同？
 :::
@@ -190,7 +196,7 @@ it's hung under is wrong. Verification step: **V1, path check**.
 **Scenario**: A user asks "I want to run a discriminant analysis to classify
 these groups."
 
-**LLM reply**: "Use `Classification > Discriminant Analysis`, or
+**AI reply**: "Use `Classification > Discriminant Analysis`, or
 `Machine Learning > Classifier`."
 
 **Question**: What is wrong with these two paths? How does this error differ
@@ -203,7 +209,7 @@ in kind from questions 1–3?
 「選單掛錯位置」，而是**整條路徑（含分析本身）都是虛構的**。跟前三題不同：
 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不
 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身
-（含已安裝模組）是否真的有這個功能——沒有的話就是 LLM 純粹幻覺出一個功能。
+（含已安裝模組）是否真的有這個功能——沒有的話就是 AI 純粹幻覺出一個功能。
 對應查核步驟：**V1 路徑核對**（核對後結論應為「查無此路徑」）。
 :::
 
@@ -215,7 +221,7 @@ fabricated**. Unlike questions 1–3, where the analysis exists and only the
 menu location is wrong, here the analysis does not exist anywhere in jamovi's
 built-in scope. The right move is not to go looking for "the real location" —
 it's to first confirm whether jamovi (including your installed modules)
-actually has this capability at all; if not, the LLM has simply hallucinated
+actually has this capability at all; if not, the AI has simply hallucinated
 a feature. Verification step: **V1, path check** (the correct conclusion here
 is "no such path exists").
 :::
@@ -226,9 +232,9 @@ is "no such path exists").
 ::: {.zh}
 **來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
 
-**情境**：使用者用英文問 LLM 如何做線性迴歸。
+**情境**：使用者用英文問 AI 如何做線性迴歸。
 
-**LLM 回覆**：「Use `Regression > General Linear Model > Linear
+**AI 回覆**：「Use `Regression > General Linear Model > Linear
 Regression`.」
 
 **問題**：這條路徑錯在哪裡？
@@ -238,10 +244,10 @@ Regression`.」
 **Source**: recorded observation in section 1 of
 `askLLM/docs/LIMITATIONS.zh-TW.md`.
 
-**Scenario**: A user asks the LLM, in English, how to run a linear
+**Scenario**: A user asks the AI, in English, how to run a linear
 regression.
 
-**LLM reply**: "Use `Regression > General Linear Model > Linear
+**AI reply**: "Use `Regression > General Linear Model > Linear
 Regression`."
 
 **Question**: What is wrong with this path?
@@ -271,9 +277,9 @@ segments look right. Verification step: **V1, path check**.
 ::: {.zh}
 **來源**：`askLLM/docs/LIMITATIONS.zh-TW.md` 第 1 節實測記錄。
 
-**情境**：使用者用中文問 LLM 如何做線性迴歸。
+**情境**：使用者用中文問 AI 如何做線性迴歸。
 
-**LLM 回覆**：「請到 `迴歸 → 線性線性(Linear Regression)`。」
+**AI 回覆**：「請到 `迴歸 → 線性線性(Linear Regression)`。」
 
 **問題**：除了路徑本身，這則回覆還有什麼地方看起來不對勁？
 :::
@@ -282,10 +288,10 @@ segments look right. Verification step: **V1, path check**.
 **Source**: recorded observation in section 1 of
 `askLLM/docs/LIMITATIONS.zh-TW.md`.
 
-**Scenario**: A user asks the LLM, in Chinese, how to run a linear
+**Scenario**: A user asks the AI, in Chinese, how to run a linear
 regression.
 
-**LLM reply**: "Go to `迴歸 → 線性線性(Linear Regression)`" (the Chinese
+**AI reply**: "Go to `迴歸 → 線性線性(Linear Regression)`" (the Chinese
 label literally reads "linear-linear").
 
 **Question**: Besides the path itself, what else looks off about this reply?
@@ -309,53 +315,60 @@ has nothing to do with correctness. Verification step: **V1, path check**.
 :::
 :::
 
-## [第 7 題：沒附摘要時的憑空生成]{.zh}[Question 7: fabrication with no summary attached]{.en}
+## [第 7 題（示意範例）：沒附摘要時的憑空生成]{.zh}[Question 7 (illustrative): fabrication with no summary attached]{.en}
 
 ::: {.zh}
-**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md`〈綜合使用建議〉第 3 點實測記錄。
+> 本題為**示意範例**，並非任何 AI 的真實輸出。LIMITATIONS 用這個虛構例子
+> 說明「沒有資料時模型會編一份出來」這種錯誤型態。
+
+**來源**：`askLLM/docs/LIMITATIONS.zh-TW.md`〈綜合使用建議〉第 3 點的示意範例。
 
 **情境**：使用者在送出問題時**沒有勾選**「Attach data summary to prompt」，
 資料集其實是 `iris`（150 筆鳶尾花觀測，三個品種：`setosa`、`versicolor`、
-`virginica`），問 LLM「這份資料有幾個樣本、有哪些組別？」
+`virginica`），問 AI「這份資料有幾個樣本、有哪些組別？」
 
-**LLM 回覆**：「這份資料大約有 8 個樣本，分成 Saguaro 與 Palo Verde 兩個
-物種。」
+**AI 回覆（示意）**：「這份資料大約有 8 個樣本，分成 Saguaro、Palo Verde 與
+Ironwood 三個物種。」
 
 **問題**：這則回覆錯在哪裡？根本原因是什麼？
 :::
 
 ::: {.en}
-**Source**: recorded observation in the "overall recommendations" section of
-`askLLM/docs/LIMITATIONS.zh-TW.md`, point 3.
+> This question is an **illustrative example**, not real output from any AI.
+> LIMITATIONS uses this made-up case to show the failure mode: given no data,
+> the model makes some up.
+
+**Source**: the illustrative example in the "overall recommendations" section
+of `askLLM/docs/LIMITATIONS.zh-TW.md`, point 3.
 
 **Scenario**: A user submits a question **without** ticking "Attach data
 summary to prompt." The dataset is actually `iris` (150 observations, three
 species: `setosa`, `versicolor`, `virginica`), and the user asks "how many
 samples are in this dataset, and what groups does it have?"
 
-**LLM reply**: "This dataset has roughly 8 samples, split into two species,
-Saguaro and Palo Verde."
+**AI reply (illustrative)**: "This dataset has roughly 8 samples, split into
+three species: Saguaro, Palo Verde, and Ironwood."
 
 **Question**: What is wrong with this reply? What is the root cause?
 :::
 
 ::: {.callout-note collapse="true"}
 ::: {.zh}
-**答案**：這是 LIMITATIONS 記錄的真實實測結果——未勾選「Attach data
-summary」時，LLM 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體
-物種名稱（Saguaro、Palo Verde，這兩者甚至不是 `iris` 的品種，是憑空生成的
-仙人掌／植物名稱）。根本原因不是「LLM 算錯了」，是**它從頭到尾沒有拿到任何
+**答案**：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data
+summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體
+物種名稱（Saguaro、Palo Verde、Ironwood，這三者都不是 `iris` 的品種，是憑空
+生成的仙人掌／植物名稱）。根本原因不是「AI 算錯了」，是**它從頭到尾沒有拿到任何
 資料資訊**，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：**V3 範圍核對**
 ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是
 否真的附上了資料摘要。
 :::
 
 ::: {.en}
-**Answer**: this is a real recorded observation from LIMITATIONS — when
-"Attach data summary" is unticked, the LLM has no visibility into your
-data at all, yet it still produced a specific number (8 samples) and specific
-group names (Saguaro, Palo Verde — which are not even `iris` species; they
-are fabricated plant names). The root cause is not "the LLM miscalculated"
+**Answer**: LIMITATIONS uses this made-up case to show the failure mode. With
+"Attach data summary" unticked, the AI has no visibility into your data at
+all, yet it still produces a specific number (8 samples) and specific group
+names. Saguaro, Palo Verde, and Ironwood are not `iris` species at all. They
+are fabricated plant names. The root cause is not "the AI miscalculated"
 — it's that **it never received any information about the data in the first
 place**, yet answered with the same confident tone it would use if it had.
 Verification step: **V3, scope check** — a reply that claims to know
@@ -368,12 +381,12 @@ when you submitted the question.
 ## [第 8 題（示意範例）：程式碼裡的安裝指令]{.zh}[Question 8 (illustrative): an install call in the code]{.en}
 
 ::: {.zh}
-> 本題為**示意範例**，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。
+> 本題為**示意範例**，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。
 
 **情境**：使用者用 R code tutor 問「幫我對 `data` 裡的 `score` 欄位做常態性
 檢定。」
 
-**LLM 回覆（示意）**：
+**AI 回覆（示意）**：
 
 ```r
 install.packages("moments")
@@ -386,12 +399,12 @@ agostino.test(data$score)
 
 ::: {.en}
 > This question is an **illustrative example**, not real output from any
-> LLM, used to practice the V4a code-read check.
+> AI, used to practice the V4a code-read check.
 
 **Scenario**: A user asks the R code tutor "run a normality test on the
 `score` column in `data`."
 
-**LLM reply (illustrative)**:
+**AI reply (illustrative)**:
 
 ```r
 install.packages("moments")
@@ -427,11 +440,11 @@ table in `checklist-rtutor.qmd`).
 ## [第 9 題（示意範例）：程式碼裡的檔案讀取]{.zh}[Question 9 (illustrative): a file read in the code]{.en}
 
 ::: {.zh}
-> 本題為**示意範例**，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。
+> 本題為**示意範例**，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。
 
 **情境**：使用者用 R code tutor 問「幫我畫出兩個變項的散佈圖。」
 
-**LLM 回覆（示意）**：
+**AI 回覆（示意）**：
 
 ```r
 mydata <- read.csv("C:/Users/me/Desktop/survey.csv")
@@ -445,7 +458,7 @@ plot(mydata$x, mydata$y)
 **Scenario**: A user asks the R code tutor "plot a scatterplot of two
 variables."
 
-**LLM reply (illustrative)**:
+**AI reply (illustrative)**:
 
 ```r
 mydata <- read.csv("C:/Users/me/Desktop/survey.csv")
@@ -480,13 +493,13 @@ step: **V4a, read**.
 ## [第 10 題（示意範例）：引用一個沒裝的套件]{.zh}[Question 10 (illustrative): citing an uninstalled package]{.en}
 
 ::: {.zh}
-> 本題為**示意範例**，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。
+> 本題為**示意範例**，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。
 
 **情境**：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件），
 `<rj_environment>` 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸
 （robust regression）。」
 
-**LLM 回覆（示意）**：
+**AI 回覆（示意）**：
 
 ```r
 library(MASS)
@@ -503,7 +516,7 @@ summary(fit)
 statistical packages), so the `<rj_environment>` list contains only base R
 packages. The user asks "run a robust regression for me."
 
-**LLM reply (illustrative)**:
+**AI reply (illustrative)**:
 
 ```r
 library(MASS)
@@ -519,11 +532,11 @@ the `<rj_environment>` list, what should you do?
 ::: {.zh}
 **答案**：這裡要看清楚：`MASS` 隨 base R 一起發行，在多數 R 安裝裡本來就
 存在，所以「引用 `MASS`」本身不一定是錯的。**關鍵是核對，不是背名單**。
-真正的檢查方法是：打開這次呼叫附給 LLM 的 `<rj_environment>` 區塊，逐字確認
+真正的檢查方法是：打開這次呼叫附給 AI 的 `<rj_environment>` 區塊，逐字確認
 `MASS` 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒
 列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到
 `there is no package called 'MASS'`。這種情況下應該回頭修改問題（例如
-「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 LLM 的回覆。
+「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 AI 的回覆。
 對應查核步驟：**V4a 讀** 與 **V4b 跑**（V4b 的錯誤訊息正是拿來確認 V4a
 判斷是否正確的依據）。
 :::
@@ -532,13 +545,13 @@ the `<rj_environment>` list, what should you do?
 **Answer**: look carefully here. `MASS` ships with base R and exists in most
 R installations by default, so citing `MASS` is not automatically wrong. **The
 point is to check, not to memorize a blocklist.** The real check is: open the
-`<rj_environment>` block sent to the LLM for this call, and confirm
+`<rj_environment>` block sent to the AI for this call, and confirm
 verbatim whether `MASS` is actually listed. If it is, this code does not
 violate a red flag. If it is not listed, meaning your Rj scan didn't find it,
 running this code will immediately produce
 `there is no package called 'MASS'`. In that case, go back and rephrase the
 question, for example "use only base R for a robust estimate," rather than
-manually installing a package just to make the LLM's reply work. Verification
+manually installing a package just to make the AI's reply work. Verification
 steps: **V4a, read** and **V4b, run** (the V4b error message is exactly what
 confirms whether the V4a judgment was correct).
 :::
@@ -553,7 +566,7 @@ confirms whether the V4a judgment was correct).
 **情境**：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求
 「只給程式骨架與 TODO 註解」。模型是 `gemini-flash-latest`。
 
-**LLM 回覆**（節錄）：
+**AI 回覆**（節錄）：
 
 ```r
 data_long <- data %>%
@@ -576,7 +589,7 @@ data_long <- data %>%
 format, and the prompt asked for "only a skeleton with TODO comments." The
 model was `gemini-flash-latest`.
 
-**LLM reply** (excerpt):
+**AI reply** (excerpt):
 
 ```r
 data_long <- data %>%

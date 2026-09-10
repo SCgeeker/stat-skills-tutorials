@@ -26,21 +26,21 @@ cat(pending_notice(pending_notice_results))
 ### [情境]{.zh}[Scenario]{.en}
 
 ::: {.zh}
-摘要顯示某些變項有遺漏值，想知道這個比例要不要緊、先該做什麼、以及哪些決定 LLM 不能替你做。
+摘要顯示某些變項有遺漏值，想知道這個比例要不要緊、先該做什麼、以及哪些決定 AI 不能替你做。
 :::
 
 ::: {.en}
-The summary shows missing values in some variables. You want to know whether that level of missingness matters, what to do first, and which decisions an LLM cannot make for you.
+The summary shows missing values in some variables. You want to know whether that level of missingness matters, what to do first, and which decisions an AI cannot make for you.
 :::
 
 ### [送出前必做]{.zh}[Prerequisites]{.en}
 
 ::: {.zh}
-- 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 LLM 唯一看得到的線索）
+- 勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 AI 唯一看得到的線索）
 :::
 
 ::: {.en}
-- Tick every variable you care about before you submit (the "Missing" column in the summary is the only clue the LLM can see).
+- Tick every variable you care about before you submit (the "Missing" column in the summary is the only clue the AI can see).
 :::
 
 ### [提示詞]{.zh}[Prompt]{.en}
@@ -246,12 +246,12 @@ Your data has one continuous outcome and one two-level grouping variable. You wa
 
 ::: {.zh}
 - 已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd
-- 兩組 n 與 sd 記下來（LLM 也會收到，但你要能核對）
+- 兩組 n 與 sd 記下來（AI 也會收到，但你要能核對）
 :::
 
 ::: {.en}
 - You have ticked Split by the grouping variable under Exploration ▸ Descriptives and looked at both groups' n, mean, and sd.
-- Write down both groups' n and sd (the LLM will also receive them, but you need to be able to check them).
+- Write down both groups' n and sd (the AI will also receive them, but you need to be able to check them).
 :::
 
 ### [提示詞]{.zh}[Prompt]{.en}

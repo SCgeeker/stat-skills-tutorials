@@ -228,10 +228,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
 <div class="zh">
-<p>askLLM 的 <code>LIMITATIONS.zh-TW.md</code> 記錄過一次實測：有人拿 iris 資料集問問題， 卻沒有勾選「Attach data summary to prompt」——結果 LLM 完全是在憑空回答， 憑空生出「8 個樣本、Saguaro/Palo Verde 三個物種」這種與 iris 資料八竿子打不 著的內容（iris 其實有 150 筆、三個物種是 setosa/versicolor/virginica）。如果 使用者送出前沒有先想好「什麼樣的回覆我才會接受」，看到一段語氣篤定、格式工整 的答案，很容易就直接信了。判準要在<strong>收到回覆之前</strong>寫好，不然人會被回覆本身 的自信說服，失去自己原本的判斷基準。</p>
+<p>askLLM 的 <code>LIMITATIONS.zh-TW.md</code> 用一個示意範例示警：有人拿 iris 資料集問問題， 卻沒有勾選「Attach data summary to prompt」——結果 AI 完全是在憑空回答， 憑空生出「8 個樣本，分成 Saguaro／Palo Verde／Ironwood 三個物種」這種與 iris 資料八竿子打不 著的內容（iris 其實有 150 筆、三個物種是 setosa/versicolor/virginica）。如果 使用者送出前沒有先想好「什麼樣的回覆我才會接受」，看到一段語氣篤定、格式工整 的答案，很容易就直接信了。判準要在<strong>收到回覆之前</strong>寫好，不然人會被回覆本身 的自信說服，失去自己原本的判斷基準。</p>
 </div>
 <div class="en">
-<p>askLLM’s <code>LIMITATIONS.zh-TW.md</code> documents a real test run: someone asked a question about the iris dataset without ticking “Attach data summary to prompt.” The LLM then answered from pure guesswork, inventing “8 samples, three species named Saguaro and Palo Verde” — nothing like the real iris data (150 rows, species setosa/versicolor/virginica). If you haven’t decided in advance what answer you’d actually accept, a confident, well-formatted reply is easy to believe at face value. Criteria have to be written <strong>before</strong> the reply arrives, or the reply’s own confidence will overwrite your judgment.</p>
+<p>askLLM’s <code>LIMITATIONS.zh-TW.md</code> illustrates the risk with a made-up example: someone asked a question about the iris dataset without ticking “Attach data summary to prompt.” The AI then answered from pure guesswork, inventing “8 samples across Saguaro / Palo Verde / Ironwood” — nothing like the real iris data (150 rows, species setosa/versicolor/virginica). If you haven’t decided in advance what answer you’d actually accept, a confident, well-formatted reply is easy to believe at face value. Criteria have to be written <strong>before</strong> the reply arrives, or the reply’s own confidence will overwrite your judgment.</p>
 </div>
 </section>
 <section id="判準長什麼樣子what-a-criterion-looks-like" class="level2">

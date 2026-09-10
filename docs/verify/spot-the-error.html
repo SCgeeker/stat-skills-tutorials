@@ -224,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#第-4-題整個選單都不存在question-4-a-menu-that-doesnt-exist-at-all" id="toc-第-4-題整個選單都不存在question-4-a-menu-that-doesnt-exist-at-all" class="nav-link" data-scroll-target="#第-4-題整個選單都不存在question-4-a-menu-that-doesnt-exist-at-all"><span class="zh">第 4 題：整個選單都不存在</span><span class="en">Question 4: a menu that doesn’t exist at all</span></a></li>
   <li><a href="#第-5-題編出來的巢狀層級question-5-an-invented-nesting" id="toc-第-5-題編出來的巢狀層級question-5-an-invented-nesting" class="nav-link" data-scroll-target="#第-5-題編出來的巢狀層級question-5-an-invented-nesting"><span class="zh">第 5 題：編出來的巢狀層級</span><span class="en">Question 5: an invented nesting</span></a></li>
   <li><a href="#第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong" id="toc-第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong" class="nav-link" data-scroll-target="#第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong"><span class="zh">第 6 題：連翻譯都出錯</span><span class="en">Question 6: even the translation is wrong</span></a></li>
-  <li><a href="#第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached" id="toc-第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached" class="nav-link" data-scroll-target="#第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached"><span class="zh">第 7 題：沒附摘要時的憑空生成</span><span class="en">Question 7: fabrication with no summary attached</span></a></li>
+  <li><a href="#第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached" id="toc-第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached" class="nav-link" data-scroll-target="#第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached"><span class="zh">第 7 題（示意範例）：沒附摘要時的憑空生成</span><span class="en">Question 7 (illustrative): fabrication with no summary attached</span></a></li>
   <li><a href="#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code" id="toc-第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code" class="nav-link" data-scroll-target="#第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code"><span class="zh">第 8 題（示意範例）：程式碼裡的安裝指令</span><span class="en">Question 8 (illustrative): an install call in the code</span></a></li>
   <li><a href="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" id="toc-第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" class="nav-link" data-scroll-target="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code"><span class="zh">第 9 題（示意範例）：程式碼裡的檔案讀取</span><span class="en">Question 9 (illustrative): a file read in the code</span></a></li>
   <li><a href="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" id="toc-第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" class="nav-link" data-scroll-target="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package"><span class="zh">第 10 題（示意範例）：引用一個沒裝的套件</span><span class="en">Question 10 (illustrative): citing an uninstalled package</span></a></li>
@@ -256,31 +256,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="zh">
-<p>本頁把 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 裡記錄的真實錯誤，改寫成一組「找碴」 練習：你會先看到一段情境與一段 LLM 回覆，回覆裡藏著一個錯誤，練習先自己找出 問題所在，再打開答案核對。這是練習 <code>verify/workflow.qmd</code> 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你<strong>親身發現</strong>幻覺， 而不是被動接受文件裡的結論。</p>
+<p>本頁把 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 裡記錄的錯誤與示警，改寫成一組「找碴」 練習：你會先看到一段情境與一段 AI 回覆，回覆裡藏著一個錯誤，練習先自己找出 問題所在，再打開答案核對。這是練習 <code>verify/workflow.qmd</code> 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你<strong>親身發現</strong>幻覺， 而不是被動接受文件裡的結論。</p>
 </div>
 <div class="en">
-<p>This page turns the real errors recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an LLM reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code> — the point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
+<p>This page turns the errors and warnings recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an AI reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code> — the point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
 </div>
 <div class="zh">
-<p><strong>題目來源說明</strong>：第 1–7 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑與實測觀察，出處已在每題標明。第 8–10 題是本頁自行 設計的<strong>示意範例</strong>，用來練習 V4a 的程式碼紅旗核對——這三題<strong>不是</strong>任何 LLM 的真實輸出，只是依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成的教學 用例，題目本身會清楚標示「示意範例」。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文）。目前共 11 題，本頁會在 課堂驗證後補進新的實測案例持續擴充。</p>
-<p>第 1–7 題與第 11 題的 LLM 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 8–10 題的示意回覆則依這套 規範改寫。</p>
+<p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>， 題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的 「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成 教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文）。目前共 11 題，本頁會在 課堂驗證後補進新的實測案例持續擴充。</p>
+<p>第 1–6 題與第 11 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套 規範改寫。</p>
 </div>
 <div class="en">
-<p><strong>Where the questions come from</strong>: Questions 1–7 are taken verbatim from the real error paths and real observations recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 8–10 are <strong>illustrative examples</strong> designed for this page to practice the V4a code red-flag check — these three are <strong>not</strong> real output from any LLM; they are teaching examples built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids, and each is clearly labeled “illustrative.” Question 11 comes from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 11 questions here today, and the set will grow as classroom use turns up new cases.</p>
-<p>The LLM replies in questions 1–7 and question 11 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 8–10 have been rewritten to follow it.</p>
+<p><strong>Where the questions come from</strong>: Questions 1–6 are taken verbatim from the real error paths recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 7 through 10 are <strong>illustrative examples</strong>, and each is clearly labeled. Question 7 is adapted from point 3 of the “overall recommendations” in LIMITATIONS, where “8 samples across Saguaro / Palo Verde / Ironwood” is a made-up example written to show the failure mode. LIMITATIONS itself now says plainly that it is not a recorded test result. Questions 8–10 are designed for this page to practice the V4a code red-flag check, built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids. None of these four is real output from any AI. Question 11 comes from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 11 questions here today, and the set will grow as classroom use turns up new cases.</p>
+<p>The AI replies in questions 1–6 and question 11 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 7–10 have been rewritten to follow it.</p>
 </div>
 <section id="第-1-題比較選單question-1-the-compare-menu" class="level2">
 <h2 class="anchored" data-anchor-id="第-1-題比較選單question-1-the-compare-menu"><span class="zh">第 1 題：「比較」選單</span><span class="en">Question 1: the “Compare” menu</span></h2>
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
 <p><strong>情境</strong>：使用者用 Module Guider 問「哪一個分析適合比較兩組平均數？」</p>
-<p><strong>LLM 回覆</strong>：「你可以使用 <code>分析 &gt; 比較 &gt; 獨立樣本t檢定</code>。」</p>
+<p><strong>AI 回覆</strong>：「你可以使用 <code>分析 &gt; 比較 &gt; 獨立樣本t檢定</code>。」</p>
 <p><strong>問題</strong>：這條路徑錯在哪裡？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
 <p><strong>Scenario</strong>: A user asks the Module Guider “which analysis compares two group means?”</p>
-<p><strong>LLM reply</strong>: “You can use <code>Analyses &gt; Compare &gt; Independent Samples T-Test</code>.”</p>
+<p><strong>AI reply</strong>: “You can use <code>Analyses &gt; Compare &gt; Independent Samples T-Test</code>.”</p>
 <p><strong>Question</strong>: What is wrong with this path?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -296,10 +296,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 <strong>T-Tests</strong> 選單之下。這是 LIMITATIONS 記錄「LLM 判斷正確、路徑寫錯」的典型 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核 步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 <strong>T-Tests</strong> 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核 步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the <strong>T-Tests</strong> menu. This is the textbook case LIMITATIONS records where “the LLM reasoned correctly but wrote the wrong path” — it correctly identified the right family of analysis but invented an intermediate menu that does not exist. Verification step: <strong>V1, path check</strong>.</p>
+<p><strong>Answer</strong>: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the <strong>T-Tests</strong> menu. This is the textbook case LIMITATIONS records where “the AI reasoned correctly but wrote the wrong path” — it correctly identified the right family of analysis but invented an intermediate menu that does not exist. Verification step: <strong>V1, path check</strong>.</p>
 </div>
 </div>
 </div>
@@ -310,13 +310,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
 <p><strong>情境</strong>：使用者問「我想看兩個連續變項的相關係數，該用哪個分析？」</p>
-<p><strong>LLM 回覆</strong>：「請用 <code>探索 &gt; 相關性</code>。」</p>
+<p><strong>AI 回覆</strong>：「請用 <code>探索 &gt; 相關性</code>。」</p>
 <p><strong>問題</strong>：這條路徑錯在哪裡？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
 <p><strong>Scenario</strong>: A user asks “I want the correlation between two continuous variables — which analysis?”</p>
-<p><strong>LLM reply</strong>: “Use <code>Exploration &gt; Correlation</code>.”</p>
+<p><strong>AI reply</strong>: “Use <code>Exploration &gt; Correlation</code>.”</p>
 <p><strong>Question</strong>: What is wrong with this path?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -332,10 +332,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：相關矩陣實際位於 <strong>Regression</strong> 選單之下，不在 Exploration。跟 第 1 題一樣，LLM 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。 對應查核步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：相關矩陣實際位於 <strong>Regression</strong> 選單之下，不在 Exploration。跟 第 1 題一樣，AI 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。 對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: the correlation matrix actually lives under the <strong>Regression</strong> menu, not Exploration. As in question 1, the LLM correctly identified “this calls for a correlation analysis” but hung it under the wrong top-level menu. Verification step: <strong>V1, path check</strong>.</p>
+<p><strong>Answer</strong>: the correlation matrix actually lives under the <strong>Regression</strong> menu, not Exploration. As in question 1, the AI correctly identified “this calls for a correlation analysis” but hung it under the wrong top-level menu. Verification step: <strong>V1, path check</strong>.</p>
 </div>
 </div>
 </div>
@@ -346,13 +346,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
 <p><strong>情境</strong>：使用者問「我想對這幾個連續變項做主成分分析。」</p>
-<p><strong>LLM 回覆</strong>：「可以到 <code>探索 &gt; 主成分分析</code>。」</p>
+<p><strong>AI 回覆</strong>：「可以到 <code>探索 &gt; 主成分分析</code>。」</p>
 <p><strong>問題</strong>：這條路徑錯在哪裡？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
 <p><strong>Scenario</strong>: A user asks “I want to run a principal component analysis on these continuous variables.”</p>
-<p><strong>LLM reply</strong>: “Go to <code>Exploration &gt; Principal Component Analysis</code>.”</p>
+<p><strong>AI reply</strong>: “Go to <code>Exploration &gt; Principal Component Analysis</code>.”</p>
 <p><strong>Question</strong>: What is wrong with this path?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -382,13 +382,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
 <p><strong>情境</strong>：使用者問「我想做判別分析來分類這幾個組別。」</p>
-<p><strong>LLM 回覆</strong>：「請用 <code>分類 &gt; 判別分析</code>，或者 <code>機器學習 &gt; 分類器</code>。」</p>
+<p><strong>AI 回覆</strong>：「請用 <code>分類 &gt; 判別分析</code>，或者 <code>機器學習 &gt; 分類器</code>。」</p>
 <p><strong>問題</strong>：這兩條路徑錯在哪裡？跟前三題的錯誤性質有什麼不同？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
 <p><strong>Scenario</strong>: A user asks “I want to run a discriminant analysis to classify these groups.”</p>
-<p><strong>LLM reply</strong>: “Use <code>Classification &gt; Discriminant Analysis</code>, or <code>Machine Learning &gt; Classifier</code>.”</p>
+<p><strong>AI reply</strong>: “Use <code>Classification &gt; Discriminant Analysis</code>, or <code>Machine Learning &gt; Classifier</code>.”</p>
 <p><strong>Question</strong>: What is wrong with these two paths? How does this error differ in kind from questions 1–3?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -404,10 +404,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是 「選單掛錯位置」，而是<strong>整條路徑（含分析本身）都是虛構的</strong>。跟前三題不同： 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身 （含已安裝模組）是否真的有這個功能——沒有的話就是 LLM 純粹幻覺出一個功能。 對應查核步驟：<strong>V1 路徑核對</strong>（核對後結論應為「查無此路徑」）。</p>
+<p><strong>答案</strong>：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是 「選單掛錯位置」，而是<strong>整條路徑（含分析本身）都是虛構的</strong>。跟前三題不同： 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身 （含已安裝模組）是否真的有這個功能——沒有的話就是 AI 純粹幻覺出一個功能。 對應查核步驟：<strong>V1 路徑核對</strong>（核對後結論應為「查無此路徑」）。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all” — this is not “the menu is in the wrong place,” it is that <strong>the entire path, including the analysis itself, is fabricated</strong>. Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the LLM has simply hallucinated a feature. Verification step: <strong>V1, path check</strong> (the correct conclusion here is “no such path exists”).</p>
+<p><strong>Answer</strong>: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all” — this is not “the menu is in the wrong place,” it is that <strong>the entire path, including the analysis itself, is fabricated</strong>. Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the AI has simply hallucinated a feature. Verification step: <strong>V1, path check</strong> (the correct conclusion here is “no such path exists”).</p>
 </div>
 </div>
 </div>
@@ -417,14 +417,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="第-5-題編出來的巢狀層級question-5-an-invented-nesting"><span class="zh">第 5 題：編出來的巢狀層級</span><span class="en">Question 5: an invented nesting</span></h2>
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
-<p><strong>情境</strong>：使用者用英文問 LLM 如何做線性迴歸。</p>
-<p><strong>LLM 回覆</strong>：「Use <code>Regression &gt; General Linear Model &gt; Linear Regression</code>.」</p>
+<p><strong>情境</strong>：使用者用英文問 AI 如何做線性迴歸。</p>
+<p><strong>AI 回覆</strong>：「Use <code>Regression &gt; General Linear Model &gt; Linear Regression</code>.」</p>
 <p><strong>問題</strong>：這條路徑錯在哪裡？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
-<p><strong>Scenario</strong>: A user asks the LLM, in English, how to run a linear regression.</p>
-<p><strong>LLM reply</strong>: “Use <code>Regression &gt; General Linear Model &gt; Linear Regression</code>.”</p>
+<p><strong>Scenario</strong>: A user asks the AI, in English, how to run a linear regression.</p>
+<p><strong>AI reply</strong>: “Use <code>Regression &gt; General Linear Model &gt; Linear Regression</code>.”</p>
 <p><strong>Question</strong>: What is wrong with this path?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -453,14 +453,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="第-6-題連翻譯都出錯question-6-even-the-translation-is-wrong"><span class="zh">第 6 題：連翻譯都出錯</span><span class="en">Question 6: even the translation is wrong</span></h2>
 <div class="zh">
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 第 1 節實測記錄。</p>
-<p><strong>情境</strong>：使用者用中文問 LLM 如何做線性迴歸。</p>
-<p><strong>LLM 回覆</strong>：「請到 <code>迴歸 → 線性線性(Linear Regression)</code>。」</p>
+<p><strong>情境</strong>：使用者用中文問 AI 如何做線性迴歸。</p>
+<p><strong>AI 回覆</strong>：「請到 <code>迴歸 → 線性線性(Linear Regression)</code>。」</p>
 <p><strong>問題</strong>：除了路徑本身，這則回覆還有什麼地方看起來不對勁？</p>
 </div>
 <div class="en">
 <p><strong>Source</strong>: recorded observation in section 1 of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>.</p>
-<p><strong>Scenario</strong>: A user asks the LLM, in Chinese, how to run a linear regression.</p>
-<p><strong>LLM reply</strong>: “Go to <code>迴歸 → 線性線性(Linear Regression)</code>” (the Chinese label literally reads “linear-linear”).</p>
+<p><strong>Scenario</strong>: A user asks the AI, in Chinese, how to run a linear regression.</p>
+<p><strong>AI reply</strong>: “Go to <code>迴歸 → 線性線性(Linear Regression)</code>” (the Chinese label literally reads “linear-linear”).</p>
 <p><strong>Question</strong>: Besides the path itself, what else looks off about this reply?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -485,18 +485,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached" class="level2">
-<h2 class="anchored" data-anchor-id="第-7-題沒附摘要時的憑空生成question-7-fabrication-with-no-summary-attached"><span class="zh">第 7 題：沒附摘要時的憑空生成</span><span class="en">Question 7: fabrication with no summary attached</span></h2>
+<section id="第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached" class="level2">
+<h2 class="anchored" data-anchor-id="第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached"><span class="zh">第 7 題（示意範例）：沒附摘要時的憑空生成</span><span class="en">Question 7 (illustrative): fabrication with no summary attached</span></h2>
 <div class="zh">
-<p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈綜合使用建議〉第 3 點實測記錄。</p>
-<p><strong>情境</strong>：使用者在送出問題時<strong>沒有勾選</strong>「Attach data summary to prompt」， 資料集其實是 <code>iris</code>（150 筆鳶尾花觀測，三個品種：<code>setosa</code>、<code>versicolor</code>、 <code>virginica</code>），問 LLM「這份資料有幾個樣本、有哪些組別？」</p>
-<p><strong>LLM 回覆</strong>：「這份資料大約有 8 個樣本，分成 Saguaro 與 Palo Verde 兩個 物種。」</p>
+<blockquote class="blockquote">
+<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出。LIMITATIONS 用這個虛構例子 說明「沒有資料時模型會編一份出來」這種錯誤型態。</p>
+</blockquote>
+<p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈綜合使用建議〉第 3 點的示意範例。</p>
+<p><strong>情境</strong>：使用者在送出問題時<strong>沒有勾選</strong>「Attach data summary to prompt」， 資料集其實是 <code>iris</code>（150 筆鳶尾花觀測，三個品種：<code>setosa</code>、<code>versicolor</code>、 <code>virginica</code>），問 AI「這份資料有幾個樣本、有哪些組別？」</p>
+<p><strong>AI 回覆（示意）</strong>：「這份資料大約有 8 個樣本，分成 Saguaro、Palo Verde 與 Ironwood 三個物種。」</p>
 <p><strong>問題</strong>：這則回覆錯在哪裡？根本原因是什麼？</p>
 </div>
 <div class="en">
-<p><strong>Source</strong>: recorded observation in the “overall recommendations” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>, point 3.</p>
+<blockquote class="blockquote">
+<p>This question is an <strong>illustrative example</strong>, not real output from any AI. LIMITATIONS uses this made-up case to show the failure mode: given no data, the model makes some up.</p>
+</blockquote>
+<p><strong>Source</strong>: the illustrative example in the “overall recommendations” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>, point 3.</p>
 <p><strong>Scenario</strong>: A user submits a question <strong>without</strong> ticking “Attach data summary to prompt.” The dataset is actually <code>iris</code> (150 observations, three species: <code>setosa</code>, <code>versicolor</code>, <code>virginica</code>), and the user asks “how many samples are in this dataset, and what groups does it have?”</p>
-<p><strong>LLM reply</strong>: “This dataset has roughly 8 samples, split into two species, Saguaro and Palo Verde.”</p>
+<p><strong>AI reply (illustrative)</strong>: “This dataset has roughly 8 samples, split into three species: Saguaro, Palo Verde, and Ironwood.”</p>
 <p><strong>Question</strong>: What is wrong with this reply? What is the root cause?</p>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -512,10 +518,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：這是 LIMITATIONS 記錄的真實實測結果——未勾選「Attach data summary」時，LLM 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體 物種名稱（Saguaro、Palo Verde，這兩者甚至不是 <code>iris</code> 的品種，是憑空生成的 仙人掌／植物名稱）。根本原因不是「LLM 算錯了」，是<strong>它從頭到尾沒有拿到任何 資料資訊</strong>，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：<strong>V3 範圍核對</strong> ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是 否真的附上了資料摘要。</p>
+<p><strong>答案</strong>：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體 物種名稱（Saguaro、Palo Verde、Ironwood，這三者都不是 <code>iris</code> 的品種，是憑空 生成的仙人掌／植物名稱）。根本原因不是「AI 算錯了」，是<strong>它從頭到尾沒有拿到任何 資料資訊</strong>，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：<strong>V3 範圍核對</strong> ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是 否真的附上了資料摘要。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: this is a real recorded observation from LIMITATIONS — when “Attach data summary” is unticked, the LLM has no visibility into your data at all, yet it still produced a specific number (8 samples) and specific group names (Saguaro, Palo Verde — which are not even <code>iris</code> species; they are fabricated plant names). The root cause is not “the LLM miscalculated” — it’s that <strong>it never received any information about the data in the first place</strong>, yet answered with the same confident tone it would use if it had. Verification step: <strong>V3, scope check</strong> — a reply that claims to know something it cannot actually see should be discounted entirely, and you should go back and confirm whether the data summary was actually attached when you submitted the question.</p>
+<p><strong>Answer</strong>: LIMITATIONS uses this made-up case to show the failure mode. With “Attach data summary” unticked, the AI has no visibility into your data at all, yet it still produces a specific number (8 samples) and specific group names. Saguaro, Palo Verde, and Ironwood are not <code>iris</code> species at all. They are fabricated plant names. The root cause is not “the AI miscalculated” — it’s that <strong>it never received any information about the data in the first place</strong>, yet answered with the same confident tone it would use if it had. Verification step: <strong>V3, scope check</strong> — a reply that claims to know something it cannot actually see should be discounted entirely, and you should go back and confirm whether the data summary was actually attached when you submitted the question.</p>
 </div>
 </div>
 </div>
@@ -525,10 +531,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="第-8-題示意範例程式碼裡的安裝指令question-8-illustrative-an-install-call-in-the-code"><span class="zh">第 8 題（示意範例）：程式碼裡的安裝指令</span><span class="en">Question 8 (illustrative): an install call in the code</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題為<strong>示意範例</strong>，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。</p>
+<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。</p>
 </blockquote>
 <p><strong>情境</strong>：使用者用 R code tutor 問「幫我對 <code>data</code> 裡的 <code>score</code> 欄位做常態性 檢定。」</p>
-<p><strong>LLM 回覆（示意）</strong>：</p>
+<p><strong>AI 回覆（示意）</strong>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"moments"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">agostino.test</span>(data<span class="sc">$</span>score)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -536,10 +542,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="en">
 <blockquote class="blockquote">
-<p>This question is an <strong>illustrative example</strong>, not real output from any LLM, used to practice the V4a code-read check.</p>
+<p>This question is an <strong>illustrative example</strong>, not real output from any AI, used to practice the V4a code-read check.</p>
 </blockquote>
 <p><strong>Scenario</strong>: A user asks the R code tutor “run a normality test on the <code>score</code> column in <code>data</code>.”</p>
-<p><strong>LLM reply (illustrative)</strong>:</p>
+<p><strong>AI reply (illustrative)</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"moments"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">agostino.test</span>(data<span class="sc">$</span>score)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -571,17 +577,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code"><span class="zh">第 9 題（示意範例）：程式碼裡的檔案讀取</span><span class="en">Question 9 (illustrative): a file read in the code</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題為<strong>示意範例</strong>，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。</p>
+<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。</p>
 </blockquote>
 <p><strong>情境</strong>：使用者用 R code tutor 問「幫我畫出兩個變項的散佈圖。」</p>
-<p><strong>LLM 回覆（示意）</strong>：</p>
+<p><strong>AI 回覆（示意）</strong>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"C:/Users/me/Desktop/survey.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mydata<span class="sc">$</span>x, mydata<span class="sc">$</span>y)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>問題</strong>：這段程式碼違反了哪幾條紅旗規則？（不只一條）</p>
 </div>
 <div class="en">
 <p><strong>Scenario</strong>: A user asks the R code tutor “plot a scatterplot of two variables.”</p>
-<p><strong>LLM reply (illustrative)</strong>:</p>
+<p><strong>AI reply (illustrative)</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mydata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"C:/Users/me/Desktop/survey.csv"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mydata<span class="sc">$</span>x, mydata<span class="sc">$</span>y)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Question</strong>: Which red-flag rules does this code violate? (More than one.)</p>
@@ -612,10 +618,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package"><span class="zh">第 10 題（示意範例）：引用一個沒裝的套件</span><span class="en">Question 10 (illustrative): citing an uninstalled package</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題為<strong>示意範例</strong>，並非任何 LLM 的真實輸出，用來練習 V4a 讀碼核對。</p>
+<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。</p>
 </blockquote>
 <p><strong>情境</strong>：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件）， <code>&lt;rj_environment&gt;</code> 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸 （robust regression）。」</p>
-<p><strong>LLM 回覆（示意）</strong>：</p>
+<p><strong>AI 回覆（示意）</strong>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -623,7 +629,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="en">
 <p><strong>Scenario</strong>: The user’s Rj environment has only base R installed (no extra statistical packages), so the <code>&lt;rj_environment&gt;</code> list contains only base R packages. The user asks “run a robust regression for me.”</p>
-<p><strong>LLM reply (illustrative)</strong>:</p>
+<p><strong>AI reply (illustrative)</strong>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
@@ -642,10 +648,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：這裡要看清楚：<code>MASS</code> 隨 base R 一起發行，在多數 R 安裝裡本來就 存在，所以「引用 <code>MASS</code>」本身不一定是錯的。<strong>關鍵是核對，不是背名單</strong>。 真正的檢查方法是：打開這次呼叫附給 LLM 的 <code>&lt;rj_environment&gt;</code> 區塊，逐字確認 <code>MASS</code> 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒 列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到 <code>there is no package called 'MASS'</code>。這種情況下應該回頭修改問題（例如 「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 LLM 的回覆。 對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>（V4b 的錯誤訊息正是拿來確認 V4a 判斷是否正確的依據）。</p>
+<p><strong>答案</strong>：這裡要看清楚：<code>MASS</code> 隨 base R 一起發行，在多數 R 安裝裡本來就 存在，所以「引用 <code>MASS</code>」本身不一定是錯的。<strong>關鍵是核對，不是背名單</strong>。 真正的檢查方法是：打開這次呼叫附給 AI 的 <code>&lt;rj_environment&gt;</code> 區塊，逐字確認 <code>MASS</code> 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒 列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到 <code>there is no package called 'MASS'</code>。這種情況下應該回頭修改問題（例如 「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 AI 的回覆。 對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>（V4b 的錯誤訊息正是拿來確認 V4a 判斷是否正確的依據）。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: look carefully here. <code>MASS</code> ships with base R and exists in most R installations by default, so citing <code>MASS</code> is not automatically wrong. <strong>The point is to check, not to memorize a blocklist.</strong> The real check is: open the <code>&lt;rj_environment&gt;</code> block sent to the LLM for this call, and confirm verbatim whether <code>MASS</code> is actually listed. If it is, this code does not violate a red flag. If it is not listed, meaning your Rj scan didn’t find it, running this code will immediately produce <code>there is no package called 'MASS'</code>. In that case, go back and rephrase the question, for example “use only base R for a robust estimate,” rather than manually installing a package just to make the LLM’s reply work. Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong> (the V4b error message is exactly what confirms whether the V4a judgment was correct).</p>
+<p><strong>Answer</strong>: look carefully here. <code>MASS</code> ships with base R and exists in most R installations by default, so citing <code>MASS</code> is not automatically wrong. <strong>The point is to check, not to memorize a blocklist.</strong> The real check is: open the <code>&lt;rj_environment&gt;</code> block sent to the AI for this call, and confirm verbatim whether <code>MASS</code> is actually listed. If it is, this code does not violate a red flag. If it is not listed, meaning your Rj scan didn’t find it, running this code will immediately produce <code>there is no package called 'MASS'</code>. In that case, go back and rephrase the question, for example “use only base R for a robust estimate,” rather than manually installing a package just to make the AI’s reply work. Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong> (the V4b error message is exactly what confirms whether the V4a judgment was correct).</p>
 </div>
 </div>
 </div>
@@ -658,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>本題取自 <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。</p>
 </blockquote>
 <p><strong>情境</strong>：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求 「只給程式骨架與 TODO 註解」。模型是 <code>gemini-flash-latest</code>。</p>
-<p><strong>LLM 回覆</strong>（節錄）：</p>
+<p><strong>AI 回覆</strong>（節錄）：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="co"># </span><span class="al">TODO</span><span class="co">: 填入要轉換的兩個時間點欄位名稱),</span></span>
@@ -672,7 +678,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This question comes from the recorded test in <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code>. The reply is quoted verbatim, with no editing.</p>
 </blockquote>
 <p><strong>Scenario</strong>: The user asked the R code tutor to reshape wide data into long format, and the prompt asked for “only a skeleton with TODO comments.” The model was <code>gemini-flash-latest</code>.</p>
-<p><strong>LLM reply</strong> (excerpt):</p>
+<p><strong>AI reply</strong> (excerpt):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(<span class="co"># </span><span class="al">TODO</span><span class="co">: fill in the two time-point column names),</span></span>

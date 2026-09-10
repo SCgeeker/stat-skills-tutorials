@@ -5,38 +5,34 @@ title: "[第一課：LLM 看得到什麼、看不到什麼]{.zh}[What the LLM Se
 ## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
 ::: {.zh}
-有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第
-47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM
-從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的
-**摘要統計**，它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤
-之所以危險，是因為語氣跟講對的時候一模一樣。
+很多使用者會用`askLLM`直接問AI：「這筆資料有沒有離群值？」，然後得到語氣篤定的回覆：「我檢查過資料，第47 筆的數值明顯偏高，建議排除。」這樣聽起來很專業，但是這句話從頭到尾是AI編造的。`askLLM`從來沒有把第 47筆、或任何一筆原始資料，傳給 AI。預設狀況下，AI收到的只是你勾選變項的**摘要統計**，它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤之所以危險，是因為肯定的語氣猶如宣稱答案正確。
 :::
 
 ::: {.en}
-A user asked askLLM whether the data had outliers. The reply was confident:
-"I checked the data — row 47 is clearly high, I'd exclude it." That sounds
-expert, but it is fabricated from start to finish. askLLM never sends row 47,
-or any raw row, to the LLM. The LLM only receives **summary statistics** for
-the variables you selected. It cannot name "row 47" because it never saw
-rows at all. This kind of error is dangerous precisely because it sounds
-exactly like a correct answer.
+Many users ask the AI directly through `askLLM`: "Does this dataset have
+outliers?" The reply comes back in a confident tone: "I checked the data.
+Row 47 is clearly high, so I would exclude it." That sounds expert, but the
+AI fabricated the whole answer. `askLLM` never sends row 47, or any other raw
+row, to the AI. By default the AI receives only **summary statistics** for the
+variables you ticked. It may not even see how many columns your data has, and
+it certainly cannot name a specific row. This kind of error is dangerous
+because the confident tone itself claims the answer is correct.
 :::
 
 ::: {.zh}
-這個對話是**示意範例**，不是實際記錄。但同一類錯誤真的發生過：askLLM 的實測記錄
-裡，在未勾選 Attach data summary 的情況下，模型憑空生出「8 個樣本、Saguaro 與
-Palo Verde 三個物種」這種與手上資料毫無關係的內容（見母專案的
-`askLLM/docs/LIMITATIONS.zh-TW.md`）。模型沒有資料時不會說「我沒有資料」，它會
+這個對話是**示意範例**，不是實際記錄。母專案的 `askLLM/docs/LIMITATIONS.zh-TW.md`
+用同一類示意來示警：未勾選 Attach data summary 時，AI 可能憑空生出「8 個樣本，
+分成 Saguaro／Palo Verde／Ironwood 三個物種」這種與手上資料毫無關係的內容。AI 沒有資料時不會說「我沒有資料」，它會
 編一份出來。
 :::
 
 ::: {.en}
-That exchange is **illustrative**, not a transcript. The same class of error is
-real, however. askLLM's own testing records a reply that invented "8 samples
-across three species, Saguaro and Palo Verde" for a dataset containing nothing
-of the kind, produced with the data summary switched off. The record is in
-`askLLM/docs/LIMITATIONS.zh-TW.md` in the parent project. Given no data, the
-model does not say it has no data. It makes some up.
+That exchange is **illustrative**, not a transcript. The parent project warns about the same
+thing in the same way. `askLLM/docs/LIMITATIONS.zh-TW.md` gives its own
+illustration: with the data summary switched off, an AI can invent "8 samples
+across Saguaro / Palo Verde / Ironwood" for a dataset containing nothing of
+the kind. Given no data, the
+AI does not say it has no data. It makes some up.
 :::
 
 ## [askLLM 實際送出的內容]{.zh}[What askLLM actually sends]{.en}
@@ -72,49 +68,46 @@ group [factor]:
 ```
 
 ::: {.zh}
-就這樣。唯一的例外是**有序類別變項（ordered factor）**會多一行 `level order: 低 < 中 < 高`，說明水準的順序。除此之外沒有別的了——**LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。**
-勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全
+就這樣。唯一的例外是**有序類別變項（ordered factor）**會多一行 `level order: 低 < 中 < 高`，說明水準的順序。除此之外沒有別的了——**AI 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。**
+勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，AI 完全
 是在憑空猜測。
 :::
 
 ::: {.en}
 That is all. The one exception is an **ordered factor**, which adds one more
 line, `level order: low < medium < high`, to show how the levels are ordered.
-Beyond that there is nothing — **the LLM receives exactly what you just read,
+Beyond that there is nothing — **the AI receives exactly what you just read,
 nothing more.**
 This block is attached only when "Attach data summary to prompt" is ticked;
-untick it and the LLM is guessing with no data at all.
+untick it and the AI is guessing with no data at all.
 :::
 
 ## [摘要看不到什麼]{.zh}[What the summary cannot show]{.en}
 
 ::: {.zh}
-n、遺漏數、mean、sd、median、min、max（連續變項）與各水準次數（類別變項）——
-這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM **原則上不可能
-真的檢查過**，即使它宣稱檢查過：
+摘要只有連續變項如n、missing data、mean、sd、median、min、max，與類別變項像是各水準次數。整欄原始資料不會在摘要裡面，所以以下這些事，AI **原則上不可能真的檢查過**，即使它宣稱檢查過：
 
 - 哪一筆資料是離群值（只知道 min 和 max，不知道哪一列）
 - 資料是否常態分布（min/max/median 不足以判斷分布形狀）
 - 遺漏值集中在哪些組別（只知道遺漏「總數」，不知道遺漏的樣式）
 - 變項背後的實際測量方式或研究設計
 
-看到回覆聲稱做了以上任何一件事，那就是越界（overreaching），要打折扣看待。
+看到AI回覆聲稱做了以上任何一件事，那就是越界（overreaching），使用者要謹慎判斷。
 :::
 
 ::: {.en}
-The summary's entire vocabulary is: n, missing, mean, sd, median, min, max
-(continuous) and level counts (categorical). Raw rows are absent, so the
-following are things the LLM **cannot actually have checked**, even if it
-claims to have:
+The summary reports n, missing, mean, sd, median, min, and max for a
+continuous variable, and level counts for a categorical one. The raw column
+values never reach the summary. In principle, therefore, the AI **cannot
+have checked** any of the following, whatever it claims:
 
-- which specific row is an outlier (min/max tell you the range, not which row)
-- whether the data are normally distributed (min/max/median can't reveal shape)
-- whether missingness clusters in particular groups (only the missing count
-  is known, not the pattern)
-- what the variable actually measures or how the study was designed
+- which specific row is an outlier. Min and max give you the range, not the row.
+- whether the data are normally distributed. Min, max, and median cannot reveal the shape of a distribution.
+- whether missingness clusters in particular groups. The summary gives you the total missing count, not the pattern.
+- what the variable actually measures, or how the study was designed.
 
-If a reply claims to have checked any of these, treat that claim as
-overreaching and discount it.
+When an AI reply claims to have checked any of these, the reply is
+overreaching. Judge it carefully.
 :::
 
 ## [動手做（5 分鐘）]{.zh}[Try it (5 minutes)]{.en}
@@ -149,11 +142,11 @@ overreaching and discount it.
 ## [帶走這句話]{.zh}[One thing to remember]{.en}
 
 ::: {.zh}
-LLM 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都
+AI 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都
 看不到。
 :::
 
 ::: {.en}
-The LLM only ever sees the summary numbers for the variables you selected —
+The AI only ever sees the summary numbers for the variables you ticked —
 never a single row of the raw data you see in jamovi.
 :::

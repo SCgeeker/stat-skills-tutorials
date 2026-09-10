@@ -228,16 +228,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
 <div class="zh">
-<p>有個使用者在 askLLM 裡問：「這筆資料有沒有離群值？」回覆很篤定：「我檢查過資料，第 47 筆的數值明顯偏高，建議排除。」聽起來很專業——但這句話從頭到尾是編的。askLLM 從來沒有把第 47 筆、或任何一筆原始資料，傳給 LLM。LLM 收到的只是你勾選變項的 <strong>摘要統計</strong>，它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤 之所以危險，是因為語氣跟講對的時候一模一樣。</p>
+<p>很多使用者會用<code>askLLM</code>直接問AI：「這筆資料有沒有離群值？」，然後得到語氣篤定的回覆：「我檢查過資料，第47 筆的數值明顯偏高，建議排除。」這樣聽起來很專業，但是這句話從頭到尾是AI編造的。<code>askLLM</code>從來沒有把第 47筆、或任何一筆原始資料，傳給 AI。預設狀況下，AI收到的只是你勾選變項的<strong>摘要統計</strong>，它連資料有幾欄都不一定看得完整，更不可能指認「第幾筆」。這種錯誤之所以危險，是因為肯定的語氣猶如宣稱答案正確。</p>
 </div>
 <div class="en">
-<p>A user asked askLLM whether the data had outliers. The reply was confident: “I checked the data — row 47 is clearly high, I’d exclude it.” That sounds expert, but it is fabricated from start to finish. askLLM never sends row 47, or any raw row, to the LLM. The LLM only receives <strong>summary statistics</strong> for the variables you selected. It cannot name “row 47” because it never saw rows at all. This kind of error is dangerous precisely because it sounds exactly like a correct answer.</p>
+<p>Many users ask the AI directly through <code>askLLM</code>: “Does this dataset have outliers?” The reply comes back in a confident tone: “I checked the data. Row 47 is clearly high, so I would exclude it.” That sounds expert, but the AI fabricated the whole answer. <code>askLLM</code> never sends row 47, or any other raw row, to the AI. By default the AI receives only <strong>summary statistics</strong> for the variables you ticked. It may not even see how many columns your data has, and it certainly cannot name a specific row. This kind of error is dangerous because the confident tone itself claims the answer is correct.</p>
 </div>
 <div class="zh">
-<p>這個對話是<strong>示意範例</strong>，不是實際記錄。但同一類錯誤真的發生過：askLLM 的實測記錄 裡，在未勾選 Attach data summary 的情況下，模型憑空生出「8 個樣本、Saguaro 與 Palo Verde 三個物種」這種與手上資料毫無關係的內容（見母專案的 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>）。模型沒有資料時不會說「我沒有資料」，它會 編一份出來。</p>
+<p>這個對話是<strong>示意範例</strong>，不是實際記錄。母專案的 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 用同一類示意來示警：未勾選 Attach data summary 時，AI 可能憑空生出「8 個樣本， 分成 Saguaro／Palo Verde／Ironwood 三個物種」這種與手上資料毫無關係的內容。AI 沒有資料時不會說「我沒有資料」，它會 編一份出來。</p>
 </div>
 <div class="en">
-<p>That exchange is <strong>illustrative</strong>, not a transcript. The same class of error is real, however. askLLM’s own testing records a reply that invented “8 samples across three species, Saguaro and Palo Verde” for a dataset containing nothing of the kind, produced with the data summary switched off. The record is in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> in the parent project. Given no data, the model does not say it has no data. It makes some up.</p>
+<p>That exchange is <strong>illustrative</strong>, not a transcript. The parent project warns about the same thing in the same way. <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> gives its own illustration: with the data summary switched off, an AI can invent “8 samples across Saguaro / Palo Verde / Ironwood” for a dataset containing nothing of the kind. Given no data, the AI does not say it has no data. It makes some up.</p>
 </div>
 </section>
 <section id="askllm-實際送出的內容what-askllm-actually-sends" class="level2">
@@ -261,33 +261,33 @@ ul.task-list li input[type="checkbox"] {
   n: 120, missing: 0, 2 levels
   levels by count: control(61), treatment(59)</code></pre>
 <div class="zh">
-<p>就這樣。唯一的例外是<strong>有序類別變項（ordered factor）</strong>會多一行 <code>level order: 低 &lt; 中 &lt; 高</code>，說明水準的順序。除此之外沒有別的了——<strong>LLM 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，LLM 完全 是在憑空猜測。</p>
+<p>就這樣。唯一的例外是<strong>有序類別變項（ordered factor）</strong>會多一行 <code>level order: 低 &lt; 中 &lt; 高</code>，說明水準的順序。除此之外沒有別的了——<strong>AI 收到的資訊，跟你在這裡讀到的一模一樣，不多也不少。</strong> 勾選「Attach data summary to prompt」時才會送出這段摘要；若取消勾選，AI 完全 是在憑空猜測。</p>
 </div>
 <div class="en">
-<p>That is all. The one exception is an <strong>ordered factor</strong>, which adds one more line, <code>level order: low &lt; medium &lt; high</code>, to show how the levels are ordered. Beyond that there is nothing — <strong>the LLM receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the LLM is guessing with no data at all.</p>
+<p>That is all. The one exception is an <strong>ordered factor</strong>, which adds one more line, <code>level order: low &lt; medium &lt; high</code>, to show how the levels are ordered. Beyond that there is nothing — <strong>the AI receives exactly what you just read, nothing more.</strong> This block is attached only when “Attach data summary to prompt” is ticked; untick it and the AI is guessing with no data at all.</p>
 </div>
 </section>
 <section id="摘要看不到什麼what-the-summary-cannot-show" class="level2">
 <h2 class="anchored" data-anchor-id="摘要看不到什麼what-the-summary-cannot-show"><span class="zh">摘要看不到什麼</span><span class="en">What the summary cannot show</span></h2>
 <div class="zh">
-<p>n、遺漏數、mean、sd、median、min、max（連續變項）與各水準次數（類別變項）—— 這就是摘要的全部欄位。原始資料列不在裡面，所以以下這些事，LLM <strong>原則上不可能 真的檢查過</strong>，即使它宣稱檢查過：</p>
+<p>摘要只有連續變項如n、missing data、mean、sd、median、min、max，與類別變項像是各水準次數。整欄原始資料不會在摘要裡面，所以以下這些事，AI <strong>原則上不可能真的檢查過</strong>，即使它宣稱檢查過：</p>
 <ul>
 <li>哪一筆資料是離群值（只知道 min 和 max，不知道哪一列）</li>
 <li>資料是否常態分布（min/max/median 不足以判斷分布形狀）</li>
 <li>遺漏值集中在哪些組別（只知道遺漏「總數」，不知道遺漏的樣式）</li>
 <li>變項背後的實際測量方式或研究設計</li>
 </ul>
-<p>看到回覆聲稱做了以上任何一件事，那就是越界（overreaching），要打折扣看待。</p>
+<p>看到AI回覆聲稱做了以上任何一件事，那就是越界（overreaching），使用者要謹慎判斷。</p>
 </div>
 <div class="en">
-<p>The summary’s entire vocabulary is: n, missing, mean, sd, median, min, max (continuous) and level counts (categorical). Raw rows are absent, so the following are things the LLM <strong>cannot actually have checked</strong>, even if it claims to have:</p>
+<p>The summary reports n, missing, mean, sd, median, min, and max for a continuous variable, and level counts for a categorical one. The raw column values never reach the summary. In principle, therefore, the AI <strong>cannot have checked</strong> any of the following, whatever it claims:</p>
 <ul>
-<li>which specific row is an outlier (min/max tell you the range, not which row)</li>
-<li>whether the data are normally distributed (min/max/median can’t reveal shape)</li>
-<li>whether missingness clusters in particular groups (only the missing count is known, not the pattern)</li>
-<li>what the variable actually measures or how the study was designed</li>
+<li>which specific row is an outlier. Min and max give you the range, not the row.</li>
+<li>whether the data are normally distributed. Min, max, and median cannot reveal the shape of a distribution.</li>
+<li>whether missingness clusters in particular groups. The summary gives you the total missing count, not the pattern.</li>
+<li>what the variable actually measures, or how the study was designed.</li>
 </ul>
-<p>If a reply claims to have checked any of these, treat that claim as overreaching and discount it.</p>
+<p>When an AI reply claims to have checked any of these, the reply is overreaching. Judge it carefully.</p>
 </div>
 </section>
 <section id="動手做5-分鐘try-it-5-minutes" class="level2">
@@ -316,10 +316,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="帶走這句話one-thing-to-remember" class="level2">
 <h2 class="anchored" data-anchor-id="帶走這句話one-thing-to-remember"><span class="zh">帶走這句話</span><span class="en">One thing to remember</span></h2>
 <div class="zh">
-<p>LLM 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都 看不到。</p>
+<p>AI 只讀得到你勾選變項的摘要數字，你在 jamovi 裡看到的原始資料，它一個字都 看不到。</p>
 </div>
 <div class="en">
-<p>The LLM only ever sees the summary numbers for the variables you selected — never a single row of the raw data you see in jamovi.</p>
+<p>The AI only ever sees the summary numbers for the variables you ticked — never a single row of the raw data you see in jamovi.</p>
 </div>
 
 

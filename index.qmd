@@ -5,42 +5,21 @@ title: "stat-skills-tutorials"
 ## [這是什麼]{.zh}[What this is]{.en}
 
 ::: {.zh}
-`stat-skills-tutorials` 是給 jamovi 模組 `askLLM` 使用者的原創教程與提示詞庫，
-教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作做統計分析，而不是教
-統計方法或 R 語言本身——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節
-（見「外部教材導讀」）。
+`stat-skills-tutorials` 是給 jamovi 模組 `askLLM` 使用者的原創教程與提示詞庫，教你怎麼跟諮詢型 AI（Module Guider / R code tutor）協作規劃統計分析，而不是教授統計方法或 R 語言——統計知識一律連到 psyteachr、lsj-book 等外部教材對應章節（見「外部教材導讀」）。
 
 本站分三層，對應 README 提到的三件事：
 
-1. **[協作素養](literacy/01-what-the-llm-sees.qmd)**：有意識了解 AI 是協作者、
-   清晰描述問題、設定明確判準，六課短文。
-2. **[提示詞庫](prompts/index.qmd)**：情境化、可直接複製進 askLLM `question`
-   欄的提示詞，附查核點與判準；每條有結構化 schema（見 `prompts/_schema.yaml`）。
-3. **[生成結果查核](verify/workflow.qmd)**：AI 回覆不是自己說了算，要拿 jamovi
-   介面、原始資料、研究設計去對——Module Guider 與 R code tutor 各有一套查核清單。
+1. **[協作素養](literacy/01-what-the-llm-sees.qmd)**：六節介紹文章說明，使用者應有意識了解 AI 是協作者、清晰描述問題、設定明確判準。
+2. **[提示詞庫](prompts/index.qmd)**：情境化、可直接複製到 askLLM `question`欄的提示詞，附查核點與判決標準；每條提示詞有結構化模板（見 `prompts/_schema.yaml`）。
+3. **[生成結果查核](verify/workflow.qmd)**：AI 回覆必須要使用者親自操作jamovi介面、以原始資料、研究設計去核實——Module Guider 與 R code tutor 各有一套查核清單。
 :::
 
 ::: {.en}
-`stat-skills-tutorials` is an original tutorial and prompt library for users
-of the jamovi module `askLLM`. It teaches you how to collaborate with a
-consulting AI — the Module Guider or the R code tutor — on statistical
-analysis. It does not teach statistics or R themselves; for that, every page
-links out to the matching chapter in an external textbook such as psyteachr
-or lsj-book (see [External Reading Map](external/reading-map.qmd)).
+`stat-skills-tutorials` is an original tutorial and prompt library for users of the jamovi module `askLLM`. It teaches you how to plan a statistical analysis together with a consulting AI, either the Module Guider or the R code tutor. It does not teach statistics or R. For the statistics itself, every page links out to the matching chapter in an external textbook such as psyteachr or lsj-book. See the [External Reading Map](external/reading-map.qmd).
 
 The site has three layers, matching the three things the README describes:
 
-1. **[Collaboration literacy](literacy/01-what-the-llm-sees.qmd)**: six short
-   lessons on treating the AI as a collaborator with awareness, describing
-   your problem clearly, and setting explicit acceptance criteria.
-2. **[Prompt library](prompts/index.qmd)**: scenario-based prompts you can
-   paste directly into askLLM's `question` field, each with its own
-   verification points and acceptance criteria and a structured schema (see
-   `prompts/_schema.yaml`).
-3. **[Verifying generated results](verify/workflow.qmd)**: an AI reply is
-   never taken at face value — it is checked against your jamovi interface,
-   your raw data, and your research design. The Module Guider and the R code
-   tutor each have their own verification checklist.
+1. **[Collaboration literacy](literacy/01-what-the-llm-sees.qmd)**: six short lessons. You should treat the AI as a collaborator with awareness, describe your problem clearly, and set explicit acceptance criteria.
+2. **[Prompt library](prompts/index.qmd)**: scenario-based prompts, ready to paste straight into askLLM's `question` field. Every prompt carries its own checks and acceptance criteria, and every prompt follows a structured schema. See `prompts/_schema.yaml`.
+3. **[Verifying generated results](verify/workflow.qmd)**: every AI reply requires you, the user, to verify it in person. Operate the jamovi interface, and check the reply against your raw data and your research design. The Module Guider and the R code tutor each have their own verification checklist.
 :::
-
-</content>

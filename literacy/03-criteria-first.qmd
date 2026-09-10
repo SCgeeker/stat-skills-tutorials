@@ -5,9 +5,9 @@ title: "[第三課：先寫判準再送出]{.zh}[Write Your Criteria Before You 
 ## [為什麼這件事會出錯]{.zh}[Why this goes wrong]{.en}
 
 ::: {.zh}
-askLLM 的 `LIMITATIONS.zh-TW.md` 記錄過一次實測：有人拿 iris 資料集問問題，
-卻沒有勾選「Attach data summary to prompt」——結果 LLM 完全是在憑空回答，
-憑空生出「8 個樣本、Saguaro/Palo Verde 三個物種」這種與 iris 資料八竿子打不
+askLLM 的 `LIMITATIONS.zh-TW.md` 用一個示意範例示警：有人拿 iris 資料集問問題，
+卻沒有勾選「Attach data summary to prompt」——結果 AI 完全是在憑空回答，
+憑空生出「8 個樣本，分成 Saguaro／Palo Verde／Ironwood 三個物種」這種與 iris 資料八竿子打不
 著的內容（iris 其實有 150 筆、三個物種是 setosa/versicolor/virginica）。如果
 使用者送出前沒有先想好「什麼樣的回覆我才會接受」，看到一段語氣篤定、格式工整
 的答案，很容易就直接信了。判準要在**收到回覆之前**寫好，不然人會被回覆本身
@@ -15,10 +15,10 @@ askLLM 的 `LIMITATIONS.zh-TW.md` 記錄過一次實測：有人拿 iris 資料�
 :::
 
 ::: {.en}
-askLLM's `LIMITATIONS.zh-TW.md` documents a real test run: someone asked a
+askLLM's `LIMITATIONS.zh-TW.md` illustrates the risk with a made-up example: someone asked a
 question about the iris dataset without ticking "Attach data summary to
-prompt." The LLM then answered from pure guesswork, inventing "8 samples,
-three species named Saguaro and Palo Verde" — nothing like the real iris
+prompt." The AI then answered from pure guesswork, inventing "8 samples across
+Saguaro / Palo Verde / Ironwood" — nothing like the real iris
 data (150 rows, species setosa/versicolor/virginica). If you haven't decided
 in advance what answer you'd actually accept, a confident, well-formatted
 reply is easy to believe at face value. Criteria have to be written **before**

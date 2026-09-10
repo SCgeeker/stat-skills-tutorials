@@ -229,7 +229,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="為什麼這件事會出錯why-this-goes-wrong" class="level2">
 <h2 class="anchored" data-anchor-id="為什麼這件事會出錯why-this-goes-wrong"><span class="zh">為什麼這件事會出錯</span><span class="en">Why this goes wrong</span></h2>
 <div class="zh">
-<p>有人在 askLLM 裡打了「幫我分析這個資料」，勾選 Submit，收到一段內容豐富、 但完全不對題的回覆——它猜了一個描述統計加一個相關分析，剛好都不是使用者真正 想問的問題。使用者接著在同一個問題欄後面補一句「不對，我是想問兩組有沒有差 異」，再次勾選 Submit。可是 askLLM <strong>沒有對話記憶</strong>：第二次送出時，LLM 完全 不知道「不對」是在回應什麼，只會把整段文字當成一個全新、獨立的問題重新回答。 模糊的指令加上單輪限制，結果就是來回猜測、浪費呼叫次數，答案還是對不上。</p>
+<p>有人在 askLLM 裡打了「幫我分析這個資料」，勾選 Submit，收到一段內容豐富、 但完全不對題的回覆——它猜了一個描述統計加一個相關分析，剛好都不是使用者真正 想問的問題。使用者接著在同一個問題欄後面補一句「不對，我是想問兩組有沒有差 異」，再次勾選 Submit。可是 askLLM <strong>沒有對話記憶</strong>：第二次送出時，AI 完全 不知道「不對」是在回應什麼，只會把整段文字當成一個全新、獨立的問題重新回答。 模糊的指令加上單輪限制，結果就是來回猜測、浪費呼叫次數，答案還是對不上。</p>
 </div>
 <div class="en">
 <p>Someone typed “analyze this for me” into askLLM, ticked Submit, and got a long, confident reply — a description plus a correlation, neither of which was the question they actually had in mind. They then appended “no, I meant whether the two groups differ” to the same question box and submitted again. But askLLM has <strong>no conversation memory</strong>: the second call has no idea what “no” is responding to: it just re-answers the whole text as a brand-new, standalone question. A vague instruction combined with a single-turn design means guesswork, wasted calls, and an answer that still misses the point.</p>

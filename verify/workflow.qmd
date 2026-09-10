@@ -5,7 +5,7 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 ## [原則]{.zh}[Principles]{.en}
 
 ::: {.zh}
-- 查核不是「再問一次 AI」，是拿 LLM 看不到的東西——你的 jamovi 介面、你的原始
+- 查核不是「再問一次 AI」，是拿 AI 看不到的東西——你的 jamovi 介面、你的原始
   資料、你的研究設計——去對。
 - 兩條路線難度不對等：Module Guider 的輸出有有限集合可核（選單路徑）；
   R code tutor 的輸出只能靠流程（讀碼、跑碼、跟 GUI 對照）。
@@ -13,7 +13,7 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 :::
 
 ::: {.en}
-- Verification is not "asking the AI again" — it is checking what the LLM
+- Verification is not "asking the AI again" — it is checking what the AI
   said against things it cannot see: your jamovi interface, your raw data,
   your research design.
 - The two paths are not equally hard to verify: the Module Guider's output

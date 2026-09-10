@@ -7,7 +7,7 @@ title: "[第六課：問完之後]{.zh}[After You Get an Answer]{.en}"
 ::: {.zh}
 有位同學在 Module Guider 裡勾了 Submit、拿到回覆後，直接在 `question` 欄
 把問題改了一個字，沒有取消 Submit 再重新勾選——結果畫面上出現的還是舊回
-覆，`meta` 欄多了一個「· cached」，他以為 LLM 沒有理解新問題，其實是被自
+覆，`meta` 欄多了一個「· cached」，他以為 AI 沒有理解新問題，其實是被自
 己的舊答案回放了。這不是隨機的怪異行為，而是 askLLM 內建的防抖快取：
 `.askllm_decide()` 只有三種結果，`guide`（未勾 Submit 或問題是空的）、
 `cached`（新 payload 跟上次快取的 payload 完全相同）、`call`（其餘情況）。
@@ -20,7 +20,7 @@ title: "[第六課：問完之後]{.zh}[After You Get an Answer]{.en}"
 A student ticked Submit in the Module Guider, got a reply, then edited one
 word in the `question` field without first unticking and re-ticking
 Submit — and the screen still showed the old reply, now labeled "· cached" in
-the meta line. He assumed the LLM had ignored his new question; in fact his
+the meta line. He assumed the AI had ignored his new question; in fact his
 own old answer had been replayed. This is not random flakiness — it is
 askLLM's built-in debounce cache. `.askllm_decide()` has exactly three
 outcomes: `guide` (Submit unticked or the question is empty), `cached` (the

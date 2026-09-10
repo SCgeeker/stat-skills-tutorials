@@ -8,10 +8,10 @@ title: "[第五課：摘要之外的事自己來]{.zh}[What Summary Statistics C
 有位同學問 askLLM：「這兩組數據該用 t 檢定嗎？」得到的回覆聽起來很專業，
 列出了平均數與標準差，語氣自信。但如果回覆進一步說「我檢查過資料的常態性
 與離群值，看起來沒問題」（示意範例），這句話本身就不可能是真的——askLLM
-送給 LLM 的從來不是你的原始資料列，而是 `summarize_data()` 算出來的摘要統
+送給 AI 的從來不是你的原始資料列，而是 `summarize_data()` 算出來的摘要統
 計：每個連續變項的 n、遺漏數、mean、sd、median、min、max；每個類別變項的
 水準次數。常態性、離群值、遺漏值型態（是隨機遺漏還是系統性遺漏）這些問題，
-都需要看每一筆觀測值才能回答，而 LLM 從頭到尾看不到任何一筆。凡是回覆聲稱
+都需要看每一筆觀測值才能回答，而 AI 從頭到尾看不到任何一筆。凡是回覆聲稱
 「檢查過」這類東西，最多是根據摘要數字的猜測，不是真的檢查。
 :::
 
@@ -20,12 +20,12 @@ A student asked askLLM, "should I use a t-test for these two groups?" The
 reply sounded confident and professional, listing means and standard
 deviations. But if the reply went on to say "I checked normality and outliers
 in your data and they look fine" (illustrative example), that claim cannot be
-true. What askLLM sends the LLM is never your raw data rows — it is the
+true. What askLLM sends the AI is never your raw data rows — it is the
 summary statistics computed by `summarize_data()`: for each continuous
 variable, n, missing count, mean, sd, median, min, max; for each categorical
 variable, level counts. Normality, outliers, and missing-data patterns
 (missing at random vs. systematic) all require looking at individual
-observations, and the LLM never sees a single row of them. Any reply that
+observations, and the AI never sees a single row of them. Any reply that
 claims to have "checked" these things is, at best, a guess from summary
 numbers — not an actual check.
 :::
@@ -62,12 +62,12 @@ askLLM can do for you — but once you're done, you have a concrete result
 
 ::: {.zh}
 因為 askLLM 是單輪問答（沒有對話歷史），最有效的做法不是追問「那我該怎麼
-辦」，而是把你自己做出來的檢定結果直接寫進下一次的 `Question:`，讓 LLM 針
+辦」，而是把你自己做出來的檢定結果直接寫進下一次的 `Question:`，讓 AI 針
 對「已知事實」給建議，而不是要它憑空猜。範例寫法（示意）：「我用 jamovi 的
 Assumption Checks 做了 Levene's test，結果顯著（p = .03），代表變異數不同
 質，請問我該改用哪一種 t 檢定並說明原因」；或「Shapiro-Wilk 常態性檢定在
 兩組都顯著（p < .05），樣本數各 15，這種情況該用母數還是無母數的比較方
-法？」。這樣寫的好處是：判準明確、LLM 不需要猜你有沒有做過檢查，回覆也更
+法？」。這樣寫的好處是：判準明確、AI 不需要猜你有沒有做過檢查，回覆也更
 容易用第 3 課教的「先寫判準」去核對。
 :::
 
@@ -75,7 +75,7 @@ Assumption Checks 做了 Levene's test，結果顯著（p = .03），代表變�
 Because askLLM is a single-turn tool with no conversation history, the most
 effective move is not to ask a follow-up like "so what should I do" — it is
 to write your own check results directly into the next `Question:`, so the
-LLM reasons from a known fact instead of guessing. Example phrasing
+AI reasons from a known fact instead of guessing. Example phrasing
 (illustrative): "I ran Levene's test in jamovi's Assumption Checks and it was
 significant (p = .03), meaning unequal variances — which version of the
 t-test should I use, and why?" Or: "Shapiro-Wilk normality tests were
