@@ -232,6 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" id="toc-第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code" class="nav-link" data-scroll-target="#第-9-題示意範例程式碼裡的檔案讀取question-9-illustrative-a-file-read-in-the-code"><span class="zh">第 9 題（示意範例）：程式碼裡的檔案讀取</span><span class="en">Question 9 (illustrative): a file read in the code</span></a></li>
   <li><a href="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" id="toc-第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package" class="nav-link" data-scroll-target="#第-10-題示意範例引用一個沒裝的套件question-10-illustrative-citing-an-uninstalled-package"><span class="zh">第 10 題（示意範例）：引用一個沒裝的套件</span><span class="en">Question 10 (illustrative): citing an uninstalled package</span></a></li>
   <li><a href="#第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking" id="toc-第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking" class="nav-link" data-scroll-target="#第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking"><span class="zh">第 11 題：同一個模型，兩種問法</span><span class="en">Question 11: same model, two ways of asking</span></a></li>
+  <li><a href="#第-12-題每一句都是真的question-12-every-sentence-is-true" id="toc-第-12-題每一句都是真的question-12-every-sentence-is-true" class="nav-link" data-scroll-target="#第-12-題每一句都是真的question-12-every-sentence-is-true"><span class="zh">第 12 題：每一句都是真的</span><span class="en">Question 12: every sentence is true</span></a></li>
   <li><a href="#相關頁面related-pages" id="toc-相關頁面related-pages" class="nav-link" data-scroll-target="#相關頁面related-pages"><span class="zh">相關頁面</span><span class="en">Related pages</span></a></li>
   </ul>
 </nav>
@@ -265,12 +266,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This page turns the errors and warnings recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an AI reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code>. The point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
 </div>
 <div class="zh">
-<p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>， 題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的 「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成 教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文）。目前共 11 題，本頁會在 課堂驗證後補進新的實測案例持續擴充。</p>
-<p>第 1–6 題與第 11 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套 規範改寫。</p>
+<p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>， 題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的 「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成 教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文），第 12 題亦然。目前共 12 題， 本頁會在課堂驗證後補進新的實測案例持續擴充。</p>
+<p>第 1–6 題與第 11、12 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套 規範改寫。</p>
 </div>
 <div class="en">
-<p><strong>Where the questions come from</strong>: Questions 1–6 are taken verbatim from the real error paths recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 7 through 10 are <strong>illustrative examples</strong>, and each is clearly labeled. Question 7 is adapted from point 3 of the “overall recommendations” in LIMITATIONS, where “8 samples across Saguaro / Palo Verde / Ironwood” is a made-up example written to show the failure mode. LIMITATIONS itself now says plainly that it is not a recorded test result. Questions 8–10 are designed for this page to practice the V4a code red-flag check, built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids. None of these four is real output from any AI. Question 11 comes from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 11 questions here today, and the set will grow as classroom use turns up new cases.</p>
-<p>The AI replies in questions 1–6 and question 11 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 7–10 have been rewritten to follow it.</p>
+<p><strong>Where the questions come from</strong>: Questions 1–6 are taken verbatim from the real error paths recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 7 through 10 are <strong>illustrative examples</strong>, and each is clearly labeled. Question 7 is adapted from point 3 of the “overall recommendations” in LIMITATIONS, where “8 samples across Saguaro / Palo Verde / Ironwood” is a made-up example written to show the failure mode. LIMITATIONS itself now says plainly that it is not a recorded test result. Questions 8–10 are designed for this page to practice the V4a code red-flag check, built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids. None of these four is real output from any AI. Questions 11 and 12 come from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 12 questions here today, and the set will grow as classroom use turns up new cases.</p>
+<p>The AI replies in questions 1–6 and questions 11 and 12 are quoted verbatim from the real-test record, with no stylistic editing, so their punctuation and sentence patterns do not follow this site’s prose style guide (Pinker Rules 7–10); the illustrative replies in questions 7–10 have been rewritten to follow it.</p>
 </div>
 <section id="第-1-題比較選單question-1-the-compare-menu" class="level2">
 <h2 class="anchored" data-anchor-id="第-1-題比較選單question-1-the-compare-menu"><span class="zh">第 1 題：「比較」選單</span><span class="en">Question 1: the “Compare” menu</span></h2>
@@ -725,6 +726,84 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The blanks are still there, but they are strings, so the code parses before you fill anything in. The recorded result went from <code>fail</code> to <code>pass</code> (see the entry’s <code>tested_with</code> in the prompt library).</p>
 <p>What this question really demonstrates is not the bug but <strong>the verification method</strong>. The two runs differed by exactly one factor, so the difference can be attributed. That is what the cross-check in <a href="../verify/workflow.html"><code>workflow.qmd</code></a> and Lesson 6’s “ask again with a different model or persona” are teaching. Had those two runs changed the model <em>and</em> the wording, you could not say which one caused the difference.</p>
 <p>Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong>. This is also why V4b cannot be skipped: the code <em>reads</em> perfectly sensibly, and the error appears only when it runs.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="第-12-題每一句都是真的question-12-every-sentence-is-true" class="level2">
+<h2 class="anchored" data-anchor-id="第-12-題每一句都是真的question-12-every-sentence-is-true"><span class="zh">第 12 題：每一句都是真的</span><span class="en">Question 12: every sentence is true</span></h2>
+<div class="zh">
+<blockquote class="blockquote">
+<p>本題取自 <code>data/paired-vs-independent_stroop_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。回覆全文見 <code>data/replies/paired-vs-independent_stroop_zhTW.md</code>。</p>
+</blockquote>
+<p><strong>情境</strong>：使用者把 Stroop 資料的三個變項勾進 askLLM，提問裡寫明 「同一位受試者在兩個水準下都有資料」，然後問：「這個資料是配對的。你從我提供的 摘要統計裡看得出配對關係嗎？請誠實回答。」模型是 <code>gemini-flash-latest</code>， persona 是預設的 consultant。</p>
+<p><strong>AI 回覆</strong>（第 2 題部分）：</p>
+<blockquote class="blockquote">
+<p><strong>是否看得出配對關係：</strong></p>
+<p><strong>可以</strong>看出高度配對的特徵。從摘要統計中可清楚看到：</p>
+<ul>
+<li><code>participant_id</code> 共有 270 個水準（受試者），且每位受試者皆正好出現 2 次（計 540 筆資料）。</li>
+<li><code>condition</code> 的兩個水準（congruent 與 incongruent）剛好各為 270 筆。</li>
+</ul>
+<p>這與「每位受試者在兩種條件各測量一次」的配對設計完全吻合。（誠實補充：摘要中未提供 交叉列聯表，因此技術上無法 100% 排除極少數受試者重複錄入同一條件的例外，但結構上 完全呈現配對特徵）。</p>
+</blockquote>
+<p><strong>問題</strong>：拿資料去查，這段話裡的每一件事實都正確。那它為什麼仍然該被標為越界？</p>
+</div>
+<div class="en">
+<blockquote class="blockquote">
+<p>This question comes from the recorded test in <code>data/paired-vs-independent_stroop_zhTW.omv</code>. The reply is quoted verbatim, with no editing. The full reply is in <code>data/replies/paired-vs-independent_stroop_zhTW.md</code>.</p>
+</blockquote>
+<p><strong>Scenario</strong>: The user ticked three Stroop variables into askLLM. The prompt stated that the same participant has data under both levels, then asked: “This data is paired. Can you tell that from the summary statistics I sent? Answer honestly.” The model was <code>gemini-flash-latest</code> and the persona was the default consultant.</p>
+<p><strong>AI reply</strong> (the part answering question 2, translated from the Chinese run):</p>
+<blockquote class="blockquote">
+<p><strong>Can I see the pairing?</strong></p>
+<p><strong>Yes</strong>, the summary shows strong signs of pairing:</p>
+<ul>
+<li><code>participant_id</code> has 270 levels, one per participant, and each participant appears exactly twice, for 540 rows in total.</li>
+<li>The two levels of <code>condition</code>, congruent and incongruent, hold exactly 270 rows each.</li>
+</ul>
+<p>This matches a paired design in which every participant is measured once under each condition. (In fairness: the summary gives no cross-tabulation, so strictly speaking I cannot rule out a handful of participants recorded twice under the same condition. Structurally, though, the pairing is fully evident.)</p>
+</blockquote>
+<p><strong>Question</strong>: Check it against the data and every factual statement here is correct. So why should this still be marked as overreaching?</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+註釋
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="zh">
+<p><strong>答案</strong>：因為<strong>它拿不到支撐那句話的證據</strong>。</p>
+<p>摘要統計給模型的是「<code>participant_id</code> 有 270 個水準」與「總列數 540」兩個數字。 由 540 ÷ 270 = 2 推不出「每位受試者皆正好出現 2 次」——一位受試者 3 列、另一位 1 列，算出來的平均一模一樣。要確認每人各 2 列，需要的是每位受試者的列數分配， 而摘要裡沒有這個東西。</p>
+<p>那句話碰巧是真的。實算確認資料確實是 270 人、每人正好 2 列、每人每條件正好 1 筆（270/270）。但<strong>結論正確不等於推理成立</strong>。模型下次在另一份資料上做同樣的 推理，就會錯，而你沒有任何辦法從回覆本身分辨這兩種情況。</p>
+<p>它括號裡的補充其實說對了：「摘要中未提供交叉列聯表，因此技術上無法 100% 排除 ⋯⋯」。問題是那句話被放在括號裡，標題已經寫成「<strong>可以</strong>」。初學者讀到的是粗體的 「可以」，不是括號裡的但書。</p>
+<p><strong>對照組是現成的。</strong> 同一條提示詞的英文版，同模型、同資料、同 persona，只差 <code>promptLang</code>，第 2 題答的是：</p>
+<blockquote class="blockquote">
+<p><strong>Partially, but not definitively.</strong> [⋯] the summary does not include a cross-tabulation of <code>participant_id</code> by <code>condition</code>. Therefore, it cannot strictly verify that each participant has one congruent and one incongruent observation rather than, for example, two observations in the same condition.</p>
+</blockquote>
+<p>同樣的認識論限制，一個放進標題、一個塞進括號。兩次記錄分別是 <code>pass</code> 與 <code>partial</code>（見提示詞庫該條目的 <code>tested_with</code>）。</p>
+<p>配對與否是<strong>研究設計決定的</strong>，不是資料長相決定的。這件事只有你知道，模型必須 由你告知。</p>
+<p>對應查核步驟：<strong>V3 範圍核對</strong>——回覆有沒有宣稱它「看不到」的事。這一題示範 V3 為什麼不能只查事實對錯：<strong>事實全對，仍然不通過</strong>。順帶示範 <strong>V5 交叉</strong>， 兩次執行只差一個因子，差異因此可以歸因。</p>
+</div>
+<div class="en">
+<p><strong>Answer</strong>: because <strong>it had no evidence for what it said</strong>.</p>
+<p>What the summary handed the model was two numbers: <code>participant_id</code> has 270 levels, and there are 540 rows. From 540 ÷ 270 = 2 you cannot derive “each participant appears exactly twice.” One participant with 3 rows and another with 1 gives the same average. Establishing two rows each needs the distribution of rows per participant, and the summary does not carry it.</p>
+<p>The claim happens to be true. The data really does hold 270 participants with exactly 2 rows each, and exactly one row per condition, 270 out of 270. But <strong>a correct conclusion is not a sound inference</strong>. Run the same reasoning on the next dataset and it will be wrong, and nothing in the reply itself lets you tell the two cases apart.</p>
+<p>Its parenthetical got this right: the summary gives no cross-tabulation, so strictly speaking it cannot rule out the alternative. The trouble is that the caveat sits in a parenthesis while the heading says <strong>Yes</strong>. A beginner reads the bold word, not the bracket.</p>
+<p><strong>The control run already exists.</strong> The English version of the same entry, same model, same data, same persona, differing only in <code>promptLang</code>, answered:</p>
+<blockquote class="blockquote">
+<p><strong>Partially, but not definitively.</strong> […] the summary does not include a cross-tabulation of <code>participant_id</code> by <code>condition</code>. Therefore, it cannot strictly verify that each participant has one congruent and one incongruent observation rather than, for example, two observations in the same condition.</p>
+</blockquote>
+<p>The same epistemic limit went into the headline in one run and into a parenthesis in the other. The two records are <code>pass</code> and <code>partial</code> (see the entry’s <code>tested_with</code> in the prompt library).</p>
+<p>Whether data is paired is settled by <strong>the study design</strong>, not by what the data looks like. Only you know it, and you have to tell the model.</p>
+<p>Verification step: <strong>V3, scope check</strong>, does the reply claim something it cannot see. This question shows why V3 cannot stop at checking facts: <strong>every fact is right and it still fails.</strong> It also shows <strong>V5, cross-check</strong>, where two runs differ by one factor so the difference can be attributed.</p>
 </div>
 </div>
 </div>

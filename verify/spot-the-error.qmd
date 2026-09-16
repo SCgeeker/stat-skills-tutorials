@@ -29,10 +29,10 @@ documentation's word for it.
 LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習
 V4a 的程式碼紅旗核對，依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成
 教學用例。這四題**都不是**任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄
-（`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文）。目前共 11 題，本頁會在
-課堂驗證後補進新的實測案例持續擴充。
+（`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文），第 12 題亦然。目前共 12 題，
+本頁會在課堂驗證後補進新的實測案例持續擴充。
 
-第 1–6 題與第 11 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
+第 1–6 題與第 11、12 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套
 規範改寫。
 :::
@@ -48,12 +48,12 @@ made-up example written to show the failure mode. LIMITATIONS itself now says
 plainly that it is not a recorded test result. Questions 8–10 are designed for
 this page to practice the V4a code red-flag check, built from the instruction
 list that `askLLM/R/llm-adapter.R` explicitly forbids. None of these four is
-real output from any AI. Question 11 comes from this site's own test records, the
+real output from any AI. Questions 11 and 12 come from this site's own test records, the
 `.omv` files under `data/` and the full replies in `data/replies/`. There are
-11 questions here today, and the set will grow as classroom use turns up new
+12 questions here today, and the set will grow as classroom use turns up new
 cases.
 
-The AI replies in questions 1–6 and question 11 are quoted verbatim from the
+The AI replies in questions 1–6 and questions 11 and 12 are quoted verbatim from the
 real-test record, with no stylistic editing, so their punctuation and sentence
 patterns do not follow this site's prose style guide (Pinker Rules 7–10); the
 illustrative replies in questions 7–10 have been rewritten to follow it.
@@ -670,6 +670,142 @@ one caused the difference.
 Verification steps: **V4a, read** and **V4b, run**. This is also why V4b cannot
 be skipped: the code *reads* perfectly sensibly, and the error appears only
 when it runs.
+:::
+:::
+
+## [第 12 題：每一句都是真的]{.zh}[Question 12: every sentence is true]{.en}
+
+::: {.zh}
+> 本題取自 `data/paired-vs-independent_stroop_zhTW.omv` 的實測記錄，
+> 回覆逐字引用，未經修飾。回覆全文見
+> `data/replies/paired-vs-independent_stroop_zhTW.md`。
+
+**情境**：使用者把 Stroop 資料的三個變項勾進 askLLM，提問裡寫明
+「同一位受試者在兩個水準下都有資料」，然後問：「這個資料是配對的。你從我提供的
+摘要統計裡看得出配對關係嗎？請誠實回答。」模型是 `gemini-flash-latest`，
+persona 是預設的 consultant。
+
+**AI 回覆**（第 2 題部分）：
+
+> **是否看得出配對關係：**
+>
+> **可以**看出高度配對的特徵。從摘要統計中可清楚看到：
+>
+> - `participant_id` 共有 270 個水準（受試者），且每位受試者皆正好出現 2 次（計 540 筆資料）。
+> - `condition` 的兩個水準（congruent 與 incongruent）剛好各為 270 筆。
+>
+> 這與「每位受試者在兩種條件各測量一次」的配對設計完全吻合。（誠實補充：摘要中未提供
+> 交叉列聯表，因此技術上無法 100% 排除極少數受試者重複錄入同一條件的例外，但結構上
+> 完全呈現配對特徵）。
+
+**問題**：拿資料去查，這段話裡的每一件事實都正確。那它為什麼仍然該被標為越界？
+:::
+
+::: {.en}
+> This question comes from the recorded test in
+> `data/paired-vs-independent_stroop_zhTW.omv`. The reply is quoted verbatim,
+> with no editing. The full reply is in
+> `data/replies/paired-vs-independent_stroop_zhTW.md`.
+
+**Scenario**: The user ticked three Stroop variables into askLLM. The prompt
+stated that the same participant has data under both levels, then asked: "This
+data is paired. Can you tell that from the summary statistics I sent? Answer
+honestly." The model was `gemini-flash-latest` and the persona was the default
+consultant.
+
+**AI reply** (the part answering question 2, translated from the Chinese run):
+
+> **Can I see the pairing?**
+>
+> **Yes**, the summary shows strong signs of pairing:
+>
+> - `participant_id` has 270 levels, one per participant, and each participant appears exactly twice, for 540 rows in total.
+> - The two levels of `condition`, congruent and incongruent, hold exactly 270 rows each.
+>
+> This matches a paired design in which every participant is measured once under each condition.
+> (In fairness: the summary gives no cross-tabulation, so strictly speaking I cannot rule out a
+> handful of participants recorded twice under the same condition. Structurally, though, the
+> pairing is fully evident.)
+
+**Question**: Check it against the data and every factual statement here is
+correct. So why should this still be marked as overreaching?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：因為**它拿不到支撐那句話的證據**。
+
+摘要統計給模型的是「`participant_id` 有 270 個水準」與「總列數 540」兩個數字。
+由 540 ÷ 270 = 2 推不出「每位受試者皆正好出現 2 次」——一位受試者 3 列、另一位
+1 列，算出來的平均一模一樣。要確認每人各 2 列，需要的是每位受試者的列數分配，
+而摘要裡沒有這個東西。
+
+那句話碰巧是真的。實算確認資料確實是 270 人、每人正好 2 列、每人每條件正好
+1 筆（270/270）。但**結論正確不等於推理成立**。模型下次在另一份資料上做同樣的
+推理，就會錯，而你沒有任何辦法從回覆本身分辨這兩種情況。
+
+它括號裡的補充其實說對了：「摘要中未提供交叉列聯表，因此技術上無法 100% 排除
+⋯⋯」。問題是那句話被放在括號裡，標題已經寫成「**可以**」。初學者讀到的是粗體的
+「可以」，不是括號裡的但書。
+
+**對照組是現成的。** 同一條提示詞的英文版，同模型、同資料、同 persona，只差
+`promptLang`，第 2 題答的是：
+
+> **Partially, but not definitively.** [⋯] the summary does not include a
+> cross-tabulation of `participant_id` by `condition`. Therefore, it cannot
+> strictly verify that each participant has one congruent and one incongruent
+> observation rather than, for example, two observations in the same condition.
+
+同樣的認識論限制，一個放進標題、一個塞進括號。兩次記錄分別是 `pass` 與
+`partial`（見提示詞庫該條目的 `tested_with`）。
+
+配對與否是**研究設計決定的**，不是資料長相決定的。這件事只有你知道，模型必須
+由你告知。
+
+對應查核步驟：**V3 範圍核對**——回覆有沒有宣稱它「看不到」的事。這一題示範
+V3 為什麼不能只查事實對錯：**事實全對，仍然不通過**。順帶示範 **V5 交叉**，
+兩次執行只差一個因子，差異因此可以歸因。
+:::
+
+::: {.en}
+**Answer**: because **it had no evidence for what it said**.
+
+What the summary handed the model was two numbers: `participant_id` has 270
+levels, and there are 540 rows. From 540 ÷ 270 = 2 you cannot derive "each
+participant appears exactly twice." One participant with 3 rows and another
+with 1 gives the same average. Establishing two rows each needs the
+distribution of rows per participant, and the summary does not carry it.
+
+The claim happens to be true. The data really does hold 270 participants with
+exactly 2 rows each, and exactly one row per condition, 270 out of 270. But **a
+correct conclusion is not a sound inference**. Run the same reasoning on the
+next dataset and it will be wrong, and nothing in the reply itself lets you
+tell the two cases apart.
+
+Its parenthetical got this right: the summary gives no cross-tabulation, so
+strictly speaking it cannot rule out the alternative. The trouble is that the
+caveat sits in a parenthesis while the heading says **Yes**. A beginner reads
+the bold word, not the bracket.
+
+**The control run already exists.** The English version of the same entry, same
+model, same data, same persona, differing only in `promptLang`, answered:
+
+> **Partially, but not definitively.** [...] the summary does not include a
+> cross-tabulation of `participant_id` by `condition`. Therefore, it cannot
+> strictly verify that each participant has one congruent and one incongruent
+> observation rather than, for example, two observations in the same condition.
+
+The same epistemic limit went into the headline in one run and into a
+parenthesis in the other. The two records are `pass` and `partial` (see the
+entry's `tested_with` in the prompt library).
+
+Whether data is paired is settled by **the study design**, not by what the data
+looks like. Only you know it, and you have to tell the model.
+
+Verification step: **V3, scope check**, does the reply claim something it
+cannot see. This question shows why V3 cannot stop at checking facts:
+**every fact is right and it still fails.** It also shows **V5, cross-check**,
+where two runs differ by one factor so the difference can be attributed.
 :::
 :::
 

@@ -24,27 +24,44 @@ files carry an additional `_<persona>` suffix. The `mixed-anova-setup` prompt wa
 | `mixed-anova-setup_zhang2014_v1_fail_en.omv` | `mixed-anova-setup` | English | askllmr, Rj (prompt before the fix) |
 | `mixed-anova-setup_zhang2014_v2_fix_zhTW.omv` | `mixed-anova-setup` | Chinese | askllmr, Rj, anovaRM (prompt after the fix) |
 | `mixed-anova-setup_zhang2014_v2_fix_en.omv` | `mixed-anova-setup` | English | askllmr, Rj, anovaRM (prompt after the fix) |
+| `describe-first-look_stroop_zhTW.omv` | `describe-first-look` | Chinese | askllm (explainer), descriptives with a histogram |
+| `describe-first-look_stroop_en.omv` | `describe-first-look` | English | askllm (explainer), descriptives with two plots |
+| `paired-vs-independent_stroop_zhTW.omv` | `paired-vs-independent` | Chinese | askllm, gamljmixed, ttestIS |
+| `paired-vs-independent_stroop_en.omv` | `paired-vs-independent` | English | askllm, gamljmixed, ttestIS |
+| `correlation-choice_lopez2024_zhTW.omv` | `correlation-choice` | Chinese | askllm, corrMatrix, scat |
+| `correlation-choice_lopez2024_en.omv` | `correlation-choice` | English | askllm, corrMatrix, scat |
 
 Tested on 2026-09-08 with provider `gemini` and model `gemini-flash-latest`. The Chinese explainer
 run for `missing-data-triage` was repeated on 2026-09-09; the reason is in the last section.
 
+The last six files are batch A, tested on 2026-09-16 with the same provider and model. None of
+them sets `role` except the two `describe-first-look` runs, so the other four ran under the
+default `consultant`. They carry no persona suffix because none of their `check` lists asks for a
+persona cross-check.
+
 ## Reproducing these tests
 
 Each entry's `prompt` carries `{placeholder}` fields. The values below are what the recorded runs
-used, together with the dataset each one came from. All three download links returned HTTP 200 on
-2026-09-09.
+used, together with the dataset each one came from. The first three download links returned HTTP 200 on
+2026-09-09, the last two on 2026-09-16.
 
 | Entry | Dataset | Download |
 |---|---|---|
 | `ttest-assumptions` | Zwaan et al. (2018) Simon task | <https://psyteachr.github.io/analysis-v4/data/data_ch7.zip> (use `MeansSimonTask.csv` after unzipping) |
 | `missing-data-triage` | Dawtry et al. (2015) | <https://psyteachr.github.io/quant-fun-v3/data/Dawtry_2015_clean.csv> |
 | `mixed-anova-setup` | Zhang et al. (2014) Study 3 | <https://psyteachr.github.io/analysis-v4/data/data_ch13.zip> (contains `Zhang_2014_Study3.csv` and a codebook) |
+| `describe-first-look` | psyteachr Stroop demonstration data | <https://psyteachr.github.io/data-skills-v3/data/stroop/stroop_data.zip> (use `experiment_data.csv`, 540 rows in long format) |
+| `paired-vs-independent` | the same Stroop data | as above; the `cross-check` step needs a wide layout, see below |
+| `correlation-choice` | Lopez et al. (2024) soup-bowl study | <https://psyteachr.github.io/analysis-v4/data/data_ch9.zip> (use `data_ch9_correlation.csv`, 632 rows and 60 columns) |
 
 | Entry | Placeholder | Value |
 |---|---|---|
 | `ttest-assumptions` | `{outcome}` / `{group}` / `{n1}` / `{n2}` | `simon_effect` / `similarity` (same, different) / 80 / 80 |
 | `missing-data-triage` | `{var_a}` / `{pct_a}` / `{var_b}` / `{pct_b}` | `Household_Income` / 1.3 / `Political_Preference` / 1.3 |
 | `mixed-anova-setup` | `{id}` / `{group}` / `{t1}` / `{t2}` | `Participant_ID` / `Condition` / `T1_Pred_Interest_Comp` / `T2_Interest_Comp` |
+| `describe-first-look` | `{outcome}` / `{group}` / `{k}` / `{id}` | `reaction_time` / `condition` / 2 / `participant_id` |
+| `paired-vs-independent` | `{outcome}` / `{group}` / `{id}` | `reaction_time` / `condition` / `participant_id` |
+| `correlation-choice` | `{var_a}` / `{var_b}` / `{n_a}` / `{n_b}` | `CalEstimate` / `OzEstimate` / 622 / 622 |
 
 Two things worth knowing before you read the numbers. `simon_effect` is not a column in the file;
 the recorded runs computed it as `session1_incongruent - session1_congruent`, which is why the
@@ -62,8 +79,10 @@ only under that licence, with the source named here.
 | Zwaan et al. (2018) Simon task | psyteachr *Analysis* ch.7 (Mahrholz & Kuepper-Tetzel, 2025), <https://psyteachr.github.io/analysis-v4/07-independent.html> | CC BY 4.0 |
 | Dawtry et al. (2015) | psyteachr *Fundamentals of Quantitative Analysis* ch.11 (Bartlett & Toivo, 2024), <https://psyteachr.github.io/quant-fun-v3/11-screening-data.html> | CC BY-SA 4.0 |
 | Zhang et al. (2014) Study 3 | psyteachr *Analysis* ch.13 (Mahrholz & Kuepper-Tetzel, 2025), <https://psyteachr.github.io/analysis-v4/13-factorial-anova.html> | CC BY 4.0 |
+| Stroop demonstration data | psyteachr *Data Skills for Reproducible Research* ch.2 (Nordmann & DeBruine, 2025), <https://psyteachr.github.io/data-skills-v3/stroop.html> | CC BY-SA 4.0 |
+| Lopez et al. (2024) soup-bowl study | psyteachr *Analysis* ch.9 (Mahrholz & Kuepper-Tetzel, 2025), <https://psyteachr.github.io/analysis-v4/09-correlation.html> | CC BY 4.0 |
 
-The CC BY-SA 4.0 material (Dawtry) is shared under the same licence.
+The CC BY-SA 4.0 material (Dawtry, and the Stroop data) is shared under the same licence.
 
 ## Two traps in how variables are defined
 
@@ -110,6 +129,36 @@ Where a stored reply is known not to be the one that was executed, the file says
 
 For what it is worth, all three English samples satisfied the revised format rules. That is
 evidence the prompt fix is robust rather than noise.
+
+## A menu path can depend on which modules you have installed
+
+Both `paired-vs-independent` runs noted that jamovi's built-in paired t-test wants a wide layout,
+and offered `Analyses > Linear Models > GAMLj3 > Linear Mixed Model` for the long layout instead.
+That path is exact: `GAMLj3/jamovi.yaml` gives `menuGroup: Linear Models`,
+`menuSubgroup: GAMLj3` and `menuTitle: Linear Mixed Model`.
+
+The model did not know this. askLLM's `includeCatalog` option defaults to `true`, so the request
+carried a list of the modules installed on this machine. **Ask the same question on a machine
+without GAMLj3 and that path will not come back.** A menu path in a reply is therefore evidence
+about one installation, not about jamovi in general, which is why every `check` list opens with a
+step that makes you click the path yourself.
+
+Running that mixed model is also what verified the advice. It returns `t(269) = 13.50`, the same
+value as the paired t-test on the wide layout, `t(269) = -13.50`, differing only in the direction
+of the contrast. Treating the same data as two independent groups gives Welch `t(495.76) = -13.72`,
+still `p < .001`. The wrong choice is not caught by the p value.
+
+### Reshaping the Stroop data for that cross-check
+
+`experiment_data.csv` is long, 540 rows with two per participant. jamovi's Paired Samples T-Test
+needs one row per participant, so the recorded runs reshaped it in Rj:
+
+```r
+wide <- reshape(data, idvar = "participant_id", timevar = "condition",
+                v.names = "reaction_time", direction = "wide")
+```
+
+This yields 270 rows and three columns, with 270 complete cases.
 
 ## Controlling the variable in a cross-check (recorded 2026-09-09)
 

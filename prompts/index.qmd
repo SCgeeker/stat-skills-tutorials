@@ -121,7 +121,8 @@ Please answer all three:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Analysis ch.9 的 Lopez et al. (2024) 湯碗研究，已下載核對：data_ch9_correlation.csv 632 列、60 欄，CalEstimate 與 OzEstimate 各有 10 筆遺漏。該資料無 Condition 欄，是受試者內設計。
+- 2026-09-16 | gemini | gemini-flash-latest | **pass** | zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/correlation-choice_lopez2024_zhTW.omv、回覆副本 data/replies/correlation-choice_lopez2024_zhTW.md。expected 4/4：路徑 Analyses > Regression > Correlation Matrix 並指出勾選位置；以線性關係與極端值敏感度為據，並引平均數遠大於中位數（138.3 vs 100、6.799 vs 4）推論右偏而建議 Spearman；明說看不到散佈圖；提到成對刪除會壓低 n。check 三項零錯：path 逐字相符；number 與 R 實算 138.2556 / 100 / 1000 與 6.7991 / 4 / 100 相符；assumption 已畫散佈圖（scat）。佐證：R 實算偏態 2.30 與 5.01，Pearson r = 0.347、Spearman ρ = 0.513，推薦方向正確。另外它預測成對完整 n 落在 612–622，jamovi corrMatrix 實跑 N = 619、df = 617，落在區間內（10 筆遺漏有 7 筆重疊）。本條預設的陷阱（宣稱兩變項遺漏數不同）未被觸發。
+- 2026-09-16 | gemini | gemini-flash-latest | **pass** | en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/correlation-choice_lopez2024_en.omv、回覆副本 data/replies/correlation-choice_lopez2024_en.md。expected 4/4，與 zh 版同樣四項全中，另點名 bivariate outliers 並指出散佈圖在同一分析的 Plot 區塊。check 三項零錯，陷阱同樣未被觸發。
 
 
 ---
@@ -227,7 +228,8 @@ Please answer in beginner-friendly terms:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Data Skills 的 Stroop 資料，已下載核對：experiment_data.csv 540 列、condition 為 congruent／incongruent 各 270、participant_data.csv 270 列。
+- 2026-09-16 | gemini | gemini-flash-latest | **pass** | zh 版，persona=explainer，promptLang=zh，證據 data/describe-first-look_stroop_zhTW.omv、回覆副本 data/replies/describe-first-look_stroop_zhTW.md。expected 4/4：路徑 Analyses > Exploration > Descriptives 並指明 Split by；答「無法完全確定」分布形狀並要求自畫 Histogram 與看 Skewness/Kurtosis；點出四件摘要看不到的事，第一件正是「無法確認每人是否各 1 筆 congruent/incongruent」；全程未宣稱檢視過原始資料。check 三項齊備：path 比對本機 jmv/jamovi.yaml 逐字相符；number 817.7 / 811 / 418.9 / 1359 / 270 人 / 540 列 與 R 實算 817.7276 / 811.0353 / 418.9321 / 1358.5688 相符；assumption 已畫直方圖（08 descriptives/resources 內），回覆只給「大致對稱」的弱推論，與全體偏態 0.312 相容。
+- 2026-09-16 | gemini | gemini-flash-latest | **pass** | en 版，persona=explainer，promptLang 未設（en 預設），證據 data/describe-first-look_stroop_en.omv、回覆副本 data/replies/describe-first-look_stroop_en.md。expected 4/4，同 zh 版四項全中。此版在第 2 題更進一步：由 max 離 median 比 min 遠推出 possible slight right skew，並主動指出摘要看不出雙峰。R 實算全體偏態 0.312，該推論成立；分組後偏態僅 −0.077 與 −0.008，全體的右偏其實來自兩組平均數相差 147ms 的疊加。check 三項同 zh 版，另畫了第二張圖。
 
 
 ---
@@ -543,7 +545,8 @@ Please answer all three:
 
 ### [實測記錄]{.zh}[Tested with]{.en}
 
-- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 Stroop 資料：每位受試者在 congruent 與 incongruent 各一筆，270 人、540 列，是真正的受試者內設計。
+- 2026-09-16 | gemini | gemini-flash-latest | **partial** | zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/paired-vs-independent_stroop_zhTW.omv、回覆副本 data/replies/paired-vs-independent_stroop_zhTW.md。expected 2/4：路徑兩條都對，但第 2 題標題寫「**可以**看出高度配對的特徵」，與 expected 第 2、4 項相反——它把「participant_id 有 270 個水準、總列數 540」推成「每位受試者皆正好出現 2 次」，而 540 ÷ 270 = 2 推不出這件事（一人 3 列、另一人 1 列同樣成立）。括號裡補了「無法 100% 排除」，但標題已經定調。該斷言碰巧為真（R 實算每人正好 2 列、每人每條件正好 1 筆，270/270），沒有錯誤資訊，故不判 fail。check 三項零錯：三條路徑逐字比對通過，含第三方模組的 Linear Models ▸ GAMLj3 ▸ Linear Mixed Model；引用的 270 與 540 正確；cross-check 已跑，GAMLj 混合模型得 t(269) = 13.50，與配對 t 檢定的 t(269) = −13.50 同值（差在對比方向），誤用獨立樣本得 Welch t(495.76) = −13.72 仍 p < .001。原文已收進 verify/spot-the-error.qmd 第 12 題，與英文版並列作為對照。
+- 2026-09-16 | gemini | gemini-flash-latest | **pass** | en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/paired-vs-independent_stroop_en.omv、回覆副本 data/replies/paired-vs-independent_stroop_en.md。expected 4/4：第 2 題答 'Partially, but not definitively'，並明說 the summary does not include a cross-tabulation、因此 cannot strictly verify 每人是否一筆 congruent 一筆 incongruent。與 zh 版只差 promptLang，同模型同資料同 persona，差異即語言本身，是現成的對照組。check 三項同 zh 版，零錯。
 
 
 ---

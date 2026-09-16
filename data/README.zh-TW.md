@@ -21,26 +21,42 @@
 | `mixed-anova-setup_zhang2014_v1_fail_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj（修正前的提示詞） |
 | `mixed-anova-setup_zhang2014_v2_fix_zhTW.omv` | `mixed-anova-setup` | 繁中 | askllmr、Rj、anovaRM（修正後的提示詞） |
 | `mixed-anova-setup_zhang2014_v2_fix_en.omv` | `mixed-anova-setup` | 英文 | askllmr、Rj、anovaRM（修正後的提示詞） |
+| `describe-first-look_stroop_zhTW.omv` | `describe-first-look` | 中文 | askllm（explainer）、descriptives 含直方圖 |
+| `describe-first-look_stroop_en.omv` | `describe-first-look` | 英文 | askllm（explainer）、descriptives 含兩張圖 |
+| `paired-vs-independent_stroop_zhTW.omv` | `paired-vs-independent` | 中文 | askllm、gamljmixed、ttestIS |
+| `paired-vs-independent_stroop_en.omv` | `paired-vs-independent` | 英文 | askllm、gamljmixed、ttestIS |
+| `correlation-choice_lopez2024_zhTW.omv` | `correlation-choice` | 中文 | askllm、corrMatrix、scat |
+| `correlation-choice_lopez2024_en.omv` | `correlation-choice` | 英文 | askllm、corrMatrix、scat |
 
 實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。`missing-data-triage`
 的中文 explainer 那次於 2026-09-09 重跑，原因見最後一節。
 
+最後六個檔是批 A，2026-09-16 實測，provider 與模型相同。除了 `describe-first-look` 兩次有設
+`role`，其餘四次都沒設，跑的是預設的 `consultant`。它們檔名沒有 persona 後綴，因為這三條的
+`check` 清單都沒有要求跨 persona 比對。
+
 ## 重跑這些實測
 
-每條條目的 `prompt` 都帶 `{佔位符}`。下表是實測當時填入的值，以及各自的資料來源。三個下載連結
-於 2026-09-09 實測皆回 HTTP 200。
+每條條目的 `prompt` 都帶 `{佔位符}`。下表是實測當時填入的值，以及各自的資料來源。前三個下載連結
+於 2026-09-09 實測回 HTTP 200，後兩個於 2026-09-16 實測回 HTTP 200。
 
 | 條目 | 資料集 | 下載 |
 |---|---|---|
 | `ttest-assumptions` | Zwaan et al. (2018) Simon task | <https://psyteachr.github.io/analysis-v4/data/data_ch7.zip>（解壓後用 `MeansSimonTask.csv`） |
 | `missing-data-triage` | Dawtry et al. (2015) | <https://psyteachr.github.io/quant-fun-v3/data/Dawtry_2015_clean.csv> |
 | `mixed-anova-setup` | Zhang et al. (2014) Study 3 | <https://psyteachr.github.io/analysis-v4/data/data_ch13.zip>（含 `Zhang_2014_Study3.csv` 與 codebook） |
+| `describe-first-look` | psyteachr 的 Stroop 示範資料 | <https://psyteachr.github.io/data-skills-v3/data/stroop/stroop_data.zip>（用 `experiment_data.csv`，長格式 540 列） |
+| `paired-vs-independent` | 同一份 Stroop 資料 | 同上；`cross-check` 那步需要寬格式，作法見下 |
+| `correlation-choice` | Lopez et al. (2024) 湯碗研究 | <https://psyteachr.github.io/analysis-v4/data/data_ch9.zip>（用 `data_ch9_correlation.csv`，632 列、60 欄） |
 
 | 條目 | 佔位符 | 值 |
 |---|---|---|
 | `ttest-assumptions` | `{outcome}` / `{group}` / `{n1}` / `{n2}` | `simon_effect` / `similarity`（same、different）/ 80 / 80 |
 | `missing-data-triage` | `{var_a}` / `{pct_a}` / `{var_b}` / `{pct_b}` | `Household_Income` / 1.3 / `Political_Preference` / 1.3 |
 | `mixed-anova-setup` | `{id}` / `{group}` / `{t1}` / `{t2}` | `Participant_ID` / `Condition` / `T1_Pred_Interest_Comp` / `T2_Interest_Comp` |
+| `describe-first-look` | `{outcome}` / `{group}` / `{k}` / `{id}` | `reaction_time` / `condition` / 2 / `participant_id` |
+| `paired-vs-independent` | `{outcome}` / `{group}` / `{id}` | `reaction_time` / `condition` / `participant_id` |
+| `correlation-choice` | `{var_a}` / `{var_b}` / `{n_a}` / `{n_b}` | `CalEstimate` / `OzEstimate` / 622 / 622 |
 
 看數字之前有兩件事要知道。`simon_effect` 不是檔案裡現成的欄位，實測時是以
 `session1_incongruent − session1_congruent` 算出來的，這就是它與 psyteachr 數字不同的原因
@@ -57,8 +73,10 @@
 | Zwaan et al. (2018) Simon task | psyteachr *Analysis* ch.7（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/07-independent.html> | CC BY 4.0 |
 | Dawtry et al. (2015) | psyteachr *Fundamentals of Quantitative Analysis* ch.11（Bartlett & Toivo, 2024），<https://psyteachr.github.io/quant-fun-v3/11-screening-data.html> | CC BY-SA 4.0 |
 | Zhang et al. (2014) Study 3 | psyteachr *Analysis* ch.13（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/13-factorial-anova.html> | CC BY 4.0 |
+| Stroop 示範資料 | psyteachr *Data Skills for Reproducible Research* ch.2（Nordmann & DeBruine, 2025），<https://psyteachr.github.io/data-skills-v3/stroop.html> | CC BY-SA 4.0 |
+| Lopez et al. (2024) 湯碗研究 | psyteachr *Analysis* ch.9（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/09-correlation.html> | CC BY 4.0 |
 
-CC BY-SA 4.0 的素材（Dawtry）以相同方式分享。
+CC BY-SA 4.0 的素材（Dawtry 與 Stroop 資料）以相同方式分享。
 
 ## 變項定義的兩個陷阱
 
@@ -98,6 +116,32 @@ psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。兩個�
 若某份保存的回覆已知不是當次執行的那一份，檔案開頭會明白寫出來。
 
 附帶一提，英文那三個樣本全都符合修正後的格式規範，這是提示詞修正穩健的旁證，不是雜訊。
+
+## 選單路徑會隨你裝了哪些模組而變
+
+`paired-vs-independent` 兩次回覆都指出 jamovi 內建的配對 t 檢定要寬格式，並改推薦長格式可用的
+`Analyses > Linear Models > GAMLj3 > Linear Mixed Model`。這條路徑逐字正確：`GAMLj3/jamovi.yaml`
+寫的就是 `menuGroup: Linear Models`、`menuSubgroup: GAMLj3`、`menuTitle: Linear Mixed Model`。
+
+模型並不「知道」這件事。askLLM 的 `includeCatalog` 預設為 `true`，請求裡夾帶了本機已安裝的模組
+清單。**同一題拿到沒裝 GAMLj3 的機器上問，這條路徑就不會出現。** 回覆裡的選單路徑因此是對某一台
+機器的證據，不是對 jamovi 的通則——這正是每條 `check` 清單第一步都要你自己去點一次的原因。
+
+把那個混合模型跑起來，也就順帶驗證了這個建議。它給出 `t(269) = 13.50`，與寬格式配對 t 檢定的
+`t(269) = −13.50` 同值，只差在對比方向。把同一份資料當成兩組獨立樣本，得到 Welch
+`t(495.76) = −13.72`，仍然 `p < .001`。**選錯沒有被 p 值抓到。**
+
+### 為了那步 cross-check 而轉置 Stroop 資料
+
+`experiment_data.csv` 是長格式，540 列、每位受試者兩列。jamovi 的 Paired Samples T-Test 要一人
+一列，所以實測時在 Rj 裡先轉置：
+
+```r
+wide <- reshape(data, idvar = "participant_id", timevar = "condition",
+                v.names = "reaction_time", direction = "wide")
+```
+
+產出 270 列、3 欄，完整案例 270。
 
 ## cross-check 的變項控制（2026-09-09 記）
 
