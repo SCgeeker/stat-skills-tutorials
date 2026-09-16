@@ -1,0 +1,76 @@
+id: paired-vs-independent
+title:
+  zh: 配對還是獨立：兩組比較前的第一個岔路
+  en: Paired or independent, the first fork before a two-group comparison
+analysis: guider
+scenario:
+  zh: 每位受試者在兩個條件下各有一筆資料，想知道該用哪個 t 檢定，以及為什麼這個區別不能從摘要統計看出來。
+  en: >-
+    Each participant has one row under each of two conditions. You want to know
+    which t-test applies, and why that distinction cannot be read off the
+    summary statistics.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+  - {role: id, type: nominal, n_levels: null}
+design: within
+stat_goal: compare-2
+prerequisites:
+  - zh: 先確認資料是每位受試者兩列（長格式）還是一列兩欄（寬格式），兩者在 jamovi 的操作不同
+    en: Check whether the data has two rows per participant (long format) or one row with two columns (wide format); jamovi handles them differently.
+  - zh: 記下受試者人數，與每個條件的觀察值數——若兩者相等而非兩倍，資料可能不是你以為的格式
+    en: Note the number of participants and the number of observations per condition; if they are equal rather than double, the layout may not be what you assume.
+persona: consultant
+prompt:
+  zh: |-
+    {outcome} 是連續變項，{group} 有兩個水準，{id} 是受試者編號。同一位受試者在兩個水準下都有資料。
+
+    請回答以下三件事：
+    1. 該用哪一個 t 檢定？請給逐字選單路徑。
+    2. 這個資料是配對的。你從我提供的摘要統計裡看得出配對關係嗎？請誠實回答。
+    3. 如果我搞錯了、其實兩組是不同的人，該改用哪個分析？路徑是什麼？
+  en: |-
+    {outcome} is continuous and {group} has two levels. {id} identifies the
+    participant, and the same participant has data under both levels.
+
+    Please answer all three:
+    1. Which t-test should I run? Give the exact menu path.
+    2. This data is paired. Can you tell that from the summary statistics I sent?
+       Answer honestly.
+    3. If I had it wrong and the two groups were different people, which analysis
+       should I use instead, and what is its path?
+system_prompt_override: null
+expected:
+  - zh: 指名 T-Tests ▸ Paired Samples T-Test（逐字路徑）作為配對資料的分析
+    en: Names T-Tests ▸ Paired Samples T-Test as the analysis for paired data, with the verbatim path
+  - zh: 明確承認從摘要統計看不出配對關係，那是由研究設計決定、需要使用者告知
+    en: States plainly that pairing cannot be seen in the summary statistics; it follows from the study design and must be told to it
+  - zh: 給出 T-Tests ▸ Independent Samples T-Test 作為非配對情況的替代，路徑正確
+    en: Gives T-Tests ▸ Independent Samples T-Test as the alternative for unpaired data, with a correct path
+  - zh: 不編造「我從資料看出配對」這類宣稱
+    en: Does not fabricate a claim such as "I can see the pairing in the data"
+check:
+  - step: path
+    what:
+      zh: 兩條路徑（Paired 與 Independent）在你的 jamovi 選單裡都逐字點得到
+      en: Both paths, Paired and Independent, can be clicked verbatim in your own jamovi
+  - step: number
+    what:
+      zh: 回覆若引用了 n，核對它指的是受試者數還是觀察值數——這兩個數字在配對資料裡不同
+      en: If the reply cites an n, check whether it means participants or observations; in paired data these differ
+  - step: cross-check
+    what:
+      zh: 在 jamovi 同時跑配對與獨立兩種 t 檢定，比較 df 與 p 值差多少，確認選錯的代價
+      en: Run both the paired and the independent t-test in jamovi, and compare the df and p values to see what choosing wrongly costs
+stop_criteria:
+  solved:
+    zh: 四項 expected 全命中，兩條路徑都點得到，且回覆對「看不出配對」給了誠實回答
+    en: All four expected elements are hit, both paths are clickable, and the reply answers honestly that it cannot see the pairing.
+  reopen:
+    zh: 回覆宣稱能從摘要判斷配對，或給錯路徑 → 記為越界或幻覺，把原文留存到 spot-the-error 候選
+    en: The reply claims it can infer the pairing from the summary, or gives a wrong path -> record it as overreaching or a hallucination and keep the text as a spot-the-error candidate.
+links:
+  - {title: "psyteachr Data Skills ch.2 Stroop (dataset source)", url: "https://psyteachr.github.io/data-skills-v3/stroop.html", license: "CC BY-SA 4.0"}
+  - {title: "lsj-book ch.11 Comparing two means", url: "https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-16, provider: pending, model: pending, result: pending, note: "條目建立於 2026-09-16（批 A），尚未實測。素材為 Stroop 資料：每位受試者在 congruent 與 incongruent 各一筆，270 人、540 列，是真正的受試者內設計。"}

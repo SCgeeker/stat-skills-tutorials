@@ -1,0 +1,75 @@
+id: correlation-choice
+title:
+  zh: 兩個連續變項的關聯該用哪種相關
+  en: Which correlation for two continuous variables
+analysis: guider
+scenario:
+  zh: 有兩個連續變項想看關聯，不確定該用 Pearson 還是 Spearman，也想知道哪些判斷需要看散佈圖。
+  en: >-
+    You have two continuous variables and want to examine their association,
+    but are unsure whether to use Pearson or Spearman, and which judgements
+    need a scatterplot.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+design: none
+stat_goal: associate
+prerequisites:
+  - zh: 兩個變項都勾進 Variables to describe，並記下各自的遺漏數
+    en: Tick both variables into Variables to describe, and note how many values are missing in each.
+  - zh: 先看 min 與 max，若兩者差距懸殊，之後要留意是否有極端值主導相關
+    en: Look at min and max first; a wide gap is a hint that extreme values may drive the correlation.
+persona: consultant
+prompt:
+  zh: |-
+    {var_a} 與 {var_b} 都是連續變項，各有 {n_a} 與 {n_b} 筆有效值。
+
+    請回答以下三件事：
+    1. 該用 Pearson 還是 Spearman？判斷依據是什麼？請給逐字選單路徑。
+    2. 這個判斷需要哪些你從摘要統計看不到的資訊？請明說。
+    3. 若兩個變項的遺漏筆數不同，相關分析會怎麼處理？我該注意什麼？
+  en: |-
+    {var_a} and {var_b} are both continuous, with {n_a} and {n_b} valid values
+    respectively.
+
+    Please answer all three:
+    1. Should I use Pearson or Spearman? On what basis do I decide? Give the exact
+       menu path.
+    2. Which information does that decision need that you cannot see in the summary
+       statistics? Say so plainly.
+    3. If the two variables have different numbers of missing values, how does the
+       correlation handle that, and what should I watch for?
+system_prompt_override: null
+expected:
+  - zh: 指名 Regression ▸ Correlation Matrix（逐字路徑），並說明 Pearson 與 Spearman 的勾選位置
+    en: Names Regression ▸ Correlation Matrix with the verbatim path, and says where the Pearson and Spearman checkboxes are
+  - zh: 以線性關係與極端值敏感度作為選擇依據，而非只說「常態就用 Pearson」
+    en: Bases the choice on linearity and sensitivity to extreme values, not merely on "use Pearson if normal"
+  - zh: 明確承認它看不到散佈圖，線性與否必須由使用者自己畫圖判斷
+    en: States plainly that it cannot see a scatterplot, and that linearity must be judged by the user plotting it
+  - zh: 提到成對刪除（pairwise）與整列刪除（listwise）的差別，或至少提醒遺漏處理會影響 n
+    en: Mentions the difference between pairwise and listwise deletion, or at least warns that missing-data handling changes n
+check:
+  - step: path
+    what:
+      zh: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡逐字點得到
+      en: Every "Analyses ▸ …" path in the reply can be clicked verbatim in your own jamovi
+  - step: number
+    what:
+      zh: 回覆引用的有效值筆數與 Descriptives 面板的 N 及 Missing 欄一致
+      en: The counts of valid values cited in the reply match the N and Missing columns in the Descriptives panel
+  - step: assumption
+    what:
+      zh: 自己畫一次散佈圖，看關係是否近似線性；若明顯彎曲而回覆卻推薦 Pearson，記為判準失準
+      en: Plot the scatterplot yourself and see whether the relationship is roughly linear; if it curves clearly but the reply recommended Pearson, record the judgement as unsound
+stop_criteria:
+  solved:
+    zh: 四項 expected 全命中，路徑點得到，且散佈圖與回覆的判準相容
+    en: All four expected elements are hit, the paths are clickable, and the scatterplot is compatible with the reply's reasoning.
+  reopen:
+    zh: 回覆宣稱看過散佈圖或直接斷言關係是線性的 → 記為越界；換 explainer persona 重問一次比對
+    en: The reply claims to have seen a scatterplot or asserts the relationship is linear -> record it as overreaching and ask again with the explainer persona to compare.
+links:
+  - {title: "psyteachr Analysis ch.9 Correlation (dataset source)", url: "https://psyteachr.github.io/analysis-v4/09-correlation.html", license: "CC BY 4.0"}
+tested_with:
+  - {date: 2026-09-16, provider: pending, model: pending, result: pending, note: "條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Analysis ch.9 的 Lopez et al. (2024) 湯碗研究，已下載核對：data_ch9_correlation.csv 632 列、60 欄，CalEstimate 與 OzEstimate 各有 10 筆遺漏。該資料無 Condition 欄，是受試者內設計。"}

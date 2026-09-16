@@ -19,6 +19,219 @@ pending_notice_results <- unlist(lapply(pending_notice_entries, function(pn_e) {
 cat(pending_notice(pending_notice_results))
 ```
 
+## [兩個連續變項的關聯該用哪種相關]{.zh}[Which correlation for two continuous variables]{.en}
+
+**analysis**: `guider` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `associate` &nbsp;|&nbsp; **persona**: `consultant`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+有兩個連續變項想看關聯，不確定該用 Pearson 還是 Spearman，也想知道哪些判斷需要看散佈圖。
+:::
+
+::: {.en}
+You have two continuous variables and want to examine their association, but are unsure whether to use Pearson or Spearman, and which judgements need a scatterplot.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 兩個變項都勾進 Variables to describe，並記下各自的遺漏數
+- 先看 min 與 max，若兩者差距懸殊，之後要留意是否有極端值主導相關
+:::
+
+::: {.en}
+- Tick both variables into Variables to describe, and note how many values are missing in each.
+- Look at min and max first; a wide gap is a hint that extreme values may drive the correlation.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+{var_a} 與 {var_b} 都是連續變項，各有 {n_a} 與 {n_b} 筆有效值。
+
+請回答以下三件事：
+1. 該用 Pearson 還是 Spearman？判斷依據是什麼？請給逐字選單路徑。
+2. 這個判斷需要哪些你從摘要統計看不到的資訊？請明說。
+3. 若兩個變項的遺漏筆數不同，相關分析會怎麼處理？我該注意什麼？
+```
+:::
+
+::: {.en}
+```
+{var_a} and {var_b} are both continuous, with {n_a} and {n_b} valid values
+respectively.
+
+Please answer all three:
+1. Should I use Pearson or Spearman? On what basis do I decide? Give the exact
+   menu path.
+2. Which information does that decision need that you cannot see in the summary
+   statistics? Say so plainly.
+3. If the two variables have different numbers of missing values, how does the
+   correlation handle that, and what should I watch for?
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 指名 Regression ▸ Correlation Matrix（逐字路徑），並說明 Pearson 與 Spearman 的勾選位置
+- 以線性關係與極端值敏感度作為選擇依據，而非只說「常態就用 Pearson」
+- 明確承認它看不到散佈圖，線性與否必須由使用者自己畫圖判斷
+- 提到成對刪除（pairwise）與整列刪除（listwise）的差別，或至少提醒遺漏處理會影響 n
+:::
+
+::: {.en}
+- Names Regression ▸ Correlation Matrix with the verbatim path, and says where the Pearson and Spearman checkboxes are
+- Bases the choice on linearity and sensitivity to extreme values, not merely on "use Pearson if normal"
+- States plainly that it cannot see a scatterplot, and that linearity must be judged by the user plotting it
+- Mentions the difference between pairwise and listwise deletion, or at least warns that missing-data handling changes n
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **path**: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡逐字點得到
+- **number**: 回覆引用的有效值筆數與 Descriptives 面板的 N 及 Missing 欄一致
+- **assumption**: 自己畫一次散佈圖，看關係是否近似線性；若明顯彎曲而回覆卻推薦 Pearson，記為判準失準
+:::
+
+::: {.en}
+- **path**: Every "Analyses ▸ …" path in the reply can be clicked verbatim in your own jamovi
+- **number**: The counts of valid values cited in the reply match the N and Missing columns in the Descriptives panel
+- **assumption**: Plot the scatterplot yourself and see whether the relationship is roughly linear; if it curves clearly but the reply recommended Pearson, record the judgement as unsound
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 四項 expected 全命中，路徑點得到，且散佈圖與回覆的判準相容
+- **reopen**: 回覆宣稱看過散佈圖或直接斷言關係是線性的 → 記為越界；換 explainer persona 重問一次比對
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit, the paths are clickable, and the scatterplot is compatible with the reply's reasoning.
+- **reopen**: The reply claims to have seen a scatterplot or asserts the relationship is linear -> record it as overreaching and ask again with the explainer persona to compare.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Analysis ch.9 Correlation (dataset source)](https://psyteachr.github.io/analysis-v4/09-correlation.html)（CC BY 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Analysis ch.9 的 Lopez et al. (2024) 湯碗研究，已下載核對：data_ch9_correlation.csv 632 列、60 欄，CalEstimate 與 OzEstimate 各有 10 筆遺漏。該資料無 Condition 欄，是受試者內設計。
+
+
+---
+
+## [拿到資料的第一眼該看什麼]{.zh}[What to look at first]{.en}
+
+**analysis**: `guider` &nbsp;|&nbsp; **design**: `within` &nbsp;|&nbsp; **stat_goal**: `describe` &nbsp;|&nbsp; **persona**: `explainer`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+剛載入一份實驗資料，想知道該先看哪些描述統計、以及哪些判斷需要看原始資料才做得到。
+:::
+
+::: {.en}
+You have just loaded an experiment's data and want to know which descriptive statistics to look at first, and which judgements need the raw data rather than a summary.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先把結果變項與分組變項都勾進 Variables to describe，否則 LLM 收不到它們的摘要
+- 記下每個水準的 n，等一下要拿來核對回覆引用的數字
+:::
+
+::: {.en}
+- Tick both the outcome and the grouping variable into Variables to describe, or the LLM will not receive their summaries.
+- Write down the n for each level so you can check the numbers the reply cites.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+{outcome} 是連續變項，{group} 有 {k} 個水準，{id} 是受試者編號。每位受試者在每個水準各有一筆資料。
+
+請用初學者聽得懂的方式回答：
+1. 我應該先看哪些描述統計？請給逐字選單路徑。
+2. 從這份摘要，你能判斷分布形狀嗎？如果不能，我該自己做什麼來判斷？
+3. 有哪些關於這份資料的問題，是你從摘要統計裡看不出來、只能由我自己看原始資料才知道的？
+```
+:::
+
+::: {.en}
+```
+{outcome} is continuous, {group} has {k} levels, and {id} identifies the
+participant. Each participant has one row per level.
+
+Please answer in beginner-friendly terms:
+1. Which descriptive statistics should I look at first? Give the exact menu path.
+2. Can you judge the shape of the distribution from this summary? If not, what
+   should I do myself to judge it?
+3. Which questions about this data can you not answer from summary statistics,
+   so that I have to look at the raw data myself?
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 給出 Exploration ▸ Descriptives 的逐字路徑，並說明 Split by 可依水準分開看
+- 明確承認摘要統計判斷不了分布形狀，並建議畫圖（直方圖或箱形圖）自行檢視
+- 至少點出一件它看不到的事，例如哪一筆是離群值、遺漏的型態、或每位受試者的配對關係
+- 不宣稱自己檢視過原始資料或個別觀察值
+:::
+
+::: {.en}
+- Gives the verbatim path Exploration ▸ Descriptives, and mentions that Split by shows each level separately
+- States plainly that summary statistics cannot reveal distribution shape, and suggests plotting (a histogram or boxplot) to judge it
+- Names at least one thing it cannot see, such as which row is an outlier, the pattern of missingness, or the pairing between each participant's rows
+- Does not claim to have inspected the raw data or any individual observation
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **path**: 回覆中每條 "Analyses ▸ …" 路徑，在你的 jamovi 選單裡逐字點得到
+- **number**: 回覆引用的 n、mean、sd 與你在 Descriptives 面板看到的一致
+- **assumption**: 自己畫一次直方圖，看分布形狀是否與回覆的描述相容；回覆若根本沒描述形狀，這一步記為通過
+:::
+
+::: {.en}
+- **path**: Every "Analyses ▸ …" path in the reply can be clicked verbatim in your own jamovi
+- **number**: The n, mean, and sd cited in the reply match what you see in the Descriptives panel
+- **assumption**: Plot a histogram yourself and check whether the shape is compatible with the reply; if the reply made no claim about shape, this step passes
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 四項 expected 全命中且 path 查核零錯 → 依建議執行
+- **reopen**: 回覆宣稱看得出分布形狀或指認了特定觀察值 → 記為越界，換 consultant persona 重問一次比對
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit and the path check is clean -> follow the advice.
+- **reopen**: The reply claims to see the distribution shape or names a specific observation -> record it as overreaching and ask again with the consultant persona to compare.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Data Skills ch.2 Stroop (dataset source)](https://psyteachr.github.io/data-skills-v3/stroop.html)（CC BY-SA 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Data Skills 的 Stroop 資料，已下載核對：experiment_data.csv 540 列、condition 為 congruent／incongruent 各 270、participant_data.csv 270 列。
+
+
+---
+
 ## [遺漏值先分流再處理]{.zh}[Triage missing data before you treat it]{.en}
 
 **analysis**: `guider` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `screen` &nbsp;|&nbsp; **persona**: `explainer`
@@ -224,6 +437,113 @@ Please guide me under these rules, without giving the full solution:
 - 2026-09-08 | gemini | gemini-flash-latest | **fail** | 【修正前的提示詞】en 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_en.omv。同一根因，錯誤位置 <text>:21:1，另有 table(data_long$# TODO: ...)。此失效模式可重現，已列為 spot-the-error 題材。
 - 2026-09-09 | gemini | gemini-flash-latest | **pass** | 修正後重測，zh 版，證據 data/mixed-anova-setup_zhang2014_v2_fix_zhTW.omv。expected 4/4：只用 data、無 read.csv/install.packages；待填處為開頭的變數指派（target_cols 等）且值為字串佔位符，填值前即可 parse；長格式 304 列（152 × 2）；有 table() 驗證輸出。check 三項齊備：code-read 無紅旗，code-run 在 Rj 零錯誤且每格為 1，cross-check 的 anovaRM 已跑（within = Time[T1,T2]、between = Condition）。判定依據為當次貼入 Rj 的程式碼與其執行結果，非 .omv 內顯示的回覆（見 data/README.md 的 submit 重跑陷阱）。
 - 2026-09-09 | gemini | gemini-flash-latest | **pass** | 修正後重測，en 版，證據 data/mixed-anova-setup_zhang2014_v2_fix_en.omv。expected 4/4，待填處為 id_col / time_cols / time_col_name / score_col_name 四個開頭指派（此為當次貼入 Rj 執行的那份程式碼；.omv 現存的回覆是第三個樣本，其變數名為 id_var / time_cols / time_name / score_name）。Rj 執行零錯誤、304 列、每格為 1，anovaRM 同上。附帶觀察：該檔因 submit 重跑共產生三個回覆樣本（變數名分別為 id_col / time_cols / id_var），三者皆符合修正後的格式規範，為提示詞修正穩健的旁證。判定依據同 zh 版。
+
+
+---
+
+## [配對還是獨立：兩組比較前的第一個岔路]{.zh}[Paired or independent, the first fork before a two-group comparison]{.en}
+
+**analysis**: `guider` &nbsp;|&nbsp; **design**: `within` &nbsp;|&nbsp; **stat_goal**: `compare-2` &nbsp;|&nbsp; **persona**: `consultant`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+每位受試者在兩個條件下各有一筆資料，想知道該用哪個 t 檢定，以及為什麼這個區別不能從摘要統計看出來。
+:::
+
+::: {.en}
+Each participant has one row under each of two conditions. You want to know which t-test applies, and why that distinction cannot be read off the summary statistics.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先確認資料是每位受試者兩列（長格式）還是一列兩欄（寬格式），兩者在 jamovi 的操作不同
+- 記下受試者人數，與每個條件的觀察值數——若兩者相等而非兩倍，資料可能不是你以為的格式
+:::
+
+::: {.en}
+- Check whether the data has two rows per participant (long format) or one row with two columns (wide format); jamovi handles them differently.
+- Note the number of participants and the number of observations per condition; if they are equal rather than double, the layout may not be what you assume.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+{outcome} 是連續變項，{group} 有兩個水準，{id} 是受試者編號。同一位受試者在兩個水準下都有資料。
+
+請回答以下三件事：
+1. 該用哪一個 t 檢定？請給逐字選單路徑。
+2. 這個資料是配對的。你從我提供的摘要統計裡看得出配對關係嗎？請誠實回答。
+3. 如果我搞錯了、其實兩組是不同的人，該改用哪個分析？路徑是什麼？
+```
+:::
+
+::: {.en}
+```
+{outcome} is continuous and {group} has two levels. {id} identifies the
+participant, and the same participant has data under both levels.
+
+Please answer all three:
+1. Which t-test should I run? Give the exact menu path.
+2. This data is paired. Can you tell that from the summary statistics I sent?
+   Answer honestly.
+3. If I had it wrong and the two groups were different people, which analysis
+   should I use instead, and what is its path?
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 指名 T-Tests ▸ Paired Samples T-Test（逐字路徑）作為配對資料的分析
+- 明確承認從摘要統計看不出配對關係，那是由研究設計決定、需要使用者告知
+- 給出 T-Tests ▸ Independent Samples T-Test 作為非配對情況的替代，路徑正確
+- 不編造「我從資料看出配對」這類宣稱
+:::
+
+::: {.en}
+- Names T-Tests ▸ Paired Samples T-Test as the analysis for paired data, with the verbatim path
+- States plainly that pairing cannot be seen in the summary statistics; it follows from the study design and must be told to it
+- Gives T-Tests ▸ Independent Samples T-Test as the alternative for unpaired data, with a correct path
+- Does not fabricate a claim such as "I can see the pairing in the data"
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **path**: 兩條路徑（Paired 與 Independent）在你的 jamovi 選單裡都逐字點得到
+- **number**: 回覆若引用了 n，核對它指的是受試者數還是觀察值數——這兩個數字在配對資料裡不同
+- **cross-check**: 在 jamovi 同時跑配對與獨立兩種 t 檢定，比較 df 與 p 值差多少，確認選錯的代價
+:::
+
+::: {.en}
+- **path**: Both paths, Paired and Independent, can be clicked verbatim in your own jamovi
+- **number**: If the reply cites an n, check whether it means participants or observations; in paired data these differ
+- **cross-check**: Run both the paired and the independent t-test in jamovi, and compare the df and p values to see what choosing wrongly costs
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 四項 expected 全命中，兩條路徑都點得到，且回覆對「看不出配對」給了誠實回答
+- **reopen**: 回覆宣稱能從摘要判斷配對，或給錯路徑 → 記為越界或幻覺，把原文留存到 spot-the-error 候選
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit, both paths are clickable, and the reply answers honestly that it cannot see the pairing.
+- **reopen**: The reply claims it can infer the pairing from the summary, or gives a wrong path -> record it as overreaching or a hallucination and keep the text as a spot-the-error candidate.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Data Skills ch.2 Stroop (dataset source)](https://psyteachr.github.io/data-skills-v3/stroop.html)（CC BY-SA 4.0）
+- [lsj-book ch.11 Comparing two means](https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html)（CC BY-SA 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-16 | pending | pending | **pending** | 條目建立於 2026-09-16（批 A），尚未實測。素材為 Stroop 資料：每位受試者在 congruent 與 incongruent 各一筆，270 人、540 列，是真正的受試者內設計。
 
 
 ---

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-TW" xml:lang="zh-TW"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.38">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -12,10 +12,13 @@
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
 */
-code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -39,10 +42,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-a0f9fd0d421825b736dc1bbcbcba2219.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-172ba59bd5e0b52282274ba0c0cc16fc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -165,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#遺漏值先分流再處理triage-missing-data-before-you-treat-it" id="toc-遺漏值先分流再處理triage-missing-data-before-you-treat-it" class="nav-link active" data-scroll-target="#遺漏值先分流再處理triage-missing-data-before-you-treat-it"><span class="zh">遺漏值先分流再處理</span><span class="en">Triage missing data before you treat it</span></a>
+  <li><a href="#兩個連續變項的關聯該用哪種相關which-correlation-for-two-continuous-variables" id="toc-兩個連續變項的關聯該用哪種相關which-correlation-for-two-continuous-variables" class="nav-link active" data-scroll-target="#兩個連續變項的關聯該用哪種相關which-correlation-for-two-continuous-variables"><span class="zh">兩個連續變項的關聯該用哪種相關</span><span class="en">Which correlation for two continuous variables</span></a>
   <ul class="collapse">
   <li><a href="#情境scenario" id="toc-情境scenario" class="nav-link" data-scroll-target="#情境scenario"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
   <li><a href="#送出前必做prerequisites" id="toc-送出前必做prerequisites" class="nav-link" data-scroll-target="#送出前必做prerequisites"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
@@ -176,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#延伸閱讀links" id="toc-延伸閱讀links" class="nav-link" data-scroll-target="#延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
   <li><a href="#實測記錄tested-with" id="toc-實測記錄tested-with" class="nav-link" data-scroll-target="#實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
   </ul></li>
-  <li><a href="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" id="toc-混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" class="nav-link" data-scroll-target="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova"><span class="zh">混合設計 ANOVA 前的資料整形</span><span class="en">Reshaping data for a mixed ANOVA</span></a>
+  <li><a href="#拿到資料的第一眼該看什麼what-to-look-at-first" id="toc-拿到資料的第一眼該看什麼what-to-look-at-first" class="nav-link" data-scroll-target="#拿到資料的第一眼該看什麼what-to-look-at-first"><span class="zh">拿到資料的第一眼該看什麼</span><span class="en">What to look at first</span></a>
   <ul class="collapse">
   <li><a href="#情境scenario-1" id="toc-情境scenario-1" class="nav-link" data-scroll-target="#情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
   <li><a href="#送出前必做prerequisites-1" id="toc-送出前必做prerequisites-1" class="nav-link" data-scroll-target="#送出前必做prerequisites-1"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
@@ -187,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#延伸閱讀links-1" id="toc-延伸閱讀links-1" class="nav-link" data-scroll-target="#延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
   <li><a href="#實測記錄tested-with-1" id="toc-實測記錄tested-with-1" class="nav-link" data-scroll-target="#實測記錄tested-with-1"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
   </ul></li>
-  <li><a href="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" id="toc-兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" class="nav-link" data-scroll-target="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison"><span class="zh">兩組比較前該檢查什麼</span><span class="en">What to check before a two-group comparison</span></a>
+  <li><a href="#遺漏值先分流再處理triage-missing-data-before-you-treat-it" id="toc-遺漏值先分流再處理triage-missing-data-before-you-treat-it" class="nav-link" data-scroll-target="#遺漏值先分流再處理triage-missing-data-before-you-treat-it"><span class="zh">遺漏值先分流再處理</span><span class="en">Triage missing data before you treat it</span></a>
   <ul class="collapse">
   <li><a href="#情境scenario-2" id="toc-情境scenario-2" class="nav-link" data-scroll-target="#情境scenario-2"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
   <li><a href="#送出前必做prerequisites-2" id="toc-送出前必做prerequisites-2" class="nav-link" data-scroll-target="#送出前必做prerequisites-2"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
@@ -197,6 +200,39 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#判準stop-criteria-2" id="toc-判準stop-criteria-2" class="nav-link" data-scroll-target="#判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
   <li><a href="#延伸閱讀links-2" id="toc-延伸閱讀links-2" class="nav-link" data-scroll-target="#延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
   <li><a href="#實測記錄tested-with-2" id="toc-實測記錄tested-with-2" class="nav-link" data-scroll-target="#實測記錄tested-with-2"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
+  </ul></li>
+  <li><a href="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" id="toc-混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" class="nav-link" data-scroll-target="#混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova"><span class="zh">混合設計 ANOVA 前的資料整形</span><span class="en">Reshaping data for a mixed ANOVA</span></a>
+  <ul class="collapse">
+  <li><a href="#情境scenario-3" id="toc-情境scenario-3" class="nav-link" data-scroll-target="#情境scenario-3"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites-3" id="toc-送出前必做prerequisites-3" class="nav-link" data-scroll-target="#送出前必做prerequisites-3"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt-3" id="toc-提示詞prompt-3" class="nav-link" data-scroll-target="#提示詞prompt-3"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements-3" id="toc-期望回覆要素expected-elements-3" class="nav-link" data-scroll-target="#期望回覆要素expected-elements-3"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check-3" id="toc-查核點check-3" class="nav-link" data-scroll-target="#查核點check-3"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria-3" id="toc-判準stop-criteria-3" class="nav-link" data-scroll-target="#判準stop-criteria-3"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links-3" id="toc-延伸閱讀links-3" class="nav-link" data-scroll-target="#延伸閱讀links-3"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with-3" id="toc-實測記錄tested-with-3" class="nav-link" data-scroll-target="#實測記錄tested-with-3"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
+  </ul></li>
+  <li><a href="#配對還是獨立兩組比較前的第一個岔路paired-or-independent-the-first-fork-before-a-two-group-comparison" id="toc-配對還是獨立兩組比較前的第一個岔路paired-or-independent-the-first-fork-before-a-two-group-comparison" class="nav-link" data-scroll-target="#配對還是獨立兩組比較前的第一個岔路paired-or-independent-the-first-fork-before-a-two-group-comparison"><span class="zh">配對還是獨立：兩組比較前的第一個岔路</span><span class="en">Paired or independent, the first fork before a two-group comparison</span></a>
+  <ul class="collapse">
+  <li><a href="#情境scenario-4" id="toc-情境scenario-4" class="nav-link" data-scroll-target="#情境scenario-4"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites-4" id="toc-送出前必做prerequisites-4" class="nav-link" data-scroll-target="#送出前必做prerequisites-4"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt-4" id="toc-提示詞prompt-4" class="nav-link" data-scroll-target="#提示詞prompt-4"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements-4" id="toc-期望回覆要素expected-elements-4" class="nav-link" data-scroll-target="#期望回覆要素expected-elements-4"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check-4" id="toc-查核點check-4" class="nav-link" data-scroll-target="#查核點check-4"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria-4" id="toc-判準stop-criteria-4" class="nav-link" data-scroll-target="#判準stop-criteria-4"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links-4" id="toc-延伸閱讀links-4" class="nav-link" data-scroll-target="#延伸閱讀links-4"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with-4" id="toc-實測記錄tested-with-4" class="nav-link" data-scroll-target="#實測記錄tested-with-4"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
+  </ul></li>
+  <li><a href="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" id="toc-兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" class="nav-link" data-scroll-target="#兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison"><span class="zh">兩組比較前該檢查什麼</span><span class="en">What to check before a two-group comparison</span></a>
+  <ul class="collapse">
+  <li><a href="#情境scenario-5" id="toc-情境scenario-5" class="nav-link" data-scroll-target="#情境scenario-5"><span class="zh">情境</span><span class="en">Scenario</span></a></li>
+  <li><a href="#送出前必做prerequisites-5" id="toc-送出前必做prerequisites-5" class="nav-link" data-scroll-target="#送出前必做prerequisites-5"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></a></li>
+  <li><a href="#提示詞prompt-5" id="toc-提示詞prompt-5" class="nav-link" data-scroll-target="#提示詞prompt-5"><span class="zh">提示詞</span><span class="en">Prompt</span></a></li>
+  <li><a href="#期望回覆要素expected-elements-5" id="toc-期望回覆要素expected-elements-5" class="nav-link" data-scroll-target="#期望回覆要素expected-elements-5"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></a></li>
+  <li><a href="#查核點check-5" id="toc-查核點check-5" class="nav-link" data-scroll-target="#查核點check-5"><span class="zh">查核點</span><span class="en">Check</span></a></li>
+  <li><a href="#判準stop-criteria-5" id="toc-判準stop-criteria-5" class="nav-link" data-scroll-target="#判準stop-criteria-5"><span class="zh">判準</span><span class="en">Stop criteria</span></a></li>
+  <li><a href="#延伸閱讀links-5" id="toc-延伸閱讀links-5" class="nav-link" data-scroll-target="#延伸閱讀links-5"><span class="zh">延伸閱讀</span><span class="en">Links</span></a></li>
+  <li><a href="#實測記錄tested-with-5" id="toc-實測記錄tested-with-5" class="nav-link" data-scroll-target="#實測記錄tested-with-5"><span class="zh">實測記錄</span><span class="en">Tested with</span></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -225,11 +261,258 @@ ul.task-list li input[type="checkbox"] {
 
 <p>本頁由 <code>tools/build-prompts.R</code> 依 <code>prompts/entries/*.yaml</code> 自動產生，<strong>請勿手動修改本頁內容</strong>—— 要修改條目請改對應的 yaml 檔後重新執行 build 腳本。</p>
 <p>This page is generated by <code>tools/build-prompts.R</code> from <code>prompts/entries/*.yaml</code>. <strong>Do not edit this page by hand</strong> – edit the corresponding YAML entry and rerun the build script instead.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">警告</span><span class="zh">部分提示詞尚未實測</span><span class="en">Some prompts have not been tested yet</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div class="zh">
+<p>本庫部分條目的 <code>tested_with</code> 仍記為 <code>pending</code>：還沒有送給真實模型跑過。 這些條目的「期望回覆要素」請當成設計意圖；只有標為 <code>pass</code>／<code>partial</code>／<code>fail</code> 的條目才代表已觀察到的實測行為。</p>
+</div>
+<div class="en">
+<p>Some entries in this library still record <code>pending</code> as their test result and have not been run against a live model yet. Treat those entries’ expected-response list as a design intention; only entries marked <code>pass</code>, <code>partial</code>, or <code>fail</code> reflect observed test behaviour.</p>
+</div>
+</div>
+</div>
+<section id="兩個連續變項的關聯該用哪種相關which-correlation-for-two-continuous-variables" class="level2">
+<h2 class="anchored" data-anchor-id="兩個連續變項的關聯該用哪種相關which-correlation-for-two-continuous-variables"><span class="zh">兩個連續變項的關聯該用哪種相關</span><span class="en">Which correlation for two continuous variables</span></h2>
+<p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>none</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>associate</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>consultant</code></p>
+<section id="情境scenario" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
+<p>有兩個連續變項想看關聯，不確定該用 Pearson 還是 Spearman，也想知道哪些判斷需要看散佈圖。</p>
+</div>
+<div class="en">
+<p>You have two continuous variables and want to examine their association, but are unsure whether to use Pearson or Spearman, and which judgements need a scatterplot.</p>
+</div>
+</section>
+<section id="送出前必做prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
+<ul>
+<li>兩個變項都勾進 Variables to describe，並記下各自的遺漏數</li>
+<li>先看 min 與 max，若兩者差距懸殊，之後要留意是否有極端值主導相關</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Tick both variables into Variables to describe, and note how many values are missing in each.</li>
+<li>Look at min and max first; a wide gap is a hint that extreme values may drive the correlation.</li>
+</ul>
+</div>
+</section>
+<section id="提示詞prompt" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
+<pre><code>{var_a} 與 {var_b} 都是連續變項，各有 {n_a} 與 {n_b} 筆有效值。
+
+請回答以下三件事：
+1. 該用 Pearson 還是 Spearman？判斷依據是什麼？請給逐字選單路徑。
+2. 這個判斷需要哪些你從摘要統計看不到的資訊？請明說。
+3. 若兩個變項的遺漏筆數不同，相關分析會怎麼處理？我該注意什麼？</code></pre>
+</div>
+<div class="en">
+<pre><code>{var_a} and {var_b} are both continuous, with {n_a} and {n_b} valid values
+respectively.
+
+Please answer all three:
+1. Should I use Pearson or Spearman? On what basis do I decide? Give the exact
+   menu path.
+2. Which information does that decision need that you cannot see in the summary
+   statistics? Say so plainly.
+3. If the two variables have different numbers of missing values, how does the
+   correlation handle that, and what should I watch for?</code></pre>
+</div>
+</section>
+<section id="期望回覆要素expected-elements" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
+<ul>
+<li>指名 Regression ▸ Correlation Matrix（逐字路徑），並說明 Pearson 與 Spearman 的勾選位置</li>
+<li>以線性關係與極端值敏感度作為選擇依據，而非只說「常態就用 Pearson」</li>
+<li>明確承認它看不到散佈圖，線性與否必須由使用者自己畫圖判斷</li>
+<li>提到成對刪除（pairwise）與整列刪除（listwise）的差別，或至少提醒遺漏處理會影響 n</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Names Regression ▸ Correlation Matrix with the verbatim path, and says where the Pearson and Spearman checkboxes are</li>
+<li>Bases the choice on linearity and sensitivity to extreme values, not merely on “use Pearson if normal”</li>
+<li>States plainly that it cannot see a scatterplot, and that linearity must be judged by the user plotting it</li>
+<li>Mentions the difference between pairwise and listwise deletion, or at least warns that missing-data handling changes n</li>
+</ul>
+</div>
+</section>
+<section id="查核點check" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
+<ul>
+<li><strong>path</strong>: 回覆中每條 “Analyses ▸ …” 路徑在你的 jamovi 選單裡逐字點得到</li>
+<li><strong>number</strong>: 回覆引用的有效值筆數與 Descriptives 面板的 N 及 Missing 欄一致</li>
+<li><strong>assumption</strong>: 自己畫一次散佈圖，看關係是否近似線性；若明顯彎曲而回覆卻推薦 Pearson，記為判準失準</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>path</strong>: Every “Analyses ▸ …” path in the reply can be clicked verbatim in your own jamovi</li>
+<li><strong>number</strong>: The counts of valid values cited in the reply match the N and Missing columns in the Descriptives panel</li>
+<li><strong>assumption</strong>: Plot the scatterplot yourself and see whether the relationship is roughly linear; if it curves clearly but the reply recommended Pearson, record the judgement as unsound</li>
+</ul>
+</div>
+</section>
+<section id="判準stop-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
+<ul>
+<li><strong>solved</strong>: 四項 expected 全命中，路徑點得到，且散佈圖與回覆的判準相容</li>
+<li><strong>reopen</strong>: 回覆宣稱看過散佈圖或直接斷言關係是線性的 → 記為越界；換 explainer persona 重問一次比對</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: All four expected elements are hit, the paths are clickable, and the scatterplot is compatible with the reply’s reasoning.</li>
+<li><strong>reopen</strong>: The reply claims to have seen a scatterplot or asserts the relationship is linear -&gt; record it as overreaching and ask again with the explainer persona to compare.</li>
+</ul>
+</div>
+</section>
+<section id="延伸閱讀links" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<ul>
+<li><a href="https://psyteachr.github.io/analysis-v4/09-correlation.html">psyteachr Analysis ch.9 Correlation (dataset source)</a>（CC BY 4.0）</li>
+</ul>
+</section>
+<section id="實測記錄tested-with" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<ul>
+<li>2026-09-16 | pending | pending | <strong>pending</strong> | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Analysis ch.9 的 Lopez et al.&nbsp;(2024) 湯碗研究，已下載核對：data_ch9_correlation.csv 632 列、60 欄，CalEstimate 與 OzEstimate 各有 10 筆遺漏。該資料無 Condition 欄，是受試者內設計。</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="拿到資料的第一眼該看什麼what-to-look-at-first" class="level2">
+<h2 class="anchored" data-anchor-id="拿到資料的第一眼該看什麼what-to-look-at-first"><span class="zh">拿到資料的第一眼該看什麼</span><span class="en">What to look at first</span></h2>
+<p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>within</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>describe</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>explainer</code></p>
+<section id="情境scenario-1" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
+<p>剛載入一份實驗資料，想知道該先看哪些描述統計、以及哪些判斷需要看原始資料才做得到。</p>
+</div>
+<div class="en">
+<p>You have just loaded an experiment’s data and want to know which descriptive statistics to look at first, and which judgements need the raw data rather than a summary.</p>
+</div>
+</section>
+<section id="送出前必做prerequisites-1" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-1"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
+<ul>
+<li>先把結果變項與分組變項都勾進 Variables to describe，否則 LLM 收不到它們的摘要</li>
+<li>記下每個水準的 n，等一下要拿來核對回覆引用的數字</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Tick both the outcome and the grouping variable into Variables to describe, or the LLM will not receive their summaries.</li>
+<li>Write down the n for each level so you can check the numbers the reply cites.</li>
+</ul>
+</div>
+</section>
+<section id="提示詞prompt-1" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
+<pre><code>{outcome} 是連續變項，{group} 有 {k} 個水準，{id} 是受試者編號。每位受試者在每個水準各有一筆資料。
+
+請用初學者聽得懂的方式回答：
+1. 我應該先看哪些描述統計？請給逐字選單路徑。
+2. 從這份摘要，你能判斷分布形狀嗎？如果不能，我該自己做什麼來判斷？
+3. 有哪些關於這份資料的問題，是你從摘要統計裡看不出來、只能由我自己看原始資料才知道的？</code></pre>
+</div>
+<div class="en">
+<pre><code>{outcome} is continuous, {group} has {k} levels, and {id} identifies the
+participant. Each participant has one row per level.
+
+Please answer in beginner-friendly terms:
+1. Which descriptive statistics should I look at first? Give the exact menu path.
+2. Can you judge the shape of the distribution from this summary? If not, what
+   should I do myself to judge it?
+3. Which questions about this data can you not answer from summary statistics,
+   so that I have to look at the raw data myself?</code></pre>
+</div>
+</section>
+<section id="期望回覆要素expected-elements-1" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-1"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
+<ul>
+<li>給出 Exploration ▸ Descriptives 的逐字路徑，並說明 Split by 可依水準分開看</li>
+<li>明確承認摘要統計判斷不了分布形狀，並建議畫圖（直方圖或箱形圖）自行檢視</li>
+<li>至少點出一件它看不到的事，例如哪一筆是離群值、遺漏的型態、或每位受試者的配對關係</li>
+<li>不宣稱自己檢視過原始資料或個別觀察值</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Gives the verbatim path Exploration ▸ Descriptives, and mentions that Split by shows each level separately</li>
+<li>States plainly that summary statistics cannot reveal distribution shape, and suggests plotting (a histogram or boxplot) to judge it</li>
+<li>Names at least one thing it cannot see, such as which row is an outlier, the pattern of missingness, or the pairing between each participant’s rows</li>
+<li>Does not claim to have inspected the raw data or any individual observation</li>
+</ul>
+</div>
+</section>
+<section id="查核點check-1" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-1"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
+<ul>
+<li><strong>path</strong>: 回覆中每條 “Analyses ▸ …” 路徑，在你的 jamovi 選單裡逐字點得到</li>
+<li><strong>number</strong>: 回覆引用的 n、mean、sd 與你在 Descriptives 面板看到的一致</li>
+<li><strong>assumption</strong>: 自己畫一次直方圖，看分布形狀是否與回覆的描述相容；回覆若根本沒描述形狀，這一步記為通過</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>path</strong>: Every “Analyses ▸ …” path in the reply can be clicked verbatim in your own jamovi</li>
+<li><strong>number</strong>: The n, mean, and sd cited in the reply match what you see in the Descriptives panel</li>
+<li><strong>assumption</strong>: Plot a histogram yourself and check whether the shape is compatible with the reply; if the reply made no claim about shape, this step passes</li>
+</ul>
+</div>
+</section>
+<section id="判準stop-criteria-1" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-1"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
+<ul>
+<li><strong>solved</strong>: 四項 expected 全命中且 path 查核零錯 → 依建議執行</li>
+<li><strong>reopen</strong>: 回覆宣稱看得出分布形狀或指認了特定觀察值 → 記為越界，換 consultant persona 重問一次比對</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: All four expected elements are hit and the path check is clean -&gt; follow the advice.</li>
+<li><strong>reopen</strong>: The reply claims to see the distribution shape or names a specific observation -&gt; record it as overreaching and ask again with the consultant persona to compare.</li>
+</ul>
+</div>
+</section>
+<section id="延伸閱讀links-1" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<ul>
+<li><a href="https://psyteachr.github.io/data-skills-v3/stroop.html">psyteachr Data Skills ch.2 Stroop (dataset source)</a>（CC BY-SA 4.0）</li>
+</ul>
+</section>
+<section id="實測記錄tested-with-1" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-1"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<ul>
+<li>2026-09-16 | pending | pending | <strong>pending</strong> | 條目建立於 2026-09-16（批 A），尚未實測。素材為 psyteachr Data Skills 的 Stroop 資料，已下載核對：experiment_data.csv 540 列、condition 為 congruent／incongruent 各 270、participant_data.csv 270 列。</li>
+</ul>
+<hr>
+</section>
+</section>
 <section id="遺漏值先分流再處理triage-missing-data-before-you-treat-it" class="level2">
 <h2 class="anchored" data-anchor-id="遺漏值先分流再處理triage-missing-data-before-you-treat-it"><span class="zh">遺漏值先分流再處理</span><span class="en">Triage missing data before you treat it</span></h2>
 <p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>none</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>screen</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>explainer</code></p>
-<section id="情境scenario" class="level3">
-<h3 class="anchored" data-anchor-id="情境scenario"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<section id="情境scenario-2" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-2"><span class="zh">情境</span><span class="en">Scenario</span></h3>
 <div class="zh">
 <p>摘要顯示某些變項有遺漏值，想知道這個比例要不要緊、先該做什麼、以及哪些決定 AI 不能替你做。</p>
 </div>
@@ -237,8 +520,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The summary shows missing values in some variables. You want to know whether that level of missingness matters, what to do first, and which decisions an AI cannot make for you.</p>
 </div>
 </section>
-<section id="送出前必做prerequisites" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做prerequisites"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<section id="送出前必做prerequisites-2" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-2"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
 <div class="zh">
 <ul>
 <li>勾選所有你關心的變項再送出（摘要裡的「遺漏」欄是 AI 唯一看得到的線索）</li>
@@ -250,8 +533,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </section>
-<section id="提示詞prompt" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞prompt"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<section id="提示詞prompt-2" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-2"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
 <div class="zh">
 <pre><code>摘要裡 {var_a} 遺漏 {pct_a}%、{var_b} 遺漏 {pct_b}%。
 
@@ -269,8 +552,8 @@ In beginner-friendly terms, please answer:
 3. Which treatment decisions (e.g. deletion vs. imputation) depend on my research design, so you cannot make them for me?</code></pre>
 </div>
 </section>
-<section id="期望回覆要素expected-elements" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<section id="期望回覆要素expected-elements-2" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-2"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
 <div class="zh">
 <ul>
 <li>明確說明它看不到遺漏的「型態」（MCAR/MAR/MNAR 無法從摘要判斷）</li>
@@ -286,8 +569,8 @@ In beginner-friendly terms, please answer:
 </ul>
 </div>
 </section>
-<section id="查核點check" class="level3">
-<h3 class="anchored" data-anchor-id="查核點check"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<section id="查核點check-2" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-2"><span class="zh">查核點</span><span class="en">Check</span></h3>
 <div class="zh">
 <ul>
 <li><strong>path</strong>: 路徑逐字核對</li>
@@ -303,8 +586,8 @@ In beginner-friendly terms, please answer:
 </ul>
 </div>
 </section>
-<section id="判準stop-criteria" class="level3">
-<h3 class="anchored" data-anchor-id="判準stop-criteria"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<section id="判準stop-criteria-2" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
 <div class="zh">
 <ul>
 <li><strong>solved</strong>: 回覆明確承認摘要的極限且建議的觀察步驟可執行</li>
@@ -318,14 +601,14 @@ In beginner-friendly terms, please answer:
 </ul>
 </div>
 </section>
-<section id="延伸閱讀links" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀links"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<section id="延伸閱讀links-2" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://psyteachr.github.io/quant-fun-v3/11-screening-data.html">psyteachr quant-fun ch.11 Screening data</a>（CC BY-SA 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄tested-with" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄tested-with"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<section id="實測記錄tested-with-2" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-2"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-09 | gemini | gemini-flash-latest | <strong>pass</strong> | zh 版實測。explainer 見 data/missing-data-triage_dawtry2015_zhTW_explainer.omv，consultant 見同名 _consultant.omv，兩份皆 promptLang=zh，僅 role 不同，問題文字 sha1 相同（475e98ea），為乾淨的單變項比較。expected 3/3 全中，未被提問誘導——問「算不算嚴重」時直接答「不算嚴重，非常輕微」。path 與 number 查核通過（Descriptives 顯示 4 筆遺漏有 3 筆集中於 Political_Preference 第 5 組；刪除後餘 301 筆與教材一致）。cross-check 通過：兩個 persona 交回使用者的決定清單核心一致（遺漏機制、刪除 vs.&nbsp;插補），consultant 另多給一項資料合理性檢查。</li>
 <li>2026-09-08 | gemini | gemini-flash-latest | <strong>pass</strong> | en 版實測，兩個 persona 的證據見 data/missing-data-triage_dawtry2015_en_{explainer,consultant}.omv。expected 3/3，同樣未被誘導。cross-check 通過，清單核心一致；consultant 另建議以 Frequencies ▸ Contingency Tables ▸ Independent Samples 檢定遺漏是否與組別關聯，該路徑存在。</li>
@@ -336,8 +619,8 @@ In beginner-friendly terms, please answer:
 <section id="混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova" class="level2">
 <h2 class="anchored" data-anchor-id="混合設計-anova-前的資料整形reshaping-data-for-a-mixed-anova"><span class="zh">混合設計 ANOVA 前的資料整形</span><span class="en">Reshaping data for a mixed ANOVA</span></h2>
 <p><strong>analysis</strong>: <code>rtutor</code> &nbsp;|&nbsp; <strong>design</strong>: <code>mixed</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>compare-k</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>tutor</code></p>
-<section id="情境scenario-1" class="level3">
-<h3 class="anchored" data-anchor-id="情境scenario-1"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<section id="情境scenario-3" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-3"><span class="zh">情境</span><span class="en">Scenario</span></h3>
 <div class="zh">
 <p>資料是寬格式：每位受試者一列，兩個時間點各一欄（事前預測與事後實際），另有一個兩水準的組別欄。想在 Rj 裡先確認長寬轉換是否正確，再回 jamovi 跑混合設計 ANOVA。</p>
 </div>
@@ -345,8 +628,8 @@ In beginner-friendly terms, please answer:
 <p>Data is in wide format: one row per participant, one column for each of two time points (a prediction beforehand and the actual rating afterwards), plus a two-level group column. You want to verify a long-format reshape in Rj before running the mixed ANOVA in jamovi.</p>
 </div>
 </section>
-<section id="送出前必做prerequisites-1" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做prerequisites-1"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<section id="送出前必做prerequisites-3" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-3"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
 <div class="zh">
 <ul>
 <li>確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）</li>
@@ -360,8 +643,8 @@ In beginner-friendly terms, please answer:
 </ul>
 </div>
 </section>
-<section id="提示詞prompt-1" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞prompt-1"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<section id="提示詞prompt-3" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-3"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
 <div class="zh">
 <pre><code>資料 data 有 {id}、{group} 與兩個時間點欄 {t1}、{t2}。
 
@@ -381,8 +664,8 @@ Please guide me under these rules, without giving the full solution:
 3. Do not run the ANOVA for me.</code></pre>
 </div>
 </section>
-<section id="期望回覆要素expected-elements-1" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-1"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<section id="期望回覆要素expected-elements-3" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-3"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
 <div class="zh">
 <ul>
 <li>只用 <code>data</code>，不出現 read.csv / install.packages（R tutor 的硬規則）</li>
@@ -400,8 +683,8 @@ Please guide me under these rules, without giving the full solution:
 </ul>
 </div>
 </section>
-<section id="查核點check-1" class="level3">
-<h3 class="anchored" data-anchor-id="查核點check-1"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<section id="查核點check-3" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-3"><span class="zh">查核點</span><span class="en">Check</span></h3>
 <div class="zh">
 <ul>
 <li><strong>code-read</strong>: 逐行讀：有無 setwd／檔案路徑／未列在 rj_environment 的套件</li>
@@ -417,8 +700,8 @@ Please guide me under these rules, without giving the full solution:
 </ul>
 </div>
 </section>
-<section id="判準stop-criteria-1" class="level3">
-<h3 class="anchored" data-anchor-id="判準stop-criteria-1"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<section id="判準stop-criteria-3" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-3"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
 <div class="zh">
 <ul>
 <li><strong>solved</strong>: code-run 列數正確且 cross-check 描述統計一致</li>
@@ -432,15 +715,15 @@ Please guide me under these rules, without giving the full solution:
 </ul>
 </div>
 </section>
-<section id="延伸閱讀links-1" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀links-1"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<section id="延伸閱讀links-3" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-3"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://psyteachr.github.io/quant-fun-v3/">psyteachr quant-fun (wrangling / ANOVA)</a>（CC BY-SA 4.0）</li>
 <li><a href="https://psyteachr.github.io/analysis-v4/13-factorial-anova.html">psyteachr analysis ch.13 Factorial ANOVA (Zhang et al.&nbsp;2014 time capsule)</a>（CC BY 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄tested-with-1" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄tested-with-1"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<section id="實測記錄tested-with-3" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-3"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-08 | gemini | gemini-flash-latest | <strong>fail</strong> | 【修正前的提示詞】zh 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是當時的提示詞要求「只給程式骨架與 TODO 註解」，模型因此把註解寫進 c() 括號內（cols = c(# TODO: …)），R 的 # 吃掉整行剩餘內容連同右括號，運算式無法收尾。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。</text></li>
 <li>2026-09-08 | gemini | gemini-flash-latest | <strong>fail</strong> | 【修正前的提示詞】en 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_en.omv。同一根因，錯誤位置 <text>:21:1，另有 table(data_long$# TODO: …)。此失效模式可重現，已列為 spot-the-error 題材。</text></li>
@@ -450,11 +733,126 @@ Please guide me under these rules, without giving the full solution:
 <hr>
 </section>
 </section>
+<section id="配對還是獨立兩組比較前的第一個岔路paired-or-independent-the-first-fork-before-a-two-group-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="配對還是獨立兩組比較前的第一個岔路paired-or-independent-the-first-fork-before-a-two-group-comparison"><span class="zh">配對還是獨立：兩組比較前的第一個岔路</span><span class="en">Paired or independent, the first fork before a two-group comparison</span></h2>
+<p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>within</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>compare-2</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>consultant</code></p>
+<section id="情境scenario-4" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-4"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<div class="zh">
+<p>每位受試者在兩個條件下各有一筆資料，想知道該用哪個 t 檢定，以及為什麼這個區別不能從摘要統計看出來。</p>
+</div>
+<div class="en">
+<p>Each participant has one row under each of two conditions. You want to know which t-test applies, and why that distinction cannot be read off the summary statistics.</p>
+</div>
+</section>
+<section id="送出前必做prerequisites-4" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-4"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<div class="zh">
+<ul>
+<li>先確認資料是每位受試者兩列（長格式）還是一列兩欄（寬格式），兩者在 jamovi 的操作不同</li>
+<li>記下受試者人數，與每個條件的觀察值數——若兩者相等而非兩倍，資料可能不是你以為的格式</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Check whether the data has two rows per participant (long format) or one row with two columns (wide format); jamovi handles them differently.</li>
+<li>Note the number of participants and the number of observations per condition; if they are equal rather than double, the layout may not be what you assume.</li>
+</ul>
+</div>
+</section>
+<section id="提示詞prompt-4" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-4"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<div class="zh">
+<pre><code>{outcome} 是連續變項，{group} 有兩個水準，{id} 是受試者編號。同一位受試者在兩個水準下都有資料。
+
+請回答以下三件事：
+1. 該用哪一個 t 檢定？請給逐字選單路徑。
+2. 這個資料是配對的。你從我提供的摘要統計裡看得出配對關係嗎？請誠實回答。
+3. 如果我搞錯了、其實兩組是不同的人，該改用哪個分析？路徑是什麼？</code></pre>
+</div>
+<div class="en">
+<pre><code>{outcome} is continuous and {group} has two levels. {id} identifies the
+participant, and the same participant has data under both levels.
+
+Please answer all three:
+1. Which t-test should I run? Give the exact menu path.
+2. This data is paired. Can you tell that from the summary statistics I sent?
+   Answer honestly.
+3. If I had it wrong and the two groups were different people, which analysis
+   should I use instead, and what is its path?</code></pre>
+</div>
+</section>
+<section id="期望回覆要素expected-elements-4" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-4"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<div class="zh">
+<ul>
+<li>指名 T-Tests ▸ Paired Samples T-Test（逐字路徑）作為配對資料的分析</li>
+<li>明確承認從摘要統計看不出配對關係，那是由研究設計決定、需要使用者告知</li>
+<li>給出 T-Tests ▸ Independent Samples T-Test 作為非配對情況的替代，路徑正確</li>
+<li>不編造「我從資料看出配對」這類宣稱</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li>Names T-Tests ▸ Paired Samples T-Test as the analysis for paired data, with the verbatim path</li>
+<li>States plainly that pairing cannot be seen in the summary statistics; it follows from the study design and must be told to it</li>
+<li>Gives T-Tests ▸ Independent Samples T-Test as the alternative for unpaired data, with a correct path</li>
+<li>Does not fabricate a claim such as “I can see the pairing in the data”</li>
+</ul>
+</div>
+</section>
+<section id="查核點check-4" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-4"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<div class="zh">
+<ul>
+<li><strong>path</strong>: 兩條路徑（Paired 與 Independent）在你的 jamovi 選單裡都逐字點得到</li>
+<li><strong>number</strong>: 回覆若引用了 n，核對它指的是受試者數還是觀察值數——這兩個數字在配對資料裡不同</li>
+<li><strong>cross-check</strong>: 在 jamovi 同時跑配對與獨立兩種 t 檢定，比較 df 與 p 值差多少，確認選錯的代價</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>path</strong>: Both paths, Paired and Independent, can be clicked verbatim in your own jamovi</li>
+<li><strong>number</strong>: If the reply cites an n, check whether it means participants or observations; in paired data these differ</li>
+<li><strong>cross-check</strong>: Run both the paired and the independent t-test in jamovi, and compare the df and p values to see what choosing wrongly costs</li>
+</ul>
+</div>
+</section>
+<section id="判準stop-criteria-4" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-4"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<div class="zh">
+<ul>
+<li><strong>solved</strong>: 四項 expected 全命中，兩條路徑都點得到，且回覆對「看不出配對」給了誠實回答</li>
+<li><strong>reopen</strong>: 回覆宣稱能從摘要判斷配對，或給錯路徑 → 記為越界或幻覺，把原文留存到 spot-the-error 候選</li>
+</ul>
+</div>
+<div class="en">
+<ul>
+<li><strong>solved</strong>: All four expected elements are hit, both paths are clickable, and the reply answers honestly that it cannot see the pairing.</li>
+<li><strong>reopen</strong>: The reply claims it can infer the pairing from the summary, or gives a wrong path -&gt; record it as overreaching or a hallucination and keep the text as a spot-the-error candidate.</li>
+</ul>
+</div>
+</section>
+<section id="延伸閱讀links-4" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-4"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<ul>
+<li><a href="https://psyteachr.github.io/data-skills-v3/stroop.html">psyteachr Data Skills ch.2 Stroop (dataset source)</a>（CC BY-SA 4.0）</li>
+<li><a href="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html">lsj-book ch.11 Comparing two means</a>（CC BY-SA 4.0）</li>
+</ul>
+</section>
+<section id="實測記錄tested-with-4" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-4"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<ul>
+<li>2026-09-16 | pending | pending | <strong>pending</strong> | 條目建立於 2026-09-16（批 A），尚未實測。素材為 Stroop 資料：每位受試者在 congruent 與 incongruent 各一筆，270 人、540 列，是真正的受試者內設計。</li>
+</ul>
+<hr>
+</section>
+</section>
 <section id="兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison" class="level2">
 <h2 class="anchored" data-anchor-id="兩組比較前該檢查什麼what-to-check-before-a-two-group-comparison"><span class="zh">兩組比較前該檢查什麼</span><span class="en">What to check before a two-group comparison</span></h2>
 <p><strong>analysis</strong>: <code>guider</code> &nbsp;|&nbsp; <strong>design</strong>: <code>between</code> &nbsp;|&nbsp; <strong>stat_goal</strong>: <code>compare-2</code> &nbsp;|&nbsp; <strong>persona</strong>: <code>consultant</code></p>
-<section id="情境scenario-2" class="level3">
-<h3 class="anchored" data-anchor-id="情境scenario-2"><span class="zh">情境</span><span class="en">Scenario</span></h3>
+<section id="情境scenario-5" class="level3">
+<h3 class="anchored" data-anchor-id="情境scenario-5"><span class="zh">情境</span><span class="en">Scenario</span></h3>
 <div class="zh">
 <p>資料集有一個連續結果變項與一個兩水準分組變項，想知道該用哪個 t 檢定、以及前提不符時的替代方案。</p>
 </div>
@@ -462,8 +860,8 @@ Please guide me under these rules, without giving the full solution:
 <p>Your data has one continuous outcome and one two-level grouping variable. You want to know which t-test to use, and what to do if its assumptions are not met.</p>
 </div>
 </section>
-<section id="送出前必做prerequisites-2" class="level3">
-<h3 class="anchored" data-anchor-id="送出前必做prerequisites-2"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
+<section id="送出前必做prerequisites-5" class="level3">
+<h3 class="anchored" data-anchor-id="送出前必做prerequisites-5"><span class="zh">送出前必做</span><span class="en">Prerequisites</span></h3>
 <div class="zh">
 <ul>
 <li>已在 Exploration ▸ Descriptives 勾選 Split by 分組變項，看過兩組的 n、mean、sd</li>
@@ -477,8 +875,8 @@ Please guide me under these rules, without giving the full solution:
 </ul>
 </div>
 </section>
-<section id="提示詞prompt-2" class="level3">
-<h3 class="anchored" data-anchor-id="提示詞prompt-2"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
+<section id="提示詞prompt-5" class="level3">
+<h3 class="anchored" data-anchor-id="提示詞prompt-5"><span class="zh">提示詞</span><span class="en">Prompt</span></h3>
 <div class="zh">
 <pre><code>{outcome} 是連續變項，{group} 有兩組（n 分別為 {n1}、{n2}）。
 
@@ -496,8 +894,8 @@ Please answer all three:
 3. If assumptions fail, what non-parametric alternative should I use, with its exact menu path?</code></pre>
 </div>
 </section>
-<section id="期望回覆要素expected-elements-2" class="level3">
-<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-2"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
+<section id="期望回覆要素expected-elements-5" class="level3">
+<h3 class="anchored" data-anchor-id="期望回覆要素expected-elements-5"><span class="zh">期望回覆要素</span><span class="en">Expected elements</span></h3>
 <div class="zh">
 <ul>
 <li>指名 T-Tests ▸ Independent Samples T-Test（逐字路徑）</li>
@@ -515,8 +913,8 @@ Please answer all three:
 </ul>
 </div>
 </section>
-<section id="查核點check-2" class="level3">
-<h3 class="anchored" data-anchor-id="查核點check-2"><span class="zh">查核點</span><span class="en">Check</span></h3>
+<section id="查核點check-5" class="level3">
+<h3 class="anchored" data-anchor-id="查核點check-5"><span class="zh">查核點</span><span class="en">Check</span></h3>
 <div class="zh">
 <ul>
 <li><strong>path</strong>: 回覆中每條 “Analyses ▸ …” 路徑在你的 jamovi 選單裡點得到</li>
@@ -532,8 +930,8 @@ Please answer all three:
 </ul>
 </div>
 </section>
-<section id="判準stop-criteria-2" class="level3">
-<h3 class="anchored" data-anchor-id="判準stop-criteria-2"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
+<section id="判準stop-criteria-5" class="level3">
+<h3 class="anchored" data-anchor-id="判準stop-criteria-5"><span class="zh">判準</span><span class="en">Stop criteria</span></h3>
 <div class="zh">
 <ul>
 <li><strong>solved</strong>: 四個 expected 全命中且 path 查核零錯 → 依建議執行</li>
@@ -547,15 +945,15 @@ Please answer all three:
 </ul>
 </div>
 </section>
-<section id="延伸閱讀links-2" class="level3">
-<h3 class="anchored" data-anchor-id="延伸閱讀links-2"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
+<section id="延伸閱讀links-5" class="level3">
+<h3 class="anchored" data-anchor-id="延伸閱讀links-5"><span class="zh">延伸閱讀</span><span class="en">Links</span></h3>
 <ul>
 <li><a href="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html">lsj-book ch.11 Comparing two means</a>（CC BY-SA 4.0）</li>
 <li><a href="https://psyteachr.github.io/analysis-v4/07-independent.html">psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)</a>（CC BY 4.0）</li>
 </ul>
 </section>
-<section id="實測記錄tested-with-2" class="level3">
-<h3 class="anchored" data-anchor-id="實測記錄tested-with-2"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
+<section id="實測記錄tested-with-5" class="level3">
+<h3 class="anchored" data-anchor-id="實測記錄tested-with-5"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
 <li>2026-09-08 | gemini | gemini-flash-latest | <strong>pass</strong> | zh 版實測（data/ttest-assumptions_zwaan2018_zhTW.omv）。expected 4/4：逐字路徑、Welch 與 Student 的判準、Assumption Checks 的 Normality 與 Homogeneity、Mann-Whitney U 替代皆命中。path 與 assumption 查核通過；模型以 &gt; 而非 ▸ 作分隔，視為命中。</li>
 <li>2026-09-08 | gemini | gemini-flash-latest | <strong>pass</strong> | en 版實測（data/ttest-assumptions_zwaan2018_en.omv）。expected 4/4，另給出 Kruskal-Wallis 作為第二條替代路徑，實跑存在。</li>
