@@ -19,10 +19,12 @@ Thumbs.db
 
 # 工作稿不進版控。本 repo 是公開的，草稿、盤點記錄、實測工作稿都屬於過程產物，
 # 一旦提交就會連同過期內容一起公開，且無法只靠 git rm 收回（歷史仍可取得）。
-# 跨機同步改走 FreeFileSync 的 claude-backup（不公開），位置與用法見該處：
-#   D:\core\personal\eData\claude-backup\shared\worknotes\stat-skills-tutorials\
+# 工作稿存放於母專案資料夾（本機、無 remote），位置與用法見該處 README：
+#   D:\core\LAB\Analysis\jmv_modules\stat-skills-worknotes\
 *_rewrite_*.md
 prompt-testing-*.md
 external-examples-survey*.md
 .*_archive.md
+library-expansion-plan-*.md
+batch-*-testing-*.md
 PROPOSAL.zh-TW.md
