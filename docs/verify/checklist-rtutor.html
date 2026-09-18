@@ -306,7 +306,7 @@ ul.task-list li input[type="checkbox"] {
 <td><span class="zh">模型不能替你安裝套件；Rj 只用已裝好的套件。</span><span class="en">The model cannot install packages for you; Rj only has what is already installed.</span></td>
 </tr>
 <tr class="even">
-<td><code>read.csv(...)</code>／<span class="zh">任何檔案讀取函式</span><span class="en">/ any file-reading function</span></td>
+<td><code>read.csv(...)</code><span class="zh">／任何檔案讀取函式</span><span class="en">/ any file-reading function</span></td>
 <td><span class="zh">不得建議讀取檔案；資料一律用 <code>data</code> 這個既有物件。</span><span class="en">No file reads are allowed; the data must always come from the existing <code>data</code> object.</span></td>
 </tr>
 <tr class="odd">
@@ -322,8 +322,8 @@ ul.task-list li input[type="checkbox"] {
 <td><span class="zh">不得呼叫系統層級指令。</span><span class="en">System-level shell calls are not allowed.</span></td>
 </tr>
 <tr class="even">
-<td><code>library(套件)</code>，但該套件<strong>不在</strong> <code>&lt;rj_environment&gt;</code> 清單內、也非 base R</td>
-<td><span class="zh">模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 <code>there is no package called '...'</code>。</span><span class="en"><code>library(package)</code> where the package is <strong>not</strong> in the <code>&lt;rj_environment&gt;</code> list and is not base R — the model may only cite packages actually installed in your Rj; code citing an uninstalled package will fail immediately with <code>there is no package called '...'</code>.</span></td>
+<td><span class="zh"><code>library(套件)</code>，但該套件<strong>不在</strong> <code>&lt;rj_environment&gt;</code> 清單內、也非 base R</span><span class="en"><code>library(package)</code>, where the package is <strong>not</strong> in the <code>&lt;rj_environment&gt;</code> list and is not base R</span></td>
+<td><span class="zh">模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 <code>there is no package called '...'</code>。</span><span class="en">The model may only cite packages actually installed in your Rj. Code that loads an uninstalled package fails immediately with <code>there is no package called '...'</code>.</span></td>
 </tr>
 </tbody>
 </table>

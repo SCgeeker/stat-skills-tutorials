@@ -185,11 +185,9 @@ test_that("render_entry_qmd 語言中立欄位不被包進任一語言區塊", {
   en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
   all_blocks <- c(zh_blocks, en_blocks)
 
-  neutral_values <- c(
-    entry$analysis, entry$design, entry$stat_goal, entry$persona,
-    entry$tested_with[[1]]$date, entry$tested_with[[1]]$provider,
-    entry$tested_with[[1]]$model
-  )
+  # tested_with 的 date/provider/model 改由下方測試處理：它們在中英兩個區塊
+  # 各列一次（兩種語言都看得到），因為中文 note 只能放進 .zh 區塊
+  neutral_values <- c(entry$analysis, entry$design, entry$stat_goal, entry$persona)
   for (v in neutral_values) {
     expect_false(any(grepl(v, all_blocks, fixed = TRUE)),
                  info = sprintf("語言中立欄位值 '%s' 不應出現在語言區塊內", v))
@@ -197,6 +195,58 @@ test_that("render_entry_qmd 語言中立欄位不被包進任一語言區塊", {
   # 這些欄位仍應出現在 qmd 全文中（只是不被語言 div 包住）
   expect_true(grepl(entry$stat_goal, qmd, fixed = TRUE))
   expect_true(grepl(entry$persona, qmd, fixed = TRUE))
+})
+
+#' 測試用：含中文 note 與證據路徑的 tested_with
+mk_tested_entry <- function() {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  entry$tested_with <- list(list(
+    date = "2026-09-18", provider = "gemini", model = "gemini-flash-latest", result = "pass",
+    note = "zh 版，證據 data/x_zhTW.omv、回覆副本 data/replies/x_zhTW.md，[括號] 也在"
+  ))
+  entry
+}
+
+test_that("render_entry_qmd 的 tested_with 中文 note 只在 .zh 區塊，英文區塊列證據路徑", {
+  qmd <- render_entry_qmd(mk_tested_entry())
+  zh_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  en_blocks <- unlist(regmatches(qmd, gregexpr("(?s)::: \\{\\.en\\}\\n.*?\\n:::", qmd, perl = TRUE)))
+  expect_true(any(grepl("回覆副本 data/replies/x_zhTW.md", zh_blocks, fixed = TRUE)))
+  expect_true(any(grepl("Evidence: `data/x_zhTW.omv`, `data/replies/x_zhTW.md`", en_blocks, fixed = TRUE)))
+  expect_true(any(grepl("recorded in Chinese", en_blocks, fixed = TRUE)))
+  # date/provider/model/result 兩種語言都看得到
+  for (v in c("2026-09-18", "gemini-flash-latest", "**pass**")) {
+    expect_true(any(grepl(v, zh_blocks, fixed = TRUE)), info = v)
+    expect_true(any(grepl(v, en_blocks, fixed = TRUE)), info = v)
+  }
+})
+
+test_that("render_entry_qmd 的 .en 區塊與語言中立處都不含中文字", {
+  qmd <- render_entry_qmd(mk_tested_entry())
+  no_zh <- gsub("(?s)::: \\{\\.zh\\}\\n.*?\\n:::", "", qmd, perl = TRUE)
+  no_zh <- gsub("\\[[^]]*\\]\\{\\.zh\\}", "", no_zh, perl = TRUE)
+  cjk <- regmatches(no_zh, gregexpr("[㐀-鿿＀-￯　-〿]+", no_zh, perl = TRUE))[[1]]
+  expect_equal(cjk, character(0))
+})
+
+test_that("render_entry_qmd 的延伸閱讀用語言中立的分隔，不用全形括號", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  entry$links <- list(list(title = "T", url = "http://t", license = "CC0"))
+  qmd <- render_entry_qmd(entry)
+  expect_true(grepl("- [T](http://t) · CC0", qmd, fixed = TRUE))
+})
+
+test_that("render_index_qmd 的頁首說明中英各自包進語言區塊", {
+  dir <- test_path("fixtures", "read-entries-only6")
+  dir.create(dir, showWarnings = FALSE)
+  file.copy(fx("valid-entry.yaml"), file.path(dir, "valid-entry.yaml"), overwrite = TRUE)
+  idx <- render_index_qmd(read_entries(dir))
+  unlink(dir, recursive = TRUE)
+  zh <- extract_div(idx, "zh")
+  en <- extract_div(idx, "en")
+  expect_true(grepl("請勿手動修改", zh, fixed = TRUE))
+  expect_true(grepl("Do not edit this page by hand", en, fixed = TRUE))
+  expect_true(grepl("title: \"[提示詞庫]{.zh}[Prompt Library]{.en}\"", idx, fixed = TRUE))
 })
 
 # ---------------------------------------------------------------------------
@@ -286,7 +336,7 @@ test_that("render_reading_map_md 依 goal x design 分組，且依規定順序�
                  links = list(list(title = "C chapter", url = "http://c", license = "CC0", kind = "chapter")))
   )
   md <- render_reading_map_md(entries)
-  expect_true(grepl("## Where to read", md, fixed = TRUE))
+  expect_true(grepl("## [該讀哪一章]{.zh}[Where to read]{.en}", md, fixed = TRUE))
   expect_true(grepl("Screen data before analysis", md, fixed = TRUE))
   expect_true(grepl("Compare two groups or conditions", md, fixed = TRUE))
   expect_true(grepl("Between-subjects", md, fixed = TRUE))
@@ -328,7 +378,7 @@ test_that("render_reading_map_md 該組沒有 chapter 時改列範例資料與�
                   links = list(list(title = "Dataset Y", url = "http://data-y", license = "CC0", kind = "dataset")))
   )
   md <- render_reading_map_md(entries, data_dir_url = "http://example/data")
-  table1_part <- sub("(?s)## Datasets used.*$", "", md, perl = TRUE)
+  table1_part <- sub("(?s)\n## [^\n]*Datasets used.*$", "", md, perl = TRUE)
   expect_true(grepl("Worked example in this library:", table1_part, fixed = TRUE))
   expect_true(grepl("[Dataset Y](http://data-y) · CC0", table1_part, fixed = TRUE))
   expect_true(grepl("Recorded test files: [data/ on GitHub](http://example/data)", table1_part, fixed = TRUE))
@@ -343,6 +393,23 @@ test_that("render_reading_map_md 該組既無 chapter 也無 dataset 時只列�
   expect_true(grepl("Recorded test files: [data/ on GitHub](http://example/data)", md, fixed = TRUE))
   expect_false(grepl("Worked example in this library:", md, fixed = TRUE))
   expect_false(grepl("linked yet", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 的標籤與表頭中英並列", {
+  entries <- list(
+    a = mk_entry("screen", "none",
+                 links = list(list(title = "A chapter", url = "http://a", license = "CC0"))),
+    p = mk_entry("predict", "within",
+                 links = list(list(title = "D", url = "http://d", license = "CC0", kind = "dataset")))
+  )
+  md <- render_reading_map_md(entries, data_dir_url = "http://example/data")
+  expect_true(grepl("[分析前檢查資料]{.zh}[Screen data before analysis]{.en}", md, fixed = TRUE))
+  expect_true(grepl("[無分組設計]{.zh}[No grouping design]{.en}", md, fixed = TRUE))
+  expect_true(grepl("[受試者內]{.zh}[Within-subjects]{.en}", md, fixed = TRUE))
+  expect_true(grepl("| [目標]{.zh}[Goal]{.en} | [設計]{.zh}[Design]{.en} |", md, fixed = TRUE))
+  expect_true(grepl("[本庫的正式範例：]{.zh}[Worked example in this library:]{.en}", md, fixed = TRUE))
+  expect_true(grepl("[實測檔：[GitHub 上的 data/](http://example/data)]{.zh}", md, fixed = TRUE))
+  expect_true(grepl("| [資料集]{.zh}[Dataset]{.en} |", md, fixed = TRUE))
 })
 
 test_that("render_reading_map_md 的實測檔位置預設指向公開 repo 的 data/", {
@@ -362,10 +429,10 @@ test_that("render_reading_map_md 的 dataset 連結不進表一，只進表二",
     ))
   )
   md <- render_reading_map_md(entries)
-  table1_part <- sub("(?s)## Datasets used.*$", "", md, perl = TRUE)
+  table1_part <- sub("(?s)\n## [^\n]*Datasets used.*$", "", md, perl = TRUE)
   expect_false(grepl("Dataset Z", table1_part, fixed = TRUE))
   expect_true(grepl("Chapter Z", table1_part, fixed = TRUE))
-  expect_true(grepl("## Datasets used in the prompt library", md, fixed = TRUE))
+  expect_true(grepl("## [本庫使用的資料集]{.zh}[Datasets used in the prompt library]{.en}", md, fixed = TRUE))
   expect_true(grepl("[Dataset Z](http://dataset-z)", md, fixed = TRUE))
   expect_true(grepl("`z1`", md, fixed = TRUE))
 })
@@ -376,7 +443,7 @@ test_that("render_reading_map_md 沒有任何 dataset 連結時省略表二", {
                   links = list(list(title = "W chapter", url = "http://w", license = "CC BY", kind = "chapter")))
   )
   md <- render_reading_map_md(entries)
-  expect_false(grepl("## Datasets used in the prompt library", md, fixed = TRUE))
+  expect_false(grepl("## [本庫使用的資料集]{.zh}[Datasets used in the prompt library]{.en}", md, fixed = TRUE))
 })
 
 test_that("render_reading_map_md 對標題與授權內含的 | 做跳脫", {

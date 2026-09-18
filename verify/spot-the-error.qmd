@@ -85,6 +85,8 @@ T-Test`."
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於
 **T-Tests** 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型
@@ -126,6 +128,8 @@ variables — which analysis?"
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：相關矩陣實際位於 **Regression** 選單之下，不在 Exploration。跟
 第 1 題一樣，AI 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。
@@ -165,6 +169,8 @@ these continuous variables."
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：PCA 實際位於 **Factor** 選單之下，不在 Exploration。同一個錯誤
 模式再出現一次：分析名稱對，選單掛錯地方。對應查核步驟：**V1 路徑核對**。
@@ -204,6 +210,8 @@ in kind from questions 1–3?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是
 「選單掛錯位置」，而是**整條路徑（含分析本身）都是虛構的**。跟前三題不同：
@@ -254,6 +262,8 @@ Regression`."
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：LIMITATIONS 記錄這是「巢狀層級是編的」——`Linear Regression` 確實
 在 **Regression** 選單之下，但中間多插了一層不存在的 `General Linear Model`
@@ -298,6 +308,8 @@ label literally reads "linear-linear").
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：LIMITATIONS 特別點出「連中文標籤都出現錯字」——`線性線性` 是重複
 詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看
@@ -353,6 +365,8 @@ three species: Saguaro, Palo Verde, and Ironwood."
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data
 summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體
@@ -415,6 +429,8 @@ agostino.test(data$score)
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：第一行 `install.packages("moments")` 直接違反 `askLLM/R/llm-adapter.R`
 第 172–177 行明文禁止的指令清單。System prompt 明確要求「never suggest
@@ -468,6 +484,8 @@ plot(mydata$x, mydata$y)
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：這一行同時踩到兩條紅旗。第一條是 `read.csv(...)`：程式碼不得
 建議讀取檔案，資料一律要用既有的 `data` 物件。第二條是**絕對路徑**：
@@ -528,6 +546,8 @@ the `<rj_environment>` list, what should you do?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：這裡要看清楚：`MASS` 隨 base R 一起發行，在多數 R 安裝裡本來就
 存在，所以「引用 `MASS`」本身不一定是錯的。**關鍵是核對，不是背名單**。
@@ -604,6 +624,8 @@ model's, or the question's?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：貼進 Rj 會立刻得到 `<text>:23:1: unexpected symbol`，程式碼一行都跑
 不了。原因是 R 的 `#` 會讓該行**剩下的所有內容**成為註解——包括 `c(` 需要的那個
@@ -732,6 +754,8 @@ correct. So why should this still be marked as overreaching?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：因為**它拿不到支撐那句話的證據**。
 
@@ -864,6 +888,8 @@ dangerous?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：錯的是那句「To match jamovi, you must specify `type = 6`」。jamovi
 的 Descriptives 實際上用的是 R 的預設值 **`type = 7`**——jamovi 28.2 內建的
@@ -985,6 +1011,8 @@ wrong with these locations?
 :::
 
 ::: {.callout-note collapse="true"}
+## [看答案]{.zh}[Show answer]{.en}
+
 ::: {.zh}
 **答案**：jamovi 的 One-Way ANOVA 面板裡，**Variances** 區塊只有兩個選項：
 **Don't assume equal (Welch's)** 與 **Assume equal (Fisher's)**。同質性檢定

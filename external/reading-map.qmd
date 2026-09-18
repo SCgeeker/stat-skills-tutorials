@@ -1,7 +1,18 @@
 ---
-title: "External Reading Map"
+title: "[外部教材導讀]{.zh}[External Reading Map]{.en}"
 ---
 
+::: {.zh}
+本頁依你的處境，對應到已查核的外部教材章節。處境由 `stat_goal` 與 `design`
+兩個欄位界定，用的是與提示詞庫 schema（`prompts/_schema.yaml`）相同的受控詞彙。
+每個連結各自標示授權。下方表格在建站時由提示詞庫各條目的 `links` 欄位
+（`prompts/entries/*.yaml`）自動產生，所以對應關係只在一個地方維護。條目的完整
+內容請見[提示詞庫](../prompts/index.qmd)。
+
+外部教材都是英文，章節標題保留原文。
+:::
+
+::: {.en}
 This page maps your situation to the matching chapter in a verified external
 textbook. Your situation is defined by `stat_goal` and `design`, using the
 same controlled vocabulary as the prompt-library schema in
@@ -9,12 +20,13 @@ same controlled vocabulary as the prompt-library schema in
 generated automatically from the `links` field of each prompt-library entry
 (`prompts/entries/*.yaml`), so the mapping stays maintained in one place. For
 the full content of an entry, see the [Prompt library](../prompts/index.qmd).
+:::
 
 {{< include _reading-map-table.md >}}
 
-## Source textbooks and licences
+## [教材來源與授權]{.zh}[Source textbooks and licences]{.en}
 
-| Textbook | License |
+| [教材]{.zh}[Textbook]{.en} | [授權]{.zh}[License]{.en} |
 |---|---|
 | psyteachr data-skills | CC BY-SA 4.0 |
 | psyteachr analysis | CC BY 4.0 |
@@ -22,9 +34,16 @@ the full content of an entry, see the [Prompt library](../prompts/index.qmd).
 | psyteachr quant-fun | CC BY-SA 4.0 |
 | psyteachr reprores | CC BY |
 | lsj-book (Foxcroft / Navarro) | CC BY-SA 4.0 |
-| bradduthie/stats | CC BY-NC-SA 4.0 (link only, no excerpting) |
+| bradduthie/stats | CC BY-NC-SA 4.0 [（只連結，不摘錄）]{.zh}[(link only, no excerpting)]{.en} |
 
-This page is English-only. The source textbooks are all in English.
-bradduthie/stats is linked only, never excerpted. Its NonCommercial licence
-is incompatible with this site's CC BY-SA licence, so mixing its text in would
-leave the site's licensing unclear.
+::: {.zh}
+bradduthie/stats 只提供連結，不摘錄內容。它的「非商業」授權與本站的
+CC BY-SA 授權不相容，混入它的文字會讓本站的授權狀態不明確。
+:::
+
+::: {.en}
+The source textbooks are all in English. bradduthie/stats is linked only,
+never excerpted. Its NonCommercial licence is incompatible with this site's
+CC BY-SA licence, so mixing its text in would leave the site's licensing
+unclear.
+:::

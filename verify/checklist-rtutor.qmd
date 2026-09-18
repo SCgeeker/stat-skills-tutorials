@@ -150,11 +150,11 @@ boundary. Flag it as "do not run" and go back and rephrase the question:
 | [紅旗]{.zh}[Red flag]{.en} | [為什麼]{.zh}[Why]{.en} |
 |---|---|
 | `install.packages(...)` | [模型不能替你安裝套件；Rj 只用已裝好的套件。]{.zh}[The model cannot install packages for you; Rj only has what is already installed.]{.en} |
-| `read.csv(...)`／[任何檔案讀取函式]{.zh}[/ any file-reading function]{.en} | [不得建議讀取檔案；資料一律用 `data` 這個既有物件。]{.zh}[No file reads are allowed; the data must always come from the existing `data` object.]{.en} |
+| `read.csv(...)`[／任何檔案讀取函式]{.zh}[ / any file-reading function]{.en} | [不得建議讀取檔案；資料一律用 `data` 這個既有物件。]{.zh}[No file reads are allowed; the data must always come from the existing `data` object.]{.en} |
 | `setwd(...)` | [不得變更工作目錄。]{.zh}[The working directory must not be changed.]{.en} |
 | [任何絕對路徑（如 `C:/...`、`/Users/...`）]{.zh}[Any absolute file path (e.g. `C:/...`, `/Users/...`)]{.en} | [路徑因人而異，不可能通用，且暗示前一條「檔案讀取」紅旗。]{.zh}[Paths are machine-specific and can't generalize; this usually co-occurs with the file-read red flag above.]{.en} |
 | `system(...)` | [不得呼叫系統層級指令。]{.zh}[System-level shell calls are not allowed.]{.en} |
-| `library(套件)`，但該套件**不在** `<rj_environment>` 清單內、也非 base R | [模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 `there is no package called '...'`。]{.zh}[`library(package)` where the package is **not** in the `<rj_environment>` list and is not base R — the model may only cite packages actually installed in your Rj; code citing an uninstalled package will fail immediately with `there is no package called '...'`.]{.en} |
+| [`library(套件)`，但該套件**不在** `<rj_environment>` 清單內、也非 base R]{.zh}[`library(package)`, where the package is **not** in the `<rj_environment>` list and is not base R]{.en} | [模型只能引用你 Rj 裡實際裝了的套件；引用未裝套件的程式碼一執行就會出現 `there is no package called '...'`。]{.zh}[The model may only cite packages actually installed in your Rj. Code that loads an uninstalled package fails immediately with `there is no package called '...'`.]{.en} |
 
 ::: {.zh}
 > 提醒：`<rj_environment>` 這個套件清單只有在你的 jamovi 裝有 Rj、且

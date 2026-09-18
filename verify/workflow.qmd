@@ -27,6 +27,7 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 
 ## [流程步驟]{.zh}[Workflow steps]{.en}
 
+::: {.zh}
 ```
 送出前   P0 寫判準（我會接受什麼答案）           ← 第 3 課
          P1 記下摘要裡的關鍵數字（n、mean、遺漏）
@@ -43,6 +44,30 @@ title: "[可重複的查核流程]{.zh}[A repeatable verification workflow]{.en}
 結案     C1 對照 P0 判準：solved / reopen
          C2 填協作日誌（問題｜判準｜回覆摘要｜查核結果）
 ```
+:::
+
+::: {.en}
+```
+Before sending   P0 Write your criteria (what answer you will accept)   <- Lesson 3
+                 P1 Note the key numbers in the summary (n, mean, missing)
+
+After receiving  V1 Path check (Guider): can every Analyses ▸ … path be clicked in the menu?
+                    Tick each one
+                 V2 Number check: do the numbers the reply cites match what you noted in P1?
+                 V3 Scope check: does the reply claim things it cannot see (normality, outliers, raw rows)?
+                    If so, flag it as overreaching
+                 V4 Code check (R tutor):
+                      4a Read: uses only data? every library() is in rj_environment? no setwd, file paths, or system?
+                      4b Run: paste it into Rj and record the output or the exact error
+                      4c Cross-check: run the same analysis in the jamovi GUI; do the key numbers match?
+                         (the jmv:: call from Syntax Mode can serve as a second reference)
+                 V5 Cross-check: ask again with another persona or model; do the conclusions agree?
+                    Check each reply's paths separately
+
+Closing          C1 Compare with the P0 criteria: solved / reopen
+                 C2 Fill in the collaboration log (question | criteria | reply summary | verification result)
+```
+:::
 
 ## [兩份查核清單]{.zh}[Two checklists]{.en}
 
