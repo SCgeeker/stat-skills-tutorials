@@ -30,11 +30,11 @@
 | `describe-code-crosscheck_stroop_zhTW.omv` | `describe-code-crosscheck` | 中文 | askllmr、Rj、descriptives（jamovi 對照分析） |
 | `describe-code-crosscheck_stroop_en.omv` | `describe-code-crosscheck` | 英文 | askllmr、Rj、descriptives（jamovi 對照分析） |
 | `long-to-wide-check_stroop_zhTW.omv` | `long-to-wide-check` | 中文 | askllmr、Rj、descriptives |
-| `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | 英文 | askllmr、Rj |
-| `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | 中文 | askllmr、Rj |
-| `contingency-association_ballou2024_en.omv` | `contingency-association` | 英文 | askllmr、Rj |
-| `regression-code-check_payne2008_zhTW.omv` | `regression-code-check` | 中文 | askllmr、Rj |
-| `regression-code-check_payne2008_en.omv` | `regression-code-check` | 英文 | askllmr、Rj |
+| `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | 英文 | askllmr、Rj、descriptives |
+| `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | 中文 | askllmr、Rj、contTables |
+| `contingency-association_ballou2024_en.omv` | `contingency-association` | 英文 | askllmr、Rj、contTables |
+| `regression-code-check_payne2008_zhTW.omv` | `regression-code-check` | 中文 | askllmr、Rj、linReg |
+| `regression-code-check_payne2008_en.omv` | `regression-code-check` | 英文 | askllmr、Rj、linReg |
 | `regression-predictors_payne2008_zhTW.omv` | `regression-predictors` | 中文 | askllm、linReg |
 | `regression-predictors_payne2008_en.omv` | `regression-predictors` | 英文 | askllm、linReg |
 | `three-group-comparison_monin2008_zhTW.omv` | `three-group-comparison` | 中文 | askllm、anovaOneW |

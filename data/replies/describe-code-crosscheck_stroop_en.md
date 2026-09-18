@@ -27,6 +27,9 @@ Rules:
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 library(tidyverse)
 
 # Assign your dataset's column names here
@@ -46,11 +49,14 @@ data %>%
     Q1     = quantile(.data[[numeric_variable]], probs = 0.25, type = 6, na.rm = TRUE),
     Q3     = quantile(.data[[numeric_variable]], probs = 0.75, type = 6, na.rm = TRUE)
   )
+```
+
+說明：
 
 ### Discrepancies Between R and jamovi Statistics
 
 1. **Skewness and Kurtosis**: jamovi reports sample-adjusted values (Type 2, equivalent to SPSS/SAS). If you compute standard moment-based skewness/kurtosis (Type 1 or base formulas) in R, the values will differ slightly.
-2. **Quartiles (25th and 75th percentiles)**: Base R's `quantile()` defaults to `type = 7`, whereas jamovi uses `type = 6` (standard in SPSS/Minitab). To match jamovi, you must specify `type = 6` in R's `quantile()` function.
+2. **Quartiles (25th and 75th percentiles)**: Base R’s `quantile()` defaults to `type = 7`, whereas jamovi uses `type = 6` (standard in SPSS/Minitab). To match jamovi, you must specify `type = 6` in R's `quantile()` function.
 
 ---
 

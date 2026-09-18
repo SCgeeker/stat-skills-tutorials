@@ -2,8 +2,8 @@
 
 > 本檔是模型回覆的**穩定副本**。`.omv` 內的回覆會被 askLLM 的重跑覆蓋
 > （`submit` 勾著時每次開檔都重打 API），因此不能只靠 `.omv` 保存。
-> 抽取來源：`regression-code-check_payne2008_en.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與
-> 輸出見 `04 Rjp`。
+> 抽取來源：`regression-code-check_payne2008_en.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與輸出見 `04 Rjp`；
+> jamovi 對照分析見 `06 linReg`。
 
 | 項目 | 值 |
 |---|---|
@@ -28,6 +28,9 @@ Rules:
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 # Fill in the variable names below
 dep_var <- "FILL_IN_OUTCOME"
 indep_vars <- "FILL_IN_PREDICTOR1 + FILL_IN_PREDICTOR2"
@@ -47,6 +50,9 @@ par(mfrow = c(1, 1))
 # Collinearity check: correlation between the two predictors
 # Hint: use cor() on the two numeric predictor columns in data
 cor(data[[ "FILL_IN_PREDICTOR1" ]], data[[ "FILL_IN_PREDICTOR2" ]])
+```
+
+說明：
 
 `subject` should be excluded from the model: because each row has a unique subject identifier (180 levels for 180 rows), including it would consume all degrees of freedom.
 
@@ -111,3 +117,17 @@ F-statistic: 37.4 on 2 and 177 DF,  p-value: 2.8e-14
 
 [1] 0.07816
 ```
+
+## jamovi 對照分析（`06 linReg`）
+
+`Regression ▸ Linear Regression`，Dependent Variable 為 `direct`，Covariates 為 `indirect` 與 `manip`（未放入 `subject`），勾選 Collinearity statistics：
+
+| 項 | 估計值 | SE | t | p |
+|---|---|---|---|---|
+| Intercept | 0.01 | 0.03 | 0.43 | .667 |
+| manip | -0.04 | 0.03 | -1.30 | .194 |
+| indirect | 0.77 | 0.09 | 8.63 | <.001 |
+
+R = 0.55，R² = 0.30。VIF：indirect 1.01、manip 1.01（Tolerance 0.99）。
+
+係數、R² 與 Rj 的 `summary(model)` 一致。VIF 1.01 與 Rj 算出的預測變項相關 0.078 相符（1 ÷ (1 − 0.078²) ≈ 1.006）。

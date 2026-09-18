@@ -100,18 +100,18 @@
     ],
     "tested_with": [
       {
-        "date": "2026-09-17",
+        "date": "2026-09-18",
         "provider": "gemini",
         "model": "gemini-flash-latest",
-        "result": "partial",
-        "note": "zh 版，persona=tutor，promptLang=zh，證據 data/contingency-association_ballou2024_zhTW.omv、回覆副本 data/replies/contingency-association_ballou2024_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；印出 chisq.test(...)$expected；沒有替使用者解讀或說成有傾向）。check：code-read 通過（只用 base R，無紅旗）；code-run 通過，Rj 輸出 X-squared = 13.594, df = 8, p-value = 0.09299，期望次數表含 4.875346（Rj 不顯示 warning，故無警告原文，此步驟以看期望次數表自行檢查為準，視為通過）；但 cross-check 未做，沒有跑 Frequencies ▸ Independent Samples χ² test of association 比對，依規則 expected 全中但 check 有缺只能記 partial。"
+        "result": "pass",
+        "note": "補做 cross-check 後重評，zh 版，persona=tutor，promptLang=zh，證據 data/contingency-association_ballou2024_zhTW.omv、回覆副本 data/replies/contingency-association_ballou2024_zhTW.md。expected 4/4：只用 data；開頭兩個字串佔位符（var1／var2）；印出 chisq.test 結果的 $expected；未替使用者解讀，也未把 p = .093 說成有傾向。check 三項齊備：code-read 只用 base R；code-run 貼進 Rj 的程式碼與回覆同源（只把佔位符換成 gender／eduLevel），輸出 X-squared = 13.594、df = 8、p-value = 0.09299，期望次數表含 4.875346，零錯誤；Rj 不顯示 warning，前提改由期望次數表自行判斷。cross-check：jamovi Frequencies ▸ Independent Samples χ² test of association 得 χ² = 13.59、df = 8、p = .093，與 Rj 一致。原判 partial（2026-09-17，缺 cross-check），補做後改判 pass。"
       },
       {
-        "date": "2026-09-17",
+        "date": "2026-09-18",
         "provider": "gemini",
         "model": "gemini-flash-latest",
-        "result": "partial",
-        "note": "en 版，persona=tutor，promptLang 未設（en 預設），證據 data/contingency-association_ballou2024_en.omv、回覆副本 data/replies/contingency-association_ballou2024_en.md。判定 partial：expected 4/4，同 zh 版四項全中。check：code-read 通過（只用 base R）；code-run 通過，Rj 輸出同一組統計量（X-squared = 13.594, df = 8, p-value = 0.09299）與期望次數表（最小格 4.875346）；cross-check 未做，未跑列聯表 χ² 分析比對。"
+        "result": "pass",
+        "note": "補做 cross-check 後重評，en 版，persona=tutor，promptLang 未設（en 預設），證據 data/contingency-association_ballou2024_en.omv、回覆副本 data/replies/contingency-association_ballou2024_en.md。expected 4/4：只用 data；開頭兩個字串佔位符（col_gender／col_education）；印出 chisq.test 結果的 $expected；未替使用者解讀。check 三項齊備：code-read 只用 base R；code-run 貼進 Rj 的程式碼與回覆同源（只把佔位符換成 gender／eduLevel），輸出 X-squared = 13.594、df = 8、p-value = 0.09299，期望次數表含 4.875346，零錯誤。cross-check：jamovi Frequencies ▸ Independent Samples χ² test of association 得 χ² = 13.59、df = 8、p = .093，與 Rj 一致。原判 partial（2026-09-17，缺 cross-check），補做後改判 pass。"
       }
     ]
   },
@@ -586,11 +586,11 @@
         "note": "重做版，zh 版，persona=consultant（預設），promptLang=zh，證據 data/long-to-wide-check_stroop_zhTW.omv、回覆副本 data/replies/long-to-wide-check_stroop_zhTW.md。expected 4/4：只用 data；開頭三個字串變數指派（id_col／names_col／values_col）；明說應看到 [1] 270 3，並要求各欄遺漏值為 0；未跑 t 檢定。check 三項齊備：code-read 只用 library(tidyverse)；code-run 貼進 Rj 的程式碼與回覆逐字相同，輸出 270 × 3、三欄遺漏值皆 0、零錯誤；cross-check 依本條修訂後的做法，在同一檔跑 Descriptives（Split by condition），兩水準各 270 筆、遺漏 0，與寬資料一致，另以原始資料核對前 6 位受試者的兩欄數值逐一相符。本條原判 partial（2026-09-17：Rj 只跑了 summary(data)，且沒有 cross-check），重做後改判 pass。"
       },
       {
-        "date": "2026-09-17",
+        "date": "2026-09-18",
         "provider": "gemini",
         "model": "gemini-flash-latest",
-        "result": "partial",
-        "note": "en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/long-to-wide-check_stroop_en.omv、回覆副本 data/replies/long-to-wide-check_stroop_en.md。判定 partial：expected 4/4，code-read 通過；code-run 通過（Rj 這次確實執行了回覆的轉檔程式碼，輸出維度 270 × 3，congruent／incongruent 兩欄名在 head() 可見）；但 cross-check 未做，沒有跑 Paired Samples T-Test 比對。"
+        "result": "pass",
+        "note": "補做 cross-check 後重評，en 版，persona=consultant（預設），promptLang 未設（en 預設），證據 data/long-to-wide-check_stroop_en.omv、回覆副本 data/replies/long-to-wide-check_stroop_en.md。expected 4/4：只用 data；開頭三個字串變數指派；明說 dimensions 應為 270 3；未跑 t 檢定。check 三項齊備：code-read 只用 library(tidyverse)；code-run 貼進 Rj 的程式碼與回覆同源，輸出 270 × 3、零錯誤，head() 可見 congruent／incongruent 兩欄；cross-check 依本條修訂後的做法，在同一檔跑 Descriptives（Split by condition），兩水準各 270 筆、遺漏 0，與寬資料一致，另以原始資料核對前 6 位受試者的兩欄數值逐一相符。原判 partial（2026-09-17，缺 cross-check），補做後改判 pass。"
       }
     ]
   },
@@ -1079,18 +1079,18 @@
     ],
     "tested_with": [
       {
-        "date": "2026-09-17",
+        "date": "2026-09-18",
         "provider": "gemini",
         "model": "gemini-flash-latest",
-        "result": "partial",
-        "note": "zh 版，persona=tutor，promptLang=zh，證據 data/regression-code-check_payne2008_zhTW.omv、回覆副本 data/replies/regression-code-check_payne2008_zhTW.md。判定 partial：expected 4/4（開頭三個字串佔位符 target_dv／target_iv1／target_iv2，程式碼雖長但格式規範仍守住；受試者編號欄未進模型並說明是識別碼；診斷含 cor()（0.078，等同 VIF ≈ 1.006）與 plot(model) 殘差圖）。回覆說明識別碼若進模型會耗盡自由度，這在 jamovi 情境下正確（該欄為 Nominal、180 水準）。check：code-read 通過（無 library、無 car）；code-run 通過，係數與規格一致（indirect 0.7712、manip −0.0384、R² 0.297、F(2,177) = 37.4）；但 cross-check 未做，沒有跑 Linear Regression 比對，依規則只能記 partial。"
+        "result": "pass",
+        "note": "補做 cross-check 後重評，zh 版，persona=tutor，promptLang=zh，證據 data/regression-code-check_payne2008_zhTW.omv、回覆副本 data/replies/regression-code-check_payne2008_zhTW.md。expected 4/4：只用 data；開頭三個字串佔位符（target_dv／target_iv1／target_iv2），長程式碼中格式仍守住；subject 未進模型並說明是識別碼，說它會耗盡自由度在 jamovi 下正確（subject 為 Nominal、180 水準）；診斷含 cor() 與 plot(model) 殘差圖。check 三項齊備：code-read 無 library、未用 car；code-run 貼進 Rj 的程式碼與回覆同源，係數 indirect 0.7712、manip −0.0384、R² 0.297、F(2,177) = 37.4，預測變項相關 0.078，零錯誤；cross-check：jamovi Linear Regression（direct ~ indirect + manip，勾 Collinearity statistics，未放 subject）得相同係數、R² = 0.30、VIF 皆 1.01，與 Rj 的相關 0.078 相符。原判 partial（2026-09-17，缺 cross-check），補做後改判 pass。"
       },
       {
-        "date": "2026-09-17",
+        "date": "2026-09-18",
         "provider": "gemini",
         "model": "gemini-flash-latest",
         "result": "partial",
-        "note": "en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。判定 partial：expected 3/4，第 2 項未命中——開頭雖有 dep_var／indep_vars 佔位符，但第 19 行 cor(data[[ \"FILL_IN_PREDICTOR1\" ]], data[[ \"FILL_IN_PREDICTOR2\" ]]) 又把佔位符直接寫在函式呼叫裡，填值處分散兩地，是本批唯一的格式破口。其餘三項同 zh 版命中：識別碼未進模型並正確說明；診斷含共線性與殘差圖。check：code-read、code-run 皆通過，係數同上；cross-check 未做。"
+        "note": "補做 cross-check 後重評，en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。expected 3/4：第 2 項未命中。開頭有 dep_var／indep_vars 兩個佔位符，但第 19 行的 cor() 又把 FILL_IN_PREDICTOR1、FILL_IN_PREDICTOR2 直接寫在函式引數裡，填值處分散兩地，這是批 B 唯一的格式破口。其餘三項命中：只用 data；subject 未進模型並說明是識別碼；診斷含 cor() 與 plot(model)。check 三項皆通過：code-read 無 library；code-run 貼進 Rj 的程式碼與回覆同源，係數與 zh 版相同，cor() 輸出 0.07816，零錯誤；cross-check：jamovi Linear Regression 的係數、R² = 0.30、VIF 1.01 與 Rj 一致。cross-check 補齊後，仍因 expected 有漏維持 partial；問題出在回覆格式，不在操作。"
       }
     ]
   },

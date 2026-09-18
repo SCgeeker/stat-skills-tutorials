@@ -38,7 +38,7 @@ To compare the mean of `Intelligent` across the three independent groups, use a 
 When using **`Analyses > ANOVA > One-Way ANOVA`**, the main statistical assumptions to check are:
 
 1. **Homogeneity of variances** (equality of group variances):
-   * Expand the **Assumption Checks** section and check **Homogeneity test** (Levene's test).
+   * Expand the **Assumption Checks** section and check **Homogeneity test** (Levene’s test).
 2. **Normality** (data in each group are normally distributed):
    * Expand the **Assumption Checks** section and check **Normality test** (Shapiro-Wilk test) and/or **Q-Q plot**.
 

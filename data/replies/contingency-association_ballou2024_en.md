@@ -2,8 +2,8 @@
 
 > 本檔是模型回覆的**穩定副本**。`.omv` 內的回覆會被 askLLM 的重跑覆蓋
 > （`submit` 勾著時每次開檔都重打 API），因此不能只靠 `.omv` 保存。
-> 抽取來源：`contingency-association_ballou2024_en.omv` 的 `04 askllmr`；Rj 實際執行的程式碼與
-> 輸出見 `06 Rjp`。
+> 抽取來源：`contingency-association_ballou2024_en.omv` 的 `04 askllmr`；Rj 實際執行的程式碼與輸出見 `06 Rjp`；
+> jamovi 對照分析見 `08 contTables`。
 
 | 項目 | 值 |
 |---|---|
@@ -28,6 +28,9 @@ Rules:
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 # Assign your column names as strings:
 col_gender <- "ENTER_GENDER_COLUMN_NAME_HERE"
 col_education <- "ENTER_EDULEVEL_COLUMN_NAME_HERE"
@@ -43,6 +46,9 @@ print(chi_test)
 
 # 4. View expected frequencies to check assumptions
 print(chi_test$expected)
+```
+
+說明：
 
 To test for an association between two categorical variables, a Pearson's Chi-squared test of independence (`chisq.test()`) is typically used. To check the assumption regarding minimum expected frequencies (typically that expected cell counts should be at least 5), you can inspect the `$expected` values from the test object.
 
@@ -116,3 +122,13 @@ X-squared = 13.594, df = 8, p-value = 0.09299
   Non-binary              4.875346
   Woman                  33.758079
 ```
+
+## jamovi 對照分析（`08 contTables`）
+
+`Frequencies ▸ Independent Samples χ² test of association`，`gender` × `eduLevel`：
+
+| | 值 | df | p |
+|---|---|---|---|
+| χ² | 13.59 | 8 | .093 |
+
+與 Rj 的 `X-squared = 13.594, df = 8, p-value = 0.09299` 一致。

@@ -33,11 +33,11 @@ files carry an additional `_<persona>` suffix. The `mixed-anova-setup` prompt wa
 | `describe-code-crosscheck_stroop_zhTW.omv` | `describe-code-crosscheck` | Chinese | askllmr, Rj, descriptives (jamovi cross-check) |
 | `describe-code-crosscheck_stroop_en.omv` | `describe-code-crosscheck` | English | askllmr, Rj, descriptives (jamovi cross-check) |
 | `long-to-wide-check_stroop_zhTW.omv` | `long-to-wide-check` | Chinese | askllmr, Rj, descriptives |
-| `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | English | askllmr, Rj |
-| `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | Chinese | askllmr, Rj |
-| `contingency-association_ballou2024_en.omv` | `contingency-association` | English | askllmr, Rj |
-| `regression-code-check_payne2008_zhTW.omv` | `regression-code-check` | Chinese | askllmr, Rj |
-| `regression-code-check_payne2008_en.omv` | `regression-code-check` | English | askllmr, Rj |
+| `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | English | askllmr, Rj, descriptives |
+| `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | Chinese | askllmr, Rj, contTables |
+| `contingency-association_ballou2024_en.omv` | `contingency-association` | English | askllmr, Rj, contTables |
+| `regression-code-check_payne2008_zhTW.omv` | `regression-code-check` | Chinese | askllmr, Rj, linReg |
+| `regression-code-check_payne2008_en.omv` | `regression-code-check` | English | askllmr, Rj, linReg |
 | `regression-predictors_payne2008_zhTW.omv` | `regression-predictors` | Chinese | askllm, linReg |
 | `regression-predictors_payne2008_en.omv` | `regression-predictors` | English | askllm, linReg |
 | `three-group-comparison_monin2008_zhTW.omv` | `three-group-comparison` | Chinese | askllm, anovaOneW |

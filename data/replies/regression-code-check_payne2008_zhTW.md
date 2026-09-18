@@ -2,8 +2,8 @@
 
 > 本檔是模型回覆的**穩定副本**。`.omv` 內的回覆會被 askLLM 的重跑覆蓋
 > （`submit` 勾著時每次開檔都重打 API），因此不能只靠 `.omv` 保存。
-> 抽取來源：`regression-code-check_payne2008_zhTW.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與
-> 輸出見 `04 Rjp`。
+> 抽取來源：`regression-code-check_payne2008_zhTW.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與輸出見 `04 Rjp`；
+> jamovi 對照分析見 `06 linReg`。
 
 | 項目 | 值 |
 |---|---|
@@ -28,6 +28,9 @@ data 有 direct（連續結果變項）、indirect（連續預測變項）、man
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 # --- 變數設定（請將字串替換為合適的欄位名稱）---
 target_dv <- "REPLACE_WITH_DEPENDENT_VARIABLE"
 target_iv1 <- "REPLACE_WITH_INDEPENDENT_VARIABLE_1"
@@ -51,6 +54,9 @@ print(paste("Predictor correlation:", round(cor_check, 3)))
 par(mfrow = c(2, 2))
 plot(model)
 par(mfrow = c(1, 1))
+```
+
+說明：
 
 在進入模型之前，先提醒您關於變項的篩選：
 **`subject`（受試者編號）不應該放進迴歸模型中**。因為它有 180 個獨立水準且資料共 180 列，這純粹是個人的識別碼；若將其作為預測變項納入模型，會耗盡所有自由度導致模型無法估計或過度配適。
@@ -122,3 +128,17 @@ F-statistic: 37.4 on 2 and 177 DF,  p-value: 2.8e-14
 
 [1] "Predictor correlation: 0.078"
 ```
+
+## jamovi 對照分析（`06 linReg`）
+
+`Regression ▸ Linear Regression`，Dependent Variable 為 `direct`，Covariates 為 `indirect` 與 `manip`（未放入 `subject`），勾選 Collinearity statistics：
+
+| 項 | 估計值 | SE | t | p |
+|---|---|---|---|---|
+| Intercept | 0.01 | 0.03 | 0.43 | .667 |
+| indirect | 0.77 | 0.09 | 8.63 | <.001 |
+| manip | -0.04 | 0.03 | -1.30 | .194 |
+
+R = 0.55，R² = 0.30。VIF：indirect 1.01、manip 1.01（Tolerance 0.99）。
+
+係數、R² 與 Rj 的 `summary(model)` 一致。VIF 1.01 與 Rj 算出的預測變項相關 0.078 相符（1 ÷ (1 − 0.078²) ≈ 1.006）。

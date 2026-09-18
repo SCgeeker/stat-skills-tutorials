@@ -2,8 +2,8 @@
 
 > 本檔是模型回覆的**穩定副本**。`.omv` 內的回覆會被 askLLM 的重跑覆蓋
 > （`submit` 勾著時每次開檔都重打 API），因此不能只靠 `.omv` 保存。
-> 抽取來源：`long-to-wide-check_stroop_en.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與輸出見
-> `08 Rjp`。
+> 抽取來源：`long-to-wide-check_stroop_en.omv` 的 `02 askllmr`；Rj 實際執行的程式碼與輸出見 `08 Rjp`；
+> jamovi 對照分析見 `10 descriptives`。
 
 | 項目 | 值 |
 |---|---|
@@ -93,3 +93,14 @@ First 6 rows:
 5 5                   632.       1112.
 6 6                   674.        744.
 ```
+
+## jamovi 對照分析（`10 descriptives`）
+
+`Exploration ▸ Descriptives`，`reaction_time` 以 `condition` 分組（長格式原始資料）：
+
+| condition | N | Missing | Mean | Median | SD | Minimum | Maximum |
+|---|---|---|---|---|---|---|---|
+| congruent | 270 | 0 | 744.11 | 746.26 | 104.95 | 418.93 | 1020.82 |
+| incongruent | 270 | 0 | 891.34 | 900.77 | 141.76 | 442.96 | 1358.57 |
+
+兩個水準各 270 筆且無遺漏，與寬格式的 270 列一致，表示轉換沒有遺失或重複觀察值。回覆程式碼沒有印出各欄平均數，所以這個對照只驗證筆數與完整性。欄位對應另以原始資料核對：Rj 顯示的前 6 位受試者的 `congruent`／`incongruent` 數值，與長格式資料中對應的列逐一相符。

@@ -2,8 +2,8 @@
 
 > 本檔是模型回覆的**穩定副本**。`.omv` 內的回覆會被 askLLM 的重跑覆蓋
 > （`submit` 勾著時每次開檔都重打 API），因此不能只靠 `.omv` 保存。
-> 抽取來源：`contingency-association_ballou2024_zhTW.omv` 的 `04 askllmr`；Rj 實際執行的程式碼
-> 與輸出見 `06 Rjp`。
+> 抽取來源：`contingency-association_ballou2024_zhTW.omv` 的 `04 askllmr`；Rj 實際執行的程式碼與輸出見 `06 Rjp`；
+> jamovi 對照分析見 `08 contTables`。
 
 | 項目 | 值 |
 |---|---|
@@ -28,6 +28,9 @@ data 有 gender（3 水準：Man、Woman、Non-binary）與 eduLevel（5 水準�
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 # 1. 設定變項名稱（請將引號內的文字替換為正確的欄位名稱）
 var1 <- "待填：變項一名稱"
 var2 <- "待填：變項二名稱"
@@ -47,6 +50,9 @@ print(chi_result$expected)
 # 5. 印出檢定結果
 print("--- 卡方檢定結果 ---")
 print(chi_result)
+```
+
+說明：
 
 要檢定兩個類別變項（`gender` 與 `eduLevel`）之間是否有關聯，通常會使用**卡方獨立性檢定**（Chi-square test of independence）。
 
@@ -159,3 +165,13 @@ print(chi_result)
 data:  tab
 X-squared = 13.594, df = 8, p-value = 0.09299
 ```
+
+## jamovi 對照分析（`08 contTables`）
+
+`Frequencies ▸ Independent Samples χ² test of association`，`gender` × `eduLevel`：
+
+| | 值 | df | p |
+|---|---|---|---|
+| χ² | 13.59 | 8 | .093 |
+
+與 Rj 的 `X-squared = 13.594, df = 8, p-value = 0.09299` 一致。
