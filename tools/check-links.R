@@ -3,6 +3,8 @@
 # 檢查所有提示詞條目（prompts/entries/*.yaml）裡 links 的網址是否仍可用。
 #
 # 純函式：collect_links / check_url / default_fetch / check_all / format_report
+#   / parse_meta_refresh / resolve_url / psyteachr_book / default_fetch_body
+#   / check_version
 # 可被 tests/testthat 直接 source（測試一律注入假 fetcher，不觸網），
 # 也可用 Rscript 當 CLI 執行。
 #
@@ -17,11 +19,27 @@
 #   ——連外部網站的回應時間、暫時性錯誤（如 OSF 502）都會拖慢或弄髒每次
 #   render。因此改成手動執行，或另外排程（cron／CI 排程）定期執行。
 #
+# meta refresh 轉址偵測：
+#   有些短網址（例如 psyteachr 的章節短網址）不是用 HTTP 3xx 轉址，而是回
+#   200 的網頁，網頁內容用 <meta http-equiv="refresh" content="N; url=...">
+#   在瀏覽器端轉址。這種轉址用 HEAD／GET 的狀態碼看不出來，所以對
+#   check_url() 判為 ok 的網址，check_all() 會額外抓一次網頁內容，解析有
+#   沒有 meta refresh；若轉址目標與原網址不同，改記為 redirected。
+#
+# psyteachr 教材改版偵測（僅限 psyteachr，其他教材改版仍需人工注意）：
+#   psyteachr 的教材網址帶版本號（如 .../analysis-v4/07-independent.html），
+#   換版後短網址（.../analysis/）會用 meta refresh 指到最新版（如
+#   .../analysis-v5/）。若連結用的版本號低於短網址目前指向的版本，代表
+#   教材已改版、章節編號或內容可能已變動，記為 outdated（警告，不影響
+#   exit code），提醒人工確認連結是否仍對應正確章節。此偵測邏輯專屬
+#   psyteachr（網址格式為 https://psyteachr.github.io/<book>-v<N>/...），
+#   其他教材站台的改版無法自動偵測，仍需人工留意。
+#
 # 用法（CLI，注意：這一步會連網）：
 #   Rscript tools/check-links.R
 #   讀入 prompts/entries/*.yaml、收集所有 links、逐一檢查，印出報告。
-#   有任何 broken 連結時 exit code 1；unavailable／redirected 只是警告，
-#   印出但不影響 exit code；全部 ok（或只有 redirected／unavailable）時
+#   有任何 broken 連結時 exit code 1；unavailable／redirected／outdated
+#   只是警告，印出但不影響 exit code；全部 ok（或只有這三種警告狀態）時
 #   exit code 0。
 # ---------------------------------------------------------------------------
 
@@ -193,27 +211,215 @@ default_fetch <- function(url, method = "HEAD") {
   out
 }
 
+# parse_meta_refresh ----------------------------------------------------------------
+
+#' 從 HTML 字串找出 <meta http-equiv="refresh" content="N; url=TARGET"> 的 TARGET
+#' 容忍：大小寫、單雙引號、屬性順序對調、url= 前後空白、自結尾 />。
+#' @param html character(1)
+#' @return character(1) 轉址目標；沒有找到則回傳 NA_character_
+parse_meta_refresh <- function(html) {
+  if (is.null(html) || length(html) == 0 || is.na(html) || !nzchar(html)) return(NA_character_)
+
+  # 抓出所有 <meta ...> 標籤（容忍跨行、大小寫、自結尾 />）
+  tag_matches <- regmatches(html, gregexpr("<meta[^>]*>", html, ignore.case = TRUE, perl = TRUE))[[1]]
+  if (length(tag_matches) == 0) return(NA_character_)
+
+  for (tag in tag_matches) {
+    is_refresh <- grepl("http-equiv\\s*=\\s*[\"']?refresh[\"']?", tag, ignore.case = TRUE, perl = TRUE)
+    if (!is_refresh) next
+
+    content_m <- regmatches(tag, regexec("content\\s*=\\s*[\"']([^\"']*)[\"']", tag,
+                                          ignore.case = TRUE, perl = TRUE))[[1]]
+    if (length(content_m) < 2) next
+    content_val <- content_m[2]
+
+    url_m <- regmatches(content_val, regexec("url\\s*=\\s*['\"]?\\s*([^'\";]+?)\\s*['\"]?\\s*$",
+                                              content_val, ignore.case = TRUE, perl = TRUE))[[1]]
+    if (length(url_m) >= 2 && nzchar(url_m[2])) return(url_m[2])
+  }
+
+  NA_character_
+}
+
+# resolve_url ----------------------------------------------------------------
+
+#' 把相對於 base 的轉址目標轉為絕對網址
+#' @param base character(1) 原始網址
+#' @param target character(1) 轉址目標（可能是絕對網址、以 / 開頭的路徑、
+#'   或其他相對路徑）
+#' @return character(1) 絕對網址
+resolve_url <- function(base, target) {
+  if (grepl("^https?://", target, ignore.case = TRUE, perl = TRUE)) {
+    return(target)
+  }
+
+  origin_m <- regmatches(base, regexec("^(https?://[^/]+)", base, ignore.case = TRUE, perl = TRUE))[[1]]
+  origin <- if (length(origin_m) >= 2) origin_m[2] else ""
+
+  if (grepl("^/", target)) {
+    return(paste0(origin, target))
+  }
+
+  # 其他相對路徑：接在 base 的目錄後（去掉 base 最後一段檔名／保留結尾斜線）
+  base_dir <- sub("/[^/]*$", "/", base)
+  paste0(base_dir, target)
+}
+
+# psyteachr_book ----------------------------------------------------------------
+
+#' 判斷網址是否為 psyteachr 帶版本號的教材網址
+#' @param url character(1)
+#' @return list(book = character(1), version = integer(1))；不符合則回傳 NULL
+psyteachr_book <- function(url) {
+  m <- regmatches(url, regexec("^https://psyteachr\\.github\\.io/(.+)-v([0-9]+)(?:/.*)?$",
+                                url, perl = TRUE))[[1]]
+  if (length(m) < 3) return(NULL)
+  list(book = m[2], version = as.integer(m[3]))
+}
+
+# default_fetch_body ----------------------------------------------------------------
+
+#' 預設的抓取網頁內容實作（取前面一小段，足夠解析 meta refresh 即可）
+#' 優先用 curl 套件（追蹤轉址、逾時 30 秒、Range bytes=0-16383）；
+#' 若本機沒有 curl 套件，退回 base R 的 url()＋readLines() 讀前幾行。
+#' @param url character(1)
+#' @return list(code, body, error)
+default_fetch_body <- function(url) {
+  ua <- "stat-skills-tutorials-link-checker/1.0"
+
+  if (requireNamespace("curl", quietly = TRUE)) {
+    h <- curl::new_handle(followlocation = TRUE, timeout = 30, useragent = ua)
+    curl::handle_setheaders(h, Range = "bytes=0-16383")
+    out <- tryCatch({
+      resp <- curl::curl_fetch_memory(url, handle = h)
+      body <- tryCatch(rawToChar(resp$content), error = function(e) {
+        # Range 截斷可能切到多位元組字元中間，退而求其次去掉尾端無法轉換的位元組
+        raw <- resp$content
+        rawToChar(raw[seq_len(max(0, length(raw) - 4))])
+      })
+      list(code = as.integer(resp$status_code), body = body, error = NULL)
+    }, error = function(e) {
+      list(code = NA_integer_, body = NA_character_, error = conditionMessage(e))
+    })
+    return(out)
+  }
+
+  # 退回 base R：讀前幾行文字即可（足夠解析 <head> 內的 meta refresh）
+  out <- tryCatch({
+    con <- url(url)
+    on.exit(close(con), add = TRUE)
+    lines <- readLines(con, n = 200, warn = FALSE)
+    list(code = 200L, body = paste(lines, collapse = "\n"), error = NULL)
+  }, error = function(e) {
+    list(code = NA_integer_, body = NA_character_, error = conditionMessage(e))
+  })
+  out
+}
+
+# check_version ----------------------------------------------------------------
+
+#' 檢查 psyteachr 帶版本網址是否已被短網址的 meta refresh 指到更新版本
+#' 同一本書（book）只抓一次短網址內容，用 cache 快取抓取結果。
+#' @param url character(1) 帶版本號的章節網址
+#' @param fetch_body function(url) -> list(code, body, error)
+#' @param cache environment，用來快取「已抓過的書」，key 為 book 名稱
+#' @return list(status = "outdated", note = character(1))；
+#'   非 psyteachr、同版、抓取失敗或解析不到時回傳 NULL（不下判定）
+check_version <- function(url, fetch_body = default_fetch_body, cache = new.env()) {
+  info <- psyteachr_book(url)
+  if (is.null(info)) return(NULL)
+
+  book <- info$book
+  n <- info$version
+  short_url <- sprintf("https://psyteachr.github.io/%s/", book)
+
+  if (exists(book, envir = cache, inherits = FALSE)) {
+    cached <- get(book, envir = cache, inherits = FALSE)
+  } else {
+    cached <- fetch_body(short_url)
+    assign(book, cached, envir = cache)
+  }
+
+  if (!is.null(cached$error)) return(NULL)
+  if (is.null(cached$body) || length(cached$body) == 0 || is.na(cached$body)) return(NULL)
+
+  target <- parse_meta_refresh(cached$body)
+  if (is.na(target)) return(NULL)
+
+  target_abs <- resolve_url(short_url, target)
+  target_info <- psyteachr_book(target_abs)
+  if (is.null(target_info)) return(NULL)
+
+  m <- target_info$version
+  if (m > n) {
+    return(list(
+      status = "outdated",
+      note = sprintf("短網址 %s 已指向 v%d，此連結仍用 v%d", short_url, m, n)
+    ))
+  }
+
+  NULL
+}
+
 # check_all ----------------------------------------------------------------
 
 #' 逐一檢查 collect_links() 的結果，補上檢查結果欄位
+#'
+#' 對 check() 判為 ok 的網址，額外用 fetch_body() 抓網頁內容：
+#'   1. 若解析到 meta refresh 且目標與原網址不同（正規化尾端斜線後比較），
+#'      改記為 redirected，note 寫「meta refresh → 絕對網址」。
+#'   2. 若仍為 ok，再跑 check_version()；判定 outdated 時改記為 outdated，
+#'      note 沿用 check_version() 的說明。
+#' 非 ok 的網址不做這兩項內容檢查。
+#'
 #' @param links_df data.frame，來自 collect_links()
 #' @param check function，預設 check_url；其餘參數（...）透傳給它
+#' @param fetch_body function(url) -> list(code, body, error)，預設
+#'   default_fetch_body；測試時注入假函式，避免連網
 #' @return data.frame，links_df 加上 status/code/final_url/attempts/note 欄位
-check_all <- function(links_df, check = check_url, ...) {
+check_all <- function(links_df, check = check_url, fetch_body = default_fetch_body, ...) {
   n <- nrow(links_df)
   status <- character(n)
   code <- integer(n)
   final_url <- character(n)
   attempts <- integer(n)
   note <- character(n)
+  version_cache <- new.env()
 
   for (i in seq_len(n)) {
-    res <- check(links_df$url[i], ...)
-    status[i] <- res$status
+    url_i <- links_df$url[i]
+    res <- check(url_i, ...)
+    cur_status <- res$status
+    cur_note <- res$note
+
+    if (identical(cur_status, "ok")) {
+      body_res <- fetch_body(url_i)
+      if (is.null(body_res$error) && !is.null(body_res$body) &&
+          length(body_res$body) > 0 && !is.na(body_res$body)) {
+        refresh_target <- parse_meta_refresh(body_res$body)
+        if (!is.na(refresh_target)) {
+          abs_target <- resolve_url(url_i, refresh_target)
+          if (!identical(.normalize_url(abs_target), .normalize_url(url_i))) {
+            cur_status <- "redirected"
+            cur_note <- sprintf("meta refresh \u2192 %s", abs_target)
+          }
+        }
+      }
+    }
+
+    if (identical(cur_status, "ok")) {
+      version_res <- check_version(url_i, fetch_body = fetch_body, cache = version_cache)
+      if (!is.null(version_res) && identical(version_res$status, "outdated")) {
+        cur_status <- "outdated"
+        cur_note <- version_res$note
+      }
+    }
+
+    status[i] <- cur_status
     code[i] <- if (is.null(res$code) || is.na(res$code)) NA_integer_ else res$code
     final_url[i] <- res$final_url
     attempts[i] <- res$attempts
-    note[i] <- res$note
+    note[i] <- cur_note
   }
 
   cbind(
@@ -240,7 +446,7 @@ check_all <- function(links_df, check = check_url, ...) {
 }
 
 #' 把 check_all() 的結果整理成文字報告
-#' 順序：先列 broken，再列 unavailable、redirected，最後一行彙總各狀態數量。
+#' 順序：broken、unavailable、outdated、redirected，最後一行彙總各狀態數量。
 #' @param results data.frame，來自 check_all()
 #' @return character(1) 報告全文
 format_report <- function(results) {
@@ -255,15 +461,20 @@ format_report <- function(results) {
     "== 暫時無法連線（unavailable）==", "[UNAVAILABLE]"
   ))
   lines <- c(lines, .format_report_section(
+    results[results$status == "outdated", , drop = FALSE],
+    "== 教材已改版（outdated）==", "[OUTDATED]"
+  ))
+  lines <- c(lines, .format_report_section(
     results[results$status == "redirected", , drop = FALSE],
     "== 已轉址（redirected）==", "[REDIRECTED]"
   ))
 
-  status_levels <- c("ok", "redirected", "unavailable", "broken")
+  status_levels <- c("ok", "redirected", "outdated", "unavailable", "broken")
   tbl <- table(factor(results$status, levels = status_levels))
   summary_line <- sprintf(
-    "共 %d 筆：ok %d、redirected %d、unavailable %d、broken %d",
-    nrow(results), tbl[["ok"]], tbl[["redirected"]], tbl[["unavailable"]], tbl[["broken"]]
+    "共 %d 筆：ok %d、redirected %d、outdated %d、unavailable %d、broken %d",
+    nrow(results), tbl[["ok"]], tbl[["redirected"]], tbl[["outdated"]],
+    tbl[["unavailable"]], tbl[["broken"]]
   )
   lines <- c(lines, summary_line)
 

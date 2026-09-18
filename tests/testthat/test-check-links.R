@@ -239,3 +239,257 @@ test_that("format_report 先列 broken，再列 unavailable、redirected，最�
   last_line <- utils::tail(strsplit(report, "\n")[[1]], 1)
   expect_true(grepl("共 4 筆", last_line, fixed = TRUE))
 })
+
+test_that("format_report 加入 outdated 段落，順序為 broken、unavailable、outdated、redirected，彙總行含 outdated 數", {
+  results <- data.frame(
+    url = c("https://example.com/ok1", "https://example.com/broken1",
+            "https://example.com/unavail1", "https://example.com/outdated1",
+            "https://example.com/redir1"),
+    title = c("OK1", "Broken1", "Unavail1", "Outdated1", "Redir1"),
+    kind = rep("chapter", 5),
+    entries = c("e1", "e2", "e3", "e4", "e5"),
+    status = c("ok", "broken", "unavailable", "outdated", "redirected"),
+    code = c(200L, 404L, NA_integer_, 200L, 200L),
+    final_url = c("https://example.com/ok1", "https://example.com/broken1",
+                   "https://example.com/unavail1", "https://example.com/outdated1",
+                   "https://example.com/redir1-new"),
+    attempts = c(1, 1, 4, 1, 1),
+    note = c("", "HTTP 404", "重試 3 次後仍失敗", "短網址已指向新版",
+             "轉址至 https://example.com/redir1-new"),
+    stringsAsFactors = FALSE
+  )
+  report <- format_report(results)
+
+  pos_broken <- regexpr("Broken1", report, fixed = TRUE)
+  pos_unavail <- regexpr("Unavail1", report, fixed = TRUE)
+  pos_outdated <- regexpr("Outdated1", report, fixed = TRUE)
+  pos_redir <- regexpr("Redir1", report, fixed = TRUE)
+  pos_summary <- regexpr("共 5 筆", report, fixed = TRUE)
+
+  expect_true(pos_broken > 0)
+  expect_true(pos_broken < pos_unavail)
+  expect_true(pos_unavail < pos_outdated)
+  expect_true(pos_outdated < pos_redir)
+  expect_true(pos_redir < pos_summary)
+
+  last_line <- utils::tail(strsplit(report, "\n")[[1]], 1)
+  expect_true(grepl("共 5 筆", last_line, fixed = TRUE))
+  expect_true(grepl("outdated 1", last_line, fixed = TRUE))
+})
+
+# ---------------------------------------------------------------------------
+# parse_meta_refresh
+# ---------------------------------------------------------------------------
+
+test_that("parse_meta_refresh：標準雙引號寫法", {
+  html <- '<html><head><meta http-equiv="refresh" content="0; url=/analysis-v4/" /></head></html>'
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：單引號寫法", {
+  html <- "<html><head><meta http-equiv='refresh' content='0; url=/analysis-v4/'></head></html>"
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：屬性順序對調（content 在前）", {
+  html <- '<meta content="0;url=/analysis-v4/" http-equiv="refresh">'
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：大小寫不拘", {
+  html <- '<META HTTP-EQUIV="Refresh" CONTENT="0; URL=/analysis-v4/">'
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：url= 前後有空白", {
+  html <- '<meta http-equiv="refresh" content="0;  url =  /analysis-v4/ ">'
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：無自結尾斜線也可解析", {
+  html <- '<meta http-equiv="refresh" content="0; url=/analysis-v4/">'
+  expect_equal(parse_meta_refresh(html), "/analysis-v4/")
+})
+
+test_that("parse_meta_refresh：找不到 refresh meta 時回傳 NA", {
+  html <- '<html><head><meta charset="utf-8"><title>頁面</title></head><body>沒有轉址</body></html>'
+  expect_true(is.na(parse_meta_refresh(html)))
+})
+
+test_that("parse_meta_refresh：空字串回傳 NA", {
+  expect_true(is.na(parse_meta_refresh("")))
+})
+
+# ---------------------------------------------------------------------------
+# resolve_url
+# ---------------------------------------------------------------------------
+
+test_that("resolve_url：以 / 開頭的絕對路徑，接上 base 的 scheme+host", {
+  res <- resolve_url("https://psyteachr.github.io/analysis-v3/07-independent.html", "/analysis-v4/")
+  expect_equal(res, "https://psyteachr.github.io/analysis-v4/")
+})
+
+test_that("resolve_url：target 已是 http(s) 開頭則原樣回傳", {
+  res <- resolve_url("https://psyteachr.github.io/analysis/", "https://other.example.com/x")
+  expect_equal(res, "https://other.example.com/x")
+})
+
+test_that("resolve_url：其他相對路徑接在 base 的目錄後", {
+  res <- resolve_url("https://psyteachr.github.io/analysis-v3/07-independent.html", "another.html")
+  expect_equal(res, "https://psyteachr.github.io/analysis-v3/another.html")
+})
+
+# ---------------------------------------------------------------------------
+# psyteachr_book
+# ---------------------------------------------------------------------------
+
+test_that("psyteachr_book：帶版本號的章節網址", {
+  res <- psyteachr_book("https://psyteachr.github.io/analysis-v4/07-independent.html")
+  expect_equal(res, list(book = "analysis", version = 4L))
+})
+
+test_that("psyteachr_book：書名含連字號", {
+  res <- psyteachr_book("https://psyteachr.github.io/data-skills-v3/")
+  expect_equal(res, list(book = "data-skills", version = 3L))
+})
+
+test_that("psyteachr_book：短網址（無版本號）回傳 NULL", {
+  res <- psyteachr_book("https://psyteachr.github.io/analysis/")
+  expect_null(res)
+})
+
+test_that("psyteachr_book：非 psyteachr 網址回傳 NULL", {
+  res <- psyteachr_book("https://example.com/analysis-v4/")
+  expect_null(res)
+})
+
+# ---------------------------------------------------------------------------
+# check_version：全程用假 fetch_body，不連網
+# ---------------------------------------------------------------------------
+
+#' 建立記錄呼叫次數與參數的假 fetch_body()
+mk_fetch_body_recorder <- function(handler) {
+  calls <- new.env()
+  calls$urls <- character()
+  fn <- function(url) {
+    calls$urls <- c(calls$urls, url)
+    handler(url)
+  }
+  attr(fn, "calls") <- calls
+  fn
+}
+
+test_that("check_version：短網址指向較新版 -> outdated", {
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = '<meta http-equiv="refresh" content="0; url=/analysis-v5/">', error = NULL)
+  })
+  res <- check_version("https://psyteachr.github.io/analysis-v4/07-independent.html", fetch_body = fetch_body)
+  expect_equal(res$status, "outdated")
+  expect_true(grepl("v5", res$note, fixed = TRUE))
+  expect_true(grepl("v4", res$note, fixed = TRUE))
+})
+
+test_that("check_version：短網址指向相同版本 -> NULL", {
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = '<meta http-equiv="refresh" content="0; url=/analysis-v4/">', error = NULL)
+  })
+  res <- check_version("https://psyteachr.github.io/analysis-v4/07-independent.html", fetch_body = fetch_body)
+  expect_null(res)
+})
+
+test_that("check_version：抓取失敗 -> NULL", {
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = NA_integer_, body = NA_character_, error = "Could not resolve host")
+  })
+  res <- check_version("https://psyteachr.github.io/analysis-v4/07-independent.html", fetch_body = fetch_body)
+  expect_null(res)
+})
+
+test_that("check_version：非 psyteachr 版本網址 -> NULL，且不呼叫 fetch_body", {
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = "", error = NULL)
+  })
+  res <- check_version("https://example.com/foo-v2/", fetch_body = fetch_body)
+  expect_null(res)
+  expect_equal(length(attr(fetch_body, "calls")$urls), 0)
+})
+
+test_that("check_version：同一本書只抓一次（快取）", {
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = '<meta http-equiv="refresh" content="0; url=/analysis-v5/">', error = NULL)
+  })
+  cache <- new.env()
+  res1 <- check_version("https://psyteachr.github.io/analysis-v4/07-independent.html",
+                         fetch_body = fetch_body, cache = cache)
+  res2 <- check_version("https://psyteachr.github.io/analysis-v4/01-intro.html",
+                         fetch_body = fetch_body, cache = cache)
+  expect_equal(res1$status, "outdated")
+  expect_equal(res2$status, "outdated")
+  expect_equal(length(attr(fetch_body, "calls")$urls), 1)
+})
+
+# ---------------------------------------------------------------------------
+# check_all：整合 meta refresh 與 psyteachr 改版偵測（假 fetch_body，不連網）
+# ---------------------------------------------------------------------------
+
+test_that("check_all：狀態為 ok 且抓到 meta refresh -> redirected，note 含絕對網址", {
+  links_df <- data.frame(
+    url = c("https://example.com/shortlink"),
+    title = c("Shortlink"),
+    kind = c("chapter"),
+    entries = c("e1"),
+    stringsAsFactors = FALSE
+  )
+  fake_check <- function(url, ...) {
+    list(status = "ok", code = 200L, final_url = url, attempts = 1, note = "")
+  }
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = '<meta http-equiv="refresh" content="0; url=/new-path/">', error = NULL)
+  })
+  results <- check_all(links_df, check = fake_check, fetch_body = fetch_body)
+  expect_equal(results$status, "redirected")
+  expect_true(grepl("https://example.com/new-path/", results$note, fixed = TRUE))
+})
+
+test_that("check_all：狀態為 ok 且為 psyteachr 較新版章節 -> outdated", {
+  links_df <- data.frame(
+    url = c("https://psyteachr.github.io/analysis-v4/07-independent.html"),
+    title = c("Independent"),
+    kind = c("chapter"),
+    entries = c("e1"),
+    stringsAsFactors = FALSE
+  )
+  fake_check <- function(url, ...) {
+    list(status = "ok", code = 200L, final_url = url, attempts = 1, note = "")
+  }
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    if (identical(url, "https://psyteachr.github.io/analysis-v4/07-independent.html")) {
+      # 章節網址本身沒有 meta refresh
+      return(list(code = 200L, body = "<html><body>內容</body></html>", error = NULL))
+    }
+    # 短網址指向較新版
+    list(code = 200L, body = '<meta http-equiv="refresh" content="0; url=/analysis-v5/">', error = NULL)
+  })
+  results <- check_all(links_df, check = fake_check, fetch_body = fetch_body)
+  expect_equal(results$status, "outdated")
+  expect_true(grepl("v5", results$note, fixed = TRUE))
+})
+
+test_that("check_all：非 ok 狀態的網址不呼叫 fetch_body", {
+  links_df <- data.frame(
+    url = c("https://example.com/broken"),
+    title = c("Broken"),
+    kind = c("chapter"),
+    entries = c("e1"),
+    stringsAsFactors = FALSE
+  )
+  fake_check <- function(url, ...) {
+    list(status = "broken", code = 404L, final_url = url, attempts = 1, note = "HTTP 404")
+  }
+  fetch_body <- mk_fetch_body_recorder(function(url) {
+    list(code = 200L, body = "", error = NULL)
+  })
+  results <- check_all(links_df, check = fake_check, fetch_body = fetch_body)
+  expect_equal(results$status, "broken")
+  expect_equal(length(attr(fetch_body, "calls")$urls), 0)
+})
