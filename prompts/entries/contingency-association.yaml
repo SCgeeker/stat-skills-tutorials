@@ -18,7 +18,7 @@ prerequisites:
   - zh: 先確認兩個變項在 jamovi 裡都是 Nominal 型別，且都沒有遺漏值
     en: Confirm both variables are set to Nominal in jamovi, and that neither has missing values.
   - zh: Rj 不會顯示 R 的 warning()，程式碼印出的期望次數表要自己看，別等模型幫你抓
-    en: Rj does not display R's warning() messages; look at the expected-count table the code prints yourself instead of waiting for the model to flag it.
+    en: Rj does not display R's warning() messages. The code prints an expected-count table; look at it yourself instead of waiting for the model to flag it.
 persona: tutor
 prompt:
   zh: |-

@@ -47,8 +47,8 @@ system_prompt_override: null
 expected:
   - zh: 指名 ANOVA ▸ One-Way ANOVA（或 ANOVA ▸ ANOVA）逐字路徑，兩者在 jamovi 選單裡都真實存在
     en: Names the exact path ANOVA ▸ One-Way ANOVA (or ANOVA ▸ ANOVA); both exist in the real jamovi menu
-  - zh: 說出變異數同質性與常態性兩項前提，並正確指出兩者的勾選位置都在 Assumption Checks 區塊（Homogeneity test、Normality test、Q-Q plot），不是 Variances 區塊——Variances 區塊只有 Welch's 與 Fisher's 的選擇
-    en: States the homogeneity-of-variance and normality assumptions, and correctly places both tick boxes under Assumption Checks (Homogeneity test, Normality test, Q-Q plot) rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's
+  - zh: 說出變異數同質性與常態性兩項前提，並正確指出 Homogeneity test 與 Normality test 的勾選位置都在 Assumption Checks 區塊，不是 Variances 區塊。Variances 區塊只有 Welch's 與 Fisher's 的選擇
+    en: States the homogeneity-of-variance and normality assumptions, and correctly places the Homogeneity test and Normality test tick boxes under Assumption Checks rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's
   - zh: 明確承認從摘要統計判斷不了三組是否有差異，要跑完分析才知道
     en: States plainly that the summary statistics alone cannot reveal whether the three groups differ; running the analysis is required to know
   - zh: 沒有給事後多重比較的建議，守住提問稿的範圍限制

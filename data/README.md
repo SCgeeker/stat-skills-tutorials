@@ -117,9 +117,10 @@ only under that licence, with the source named here.
 | Payne et al. (2008) replication data | Reproducibility Project: Psychology, RP:P #44, <https://osf.io/rc6mv/> | CC0 1.0 |
 | Monin et al. (2008) replication data | Reproducibility Project: Psychology, RP:P #43, <https://osf.io/pz0my/> | CC0 1.0 |
 
-The CC BY-SA 4.0 material (Dawtry, and the Stroop data) is shared under the same licence. The two
-RP:P replication datasets are **CC0 1.0**, a different licence from the CC BY and CC BY-SA material
-above: CC0 places the data in the public domain, with no attribution requirement, so it is called
+The CC BY-SA 4.0 material, including Dawtry and the Stroop data, is shared
+under the same licence. The two RP:P replication datasets are **CC0 1.0**, a
+different licence from the CC BY and CC BY-SA material above: CC0 places the
+data in the public domain, with no attribution requirement, so it is called
 out separately here rather than folded into the CC BY-SA note.
 
 ## Two traps in how variables are defined
@@ -149,12 +150,15 @@ These surfaced while testing `describe-code-crosscheck`, `contingency-associatio
 `regression-predictors`, and `three-group-comparison`. Each is recorded here so the next person
 does not repeat it.
 
-**jamovi's Descriptives quartiles are R's default `type = 7`, not `type = 6`.** With jamovi 28.2
-bundling jmv 2.8.0, the Stroop congruent condition's 25th and 75th percentiles come out to 667.93
-and 818.76. That matches `quantile(x, type = 7)` (667.9336, 818.764) and not `type = 6` (667.4837,
-819.0694). Skewness and kurtosis are the sample-adjusted G1/G2 statistics that SPSS also reports. Both `describe-code-crosscheck`
-replies, in Chinese and in English, told the user that jamovi uses `type = 6`; the cross-check step
-caught it because all four quartiles (Q1 and Q3 for both conditions) failed to match.
+**jamovi's Descriptives quartiles are R's default `type = 7`, not `type =
+6`.** With jamovi 28.2 bundling jmv 2.8.0, the Stroop congruent condition's
+25th and 75th percentiles come out to 667.93 and 818.76. That matches
+`quantile(x, type = 7)` (667.9336, 818.764) and not `type = 6` (667.4837,
+819.0694). Skewness and kurtosis are the sample-adjusted G1/G2 statistics, the
+same ones SPSS reports. Both `describe-code-crosscheck` replies, in Chinese
+and in English, told the user that jamovi uses `type = 6`; the cross-check
+step caught it because all four quartiles, Q1 and Q3 for both conditions,
+failed to match.
 
 **Rj does not surface R's `warning()`.** `chisq.test()` emits `Chi-squared approximation may be
 incorrect` when an expected cell count is low, but that warning never appears in the Rj output pane.
@@ -162,10 +166,11 @@ In the `contingency-association` data, the expected-count table's smallest cell 
 Vocational or Similar) is 4.88, below the rule-of-thumb minimum of 5, and you can only catch that by
 reading the printed `$expected` table yourself, not by waiting for a warning to show up.
 
-**jamovi reads Payne's `subject` column as Nominal, not as a number.** Loading the `.sav` file, jamovi
-sets `subject` to Nominal with 180 levels, and the summary askLLM sends the model describes it as "factor,
-180 levels". If it were entered as a factor in a regression, it would consume all 180 degrees of
-freedom.
+**jamovi reads Payne's `subject` column as Nominal, not as a number.** Loading
+the `.sav` file, jamovi sets `subject` to Nominal with 180 levels. askLLM then
+sends the model a summary, and that summary describes `subject` as "factor,
+180 levels". If it were entered as a factor in a regression, it would consume
+all 180 degrees of freedom.
 
 **jamovi's Levene's test centres on the mean.** For the Monin et al. (2008) data, actually running
 `three-group-comparison`'s One-Way ANOVA gives Levene's test **F = 0.00, p = .996**: the three

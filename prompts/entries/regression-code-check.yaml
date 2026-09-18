@@ -54,7 +54,7 @@ expected:
   - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
     en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
   - zh: 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查，即使程式碼變長也一樣
-    en: Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in, even though the code is longer
+    en: Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in. The code is longer here, but that still holds
   - zh: 受試者編號欄沒有進入模型，並說明理由（它是識別碼）
     en: The participant identifier does not enter the model, with an explanation that it is an identifier
   - zh: 診斷至少包含共線性（VIF 或等價指標）與殘差檢視兩項

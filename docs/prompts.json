@@ -31,7 +31,7 @@
       },
       {
         "zh": "Rj 不會顯示 R 的 warning()，程式碼印出的期望次數表要自己看，別等模型幫你抓",
-        "en": "Rj does not display R's warning() messages; look at the expected-count table the code prints yourself instead of waiting for the model to flag it."
+        "en": "Rj does not display R's warning() messages. The code prints an expected-count table; look at it yourself instead of waiting for the model to flag it."
       }
     ],
     "persona": "tutor",
@@ -307,7 +307,7 @@
         "step": "code-run",
         "what": {
           "zh": "貼進 Rj 執行，記錄輸出或錯誤原文；確認六項統計量（n、mean、sd、median、min、max）算得出來",
-          "en": "Paste it into Rj and run it, recording the output or error verbatim; confirm the six statistics (n, mean, sd, median, min, max) come out"
+          "en": "Paste it into Rj and run it, recording the output or error verbatim; confirm that n, mean, sd, median, min, and max all come out"
         }
       },
       {
@@ -1026,7 +1026,7 @@
       },
       {
         "zh": "待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查，即使程式碼變長也一樣",
-        "en": "Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in, even though the code is longer"
+        "en": "Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in. The code is longer here, but that still holds"
       },
       {
         "zh": "受試者編號欄沒有進入模型，並說明理由（它是識別碼）",
@@ -1132,7 +1132,7 @@
     "prerequisites": [
       {
         "zh": "把 {outcome}、{pred_a}、{pred_b}、{id} 都勾進 Variables to describe。注意 {id} 在 jamovi 裡會被讀成 Nominal（180 個水準），這是這條陷阱的關鍵——它不會顯示成一串巨大的數字平均數",
-        "en": "Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. It will not show up as a huge, meaningless average."
+        "en": "Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. {id} will not show up as a huge, meaningless average."
       },
       {
         "zh": "確認 {pred_a} 與 {pred_b} 在 jamovi 裡是連續變項（Continuous）。{pred_b} 雖然只有兩個值（-1 與 1），仍會被歸為連續，之後在 Linear Regression 裡會落進 Covariates 欄位框，不是 Factors",
@@ -1148,11 +1148,11 @@
     "expected": [
       {
         "zh": "指名 Regression ▸ Linear Regression 逐字路徑，說明 {outcome} 放 Dependent Variable、{pred_a} 與 {pred_b} 放 Covariates（因為兩者在 jamovi 裡都是數值型；若 {pred_b} 改為類別型才會改放 Factors）",
-        "en": "Names the exact path Regression ▸ Linear Regression, and states {outcome} goes in Dependent Variable while {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)"
+        "en": "Names the exact path Regression ▸ Linear Regression, and states that {outcome} goes in Dependent Variable and that {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)"
       },
       {
         "zh": "點名 {id} 是識別碼、不該當預測變項進入模型，理由是它只是每列的代碼，放進去只會耗盡自由度（在 jamovi 中 {id} 是 180 水準的類別變項，放進 Factors 會產生 179 個虛擬變項）",
-        "en": "Names {id} as an identifier that should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)"
+        "en": "Names {id} as an identifier and states it should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)"
       },
       {
         "zh": "明確承認共線性（VIF）無法從摘要統計判斷，要跑完模型、在 Assumption Checks 勾選 Collinearity statistics 才看得到",
@@ -1267,8 +1267,8 @@
         "en": "Names the exact path ANOVA ▸ One-Way ANOVA (or ANOVA ▸ ANOVA); both exist in the real jamovi menu"
       },
       {
-        "zh": "說出變異數同質性與常態性兩項前提，並正確指出兩者的勾選位置都在 Assumption Checks 區塊（Homogeneity test、Normality test、Q-Q plot），不是 Variances 區塊——Variances 區塊只有 Welch's 與 Fisher's 的選擇",
-        "en": "States the homogeneity-of-variance and normality assumptions, and correctly places both tick boxes under Assumption Checks (Homogeneity test, Normality test, Q-Q plot) rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's"
+        "zh": "說出變異數同質性與常態性兩項前提，並正確指出 Homogeneity test 與 Normality test 的勾選位置都在 Assumption Checks 區塊，不是 Variances 區塊。Variances 區塊只有 Welch's 與 Fisher's 的選擇",
+        "en": "States the homogeneity-of-variance and normality assumptions, and correctly places the Homogeneity test and Normality test tick boxes under Assumption Checks rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's"
       },
       {
         "zh": "明確承認從摘要統計判斷不了三組是否有差異，要跑完分析才知道",

@@ -879,7 +879,7 @@ window.Quarto = {
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：錯的是那句「To match jamovi, you must specify <code>type = 6</code>」。jamovi 的 Descriptives 實際上用的是 R 的預設值 <strong><code>type = 7</code></strong>——jamovi 28.2 內建的 jmv 2.8.0 呼叫 <code>quantile()</code> 時根本沒有指定 type 參數。照模型的指示加上 <code>type = 6</code>，程式碼會順利執行、數字看起來也合理，但對不上 jamovi。實測對照：</p>
+<p><strong>答案</strong>：錯的是那句「To match jamovi, you must specify <code>type = 6</code>」。jamovi 的 Descriptives 實際上用的是 R 的預設值 <strong><code>type = 7</code></strong>——jamovi 28.2 內建的 jmv 2.8.0 呼叫 <code>quantile()</code> 時根本沒有指定 type 參數。照模型的指示加上 <code>type = 6</code>，程式碼會順利執行、數字看起來也合理，但四分位數對不上 jamovi。實測對照：</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -912,7 +912,7 @@ window.Quarto = {
 <p>對應查核步驟：<strong>V5 交叉</strong>（與 jamovi 輸出逐格比對）。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: the broken part is “To match jamovi, you must specify <code>type = 6</code>.” jamovi’s Descriptives actually uses R’s own default, <strong><code>type = 7</code></strong> — jamovi 28.2’s bundled jmv 2.8.0 calls <code>quantile()</code> without ever setting <code>type</code>. Follow the model’s instruction and add <code>type = 6</code>, and the code runs fine, the numbers look reasonable, and none of them match jamovi. The recorded comparison:</p>
+<p><strong>Answer</strong>: the broken part is “To match jamovi, you must specify <code>type = 6</code>.” jamovi’s Descriptives actually uses R’s own default, <strong><code>type = 7</code></strong>. jamovi 28.2’s bundled jmv 2.8.0 calls <code>quantile()</code> without ever setting <code>type</code>. Follow the model’s instruction and add <code>type = 6</code>, and the code runs fine and the numbers look reasonable, but the quartiles do not match jamovi. The recorded comparison:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -937,10 +937,10 @@ window.Quarto = {
 <p>n, mean, sd, median, min, and max all match exactly. Only the quartiles are off, every single one of them.</p>
 <p>What this question demonstrates:</p>
 <ol type="1">
-<li>Packaging a wrong fact as a specific, “do this and it will match” instruction is more dangerous than a vague claim. It hands you a verifiable-looking action, which makes you less likely to doubt it.</li>
+<li>Packaging a wrong fact as a specific, “do this and it will match” instruction is more dangerous than a vague claim. It hands you a verifiable-looking action. That makes you less likely to doubt it.</li>
 <li>The error showed up in both the Chinese and English runs, and again after the prompt was filled out and rerun. It is a stable error, not a one-off hallucination.</li>
 <li>Cross-checking is what catches it. Reading the Rj output alone finds nothing wrong: the code runs with zero errors and the numbers look plausible. The mismatch only shows up once you compare cell by cell against jamovi.</li>
-<li>A difference of a few tenths in the decimals is easy to wave off as rounding error. Rounding error does not land systematically on one statistic, the quartiles, and nowhere else.</li>
+<li>A difference of a few tenths in the decimals is easy to wave off as rounding error. Rounding error would not hit all four quartiles and leave the other six statistics exact.</li>
 </ol>
 <p>Verification step: <strong>V5, cross-check</strong> (compare cell by cell against jamovi’s own output).</p>
 </div>
@@ -997,13 +997,13 @@ window.Quarto = {
 <p>對應查核步驟：<strong>V1 路徑核對</strong>（核對到子區塊層級，不是只核對選單與分析名稱）。</p>
 </div>
 <div class="en">
-<p><strong>Answer</strong>: jamovi’s One-Way ANOVA panel has only two options under <strong>Variances</strong>: <strong>Don’t assume equal (Welch’s)</strong> and <strong>Assume equal (Fisher’s)</strong>. The homogeneity test is not there. It sits under <strong>Assumption Checks</strong>, alongside the normality test and the Q-Q plot. The model moved the homogeneity test into Variances, inventing a layout that sounds plausible but does not exist on the panel.</p>
-<p>The option labels themselves are not verbatim either. The actual interface reads <strong>Homogeneity test</strong> and <strong>Normality test</strong>, not the model’s <strong>Homogeneity (Levene’s)</strong> and <strong>Normality (Shapiro-Wilk)</strong>. The method names in parentheses are the model’s own added gloss, not strings that appear anywhere in jamovi’s interface.</p>
+<p><strong>Answer</strong>: jamovi’s One-Way ANOVA panel has only two options under <strong>Variances</strong>: <strong>Don’t assume equal (Welch’s)</strong> and <strong>Assume equal (Fisher’s)</strong>. The homogeneity test is not there. It sits under <strong>Assumption Checks</strong>, alongside the normality test and the Q-Q plot. The model moved the homogeneity test into Variances. That layout sounds plausible, but it does not exist on the panel.</p>
+<p>The option labels themselves are not verbatim either. The actual interface reads <strong>Homogeneity test</strong> and <strong>Normality test</strong>, not the model’s <strong>Homogeneity (Levene’s)</strong> and <strong>Normality (Shapiro-Wilk)</strong>. The method names in parentheses are the model’s own added gloss. jamovi’s interface does not use these strings anywhere.</p>
 <p>The model did get one thing right: Welch’s correction really is under Variances, next to Assume equal (Fisher’s).</p>
 <p>What this question demonstrates:</p>
 <ol type="1">
-<li>The options themselves exist, and Welch’s location is right. Only the homogeneity test is filed under the wrong section. This “mostly right, with one fabricated detail” pattern is harder to catch than question 4’s fully invented path, because just checking “does this option exist” looks fine.</li>
-<li>A path check has to go all the way down. It is not enough to confirm the analysis name (One-Way ANOVA) and the top menu (Analyses &gt; ANOVA). Every option has to be checked against the sub-section it actually sits under.</li>
+<li>The options themselves exist, and Welch’s location is right. Only the homogeneity test is filed under the wrong section. Just checking “does this option exist” looks fine, so this “mostly right, with one fabricated detail” pattern is harder to catch than question 4’s fully invented path.</li>
+<li>A path check has to go all the way down. It is not enough to confirm the analysis name (One-Way ANOVA) and the top menu (Analyses &gt; ANOVA). Every option has to be checked against the sub-section where it actually sits.</li>
 <li>This echoes question 12. The English run of the same prompt correctly put all three options under Assumption Checks: “Expand the <strong>Assumption Checks</strong> section and check <strong>Homogeneity test</strong> (Levene’s test).” Same model, same data, same persona, differing only in <code>promptLang</code>, and the reliability differs.</li>
 </ol>
 <p>Verification step: <strong>V1, path check</strong> (checked down to the sub-section level, not just the menu and analysis name).</p>

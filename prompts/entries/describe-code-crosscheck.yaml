@@ -63,7 +63,7 @@ check:
   - step: code-run
     what:
       zh: 貼進 Rj 執行，記錄輸出或錯誤原文；確認六項統計量（n、mean、sd、median、min、max）算得出來
-      en: Paste it into Rj and run it, recording the output or error verbatim; confirm the six statistics (n, mean, sd, median, min, max) come out
+      en: Paste it into Rj and run it, recording the output or error verbatim; confirm that n, mean, sd, median, min, and max all come out
   - step: cross-check
     what:
       zh: 回 jamovi 跑 Exploration ▸ Descriptives，Split by 放分組變項，勾 Skewness、Kurtosis、Percentiles，逐格比對，特別看四分位數是否相符

@@ -19,7 +19,7 @@ design: none
 stat_goal: predict
 prerequisites:
   - zh: 把 {outcome}、{pred_a}、{pred_b}、{id} 都勾進 Variables to describe。注意 {id} 在 jamovi 裡會被讀成 Nominal（180 個水準），這是這條陷阱的關鍵——它不會顯示成一串巨大的數字平均數
-    en: Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. It will not show up as a huge, meaningless average.
+    en: Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. {id} will not show up as a huge, meaningless average.
   - zh: 確認 {pred_a} 與 {pred_b} 在 jamovi 裡是連續變項（Continuous）。{pred_b} 雖然只有兩個值（-1 與 1），仍會被歸為連續，之後在 Linear Regression 裡會落進 Covariates 欄位框，不是 Factors
     en: Confirm {pred_a} and {pred_b} are Continuous in jamovi. {pred_b} only takes two values (-1 and 1), yet it is still numeric, so it belongs in the Covariates box of Linear Regression, not Factors.
 persona: explainer
@@ -43,9 +43,9 @@ prompt:
 system_prompt_override: null
 expected:
   - zh: 指名 Regression ▸ Linear Regression 逐字路徑，說明 {outcome} 放 Dependent Variable、{pred_a} 與 {pred_b} 放 Covariates（因為兩者在 jamovi 裡都是數值型；若 {pred_b} 改為類別型才會改放 Factors）
-    en: Names the exact path Regression ▸ Linear Regression, and states {outcome} goes in Dependent Variable while {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)
+    en: Names the exact path Regression ▸ Linear Regression, and states that {outcome} goes in Dependent Variable and that {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)
   - zh: 點名 {id} 是識別碼、不該當預測變項進入模型，理由是它只是每列的代碼，放進去只會耗盡自由度（在 jamovi 中 {id} 是 180 水準的類別變項，放進 Factors 會產生 179 個虛擬變項）
-    en: Names {id} as an identifier that should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)
+    en: Names {id} as an identifier and states it should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)
   - zh: 明確承認共線性（VIF）無法從摘要統計判斷，要跑完模型、在 Assumption Checks 勾選 Collinearity statistics 才看得到
     en: States plainly that collinearity (VIF) cannot be judged from the summary statistics; it only appears after you run the model and tick Collinearity statistics under Assumption Checks
   - zh: 不宣稱看過散佈圖、殘差圖，或已經知道共線性的實際程度
