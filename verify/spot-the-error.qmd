@@ -29,10 +29,10 @@ documentation's word for it.
 LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習
 V4a 的程式碼紅旗核對，依 `askLLM/R/llm-adapter.R` 明文禁止的指令清單改寫成
 教學用例。這四題**都不是**任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄
-（`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文），第 12 題亦然。目前共 12 題，
+（`data/` 底下的 `.omv` 與 `data/replies/` 的回覆全文），第 12–14 題亦然。目前共 14 題，
 本頁會在課堂驗證後補進新的實測案例持續擴充。
 
-第 1–6 題與第 11、12 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
+第 1–6 題與第 11–14 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點
 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套
 規範改寫。
 :::
@@ -48,12 +48,12 @@ made-up example written to show the failure mode. LIMITATIONS itself now says
 plainly that it is not a recorded test result. Questions 8–10 are designed for
 this page to practice the V4a code red-flag check, built from the instruction
 list that `askLLM/R/llm-adapter.R` explicitly forbids. None of these four is
-real output from any AI. Questions 11 and 12 come from this site's own test records, the
+real output from any AI. Questions 11 through 14 come from this site's own test records, the
 `.omv` files under `data/` and the full replies in `data/replies/`. There are
-12 questions here today, and the set will grow as classroom use turns up new
+14 questions here today, and the set will grow as classroom use turns up new
 cases.
 
-The AI replies in questions 1–6 and questions 11 and 12 are quoted verbatim from the
+The AI replies in questions 1–6 and questions 11 through 14 are quoted verbatim from the
 real-test record, with no stylistic editing, so their punctuation and sentence
 patterns do not follow this site's prose style guide (Pinker Rules 7–10); the
 illustrative replies in questions 7–10 have been rewritten to follow it.
@@ -806,6 +806,252 @@ Verification step: **V3, scope check**, does the reply claim something it
 cannot see. This question shows why V3 cannot stop at checking facts:
 **every fact is right and it still fails.** It also shows **V5, cross-check**,
 where two runs differ by one factor so the difference can be attributed.
+:::
+:::
+
+## [第 13 題：模型給了一個「照做就對得上」的錯誤指示]{.zh}[Question 13: an instruction that looks like it would match, but doesn't]{.en}
+
+::: {.zh}
+> 本題取自 `data/describe-code-crosscheck_stroop_en.omv` 與
+> `data/describe-code-crosscheck_stroop_zhTW.omv` 的實測記錄，回覆逐字引用，
+> 未經修飾。回覆全文見 `data/replies/`。
+
+**情境**：使用者請 R code tutor 寫一段描述統計程式碼，要拿去跟 jamovi
+Descriptives 逐格比對，並請它說明哪些統計量可能在 R 與 jamovi 之間算不出
+同一個數字。資料是 Stroop（270 位受試者 × congruent／incongruent）。
+
+**AI 回覆**（英文版，節錄）：
+
+> **Quartiles (25th and 75th percentiles)**: Base R’s `quantile()` defaults
+> to `type = 7`, whereas jamovi uses `type = 6` (standard in SPSS/Minitab).
+> To match jamovi, you must specify `type = 6` in R's `quantile()` function.
+
+中文版回覆說的是同一件事：「R 的 `quantile()` 預設演算法是 `type = 7`；而
+jamovi (以及 SPSS) 預設計算四分位數採用的是 **`type = 6`**（以 $p(N+1)$
+定位）。」同一回覆對偏態峰度的說明是對的：「jamovi reports sample-adjusted
+values (Type 2, equivalent to SPSS/SAS)」。
+
+**問題**：這段關於四分位數的指示錯在哪裡？跟前面幾題的錯誤比起來，這種
+錯法為什麼特別危險？
+:::
+
+::: {.en}
+> This question comes from the recorded tests in
+> `data/describe-code-crosscheck_stroop_en.omv` and
+> `data/describe-code-crosscheck_stroop_zhTW.omv`. The reply is quoted
+> verbatim, with no editing. Full replies are in `data/replies/`.
+
+**Scenario**: A user asked the R code tutor to write descriptive-statistics
+code to check cell by cell against jamovi's Descriptives, and to note which
+statistics might not come out the same between R and jamovi. The dataset was
+Stroop data, 270 participants under congruent and incongruent conditions.
+
+**AI reply** (English run, excerpt):
+
+> **Quartiles (25th and 75th percentiles)**: Base R’s `quantile()` defaults
+> to `type = 7`, whereas jamovi uses `type = 6` (standard in SPSS/Minitab).
+> To match jamovi, you must specify `type = 6` in R's `quantile()` function.
+
+The Chinese run said the same thing: 「R 的 `quantile()` 預設演算法是
+`type = 7`；而 jamovi (以及 SPSS) 預設計算四分位數採用的是 **`type = 6`**
+（以 $p(N+1)$ 定位）。」 The same reply's note on skewness and kurtosis was
+correct: "jamovi reports sample-adjusted values (Type 2, equivalent to
+SPSS/SAS)."
+
+**Question**: What is wrong with this quartile instruction? Compared with
+the errors in earlier questions, why is this particular kind of mistake more
+dangerous?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：錯的是那句「To match jamovi, you must specify `type = 6`」。jamovi
+的 Descriptives 實際上用的是 R 的預設值 **`type = 7`**——jamovi 28.2 內建的
+jmv 2.8.0 呼叫 `quantile()` 時根本沒有指定 type 參數。照模型的指示加上
+`type = 6`，程式碼會順利執行、數字看起來也合理，但對不上 jamovi。實測
+對照：
+
+| | jamovi Descriptives | Rj 照建議用 `type = 6` |
+|---|---|---|
+| congruent Q1／Q3 | 667.93／818.76 | 667.48／819.07 |
+| incongruent Q1／Q3 | 796.78／984.23 | 796.22／984.68 |
+
+n、mean、sd、median、min、max 六項完全一致，只有四分位數全部不符。
+
+這一題要示範的重點：
+
+1. 模型把一個錯的事實包裝成「照做就能對上」的具體指示，比一般的模糊說法
+   更危險——它給了你一個看似可驗證、可執行的動作，讓你更不會去懷疑。
+2. 這個錯誤在中英兩版、以及提示詞補完整後重跑的版本都出現，是穩定的錯，
+   不是偶發的幻覺。
+3. 抓到它的是 cross-check 這一步：只看 Rj 輸出不會發現任何問題，程式碼
+   零錯誤、數字看起來合理，問題只有拿去跟 jamovi 逐格比對才會現形。
+4. 小數點後零點幾的差距很容易被當成捨入誤差放過，需要提醒自己：捨入
+   誤差不會系統性地只出現在四分位數這一類統計量上。
+
+對應查核步驟：**V5 交叉**（與 jamovi 輸出逐格比對）。
+:::
+
+::: {.en}
+**Answer**: the broken part is "To match jamovi, you must specify
+`type = 6`." jamovi's Descriptives actually uses R's own default,
+**`type = 7`** — jamovi 28.2's bundled jmv 2.8.0 calls `quantile()` without
+ever setting `type`. Follow the model's instruction and add `type = 6`, and
+the code runs fine, the numbers look reasonable, and none of them match
+jamovi. The recorded comparison:
+
+| | jamovi Descriptives | Rj with the suggested `type = 6` |
+|---|---|---|
+| congruent Q1/Q3 | 667.93/818.76 | 667.48/819.07 |
+| incongruent Q1/Q3 | 796.78/984.23 | 796.22/984.68 |
+
+n, mean, sd, median, min, and max all match exactly. Only the quartiles are
+off, every single one of them.
+
+What this question demonstrates:
+
+1. Packaging a wrong fact as a specific, "do this and it will match"
+   instruction is more dangerous than a vague claim. It hands you a
+   verifiable-looking action, which makes you less likely to doubt it.
+2. The error showed up in both the Chinese and English runs, and again
+   after the prompt was filled out and rerun. It is a stable error, not a
+   one-off hallucination.
+3. Cross-checking is what catches it. Reading the Rj output alone finds
+   nothing wrong: the code runs with zero errors and the numbers look
+   plausible. The mismatch only shows up once you compare cell by cell
+   against jamovi.
+4. A difference of a few tenths in the decimals is easy to wave off as
+   rounding error. Rounding error does not land systematically on one
+   statistic, the quartiles, and nowhere else.
+
+Verification step: **V5, cross-check** (compare cell by cell against
+jamovi's own output).
+:::
+:::
+
+## [第 14 題：選項是真的，位置是編的]{.zh}[Question 14: the option is real, its location is not]{.en}
+
+::: {.zh}
+> 本題取自 `data/three-group-comparison_monin2008_zhTW.omv` 的實測記錄，
+> 回覆逐字引用，未經修飾。對照組見同一條目的
+> `data/three-group-comparison_monin2008_en.omv`。
+
+**情境**：使用者問 Module Guider 比較三組平均數該用哪個分析、有哪些前提要
+檢查、各自在 jamovi 哪裡勾選。資料是 RP:P #43 Monin 複製研究，`Condition`
+分三組（20／27／28 人），`Intelligent` 為 1–7 評分。
+
+**AI 回覆**（中文版，節錄）：
+
+> **在 jamovi 中的勾選位置：**
+> 進入 **`Analyses > ANOVA > One-Way ANOVA`** 分析設定面板後：
+> * 在 **Assumption Checks** 區塊中：
+>   * 勾選 **Normality (Shapiro-Wilk)**（檢驗常態性）
+>   * 勾選 **Q-Q plot**（視覺化輔助檢視常態性）
+> * 在 **Variances** 區塊中：
+>   * 可勾選 **Homogeneity (Levene's)** 檢定變異數同質性；若同質性不成立，
+>     可直接在同區塊中選取 **Don't assume equal (Welch's)** 進行校正。
+
+**問題**：對照你自己 jamovi 裡的 One-Way ANOVA 面板，這段勾選位置錯在
+哪裡？
+:::
+
+::: {.en}
+> This question comes from the recorded test in
+> `data/three-group-comparison_monin2008_zhTW.omv`. The reply is quoted
+> verbatim, with no editing. The control run is the English version of the
+> same entry, `data/three-group-comparison_monin2008_en.omv`.
+
+**Scenario**: A user asked the Module Guider which analysis compares three
+group means, what assumptions to check, and where each check lives in
+jamovi. The dataset was the RP:P #43 Monin replication, with `Condition`
+split into three groups (20, 27, 28 participants) and `Intelligent` rated
+1–7.
+
+**AI reply** (Chinese run, excerpt, translated here; the original Chinese is
+quoted in the [zh] version of this question above):
+
+> **Where to check these in jamovi:**
+> Open the **`Analyses > ANOVA > One-Way ANOVA`** settings panel, then:
+> * Under **Assumption Checks**:
+>   * Check **Normality (Shapiro-Wilk)**
+>   * Check **Q-Q plot**
+> * Under **Variances**:
+>   * You may check **Homogeneity (Levene's)** to test for equal variances;
+>     if it fails, select **Don't assume equal (Welch's)** in the same
+>     section to correct for it.
+
+**Question**: Checked against your own jamovi's One-Way ANOVA panel, what is
+wrong with these locations?
+:::
+
+::: {.callout-note collapse="true"}
+::: {.zh}
+**答案**：jamovi 的 One-Way ANOVA 面板裡，**Variances** 區塊只有兩個選項：
+**Don't assume equal (Welch's)** 與 **Assume equal (Fisher's)**。同質性檢定
+並不在這裡，它跟 Normality test、Q-Q plot 一起放在 **Assumption Checks**
+區塊。模型把 Homogeneity 檢定挪到了 Variances 底下，編出一個它自己聽起來
+很合理、但面板上不存在的排列。
+
+選項名稱本身也不是逐字的：實際介面上寫的是 **Homogeneity test** 與
+**Normality test**，不是模型寫的 **Homogeneity (Levene's)** 與
+**Normality (Shapiro-Wilk)**——後面那個帶括號的方法名稱是模型自己加上去
+的說明文字，不是 jamovi 介面上出現的字串。
+
+Welch's 校正的位置模型倒是說對了：它確實在 Variances 區塊，跟
+Assume equal (Fisher's) 並列。
+
+這一題要示範的重點：
+
+1. 選項本身存在、Welch's 的位置也對，唯獨 Homogeneity test 被搬到了錯的
+   區塊——這種「大致正確、細節編造」比第 4 題那種整條路徑純虛構更難察覺，
+   因為你光看「有沒有這個選項」會覺得沒問題。
+2. path 核對要點到最後一層：不能只確認分析名稱（One-Way ANOVA）對、大
+   選單（Analyses > ANOVA）對，還要逐一核對子區塊底下每個選項究竟被歸在
+   哪一區。
+3. 與第 12 題呼應：同一條提示詞的英文版把三個選項都正確地寫在
+   Assumption Checks 底下（"Expand the **Assumption Checks** section and
+   check **Homogeneity test** (Levene’s test)"）。同一個模型、同一份
+   資料、同一個 persona，只差 `promptLang`，可靠度不一樣。
+
+對應查核步驟：**V1 路徑核對**（核對到子區塊層級，不是只核對選單與分析
+名稱）。
+:::
+
+::: {.en}
+**Answer**: jamovi's One-Way ANOVA panel has only two options under
+**Variances**: **Don't assume equal (Welch's)** and **Assume equal
+(Fisher's)**. The homogeneity test is not there. It sits under
+**Assumption Checks**, alongside the normality test and the Q-Q plot. The
+model moved the homogeneity test into Variances, inventing a layout that
+sounds plausible but does not exist on the panel.
+
+The option labels themselves are not verbatim either. The actual interface
+reads **Homogeneity test** and **Normality test**, not the model's
+**Homogeneity (Levene's)** and **Normality (Shapiro-Wilk)**. The method
+names in parentheses are the model's own added gloss, not strings that
+appear anywhere in jamovi's interface.
+
+The model did get one thing right: Welch's correction really is under
+Variances, next to Assume equal (Fisher's).
+
+What this question demonstrates:
+
+1. The options themselves exist, and Welch's location is right. Only the
+   homogeneity test is filed under the wrong section. This "mostly right,
+   with one fabricated detail" pattern is harder to catch than question 4's
+   fully invented path, because just checking "does this option exist"
+   looks fine.
+2. A path check has to go all the way down. It is not enough to confirm the
+   analysis name (One-Way ANOVA) and the top menu (Analyses > ANOVA). Every
+   option has to be checked against the sub-section it actually sits under.
+3. This echoes question 12. The English run of the same prompt correctly
+   put all three options under Assumption Checks: "Expand the **Assumption
+   Checks** section and check **Homogeneity test** (Levene’s test)." Same
+   model, same data, same persona, differing only in `promptLang`, and the
+   reliability differs.
+
+Verification step: **V1, path check** (checked down to the sub-section
+level, not just the menu and analysis name).
 :::
 :::
 
