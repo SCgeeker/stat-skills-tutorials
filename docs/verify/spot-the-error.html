@@ -291,14 +291,14 @@ window.Quarto = {
 
 
 <div class="zh">
-<p>本頁把 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 裡記錄的錯誤與示警，改寫成一組「找碴」 練習：你會先看到一段情境與一段 AI 回覆，回覆裡藏著一個錯誤，練習先自己找出 問題所在，再打開答案核對。這是練習 <code>verify/workflow.qmd</code> 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你<strong>親身發現</strong>幻覺， 而不是被動接受文件裡的結論。</p>
+<p>本頁把 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 裡記錄的錯誤與示警，改寫成一組「找碴」練習：你會先看到一段情境與一段 AI 回覆，回覆裡藏著一個錯誤，練習先自己找出問題所在，再打開答案核對。這是練習 <code>verify/workflow.qmd</code> 裡 V1（路徑核對）、 V3（範圍核對）與 V4a（讀碼核對）的具體方式——目的是讓你<strong>親身發現</strong>幻覺，而不是被動接受文件裡的結論。</p>
 </div>
 <div class="en">
 <p>This page turns the errors and warnings recorded in <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> into a “spot the error” practice set: you will see a scenario and an AI reply with an error hidden in it, try to find the problem yourself, then open the answer to check. This is a hands-on way to practice V1 (path check), V3 (scope check), and V4a (code-read check) from <code>verify/workflow.qmd</code>. The point is to <strong>discover</strong> the hallucination yourself rather than take the documentation’s word for it.</p>
 </div>
 <div class="zh">
-<p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>， 題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的 「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成 教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄 （<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文），第 12–14 題亦然。目前共 14 題， 本頁會在課堂驗證後補進新的實測案例持續擴充。</p>
-<p>第 1–6 題與第 11–14 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點 與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套 規範改寫。</p>
+<p><strong>題目來源說明</strong>：第 1–6 題逐字取材自 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> 表格中記錄的實測錯誤路徑，出處已在每題標明。第 7 題到第 10 題都是<strong>示意範例</strong>，題目本身會清楚標示。第 7 題改寫自 LIMITATIONS〈綜合使用建議〉第 3 點，該處的「8 個樣本、Saguaro／Palo Verde／Ironwood」是為說明錯誤型態而寫的虛構例子， LIMITATIONS 原文已明文標示它不是實測記錄。第 8–10 題是本頁自行設計，用來練習 V4a 的程式碼紅旗核對，依 <code>askLLM/R/llm-adapter.R</code> 明文禁止的指令清單改寫成教學用例。這四題<strong>都不是</strong>任何 AI 的真實輸出。第 11 題取自本站自己的實測記錄（<code>data/</code> 底下的 <code>.omv</code> 與 <code>data/replies/</code> 的回覆全文），第 12–14 題亦然。目前共 14 題，本頁會在課堂驗證後補進新的實測案例持續擴充。</p>
+<p>第 1–6 題與第 11–14 題的 AI 回覆逐字引用自實測記錄，未經任何文字修飾，因此其標點與句式不遵循本站的散文規範（Pinker Rules 7–10）；第 7–10 題的示意回覆則依這套規範改寫。</p>
 </div>
 <div class="en">
 <p><strong>Where the questions come from</strong>: Questions 1–6 are taken verbatim from the real error paths recorded in the tables of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>; the source is noted on each question. Questions 7 through 10 are <strong>illustrative examples</strong>, and each is clearly labeled. Question 7 is adapted from point 3 of the “overall recommendations” in LIMITATIONS, where “8 samples across Saguaro / Palo Verde / Ironwood” is a made-up example written to show the failure mode. LIMITATIONS itself now says plainly that it is not a recorded test result. Questions 8–10 are designed for this page to practice the V4a code red-flag check, built from the instruction list that <code>askLLM/R/llm-adapter.R</code> explicitly forbids. None of these four is real output from any AI. Questions 11 through 14 come from this site’s own test records, the <code>.omv</code> files under <code>data/</code> and the full replies in <code>data/replies/</code>. There are 14 questions here today, and the set will grow as classroom use turns up new cases.</p>
@@ -331,7 +331,7 @@ window.Quarto = {
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 <strong>T-Tests</strong> 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型 案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核 步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：jamovi 沒有「比較」（Compare）這一層選單。獨立樣本 t 檢定實際位於 <strong>T-Tests</strong> 選單之下。這是 LIMITATIONS 記錄「AI 判斷正確、路徑寫錯」的典型案例——它正確知道該用哪一類分析，卻虛構了一層不存在的中繼選單。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: jamovi has no “Compare” menu level. The independent-samples t-test actually lives under the <strong>T-Tests</strong> menu. This is the textbook case LIMITATIONS records where “the AI reasoned correctly but wrote the wrong path.” It correctly identified the right family of analysis, then invented an intermediate menu that does not exist. Verification step: <strong>V1, path check</strong>.</p>
@@ -367,7 +367,7 @@ window.Quarto = {
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：相關矩陣實際位於 <strong>Regression</strong> 選單之下，不在 Exploration。跟 第 1 題一樣，AI 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。 對應查核步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：相關矩陣實際位於 <strong>Regression</strong> 選單之下，不在 Exploration。跟第 1 題一樣，AI 正確辨識出「該做相關分析」，但把它掛在錯誤的頂層選單下。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: the correlation matrix actually lives under the <strong>Regression</strong> menu, not Exploration. As in question 1, the AI correctly identified “this calls for a correlation analysis” but hung it under the wrong top-level menu. Verification step: <strong>V1, path check</strong>.</p>
@@ -403,7 +403,7 @@ window.Quarto = {
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：PCA 實際位於 <strong>Factor</strong> 選單之下，不在 Exploration。同一個錯誤 模式再出現一次：分析名稱對，選單掛錯地方。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：PCA 實際位於 <strong>Factor</strong> 選單之下，不在 Exploration。同一個錯誤模式再出現一次：分析名稱對，選單掛錯地方。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: PCA actually lives under the <strong>Factor</strong> menu, not Exploration. The same error pattern shows up again: the analysis name is right, the menu it’s hung under is wrong. Verification step: <strong>V1, path check</strong>.</p>
@@ -439,7 +439,7 @@ window.Quarto = {
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是 「選單掛錯位置」，而是<strong>整條路徑（含分析本身）都是虛構的</strong>。跟前三題不同： 前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不 存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身 （含已安裝模組）是否真的有這個功能——沒有的話就是 AI 純粹幻覺出一個功能。 對應查核步驟：<strong>V1 路徑核對</strong>（核對後結論應為「查無此路徑」）。</p>
+<p><strong>答案</strong>：LIMITATIONS 明確記錄「jamovi 內建根本沒有這些選單與分析」——這不是「選單掛錯位置」，而是<strong>整條路徑（含分析本身）都是虛構的</strong>。跟前三題不同：前三題是「分析存在、選單位置錯」，這一題是「分析在 jamovi 內建範圍內根本不存在」。這種情況下，正確做法不是去找「真正的位置」，而是先確認 jamovi 本身（含已安裝模組）是否真的有這個功能——沒有的話就是 AI 純粹幻覺出一個功能。對應查核步驟：<strong>V1 路徑核對</strong>（核對後結論應為「查無此路徑」）。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: LIMITATIONS explicitly records that “jamovi’s built-in menus have no such menu or analysis at all.” This is not “the menu is in the wrong place.” <strong>The entire path, including the analysis itself, is fabricated.</strong> Unlike questions 1–3, where the analysis exists and only the menu location is wrong, here the analysis does not exist anywhere in jamovi’s built-in scope. The right move is not to go looking for “the real location” — it’s to first confirm whether jamovi (including your installed modules) actually has this capability at all; if not, the AI has simply hallucinated a feature. Verification step: <strong>V1, path check</strong> (the correct conclusion here is “no such path exists”).</p>
@@ -475,7 +475,7 @@ window.Quarto = {
 <div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：LIMITATIONS 記錄這是「巢狀層級是編的」——<code>Linear Regression</code> 確實 在 <strong>Regression</strong> 選單之下，但中間多插了一層不存在的 <code>General Linear Model</code> 子選單。這種錯誤特別難抓，因為頭尾都對，只有中間一層是編的；逐條核對每一層 （不是只看第一層與最後一層對不對）才抓得到。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：LIMITATIONS 記錄這是「巢狀層級是編的」——<code>Linear Regression</code> 確實在 <strong>Regression</strong> 選單之下，但中間多插了一層不存在的 <code>General Linear Model</code> 子選單。這種錯誤特別難抓，因為頭尾都對，只有中間一層是編的；逐條核對每一層（不是只看第一層與最後一層對不對）才抓得到。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: LIMITATIONS records this as “a fabricated nesting level.” <code>Linear Regression</code> really is under <strong>Regression</strong>, but an extra, nonexistent <code>General Linear Model</code> sub-menu has been inserted in between. This kind of error is especially hard to catch because the first and last segments are both correct. Only the middle level is invented. You only catch it by checking every level of the path, not just whether the first and last segments look right. Verification step: <strong>V1, path check</strong>.</p>
@@ -511,7 +511,7 @@ window.Quarto = {
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：LIMITATIONS 特別點出「連中文標籤都出現錯字」——<code>線性線性</code> 是重複 詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看 「大致講得通」，連標籤的逐字拼寫都要對得上你自己 jamovi 裡看到的文字，因為 自信的語氣與正確性無關。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
+<p><strong>答案</strong>：LIMITATIONS 特別點出「連中文標籤都出現錯字」——<code>線性線性</code> 是重複詞，不是任何 jamovi 介面上真實出現過的字串。這提醒我們：路徑核對不能只看「大致講得通」，連標籤的逐字拼寫都要對得上你自己 jamovi 裡看到的文字，因為自信的語氣與正確性無關。對應查核步驟：<strong>V1 路徑核對</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: LIMITATIONS specifically flags that “even the Chinese label has a typo.” <code>線性線性</code> (“linear-linear”) is a duplicated word that never appears anywhere in jamovi’s actual interface. This is a reminder that the path check isn’t satisfied by something that “roughly makes sense.” The label’s exact wording has to match what you see in your own jamovi. Confident tone has nothing to do with correctness. Verification step: <strong>V1, path check</strong>.</p>
@@ -524,10 +524,10 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="第-7-題示意範例沒附摘要時的憑空生成question-7-illustrative-fabrication-with-no-summary-attached"><span class="zh">第 7 題（示意範例）：沒附摘要時的憑空生成</span><span class="en">Question 7 (illustrative): fabrication with no summary attached</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出。LIMITATIONS 用這個虛構例子 說明「沒有資料時模型會編一份出來」這種錯誤型態。</p>
+<p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出。LIMITATIONS 用這個虛構例子說明「沒有資料時模型會編一份出來」這種錯誤型態。</p>
 </blockquote>
 <p><strong>來源</strong>：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈綜合使用建議〉第 3 點的示意範例。</p>
-<p><strong>情境</strong>：使用者在送出問題時<strong>沒有勾選</strong>「Attach data summary to prompt」， 資料集其實是 <code>iris</code>（150 筆鳶尾花觀測，三個品種：<code>setosa</code>、<code>versicolor</code>、 <code>virginica</code>），問 AI「這份資料有幾個樣本、有哪些組別？」</p>
+<p><strong>情境</strong>：使用者在送出問題時<strong>沒有勾選</strong>「Attach data summary to prompt」，資料集其實是 <code>iris</code>（150 筆鳶尾花觀測，三個品種：<code>setosa</code>、<code>versicolor</code>、 <code>virginica</code>），問 AI「這份資料有幾個樣本、有哪些組別？」</p>
 <p><strong>AI 回覆（示意）</strong>：「這份資料大約有 8 個樣本，分成 Saguaro、Palo Verde 與 Ironwood 三個物種。」</p>
 <p><strong>問題</strong>：這則回覆錯在哪裡？根本原因是什麼？</p>
 </div>
@@ -553,7 +553,7 @@ window.Quarto = {
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體 物種名稱（Saguaro、Palo Verde、Ironwood，這三者都不是 <code>iris</code> 的品種，是憑空 生成的仙人掌／植物名稱）。根本原因不是「AI 算錯了」，是<strong>它從頭到尾沒有拿到任何 資料資訊</strong>，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：<strong>V3 範圍核對</strong> ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是 否真的附上了資料摘要。</p>
+<p><strong>答案</strong>：這是 LIMITATIONS 用來說明錯誤型態的示意範例。未勾選「Attach data summary」時，AI 完全看不到你的資料，卻仍然給出具體數字（8 個樣本）與具體物種名稱（Saguaro、Palo Verde、Ironwood，這三者都不是 <code>iris</code> 的品種，是憑空生成的仙人掌／植物名稱）。根本原因不是「AI 算錯了」，是<strong>它從頭到尾沒有拿到任何資料資訊</strong>，卻用跟有資料時同樣肯定的語氣回答。對應查核步驟：<strong>V3 範圍核對</strong> ——回覆聲稱知道它其實看不到的東西，就要整段打折扣，並回頭確認送出問題時是否真的附上了資料摘要。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: LIMITATIONS uses this made-up case to show the failure mode. With “Attach data summary” unticked, the AI has no visibility into your data at all, yet it still produces a specific number (8 samples) and specific group names. Saguaro, Palo Verde, and Ironwood are not <code>iris</code> species at all. They are fabricated plant names. The root cause is not “the AI miscalculated.” <strong>It never received any information about the data in the first place</strong>, yet answered with the same confident tone it would use if it had. Verification step: <strong>V3, scope check</strong>. Discount entirely any reply claiming to know something it cannot actually see, then go back and confirm whether the data summary was actually attached when you submitted the question.</p>
@@ -568,7 +568,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者用 R code tutor 問「幫我對 <code>data</code> 裡的 <code>score</code> 欄位做常態性 檢定。」</p>
+<p><strong>情境</strong>：使用者用 R code tutor 問「幫我對 <code>data</code> 裡的 <code>score</code> 欄位做常態性檢定。」</p>
 <p><strong>AI 回覆（示意）</strong>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"moments"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
@@ -599,7 +599,7 @@ window.Quarto = {
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：第一行 <code>install.packages("moments")</code> 直接違反 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行明文禁止的指令清單。System prompt 明確要求「never suggest install.packages（）」。這行不能執行。你的 Rj 環境不保證有網路權限或寫入 權限去安裝新套件。askLLM 應該只引用 <code>&lt;rj_environment&gt;</code> 清單裡<strong>已經 裝好</strong>的套件。對應查核步驟：<strong>V4a 讀</strong>（見 <code>checklist-rtutor.qmd</code> 的紅旗 字串表）。</p>
+<p><strong>答案</strong>：第一行 <code>install.packages("moments")</code> 直接違反 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行明文禁止的指令清單。System prompt 明確要求「never suggest install.packages（）」。這行不能執行。你的 Rj 環境不保證有網路權限或寫入權限去安裝新套件。askLLM 應該只引用 <code>&lt;rj_environment&gt;</code> 清單裡<strong>已經裝好</strong>的套件。對應查核步驟：<strong>V4a 讀</strong>（見 <code>checklist-rtutor.qmd</code> 的紅旗字串表）。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: <code>askLLM/R/llm-adapter.R</code> lines 172–177 explicitly forbid this instruction. The first line, <code>install.packages("moments")</code>, violates it directly. The system prompt states plainly: never suggest <code>install.packages()</code>. This line cannot run safely. Your Rj environment offers no guarantee of network access or write access to install a new package. askLLM must cite only packages <strong>already installed</strong>, from the <code>&lt;rj_environment&gt;</code> list. Verification step: <strong>V4a, read</strong> (see the red-flag table in <code>checklist-rtutor.qmd</code>).</p>
@@ -640,7 +640,7 @@ window.Quarto = {
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：這一行同時踩到兩條紅旗。第一條是 <code>read.csv(...)</code>：程式碼不得 建議讀取檔案，資料一律要用既有的 <code>data</code> 物件。第二條是<strong>絕對路徑</strong>： <code>C:/Users/me/Desktop/...</code> 這種路徑因人而異，在你的機器上幾乎必然不存在。 你的桌面上也許剛好有一份叫 <code>survey.csv</code> 的檔案，但這段程式碼依然完全沒有 用到 jamovi 已經幫你準備好的 <code>data</code> 物件，等於繞過了 askLLM 的設計邊界。 對應查核步驟：<strong>V4a 讀</strong>。</p>
+<p><strong>答案</strong>：這一行同時踩到兩條紅旗。第一條是 <code>read.csv(...)</code>：程式碼不得建議讀取檔案，資料一律要用既有的 <code>data</code> 物件。第二條是<strong>絕對路徑</strong>： <code>C:/Users/me/Desktop/...</code> 這種路徑因人而異，在你的機器上幾乎必然不存在。你的桌面上也許剛好有一份叫 <code>survey.csv</code> 的檔案，但這段程式碼依然完全沒有用到 jamovi 已經幫你準備好的 <code>data</code> 物件，等於繞過了 askLLM 的設計邊界。對應查核步驟：<strong>V4a 讀</strong>。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: this single line trips two red flags. The first is <code>read.csv(...)</code>: no file reads are allowed, and the data must always come from the existing <code>data</code> object. The second is the <strong>absolute path</strong>: <code>C:/Users/me/Desktop/...</code> is machine-specific and almost certainly does not exist on your computer. Your desktop might happen to hold a file called <code>survey.csv</code>. This code still never touches the <code>data</code> object jamovi already prepared for you, and it sidesteps askLLM’s design boundary. Verification step: <strong>V4a, read</strong>.</p>
@@ -655,7 +655,7 @@ window.Quarto = {
 <blockquote class="blockquote">
 <p>本題為<strong>示意範例</strong>，並非任何 AI 的真實輸出，用來練習 V4a 讀碼核對。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件）， <code>&lt;rj_environment&gt;</code> 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸 （robust regression）。」</p>
+<p><strong>情境</strong>：使用者的 Rj 環境裡只裝了 base R（沒有額外安裝任何統計套件）， <code>&lt;rj_environment&gt;</code> 清單因此只列出 base R 套件。使用者問「幫我做一個穩健迴歸（robust regression）。」</p>
 <p><strong>AI 回覆（示意）</strong>：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">rlm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> data)</span>
@@ -683,7 +683,7 @@ window.Quarto = {
 <div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：這裡要看清楚：<code>MASS</code> 隨 base R 一起發行，在多數 R 安裝裡本來就 存在，所以「引用 <code>MASS</code>」本身不一定是錯的。<strong>關鍵是核對，不是背名單</strong>。 真正的檢查方法是：打開這次呼叫附給 AI 的 <code>&lt;rj_environment&gt;</code> 區塊，逐字確認 <code>MASS</code> 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒 列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到 <code>there is no package called 'MASS'</code>。這種情況下應該回頭修改問題（例如 「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 AI 的回覆。 對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>（V4b 的錯誤訊息正是拿來確認 V4a 判斷是否正確的依據）。</p>
+<p><strong>答案</strong>：這裡要看清楚：<code>MASS</code> 隨 base R 一起發行，在多數 R 安裝裡本來就存在，所以「引用 <code>MASS</code>」本身不一定是錯的。<strong>關鍵是核對，不是背名單</strong>。真正的檢查方法是：打開這次呼叫附給 AI 的 <code>&lt;rj_environment&gt;</code> 區塊，逐字確認 <code>MASS</code> 是否真的列在裡面。如果列在裡面，這段程式碼沒有違反紅旗規則；如果沒列在裡面（代表你的 Rj 掃描結果不含它），這段程式碼一執行就會得到 <code>there is no package called 'MASS'</code>。這種情況下應該回頭修改問題（例如「只用 base R 做穩健估計」），而不是自己手動安裝套件來配合 AI 的回覆。對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>（V4b 的錯誤訊息正是拿來確認 V4a 判斷是否正確的依據）。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: look carefully here. <code>MASS</code> ships with base R and exists in most R installations by default, so citing <code>MASS</code> is not automatically wrong. <strong>The point is to check, not to memorize a blocklist.</strong> The real check is: open the <code>&lt;rj_environment&gt;</code> block sent to the AI for this call, and confirm verbatim whether <code>MASS</code> is actually listed. If it is, this code does not violate a red flag. If it is not listed, meaning your Rj scan didn’t find it, running this code will immediately produce <code>there is no package called 'MASS'</code>. In that case, go back and rephrase the question, for example “use only base R for a robust estimate,” rather than manually installing a package just to make the AI’s reply work. Verification steps: <strong>V4a, read</strong> and <strong>V4b, run</strong> (the V4b error message is exactly what confirms whether the V4a judgment was correct).</p>
@@ -696,9 +696,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="第-11-題同一個模型兩種問法question-11-same-model-two-ways-of-asking"><span class="zh">第 11 題：同一個模型，兩種問法</span><span class="en">Question 11: same model, two ways of asking</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題取自 <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。</p>
+<p>本題取自 <code>data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv</code> 的實測記錄，回覆逐字引用，未經修飾。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求 「只給程式骨架與 TODO 註解」。模型是 <code>gemini-flash-latest</code>。</p>
+<p><strong>情境</strong>：使用者請 R code tutor 幫忙把寬格式資料轉成長格式，並在提示詞裡要求「只給程式骨架與 TODO 註解」。模型是 <code>gemini-flash-latest</code>。</p>
 <p><strong>AI 回覆</strong>（節錄）：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
@@ -735,16 +735,16 @@ window.Quarto = {
 <div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：貼進 Rj 會立刻得到 <code>&lt;text&gt;:23:1: unexpected symbol</code>，程式碼一行都跑 不了。原因是 R 的 <code>#</code> 會讓該行<strong>剩下的所有內容</strong>成為註解——包括 <code>c(</code> 需要的那個 右括號。運算式因此永遠收不了尾，解析器在後面第一個非空白符號處報錯。英文版的 同一次實測更嚴重，還出現 <code>table(data_long$# TODO: ...)</code>。</p>
-<p><strong>錯的是問法。</strong> 提示詞說「只給程式骨架與 TODO 註解」，等於邀請模型把註解填在 該放值的位置。同一個模型、同一份資料、同一個 persona、同一種提示詞語言，只把 那一句改成「待填處寫成開頭的變數指派、值放字串佔位符」之後，產出就變成：</p>
+<p><strong>答案</strong>：貼進 Rj 會立刻得到 <code>&lt;text&gt;:23:1: unexpected symbol</code>，程式碼一行都跑不了。原因是 R 的 <code>#</code> 會讓該行<strong>剩下的所有內容</strong>成為註解——包括 <code>c(</code> 需要的那個右括號。運算式因此永遠收不了尾，解析器在後面第一個非空白符號處報錯。英文版的同一次實測更嚴重，還出現 <code>table(data_long$# TODO: ...)</code>。</p>
+<p><strong>錯的是問法。</strong> 提示詞說「只給程式骨架與 TODO 註解」，等於邀請模型把註解填在該放值的位置。同一個模型、同一份資料、同一個 persona、同一種提示詞語言，只把那一句改成「待填處寫成開頭的變數指派、值放字串佔位符」之後，產出就變成：</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>target_cols   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"TODO_填入T1欄位名稱"</span>, <span class="st">"TODO_填入T2欄位名稱"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>time_col_name <span class="ot">&lt;-</span> <span class="st">"Time"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">all_of</span>(target_cols), <span class="at">names_to =</span> time_col_name, ...)</span></code></pre></div><button title="複製到剪貼簿" class="code-copy-button"><i class="bi"></i></button></div>
 <p>待填處還在，但它們是字串，程式碼在你填值之前就能通過語法檢查。實測結果從 <code>fail</code> 變成 <code>pass</code>（見提示詞庫該條目的 <code>tested_with</code>）。</p>
-<p>這一題真正要示範的不是那個 bug，而是<strong>查核方法本身</strong>：兩次執行只差一個因子， 所以差異可以歸因。這正是 <a href="../verify/workflow.html"><code>workflow.qmd</code></a> 的 cross-check 與第六課 「換模型或換 persona 重問一次」在教的事。如果那兩次同時換了模型又換了問法， 你就無法說出是哪一個造成差異。</p>
-<p>對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>。這也是為什麼 V4b 不能省略——這段程式碼 「讀起來」很合理，錯誤只有執行才會現形。</p>
+<p>這一題真正要示範的不是那個 bug，而是<strong>查核方法本身</strong>：兩次執行只差一個因子，所以差異可以歸因。這正是 <a href="../verify/workflow.html"><code>workflow.qmd</code></a> 的 cross-check 與第六課「換模型或換 persona 重問一次」在教的事。如果那兩次同時換了模型又換了問法，你就無法說出是哪一個造成差異。</p>
+<p>對應查核步驟：<strong>V4a 讀</strong> 與 <strong>V4b 跑</strong>。這也是為什麼 V4b 不能省略——這段程式碼「讀起來」很合理，錯誤只有執行才會現形。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: pasting this into Rj immediately produces <code>&lt;text&gt;:23:1: unexpected symbol</code>, and not a line of it runs. R’s <code>#</code> turns <strong>everything remaining on that line</strong> into a comment, including the closing bracket that <code>c(</code> needs. The expression never terminates, and the parser reports the error at the first non-blank symbol after it. The English run of the same test was worse still, producing <code>table(data_long$# TODO: ...)</code>.</p>
@@ -766,9 +766,9 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="第-12-題每一句都是真的question-12-every-sentence-is-true"><span class="zh">第 12 題：每一句都是真的</span><span class="en">Question 12: every sentence is true</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題取自 <code>data/paired-vs-independent_stroop_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。回覆全文見 <code>data/replies/paired-vs-independent_stroop_zhTW.md</code>。</p>
+<p>本題取自 <code>data/paired-vs-independent_stroop_zhTW.omv</code> 的實測記錄，回覆逐字引用，未經修飾。回覆全文見 <code>data/replies/paired-vs-independent_stroop_zhTW.md</code>。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者把 Stroop 資料的三個變項勾進 askLLM，提問裡寫明 「同一位受試者在兩個水準下都有資料」，然後問：「這個資料是配對的。你從我提供的 摘要統計裡看得出配對關係嗎？請誠實回答。」模型是 <code>gemini-flash-latest</code>， persona 是預設的 consultant。</p>
+<p><strong>情境</strong>：使用者把 Stroop 資料的三個變項勾進 askLLM，提問裡寫明「同一位受試者在兩個水準下都有資料」，然後問：「這個資料是配對的。你從我提供的摘要統計裡看得出配對關係嗎？請誠實回答。」模型是 <code>gemini-flash-latest</code>， persona 是預設的 consultant。</p>
 <p><strong>AI 回覆</strong>（第 2 題部分）：</p>
 <blockquote class="blockquote">
 <p><strong>是否看得出配對關係：</strong></p>
@@ -777,7 +777,7 @@ window.Quarto = {
 <li><code>participant_id</code> 共有 270 個水準（受試者），且每位受試者皆正好出現 2 次（計 540 筆資料）。</li>
 <li><code>condition</code> 的兩個水準（congruent 與 incongruent）剛好各為 270 筆。</li>
 </ul>
-<p>這與「每位受試者在兩種條件各測量一次」的配對設計完全吻合。（誠實補充：摘要中未提供 交叉列聯表，因此技術上無法 100% 排除極少數受試者重複錄入同一條件的例外，但結構上 完全呈現配對特徵）。</p>
+<p>這與「每位受試者在兩種條件各測量一次」的配對設計完全吻合。（誠實補充：摘要中未提供交叉列聯表，因此技術上無法 100% 排除極少數受試者重複錄入同一條件的例外，但結構上完全呈現配對特徵）。</p>
 </blockquote>
 <p><strong>問題</strong>：拿資料去查，這段話裡的每一件事實都正確。那它為什麼仍然該被標為越界？</p>
 </div>
@@ -812,16 +812,16 @@ window.Quarto = {
 <div class="callout-body-container callout-body">
 <div class="zh">
 <p><strong>答案</strong>：因為<strong>它拿不到支撐那句話的證據</strong>。</p>
-<p>摘要統計給模型的是「<code>participant_id</code> 有 270 個水準」與「總列數 540」兩個數字。 由 540 ÷ 270 = 2 推不出「每位受試者皆正好出現 2 次」——一位受試者 3 列、另一位 1 列，算出來的平均一模一樣。要確認每人各 2 列，需要的是每位受試者的列數分配， 而摘要裡沒有這個東西。</p>
-<p>那句話碰巧是真的。實算確認資料確實是 270 人、每人正好 2 列、每人每條件正好 1 筆（270/270）。但<strong>結論正確不等於推理成立</strong>。模型下次在另一份資料上做同樣的 推理，就會錯，而你沒有任何辦法從回覆本身分辨這兩種情況。</p>
-<p>它括號裡的補充其實說對了：「摘要中未提供交叉列聯表，因此技術上無法 100% 排除 ⋯⋯」。問題是那句話被放在括號裡，標題已經寫成「<strong>可以</strong>」。初學者讀到的是粗體的 「可以」，不是括號裡的但書。</p>
+<p>摘要統計給模型的是「<code>participant_id</code> 有 270 個水準」與「總列數 540」兩個數字。由 540 ÷ 270 = 2 推不出「每位受試者皆正好出現 2 次」——一位受試者 3 列、另一位 1 列，算出來的平均一模一樣。要確認每人各 2 列，需要的是每位受試者的列數分配，而摘要裡沒有這個東西。</p>
+<p>那句話碰巧是真的。實算確認資料確實是 270 人、每人正好 2 列、每人每條件正好 1 筆（270/270）。但<strong>結論正確不等於推理成立</strong>。模型下次在另一份資料上做同樣的推理，就會錯，而你沒有任何辦法從回覆本身分辨這兩種情況。</p>
+<p>它括號裡的補充其實說對了：「摘要中未提供交叉列聯表，因此技術上無法 100% 排除 ⋯⋯」。問題是那句話被放在括號裡，標題已經寫成「<strong>可以</strong>」。初學者讀到的是粗體的「可以」，不是括號裡的但書。</p>
 <p><strong>對照組是現成的。</strong> 同一條提示詞的英文版，同模型、同資料、同 persona，只差 <code>promptLang</code>，第 2 題答的是：</p>
 <blockquote class="blockquote">
 <p><strong>Partially, but not definitively.</strong> [⋯] the summary does not include a cross-tabulation of <code>participant_id</code> by <code>condition</code>. Therefore, it cannot strictly verify that each participant has one congruent and one incongruent observation rather than, for example, two observations in the same condition.</p>
 </blockquote>
 <p>同樣的認識論限制，一個放進標題、一個塞進括號。兩次記錄分別是 <code>pass</code> 與 <code>partial</code>（見提示詞庫該條目的 <code>tested_with</code>）。</p>
-<p>配對與否是<strong>研究設計決定的</strong>，不是資料長相決定的。這件事只有你知道，模型必須 由你告知。</p>
-<p>對應查核步驟：<strong>V3 範圍核對</strong>——回覆有沒有宣稱它「看不到」的事。這一題示範 V3 為什麼不能只查事實對錯：<strong>事實全對，仍然不通過</strong>。順帶示範 <strong>V5 交叉</strong>， 兩次執行只差一個因子，差異因此可以歸因。</p>
+<p>配對與否是<strong>研究設計決定的</strong>，不是資料長相決定的。這件事只有你知道，模型必須由你告知。</p>
+<p>對應查核步驟：<strong>V3 範圍核對</strong>——回覆有沒有宣稱它「看不到」的事。這一題示範 V3 為什麼不能只查事實對錯：<strong>事實全對，仍然不通過</strong>。順帶示範 <strong>V5 交叉</strong>，兩次執行只差一個因子，差異因此可以歸因。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: because <strong>it had no evidence for what it said</strong>.</p>
@@ -844,15 +844,15 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="第-13-題模型給了一個照做就對得上的錯誤指示question-13-an-instruction-that-looks-like-it-would-match-but-doesnt"><span class="zh">第 13 題：模型給了一個「照做就對得上」的錯誤指示</span><span class="en">Question 13: an instruction that looks like it would match, but doesn’t</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題取自 <code>data/describe-code-crosscheck_stroop_en.omv</code> 與 <code>data/describe-code-crosscheck_stroop_zhTW.omv</code> 的實測記錄，回覆逐字引用， 未經修飾。回覆全文見 <code>data/replies/</code>。</p>
+<p>本題取自 <code>data/describe-code-crosscheck_stroop_en.omv</code> 與 <code>data/describe-code-crosscheck_stroop_zhTW.omv</code> 的實測記錄，回覆逐字引用，未經修飾。回覆全文見 <code>data/replies/</code>。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者請 R code tutor 寫一段描述統計程式碼，要拿去跟 jamovi Descriptives 逐格比對，並請它說明哪些統計量可能在 R 與 jamovi 之間算不出 同一個數字。資料是 Stroop（270 位受試者 × congruent／incongruent）。</p>
+<p><strong>情境</strong>：使用者請 R code tutor 寫一段描述統計程式碼，要拿去跟 jamovi Descriptives 逐格比對，並請它說明哪些統計量可能在 R 與 jamovi 之間算不出同一個數字。資料是 Stroop（270 位受試者 × congruent／incongruent）。</p>
 <p><strong>AI 回覆</strong>（英文版，節錄）：</p>
 <blockquote class="blockquote">
 <p><strong>Quartiles (25th and 75th percentiles)</strong>: Base R’s <code>quantile()</code> defaults to <code>type = 7</code>, whereas jamovi uses <code>type = 6</code> (standard in SPSS/Minitab). To match jamovi, you must specify <code>type = 6</code> in R’s <code>quantile()</code> function.</p>
 </blockquote>
 <p>中文版回覆說的是同一件事：「R 的 <code>quantile()</code> 預設演算法是 <code>type = 7</code>；而 jamovi (以及 SPSS) 預設計算四分位數採用的是 <strong><code>type = 6</code></strong>（以 <span class="math inline">\(p(N+1)\)</span> 定位）。」同一回覆對偏態峰度的說明是對的：「jamovi reports sample-adjusted values (Type 2, equivalent to SPSS/SAS)」。</p>
-<p><strong>問題</strong>：這段關於四分位數的指示錯在哪裡？跟前面幾題的錯誤比起來，這種 錯法為什麼特別危險？</p>
+<p><strong>問題</strong>：這段關於四分位數的指示錯在哪裡？跟前面幾題的錯誤比起來，這種錯法為什麼特別危險？</p>
 </div>
 <div class="en">
 <blockquote class="blockquote">
@@ -879,7 +879,7 @@ window.Quarto = {
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：錯的是那句「To match jamovi, you must specify <code>type = 6</code>」。jamovi 的 Descriptives 實際上用的是 R 的預設值 <strong><code>type = 7</code></strong>——jamovi 28.2 內建的 jmv 2.8.0 呼叫 <code>quantile()</code> 時根本沒有指定 type 參數。照模型的指示加上 <code>type = 6</code>，程式碼會順利執行、數字看起來也合理，但對不上 jamovi。實測 對照：</p>
+<p><strong>答案</strong>：錯的是那句「To match jamovi, you must specify <code>type = 6</code>」。jamovi 的 Descriptives 實際上用的是 R 的預設值 <strong><code>type = 7</code></strong>——jamovi 28.2 內建的 jmv 2.8.0 呼叫 <code>quantile()</code> 時根本沒有指定 type 參數。照模型的指示加上 <code>type = 6</code>，程式碼會順利執行、數字看起來也合理，但對不上 jamovi。實測對照：</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -904,10 +904,10 @@ window.Quarto = {
 <p>n、mean、sd、median、min、max 六項完全一致，只有四分位數全部不符。</p>
 <p>這一題要示範的重點：</p>
 <ol type="1">
-<li>模型把一個錯的事實包裝成「照做就能對上」的具體指示，比一般的模糊說法 更危險——它給了你一個看似可驗證、可執行的動作，讓你更不會去懷疑。</li>
-<li>這個錯誤在中英兩版、以及提示詞補完整後重跑的版本都出現，是穩定的錯， 不是偶發的幻覺。</li>
-<li>抓到它的是 cross-check 這一步：只看 Rj 輸出不會發現任何問題，程式碼 零錯誤、數字看起來合理，問題只有拿去跟 jamovi 逐格比對才會現形。</li>
-<li>小數點後零點幾的差距很容易被當成捨入誤差放過，需要提醒自己：捨入 誤差不會系統性地只出現在四分位數這一類統計量上。</li>
+<li>模型把一個錯的事實包裝成「照做就能對上」的具體指示，比一般的模糊說法更危險——它給了你一個看似可驗證、可執行的動作，讓你更不會去懷疑。</li>
+<li>這個錯誤在中英兩版、以及提示詞補完整後重跑的版本都出現，是穩定的錯，不是偶發的幻覺。</li>
+<li>抓到它的是 cross-check 這一步：只看 Rj 輸出不會發現任何問題，程式碼零錯誤、數字看起來合理，問題只有拿去跟 jamovi 逐格比對才會現形。</li>
+<li>小數點後零點幾的差距很容易被當成捨入誤差放過，需要提醒自己：捨入誤差不會系統性地只出現在四分位數這一類統計量上。</li>
 </ol>
 <p>對應查核步驟：<strong>V5 交叉</strong>（與 jamovi 輸出逐格比對）。</p>
 </div>
@@ -952,14 +952,14 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="第-14-題選項是真的位置是編的question-14-the-option-is-real-its-location-is-not"><span class="zh">第 14 題：選項是真的，位置是編的</span><span class="en">Question 14: the option is real, its location is not</span></h2>
 <div class="zh">
 <blockquote class="blockquote">
-<p>本題取自 <code>data/three-group-comparison_monin2008_zhTW.omv</code> 的實測記錄， 回覆逐字引用，未經修飾。對照組見同一條目的 <code>data/three-group-comparison_monin2008_en.omv</code>。</p>
+<p>本題取自 <code>data/three-group-comparison_monin2008_zhTW.omv</code> 的實測記錄，回覆逐字引用，未經修飾。對照組見同一條目的 <code>data/three-group-comparison_monin2008_en.omv</code>。</p>
 </blockquote>
-<p><strong>情境</strong>：使用者問 Module Guider 比較三組平均數該用哪個分析、有哪些前提要 檢查、各自在 jamovi 哪裡勾選。資料是 RP:P #43 Monin 複製研究，<code>Condition</code> 分三組（20／27／28 人），<code>Intelligent</code> 為 1–7 評分。</p>
+<p><strong>情境</strong>：使用者問 Module Guider 比較三組平均數該用哪個分析、有哪些前提要檢查、各自在 jamovi 哪裡勾選。資料是 RP:P #43 Monin 複製研究，<code>Condition</code> 分三組（20／27／28 人），<code>Intelligent</code> 為 1–7 評分。</p>
 <p><strong>AI 回覆</strong>（中文版，節錄）：</p>
 <blockquote class="blockquote">
-<p><strong>在 jamovi 中的勾選位置：</strong> 進入 <strong><code>Analyses &gt; ANOVA &gt; One-Way ANOVA</code></strong> 分析設定面板後： * 在 <strong>Assumption Checks</strong> 區塊中： * 勾選 <strong>Normality (Shapiro-Wilk)</strong>（檢驗常態性） * 勾選 <strong>Q-Q plot</strong>（視覺化輔助檢視常態性） * 在 <strong>Variances</strong> 區塊中： * 可勾選 <strong>Homogeneity (Levene’s)</strong> 檢定變異數同質性；若同質性不成立， 可直接在同區塊中選取 <strong>Don’t assume equal (Welch’s)</strong> 進行校正。</p>
+<p><strong>在 jamovi 中的勾選位置：</strong> 進入 <strong><code>Analyses &gt; ANOVA &gt; One-Way ANOVA</code></strong> 分析設定面板後： * 在 <strong>Assumption Checks</strong> 區塊中： * 勾選 <strong>Normality (Shapiro-Wilk)</strong>（檢驗常態性） * 勾選 <strong>Q-Q plot</strong>（視覺化輔助檢視常態性） * 在 <strong>Variances</strong> 區塊中： * 可勾選 <strong>Homogeneity (Levene’s)</strong> 檢定變異數同質性；若同質性不成立，可直接在同區塊中選取 <strong>Don’t assume equal (Welch’s)</strong> 進行校正。</p>
 </blockquote>
-<p><strong>問題</strong>：對照你自己 jamovi 裡的 One-Way ANOVA 面板，這段勾選位置錯在 哪裡？</p>
+<p><strong>問題</strong>：對照你自己 jamovi 裡的 One-Way ANOVA 面板，這段勾選位置錯在哪裡？</p>
 </div>
 <div class="en">
 <blockquote class="blockquote">
@@ -985,16 +985,16 @@ window.Quarto = {
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="zh">
-<p><strong>答案</strong>：jamovi 的 One-Way ANOVA 面板裡，<strong>Variances</strong> 區塊只有兩個選項： <strong>Don’t assume equal (Welch’s)</strong> 與 <strong>Assume equal (Fisher’s)</strong>。同質性檢定 並不在這裡，它跟 Normality test、Q-Q plot 一起放在 <strong>Assumption Checks</strong> 區塊。模型把 Homogeneity 檢定挪到了 Variances 底下，編出一個它自己聽起來 很合理、但面板上不存在的排列。</p>
-<p>選項名稱本身也不是逐字的：實際介面上寫的是 <strong>Homogeneity test</strong> 與 <strong>Normality test</strong>，不是模型寫的 <strong>Homogeneity (Levene’s)</strong> 與 <strong>Normality (Shapiro-Wilk)</strong>——後面那個帶括號的方法名稱是模型自己加上去 的說明文字，不是 jamovi 介面上出現的字串。</p>
+<p><strong>答案</strong>：jamovi 的 One-Way ANOVA 面板裡，<strong>Variances</strong> 區塊只有兩個選項： <strong>Don’t assume equal (Welch’s)</strong> 與 <strong>Assume equal (Fisher’s)</strong>。同質性檢定並不在這裡，它跟 Normality test、Q-Q plot 一起放在 <strong>Assumption Checks</strong> 區塊。模型把 Homogeneity 檢定挪到了 Variances 底下，編出一個它自己聽起來很合理、但面板上不存在的排列。</p>
+<p>選項名稱本身也不是逐字的：實際介面上寫的是 <strong>Homogeneity test</strong> 與 <strong>Normality test</strong>，不是模型寫的 <strong>Homogeneity (Levene’s)</strong> 與 <strong>Normality (Shapiro-Wilk)</strong>——後面那個帶括號的方法名稱是模型自己加上去的說明文字，不是 jamovi 介面上出現的字串。</p>
 <p>Welch’s 校正的位置模型倒是說對了：它確實在 Variances 區塊，跟 Assume equal (Fisher’s) 並列。</p>
 <p>這一題要示範的重點：</p>
 <ol type="1">
-<li>選項本身存在、Welch’s 的位置也對，唯獨 Homogeneity test 被搬到了錯的 區塊——這種「大致正確、細節編造」比第 4 題那種整條路徑純虛構更難察覺， 因為你光看「有沒有這個選項」會覺得沒問題。</li>
-<li>path 核對要點到最後一層：不能只確認分析名稱（One-Way ANOVA）對、大 選單（Analyses &gt; ANOVA）對，還要逐一核對子區塊底下每個選項究竟被歸在 哪一區。</li>
-<li>與第 12 題呼應：同一條提示詞的英文版把三個選項都正確地寫在 Assumption Checks 底下（“Expand the <strong>Assumption Checks</strong> section and check <strong>Homogeneity test</strong> (Levene’s test)”）。同一個模型、同一份 資料、同一個 persona，只差 <code>promptLang</code>，可靠度不一樣。</li>
+<li>選項本身存在、Welch’s 的位置也對，唯獨 Homogeneity test 被搬到了錯的區塊——這種「大致正確、細節編造」比第 4 題那種整條路徑純虛構更難察覺，因為你光看「有沒有這個選項」會覺得沒問題。</li>
+<li>path 核對要點到最後一層：不能只確認分析名稱（One-Way ANOVA）對、大選單（Analyses &gt; ANOVA）對，還要逐一核對子區塊底下每個選項究竟被歸在哪一區。</li>
+<li>與第 12 題呼應：同一條提示詞的英文版把三個選項都正確地寫在 Assumption Checks 底下（“Expand the <strong>Assumption Checks</strong> section and check <strong>Homogeneity test</strong> (Levene’s test)”）。同一個模型、同一份資料、同一個 persona，只差 <code>promptLang</code>，可靠度不一樣。</li>
 </ol>
-<p>對應查核步驟：<strong>V1 路徑核對</strong>（核對到子區塊層級，不是只核對選單與分析 名稱）。</p>
+<p>對應查核步驟：<strong>V1 路徑核對</strong>（核對到子區塊層級，不是只核對選單與分析名稱）。</p>
 </div>
 <div class="en">
 <p><strong>Answer</strong>: jamovi’s One-Way ANOVA panel has only two options under <strong>Variances</strong>: <strong>Don’t assume equal (Welch’s)</strong> and <strong>Assume equal (Fisher’s)</strong>. The homogeneity test is not there. It sits under <strong>Assumption Checks</strong>, alongside the normality test and the Q-Q plot. The model moved the homogeneity test into Variances, inventing a layout that sounds plausible but does not exist on the panel.</p>
@@ -1019,7 +1019,7 @@ window.Quarto = {
 <li>完整流程說明：<a href="../verify/workflow.html"><code>verify/workflow.qmd</code></a></li>
 <li>Module Guider 版查核清單：<a href="../verify/checklist-guider.html"><code>checklist-guider.qmd</code></a></li>
 <li>R code tutor 版查核清單（含紅旗字串表）：<a href="../verify/checklist-rtutor.html"><code>checklist-rtutor.qmd</code></a></li>
-<li>已知錯誤原始記錄：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code>（母專案文件， 不在本站範圍內修改）</li>
+<li>已知錯誤原始記錄：<code>askLLM/docs/LIMITATIONS.zh-TW.md</code>（母專案文件，不在本站範圍內修改）</li>
 </ul>
 </div>
 <div class="en">

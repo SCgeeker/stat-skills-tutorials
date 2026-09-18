@@ -67,6 +67,11 @@ format:
     theme: cosmo
     toc: true
     lang: zh-TW
+    # 中文段落內的換行不轉成空格：刪除兩個東亞全形字元之間的軟換行。
+    # 英文段落的換行照常變成空格。Quarto 不會套用 from: markdown+east_asian_line_breaks，
+    # 所以用篩選器達成同樣效果，說明見 _filters/cjk-softbreak.lua。
+    filters:
+      - _filters/cjk-softbreak.lua
     # 語言切換：單一站台同時含中英內容，由 assets/lang.css + _includes 控制
     # 顯示哪一語言。內容頁以 ::: {.zh} / ::: {.en} 標記。
     css:

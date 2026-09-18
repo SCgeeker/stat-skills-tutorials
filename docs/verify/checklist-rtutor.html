@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This is the second of the two verification checklists on this site. It covers steps P0–P1, V2–V4, V5, and C1–C2 of the workflow in <code>verify/workflow.qmd</code>, laid out as a single printable page. Use it when you asked the <strong>R code tutor</strong> (<code>askllmr</code>) for R code. If you used the Module Guider (<code>askllm</code>) instead, use <code>checklist-guider.qmd</code>.</p>
 </div>
 <div class="zh">
-<p>與 <code>checklist-guider.qmd</code> 最大的差異在於：R code tutor 的答案空間不是有限 集合（不像選單路徑可以逐條核對），R 是 Turing-complete，沒有任何掃描能證明 一段任意生成的程式碼「如它所說地運作」。所以這裡沒有 V1 路徑核對，取而代之 的是 <strong>V4 程式碼核對</strong>，拆成讀（4a）、跑（4b）、對（4c）三段——這是流程性 的查核，不是機械性的查核。詳見 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈兩個分析， 兩種查證方式〉一節。</p>
+<p>與 <code>checklist-guider.qmd</code> 最大的差異在於：R code tutor 的答案空間不是有限集合（不像選單路徑可以逐條核對），R 是 Turing-complete，沒有任何掃描能證明一段任意生成的程式碼「如它所說地運作」。所以這裡沒有 V1 路徑核對，取而代之的是 <strong>V4 程式碼核對</strong>，拆成讀（4a）、跑（4b）、對（4c）三段——這是流程性的查核，不是機械性的查核。詳見 <code>askLLM/docs/LIMITATIONS.zh-TW.md</code>〈兩個分析，兩種查證方式〉一節。</p>
 </div>
 <div class="en">
 <p>The key difference from <code>checklist-guider.qmd</code> is that the R code tutor’s output space is not a finite, checkable set the way menu paths are. R is Turing-complete, so no scan can prove that an arbitrary piece of generated code actually “works as claimed.” So there is no V1 path check here. Its place is taken by <strong>V4, the code check</strong>, split into read (4a), run (4b), and cross-check (4c). This is a procedural check, not a mechanical one. See the “Two analyses, two ways to verify” section of <code>askLLM/docs/LIMITATIONS.zh-TW.md</code> for background.</p>
@@ -233,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="zh">
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>P0</strong> 我已經寫下「我會接受什麼答案」（例如：程式碼必須只用 <code>data</code> 這個物件名稱、必須產出我要的統計量、不得需要我自己補檔案路徑）。</label></li>
-<li><label><input type="checkbox"><strong>P1</strong> 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數）， 這些數字之後要拿來跟程式碼的輸出核對。</label></li>
+<li><label><input type="checkbox"><strong>P1</strong> 我已經記下摘要裡的關鍵數字（每一組的 n、mean、sd、遺漏數），這些數字之後要拿來跟程式碼的輸出核對。</label></li>
 </ul>
 </div>
 <div class="en">
@@ -248,11 +248,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="zh">
 <ul class="task-list">
 <li><label><input type="checkbox"><strong>V2 數字核對</strong> — 執行後的輸出數字（n、mean、sd 等），跟我在 P1 記下的、以及在 Descriptives 面板看到的一致。</label></li>
-<li><label><input type="checkbox"><strong>V3 範圍核對</strong> — 回覆有沒有宣稱它「看不到」的東西（例如常態性、離 群值、原始資料列的內容）？如果有，這是「越界」，代表回覆超出摘要統計 能支持的範圍，應打折扣看待。</label></li>
+<li><label><input type="checkbox"><strong>V3 範圍核對</strong> — 回覆有沒有宣稱它「看不到」的東西（例如常態性、離群值、原始資料列的內容）？如果有，這是「越界」，代表回覆超出摘要統計能支持的範圍，應打折扣看待。</label></li>
 <li><label><input type="checkbox"><strong>V4a 讀</strong> — 逐行讀完整段程式碼，確認： - 資料只用 <code>data</code> 這個物件名稱，沒有另外指定其他資料來源； - 每一個 <code>library(...)</code> 引用的套件，都出現在 askLLM 附給模型的 <code>&lt;rj_environment&gt;</code> 套件清單內，或屬於 base R； - 沒有出現「紅旗指令」（見下方紅旗字串表）。 <strong>只要有一項沒通過，就先不要執行</strong>，回頭修改問題或換一個 persona 再問一次。</label></li>
-<li><label><input type="checkbox"><strong>V4b 跑</strong> — 把程式碼<strong>原封不動</strong>貼進 Rj Editor（<code>Analyses ▸ R ▸     Rj ▸ Rj Editor</code>），按下 Run，把輸出或錯誤訊息原文記下來（成功的輸出 與失敗的錯誤訊息都要記，不要只記成功的）。</label></li>
-<li><label><input type="checkbox"><strong>V4c 對</strong> — 用另一個獨立管道重跑同一個分析，比較關鍵數字是否一致： 改用 jamovi GUI 對應的分析模組跑一次；或在該分析的 Syntax Mode 中查看 jamovi 自己產生的 <code>jmv::</code> 呼叫，作為第二層獨立對照。</label></li>
-<li><label><input type="checkbox"><strong>V5 交叉核對</strong> — 換一個 persona（Consultant / Tutor / Explainer） 或換一個模型，針對同一個 <code>What should the R code do?</code> 問題再問一次； 兩次程式碼的邏輯與輸出是否一致？（V4a／V4b 仍須對第二份程式碼各自 重跑一次，不能因為兩次都「看起來合理」就省略讀碼與執行。）</label></li>
+<li><label><input type="checkbox"><strong>V4b 跑</strong> — 把程式碼<strong>原封不動</strong>貼進 Rj Editor（<code>Analyses ▸ R ▸     Rj ▸ Rj Editor</code>），按下 Run，把輸出或錯誤訊息原文記下來（成功的輸出與失敗的錯誤訊息都要記，不要只記成功的）。</label></li>
+<li><label><input type="checkbox"><strong>V4c 對</strong> — 用另一個獨立管道重跑同一個分析，比較關鍵數字是否一致：改用 jamovi GUI 對應的分析模組跑一次；或在該分析的 Syntax Mode 中查看 jamovi 自己產生的 <code>jmv::</code> 呼叫，作為第二層獨立對照。</label></li>
+<li><label><input type="checkbox"><strong>V5 交叉核對</strong> — 換一個 persona（Consultant / Tutor / Explainer）或換一個模型，針對同一個 <code>What should the R code do?</code> 問題再問一次；兩次程式碼的邏輯與輸出是否一致？（V4a／V4b 仍須對第二份程式碼各自重跑一次，不能因為兩次都「看起來合理」就省略讀碼與執行。）</label></li>
 </ul>
 </div>
 <div class="en">
@@ -284,7 +284,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a" class="level2">
 <h2 class="anchored" data-anchor-id="紅旗字串表4a-逐行核對用red-flag-string-table-for-v4a"><span class="zh">紅旗字串表（4a 逐行核對用）</span><span class="en">Red-flag string table (for V4a)</span></h2>
 <div class="zh">
-<p>askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令 （見 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行）。若程式碼裡出現任何一項，代表 回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：</p>
+<p>askLLM 的 system prompt 明文禁止模型在 R code tutor 的回覆裡使用下列指令（見 <code>askLLM/R/llm-adapter.R</code> 第 172–177 行）。若程式碼裡出現任何一項，代表回覆違反了 askLLM 自己設定的邊界，應標記為「不可執行」並回頭修改問題：</p>
 </div>
 <div class="en">
 <p>askLLM’s system prompt explicitly forbids the model from using the following in an R code tutor reply (see <code>askLLM/R/llm-adapter.R</code>, lines 172–177). If any of these appear in the code, the reply has violated askLLM’s own stated boundary. Flag it as “do not run” and go back and rephrase the question:</p>
@@ -329,7 +329,7 @@ ul.task-list li input[type="checkbox"] {
 </table>
 <div class="zh">
 <blockquote class="blockquote">
-<p>提醒：<code>&lt;rj_environment&gt;</code> 這個套件清單只有在你的 jamovi 裝有 Rj、且 askLLM 掃描到套件時才會附上。若你的 jamovi 沒裝 Rj，askLLM 會改教你 用 Syntax Mode，而不是硬生出一段你根本跑不了的程式碼；這種情況下本清單 的 4a／4b 步驟不適用，因為根本沒有 Rj Editor 可以貼上執行。</p>
+<p>提醒：<code>&lt;rj_environment&gt;</code> 這個套件清單只有在你的 jamovi 裝有 Rj、且 askLLM 掃描到套件時才會附上。若你的 jamovi 沒裝 Rj，askLLM 會改教你用 Syntax Mode，而不是硬生出一段你根本跑不了的程式碼；這種情況下本清單的 4a／4b 步驟不適用，因為根本沒有 Rj Editor 可以貼上執行。</p>
 </blockquote>
 </div>
 <div class="en">
