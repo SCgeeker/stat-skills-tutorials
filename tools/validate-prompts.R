@@ -28,6 +28,7 @@ suppressWarnings(suppressMessages({
 .CHECK_STEP_VALUES <- c("path", "number", "assumption", "code-read",
                          "code-run", "cross-check")
 .TESTED_RESULT_VALUES <- c("pass", "partial", "fail", "pending")
+.LINK_KIND_VALUES <- c("chapter", "dataset")
 
 # 輔助函式 --------------------------------------------------------------
 
@@ -217,6 +218,10 @@ validate_entry <- function(entry, expected_id = NULL) {
         if (.is_blank(l_i[[f]])) {
           errors <- c(errors, sprintf("links[%d].%s 不得為空", i, f))
         }
+      }
+      # kind（選填；缺省視同 chapter，供外部教材對照表分辨章節／資料集出處）
+      if (!is.null(l_i$kind) && !(l_i$kind %in% .LINK_KIND_VALUES)) {
+        errors <- c(errors, sprintf("links[%d].kind 非受控詞彙：%s", i, l_i$kind))
       }
     }
   }

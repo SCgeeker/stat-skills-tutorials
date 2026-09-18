@@ -95,7 +95,8 @@
       {
         "title": "psyteachr Analysis ch.6 Chi-square test of association (Ballou et al. 2024 dataset source)",
         "url": "https://psyteachr.github.io/analysis-v4/06-chi-square-one-sample.html",
-        "license": "CC BY 4.0"
+        "license": "CC BY 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -211,7 +212,8 @@
       {
         "title": "psyteachr Analysis ch.9 Correlation (dataset source)",
         "url": "https://psyteachr.github.io/analysis-v4/09-correlation.html",
-        "license": "CC BY 4.0"
+        "license": "CC BY 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -332,7 +334,8 @@
       {
         "title": "psyteachr Data Skills ch.2 Stroop (dataset source)",
         "url": "https://psyteachr.github.io/data-skills-v3/stroop.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -453,7 +456,8 @@
       {
         "title": "psyteachr Data Skills ch.2 Stroop (dataset source)",
         "url": "https://psyteachr.github.io/data-skills-v3/stroop.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -574,7 +578,8 @@
       {
         "title": "psyteachr Data Skills ch.2 Stroop (dataset source)",
         "url": "https://psyteachr.github.io/data-skills-v3/stroop.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -682,7 +687,8 @@
       {
         "title": "psyteachr quant-fun ch.11 Screening data",
         "url": "https://psyteachr.github.io/quant-fun-v3/11-screening-data.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -803,12 +809,14 @@
       {
         "title": "psyteachr quant-fun (wrangling / ANOVA)",
         "url": "https://psyteachr.github.io/quant-fun-v3/",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       },
       {
         "title": "psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule)",
         "url": "https://psyteachr.github.io/analysis-v4/13-factorial-anova.html",
-        "license": "CC BY 4.0"
+        "license": "CC BY 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -943,12 +951,14 @@
       {
         "title": "psyteachr Data Skills ch.2 Stroop (dataset source)",
         "url": "https://psyteachr.github.io/data-skills-v3/stroop.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       },
       {
         "title": "lsj-book ch.11 Comparing two means",
         "url": "https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -1074,7 +1084,8 @@
       {
         "title": "OSF RP:P #44 Payne et al. (2008) replication data (Reproducibility Project: Psychology dataset source)",
         "url": "https://osf.io/rc6mv/",
-        "license": "CC0 1.0"
+        "license": "CC0 1.0",
+        "kind": "dataset"
       }
     ],
     "tested_with": [
@@ -1200,7 +1211,8 @@
       {
         "title": "RP:P #44 Payne et al. 2008 replication data (OSF)",
         "url": "https://osf.io/rc6mv/",
-        "license": "CC0 1.0"
+        "license": "CC0 1.0",
+        "kind": "dataset"
       }
     ],
     "tested_with": [
@@ -1316,12 +1328,14 @@
       {
         "title": "RP:P #43 Monin et al. 2008 replication data (OSF)",
         "url": "https://osf.io/pz0my/",
-        "license": "CC0 1.0"
+        "license": "CC0 1.0",
+        "kind": "dataset"
       },
       {
         "title": "lsj-book ch.13 Comparing several means: one-way ANOVA (includes post-hoc tests)",
         "url": "https://davidfoxcroft.github.io/lsj-book/13-Comparing-several-means-one-way-ANOVA.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [
@@ -1437,12 +1451,14 @@
       {
         "title": "lsj-book ch.11 Comparing two means",
         "url": "https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html",
-        "license": "CC BY-SA 4.0"
+        "license": "CC BY-SA 4.0",
+        "kind": "chapter"
       },
       {
         "title": "psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)",
         "url": "https://psyteachr.github.io/analysis-v4/07-independent.html",
-        "license": "CC BY 4.0"
+        "license": "CC BY 4.0",
+        "kind": "chapter"
       }
     ],
     "tested_with": [

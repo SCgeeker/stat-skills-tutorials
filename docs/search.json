@@ -455,18 +455,40 @@
     "href": "external/reading-map.html",
     "title": "External Reading Map",
     "section": "",
-    "text": "The mapping table below is not built yet. What is here today is the list of source textbooks and their licences.",
+    "text": "This page maps your situation to the matching chapter in a verified external textbook. Your situation is defined by stat_goal and design, using the same controlled vocabulary as the prompt-library schema in prompts/_schema.yaml. Each link carries its own licence. The table below is generated automatically from the links field of each prompt-library entry (prompts/entries/*.yaml), so the mapping stays maintained in one place. For the full content of an entry, see the Prompt library.",
     "crumbs": [
       "外部教材導讀 / Reading Map",
       "External Reading Map"
     ]
   },
   {
-    "objectID": "external/reading-map.html#what-this-page-will-contain",
-    "href": "external/reading-map.html#what-this-page-will-contain",
+    "objectID": "external/reading-map.html#where-to-read",
+    "href": "external/reading-map.html#where-to-read",
     "title": "External Reading Map",
-    "section": "What this page will contain",
-    "text": "What this page will contain\nA single table will map “your situation” to the matching chapter in one of the seven verified external textbooks. Your situation is defined by stat_goal and design, using the same controlled vocabulary as the prompt-library schema in prompts/_schema.yaml. Each row carries its own license tag:\n\n\n\nTextbook\nLicense\n\n\n\n\npsyteachr data-skills\nCC BY-SA 4.0\n\n\npsyteachr analysis\nCC BY 4.0\n\n\npsyteachr stat-models\nCC BY-SA 4.0\n\n\npsyteachr quant-fun\nCC BY-SA 4.0\n\n\npsyteachr reprores\nCC BY\n\n\nlsj-book (Foxcroft / Navarro)\nCC BY-SA 4.0\n\n\nbradduthie/stats\nCC BY-NC-SA 4.0 (link only, no excerpting)\n\n\n\nThis page is English-only. The source textbooks are all in English. Its table will be generated from the links field of each prompt-library entry (prompts/entries/*.yaml), so the mapping stays maintained in one place. That generation step is not built yet, so this page currently carries only the source list above.",
+    "section": "Where to read",
+    "text": "Where to read\n\n\n\nGoal\nDesign\nWhere to read\nPrompt entries\n\n\n\n\nScreen data before analysis\nNo grouping design\npsyteachr quant-fun ch.11 Screening data · CC BY-SA 4.0\nmissing-data-triage\n\n\nDescribe variables\nWithin-subjects\npsyteachr Data Skills ch.2 Stroop (dataset source) · CC BY-SA 4.0\ndescribe-code-crosscheck, describe-first-look\n\n\nCompare two groups or conditions\nBetween-subjects\nlsj-book ch.11 Comparing two means · CC BY-SA 4.0psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch) · CC BY 4.0\nttest-assumptions\n\n\nCompare two groups or conditions\nWithin-subjects\npsyteachr Data Skills ch.2 Stroop (dataset source) · CC BY-SA 4.0lsj-book ch.11 Comparing two means · CC BY-SA 4.0\nlong-to-wide-check, paired-vs-independent\n\n\nCompare three or more groups\nBetween-subjects\nlsj-book ch.13 Comparing several means: one-way ANOVA (includes post-hoc tests) · CC BY-SA 4.0\nthree-group-comparison\n\n\nCompare three or more groups\nMixed (between and within)\npsyteachr quant-fun (wrangling / ANOVA) · CC BY-SA 4.0psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule) · CC BY 4.0\nmixed-anova-setup\n\n\nRelate two variables\nNo grouping design\npsyteachr Analysis ch.6 Chi-square test of association (Ballou et al. 2024 dataset source) · CC BY 4.0psyteachr Analysis ch.9 Correlation (dataset source) · CC BY 4.0\ncontingency-association, correlation-choice\n\n\nPredict an outcome\nNo grouping design\nNo chapter linked yet\nregression-code-check, regression-predictors",
+    "crumbs": [
+      "外部教材導讀 / Reading Map",
+      "External Reading Map"
+    ]
+  },
+  {
+    "objectID": "external/reading-map.html#datasets-used-in-the-prompt-library",
+    "href": "external/reading-map.html#datasets-used-in-the-prompt-library",
+    "title": "External Reading Map",
+    "section": "Datasets used in the prompt library",
+    "text": "Datasets used in the prompt library\n\n\n\nDataset\nLicense\nUsed by\n\n\n\n\nOSF RP:P #44 Payne et al. (2008) replication data (Reproducibility Project: Psychology dataset source)\nCC0 1.0\nregression-code-check, regression-predictors\n\n\nRP:P #43 Monin et al. 2008 replication data (OSF)\nCC0 1.0\nthree-group-comparison",
+    "crumbs": [
+      "外部教材導讀 / Reading Map",
+      "External Reading Map"
+    ]
+  },
+  {
+    "objectID": "external/reading-map.html#source-textbooks-and-licences",
+    "href": "external/reading-map.html#source-textbooks-and-licences",
+    "title": "External Reading Map",
+    "section": "Source textbooks and licences",
+    "text": "Source textbooks and licences\n\n\n\nTextbook\nLicense\n\n\n\n\npsyteachr data-skills\nCC BY-SA 4.0\n\n\npsyteachr analysis\nCC BY 4.0\n\n\npsyteachr stat-models\nCC BY-SA 4.0\n\n\npsyteachr quant-fun\nCC BY-SA 4.0\n\n\npsyteachr reprores\nCC BY\n\n\nlsj-book (Foxcroft / Navarro)\nCC BY-SA 4.0\n\n\nbradduthie/stats\nCC BY-NC-SA 4.0 (link only, no excerpting)\n\n\n\nThis page is English-only. The source textbooks are all in English. bradduthie/stats is linked only, never excerpted. Its NonCommercial licence is incompatible with this site’s CC BY-SA licence, so mixing its text in would leave the site’s licensing unclear.",
     "crumbs": [
       "外部教材導讀 / Reading Map",
       "External Reading Map"

@@ -70,7 +70,7 @@ stop_criteria:
     zh: 回覆宣稱看得出分布形狀或指認了特定觀察值 → 記為越界，換 consultant persona 重問一次比對
     en: The reply claims to see the distribution shape or names a specific observation -> record it as overreaching and ask again with the consultant persona to compare.
 links:
-  - {title: "psyteachr Data Skills ch.2 Stroop (dataset source)", url: "https://psyteachr.github.io/data-skills-v3/stroop.html", license: "CC BY-SA 4.0"}
+  - {title: "psyteachr Data Skills ch.2 Stroop (dataset source)", url: "https://psyteachr.github.io/data-skills-v3/stroop.html", license: "CC BY-SA 4.0", kind: chapter}
 tested_with:
   - {date: 2026-09-16, provider: gemini, model: gemini-flash-latest, result: pass, note: "zh 版，persona=explainer，promptLang=zh，證據 data/describe-first-look_stroop_zhTW.omv、回覆副本 data/replies/describe-first-look_stroop_zhTW.md。expected 4/4：路徑 Analyses > Exploration > Descriptives 並指明 Split by；答「無法完全確定」分布形狀並要求自畫 Histogram 與看 Skewness/Kurtosis；點出四件摘要看不到的事，第一件正是「無法確認每人是否各 1 筆 congruent/incongruent」；全程未宣稱檢視過原始資料。check 三項齊備：path 比對本機 jmv/jamovi.yaml 逐字相符；number 817.7 / 811 / 418.9 / 1359 / 270 人 / 540 列 與 R 實算 817.7276 / 811.0353 / 418.9321 / 1358.5688 相符；assumption 已畫直方圖（08 descriptives/resources 內），回覆只給「大致對稱」的弱推論，與全體偏態 0.312 相容。"}
   - {date: 2026-09-16, provider: gemini, model: gemini-flash-latest, result: pass, note: "en 版，persona=explainer，promptLang 未設（en 預設），證據 data/describe-first-look_stroop_en.omv、回覆副本 data/replies/describe-first-look_stroop_en.md。expected 4/4，同 zh 版四項全中。此版在第 2 題更進一步：由 max 離 median 比 min 遠推出 possible slight right skew，並主動指出摘要看不出雙峰。R 實算全體偏態 0.312，該推論成立；分組後偏態僅 −0.077 與 −0.008，全體的右偏其實來自兩組平均數相差 147ms 的疊加。check 三項同 zh 版，另畫了第二張圖。"}

@@ -70,8 +70,8 @@ stop_criteria:
     zh: 程式碼有語法錯誤、列數不對、或用了環境沒有的套件 → 把錯誤訊息貼回、換 consultant 要完整版
     en: The code has a syntax error, the row count is wrong, or it uses a package not available in the environment -> paste the error message back and ask the consultant persona for the full solution.
 links:
-  - {title: "psyteachr quant-fun (wrangling / ANOVA)", url: "https://psyteachr.github.io/quant-fun-v3/", license: "CC BY-SA 4.0"}
-  - {title: "psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule)", url: "https://psyteachr.github.io/analysis-v4/13-factorial-anova.html", license: "CC BY 4.0"}
+  - {title: "psyteachr quant-fun (wrangling / ANOVA)", url: "https://psyteachr.github.io/quant-fun-v3/", license: "CC BY-SA 4.0", kind: chapter}
+  - {title: "psyteachr analysis ch.13 Factorial ANOVA (Zhang et al. 2014 time capsule)", url: "https://psyteachr.github.io/analysis-v4/13-factorial-anova.html", license: "CC BY 4.0", kind: chapter}
 tested_with:
   - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: fail, note: "【修正前的提示詞】zh 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_zhTW.omv。code-run 失敗：貼進 Rj 得 <text>:23:1: unexpected symbol。根因是當時的提示詞要求「只給程式骨架與 TODO 註解」，模型因此把註解寫進 c() 括號內（cols = c(# TODO: ...)），R 的 # 吃掉整行剩餘內容連同右括號，運算式無法收尾。code-read 無紅旗：library(tidyverse) 確實存在於本機 Rj 套件庫。"}
   - {date: 2026-09-08, provider: gemini, model: gemini-flash-latest, result: fail, note: "【修正前的提示詞】en 版，證據 data/mixed-anova-setup_zhang2014_v1_fail_en.omv。同一根因，錯誤位置 <text>:21:1，另有 table(data_long$# TODO: ...)。此失效模式可重現，已列為 spot-the-error 題材。"}

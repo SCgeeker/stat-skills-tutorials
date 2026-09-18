@@ -168,7 +168,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">本頁目錄</h2>
    
   <ul>
-  <li><a href="#what-this-page-will-contain" id="toc-what-this-page-will-contain" class="nav-link active" data-scroll-target="#what-this-page-will-contain">What this page will contain</a></li>
+  <li><a href="#where-to-read" id="toc-where-to-read" class="nav-link active" data-scroll-target="#where-to-read">Where to read</a></li>
+  <li><a href="#datasets-used-in-the-prompt-library" id="toc-datasets-used-in-the-prompt-library" class="nav-link" data-scroll-target="#datasets-used-in-the-prompt-library">Datasets used in the prompt library</a></li>
+  <li><a href="#source-textbooks-and-licences" id="toc-source-textbooks-and-licences" class="nav-link" data-scroll-target="#source-textbooks-and-licences">Source textbooks and licences</a></li>
   </ul>
 </nav>
     </div>
@@ -194,12 +196,96 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<p>The mapping table below is not built yet. What is here today is the list of source textbooks and their licences.</p>
-</blockquote>
-<section id="what-this-page-will-contain" class="level2">
-<h2 class="anchored" data-anchor-id="what-this-page-will-contain">What this page will contain</h2>
-<p>A single table will map “your situation” to the matching chapter in one of the seven verified external textbooks. Your situation is defined by <code>stat_goal</code> and <code>design</code>, using the same controlled vocabulary as the prompt-library schema in <code>prompts/_schema.yaml</code>. Each row carries its own license tag:</p>
+<p>This page maps your situation to the matching chapter in a verified external textbook. Your situation is defined by <code>stat_goal</code> and <code>design</code>, using the same controlled vocabulary as the prompt-library schema in <code>prompts/_schema.yaml</code>. Each link carries its own licence. The table below is generated automatically from the <code>links</code> field of each prompt-library entry (<code>prompts/entries/*.yaml</code>), so the mapping stays maintained in one place. For the full content of an entry, see the <a href="../prompts/index.html">Prompt library</a>.</p>
+<section id="where-to-read" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-read">Where to read</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Goal</th>
+<th>Design</th>
+<th>Where to read</th>
+<th>Prompt entries</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Screen data before analysis</td>
+<td>No grouping design</td>
+<td><a href="https://psyteachr.github.io/quant-fun-v3/11-screening-data.html">psyteachr quant-fun ch.11 Screening data</a> · CC BY-SA 4.0</td>
+<td><code>missing-data-triage</code></td>
+</tr>
+<tr class="even">
+<td>Describe variables</td>
+<td>Within-subjects</td>
+<td><a href="https://psyteachr.github.io/data-skills-v3/stroop.html">psyteachr Data Skills ch.2 Stroop (dataset source)</a> · CC BY-SA 4.0</td>
+<td><code>describe-code-crosscheck</code>, <code>describe-first-look</code></td>
+</tr>
+<tr class="odd">
+<td>Compare two groups or conditions</td>
+<td>Between-subjects</td>
+<td><a href="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html">lsj-book ch.11 Comparing two means</a> · CC BY-SA 4.0<br><a href="https://psyteachr.github.io/analysis-v4/07-independent.html">psyteachr analysis ch.7 Independent-samples t-test (Shapiro-Wilk, Levene, Welch)</a> · CC BY 4.0</td>
+<td><code>ttest-assumptions</code></td>
+</tr>
+<tr class="even">
+<td>Compare two groups or conditions</td>
+<td>Within-subjects</td>
+<td><a href="https://psyteachr.github.io/data-skills-v3/stroop.html">psyteachr Data Skills ch.2 Stroop (dataset source)</a> · CC BY-SA 4.0<br><a href="https://davidfoxcroft.github.io/lsj-book/11-Comparing-two-means.html">lsj-book ch.11 Comparing two means</a> · CC BY-SA 4.0</td>
+<td><code>long-to-wide-check</code>, <code>paired-vs-independent</code></td>
+</tr>
+<tr class="odd">
+<td>Compare three or more groups</td>
+<td>Between-subjects</td>
+<td><a href="https://davidfoxcroft.github.io/lsj-book/13-Comparing-several-means-one-way-ANOVA.html">lsj-book ch.13 Comparing several means: one-way ANOVA (includes post-hoc tests)</a> · CC BY-SA 4.0</td>
+<td><code>three-group-comparison</code></td>
+</tr>
+<tr class="even">
+<td>Compare three or more groups</td>
+<td>Mixed (between and within)</td>
+<td><a href="https://psyteachr.github.io/quant-fun-v3/">psyteachr quant-fun (wrangling / ANOVA)</a> · CC BY-SA 4.0<br><a href="https://psyteachr.github.io/analysis-v4/13-factorial-anova.html">psyteachr analysis ch.13 Factorial ANOVA (Zhang et al.&nbsp;2014 time capsule)</a> · CC BY 4.0</td>
+<td><code>mixed-anova-setup</code></td>
+</tr>
+<tr class="odd">
+<td>Relate two variables</td>
+<td>No grouping design</td>
+<td><a href="https://psyteachr.github.io/analysis-v4/06-chi-square-one-sample.html">psyteachr Analysis ch.6 Chi-square test of association (Ballou et al.&nbsp;2024 dataset source)</a> · CC BY 4.0<br><a href="https://psyteachr.github.io/analysis-v4/09-correlation.html">psyteachr Analysis ch.9 Correlation (dataset source)</a> · CC BY 4.0</td>
+<td><code>contingency-association</code>, <code>correlation-choice</code></td>
+</tr>
+<tr class="even">
+<td>Predict an outcome</td>
+<td>No grouping design</td>
+<td>No chapter linked yet</td>
+<td><code>regression-code-check</code>, <code>regression-predictors</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="datasets-used-in-the-prompt-library" class="level2">
+<h2 class="anchored" data-anchor-id="datasets-used-in-the-prompt-library">Datasets used in the prompt library</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>License</th>
+<th>Used by</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://osf.io/rc6mv/">OSF RP:P #44 Payne et al.&nbsp;(2008) replication data (Reproducibility Project: Psychology dataset source)</a></td>
+<td>CC0 1.0</td>
+<td><code>regression-code-check</code>, <code>regression-predictors</code></td>
+</tr>
+<tr class="even">
+<td><a href="https://osf.io/pz0my/">RP:P #43 Monin et al.&nbsp;2008 replication data (OSF)</a></td>
+<td>CC0 1.0</td>
+<td><code>three-group-comparison</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="source-textbooks-and-licences" class="level2">
+<h2 class="anchored" data-anchor-id="source-textbooks-and-licences">Source textbooks and licences</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -238,7 +324,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>This page is English-only. The source textbooks are all in English. Its table will be generated from the <code>links</code> field of each prompt-library entry (<code>prompts/entries/*.yaml</code>), so the mapping stays maintained in one place. That generation step is not built yet, so this page currently carries only the source list above.</p>
+<p>This page is English-only. The source textbooks are all in English. bradduthie/stats is linked only, never excerpted. Its NonCommercial licence is incompatible with this site’s CC BY-SA licence, so mixing its text in would leave the site’s licensing unclear.</p>
 
 
 </section>

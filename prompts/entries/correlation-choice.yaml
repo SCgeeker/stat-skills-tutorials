@@ -70,7 +70,7 @@ stop_criteria:
     zh: 回覆宣稱看過散佈圖或直接斷言關係是線性的 → 記為越界；換 explainer persona 重問一次比對
     en: The reply claims to have seen a scatterplot or asserts the relationship is linear -> record it as overreaching and ask again with the explainer persona to compare.
 links:
-  - {title: "psyteachr Analysis ch.9 Correlation (dataset source)", url: "https://psyteachr.github.io/analysis-v4/09-correlation.html", license: "CC BY 4.0"}
+  - {title: "psyteachr Analysis ch.9 Correlation (dataset source)", url: "https://psyteachr.github.io/analysis-v4/09-correlation.html", license: "CC BY 4.0", kind: chapter}
 tested_with:
   - {date: 2026-09-16, provider: gemini, model: gemini-flash-latest, result: pass, note: "zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/correlation-choice_lopez2024_zhTW.omv、回覆副本 data/replies/correlation-choice_lopez2024_zhTW.md。expected 4/4：路徑 Analyses > Regression > Correlation Matrix 並指出勾選位置；以線性關係與極端值敏感度為據，並引平均數遠大於中位數（138.3 vs 100、6.799 vs 4）推論右偏而建議 Spearman；明說看不到散佈圖；提到成對刪除會壓低 n。check 三項零錯：path 逐字相符；number 與 R 實算 138.2556 / 100 / 1000 與 6.7991 / 4 / 100 相符；assumption 已畫散佈圖（scat）。佐證：R 實算偏態 2.30 與 5.01，Pearson r = 0.347、Spearman ρ = 0.513，推薦方向正確。另外它預測成對完整 n 落在 612–622，jamovi corrMatrix 實跑 N = 619、df = 617，落在區間內（10 筆遺漏有 7 筆重疊）。本條預設的陷阱（宣稱兩變項遺漏數不同）未被觸發。"}
   - {date: 2026-09-16, provider: gemini, model: gemini-flash-latest, result: pass, note: "en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/correlation-choice_lopez2024_en.omv、回覆副本 data/replies/correlation-choice_lopez2024_en.md。expected 4/4，與 zh 版同樣四項全中，另點名 bivariate outliers 並指出散佈圖在同一分析的 Plot 區塊。check 三項零錯，陷阱同樣未被觸發。"}

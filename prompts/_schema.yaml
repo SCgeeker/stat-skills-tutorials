@@ -159,6 +159,13 @@ fields:
       title: {type: string, required: true}
       url: {type: string, required: true}
       license: {type: string, required: true}
+      kind:
+        # 選填。未填視同 chapter（教材章節）；dataset 表示這個連結是資料集
+        # 出處（如 OSF 頁面），不列入「外部教材對照表」（external/reading-
+        # map.qmd）的章節欄，只列進該頁的資料集表。
+        type: enum
+        required: false
+        values: [chapter, dataset]
 
   tested_with:
     type: list

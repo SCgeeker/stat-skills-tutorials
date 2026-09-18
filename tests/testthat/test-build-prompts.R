@@ -255,3 +255,136 @@ test_that("render_index_qmd 嵌入依資料判斷的 R chunk，而非寫死的�
 
   unlink(dir, recursive = TRUE)
 })
+
+# ---------------------------------------------------------------------------
+# 外部教材對照表（external/_reading-map-table.md）。
+# link_kind()：讀單一 link 的 kind，缺省視同 chapter。
+# render_reading_map_md()：依 entries 的 stat_goal x design 分組，產生「表一：
+# Where to read」與「表二：Datasets used in the prompt library」兩張表格的
+# Markdown；純函式，測試只用內建的最小條目 list，不依賴真實條目。
+# write_reading_map()：把上面字串寫到檔案。
+# ---------------------------------------------------------------------------
+
+#' 建立測試用最小條目（不含 id；id 由 entries list 的 name 提供）
+mk_entry <- function(stat_goal, design, links = list()) {
+  list(stat_goal = stat_goal, design = design, links = links)
+}
+
+test_that("link_kind 缺省回傳 chapter，顯式設定時原樣回傳", {
+  expect_equal(link_kind(list(title = "t", url = "u", license = "l")), "chapter")
+  expect_equal(link_kind(list(title = "t", url = "u", license = "l", kind = "chapter")), "chapter")
+  expect_equal(link_kind(list(title = "t", url = "u", license = "l", kind = "dataset")), "dataset")
+})
+
+test_that("render_reading_map_md 依 goal x design 分組，且依規定順序排序", {
+  entries <- list(
+    b = mk_entry("compare-2", "within",
+                 links = list(list(title = "B chapter", url = "http://b", license = "CC0", kind = "chapter"))),
+    a = mk_entry("screen", "none",
+                 links = list(list(title = "A chapter", url = "http://a", license = "CC0", kind = "chapter"))),
+    c = mk_entry("compare-2", "between",
+                 links = list(list(title = "C chapter", url = "http://c", license = "CC0", kind = "chapter")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_true(grepl("## Where to read", md, fixed = TRUE))
+  expect_true(grepl("Screen data before analysis", md, fixed = TRUE))
+  expect_true(grepl("Compare two groups or conditions", md, fixed = TRUE))
+  expect_true(grepl("Between-subjects", md, fixed = TRUE))
+  expect_true(grepl("Within-subjects", md, fixed = TRUE))
+
+  pos_screen <- regexpr("Screen data before analysis", md, fixed = TRUE)
+  pos_between <- regexpr("Between-subjects", md, fixed = TRUE)
+  pos_within <- regexpr("Within-subjects", md, fixed = TRUE)
+  expect_true(pos_screen < pos_between)
+  expect_true(pos_between < pos_within)
+})
+
+test_that("render_reading_map_md 的 Prompt entries 欄以反引號、字母序、逗號分隔", {
+  entries <- list(
+    zeta = mk_entry("screen", "none",
+                     links = list(list(title = "Z chapter", url = "http://z", license = "CC0", kind = "chapter"))),
+    alpha = mk_entry("screen", "none",
+                      links = list(list(title = "Z chapter", url = "http://z", license = "CC0", kind = "chapter")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_true(grepl("`alpha`, `zeta`", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 同組內 chapter 連結依 url 去重", {
+  entries <- list(
+    x1 = mk_entry("describe", "within",
+                  links = list(list(title = "Same Chapter", url = "http://dup", license = "CC BY", kind = "chapter"))),
+    x2 = mk_entry("describe", "within",
+                  links = list(list(title = "Same Chapter", url = "http://dup", license = "CC BY", kind = "chapter")))
+  )
+  md <- render_reading_map_md(entries)
+  matches <- regmatches(md, gregexpr("http://dup", md, fixed = TRUE))[[1]]
+  expect_equal(length(matches), 1)
+})
+
+test_that("render_reading_map_md 該組沒有任何 chapter 時顯示 No chapter linked yet", {
+  entries <- list(
+    y1 = mk_entry("predict", "none",
+                  links = list(list(title = "Dataset Y", url = "http://data-y", license = "CC0", kind = "dataset")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_true(grepl("No chapter linked yet", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 的 dataset 連結不進表一，只進表二", {
+  entries <- list(
+    z1 = mk_entry("predict", "none", links = list(
+      list(title = "Chapter Z", url = "http://chapter-z", license = "CC BY", kind = "chapter"),
+      list(title = "Dataset Z", url = "http://dataset-z", license = "CC0", kind = "dataset")
+    ))
+  )
+  md <- render_reading_map_md(entries)
+  table1_part <- sub("(?s)## Datasets used.*$", "", md, perl = TRUE)
+  expect_false(grepl("Dataset Z", table1_part, fixed = TRUE))
+  expect_true(grepl("Chapter Z", table1_part, fixed = TRUE))
+  expect_true(grepl("## Datasets used in the prompt library", md, fixed = TRUE))
+  expect_true(grepl("[Dataset Z](http://dataset-z)", md, fixed = TRUE))
+  expect_true(grepl("`z1`", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 沒有任何 dataset 連結時省略表二", {
+  entries <- list(
+    w1 = mk_entry("describe", "within",
+                  links = list(list(title = "W chapter", url = "http://w", license = "CC BY", kind = "chapter")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_false(grepl("## Datasets used in the prompt library", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 對標題與授權內含的 | 做跳脫", {
+  entries <- list(
+    p1 = mk_entry("screen", "none",
+                  links = list(list(title = "A | B chapter", url = "http://pipe", license = "CC | BY", kind = "chapter")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_true(grepl("A \\| B chapter", md, fixed = TRUE))
+  expect_true(grepl("CC \\| BY", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 的 link.kind 缺省視同 chapter", {
+  entries <- list(
+    q1 = mk_entry("screen", "none",
+                  links = list(list(title = "No kind chapter", url = "http://nokind", license = "CC BY")))
+  )
+  md <- render_reading_map_md(entries)
+  expect_true(grepl("No kind chapter", md, fixed = TRUE))
+  expect_false(grepl("No chapter linked yet", md, fixed = TRUE))
+})
+
+test_that("write_reading_map 把 render_reading_map_md 的結果寫入檔案", {
+  entries <- list(
+    w1 = mk_entry("describe", "within",
+                  links = list(list(title = "W chapter", url = "http://w", license = "CC BY", kind = "chapter")))
+  )
+  out_path <- tempfile(fileext = ".md")
+  write_reading_map(entries, out_path)
+  expect_true(file.exists(out_path))
+  content <- paste(readLines(out_path, warn = FALSE), collapse = "\n")
+  expect_equal(content, render_reading_map_md(entries))
+  unlink(out_path)
+})

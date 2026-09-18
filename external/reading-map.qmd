@@ -2,16 +2,17 @@
 title: "External Reading Map"
 ---
 
-> The mapping table below is not built yet. What is here today is the list of
-> source textbooks and their licences.
+This page maps your situation to the matching chapter in a verified external
+textbook. Your situation is defined by `stat_goal` and `design`, using the
+same controlled vocabulary as the prompt-library schema in
+`prompts/_schema.yaml`. Each link carries its own licence. The table below is
+generated automatically from the `links` field of each prompt-library entry
+(`prompts/entries/*.yaml`), so the mapping stays maintained in one place. For
+the full content of an entry, see the [Prompt library](../prompts/index.qmd).
 
-## What this page will contain
+{{< include _reading-map-table.md >}}
 
-A single table will map "your situation" to the matching chapter in one of
-the seven verified external textbooks. Your situation is defined by
-`stat_goal` and `design`, using the same controlled vocabulary as the
-prompt-library schema in `prompts/_schema.yaml`. Each row carries its own
-license tag:
+## Source textbooks and licences
 
 | Textbook | License |
 |---|---|
@@ -23,8 +24,7 @@ license tag:
 | lsj-book (Foxcroft / Navarro) | CC BY-SA 4.0 |
 | bradduthie/stats | CC BY-NC-SA 4.0 (link only, no excerpting) |
 
-This page is English-only. The source textbooks are all in English. Its table
-will be generated from the `links` field of each prompt-library entry
-(`prompts/entries/*.yaml`), so the mapping stays maintained in one place.
-That generation step is not built yet, so this page currently carries only
-the source list above.
+This page is English-only. The source textbooks are all in English.
+bradduthie/stats is linked only, never excerpted. Its NonCommercial licence
+is incompatible with this site's CC BY-SA licence, so mixing its text in would
+leave the site's licensing unclear.

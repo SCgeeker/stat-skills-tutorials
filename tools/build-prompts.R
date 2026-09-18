@@ -342,6 +342,151 @@ write_index_qmd <- function(entries, out_path) {
   invisible(out_path)
 }
 
+# 外部教材對照表（external/_reading-map-table.md） -------------------------
+
+#' 取得單一 link 的 kind；未填（NULL 或空字串）視同 "chapter"
+#' @param link list，單一 link（title/url/license，可能有 kind）
+#' @return character(1) "chapter" 或 "dataset"
+link_kind <- function(link) {
+  if (is.null(link$kind) || !nzchar(link$kind)) "chapter" else link$kind
+}
+
+#' Markdown 表格欄位內容跳脫：把 "|" 轉成 "\|"，避免破壞表格分隔
+.escape_md_cell <- function(x) gsub("|", "\\|", x, fixed = TRUE)
+
+#' 依 stat_goal x design 分組，產生「外部教材對照表」的 Markdown（兩張表）
+#' 純函式：只讀 entries（list 的 name 即 id）裡的 stat_goal / design / links，
+#' 不觸碰檔案。
+#'
+#' 表一「Where to read」：依資料中實際出現的 (stat_goal, design) 組合各一
+#' 列，goal 依 screen/describe/compare-2/compare-k/associate/predict/
+#' reliability 排序，design 依 between/within/mixed/none 排序。Where to
+#' read 欄只收該組所有條目裡 kind 為 chapter 的 link，依 url 去重；該組沒有
+#' 任何 chapter link 時顯示 "No chapter linked yet"（刻意保留的缺口，不補）。
+#'
+#' 表二「Datasets used in the prompt library」：收所有條目裡 kind 為
+#' dataset 的 link，依 url 去重；沒有任何 dataset link 時整張表省略。
+#'
+#' @param entries named list，來自 read_entries()
+#' @return character(1) Markdown 全文
+render_reading_map_md <- function(entries) {
+  goal_labels <- c(
+    screen       = "Screen data before analysis",
+    describe     = "Describe variables",
+    `compare-2`  = "Compare two groups or conditions",
+    `compare-k`  = "Compare three or more groups",
+    associate    = "Relate two variables",
+    predict      = "Predict an outcome",
+    reliability  = "Check reliability"
+  )
+  design_labels <- c(
+    between = "Between-subjects",
+    within  = "Within-subjects",
+    mixed   = "Mixed (between and within)",
+    none    = "No grouping design"
+  )
+  goal_order <- names(goal_labels)
+  design_order <- names(design_labels)
+
+  ids <- names(entries)
+  goals <- vapply(ids, function(id) entries[[id]]$stat_goal, character(1))
+  designs <- vapply(ids, function(id) entries[[id]]$design, character(1))
+
+  # 只列資料中實際出現的 (goal, design) 組合，依規定順序排序
+  combos <- unique(data.frame(goal = goals, design = designs, stringsAsFactors = FALSE))
+  combos <- combos[order(match(combos$goal, goal_order), match(combos$design, design_order)), , drop = FALSE]
+
+  table1_rows <- character()
+  for (r in seq_len(nrow(combos))) {
+    g <- combos$goal[r]
+    d <- combos$design[r]
+    group_ids <- sort(ids[goals == g & designs == d])
+
+    chapter_links <- list()
+    seen_urls <- character()
+    for (id in group_ids) {
+      for (l in entries[[id]]$links) {
+        if (identical(link_kind(l), "chapter") && !(l$url %in% seen_urls)) {
+          chapter_links[[length(chapter_links) + 1]] <- l
+          seen_urls <- c(seen_urls, l$url)
+        }
+      }
+    }
+
+    where <- if (length(chapter_links) == 0) {
+      "No chapter linked yet"
+    } else {
+      paste(
+        vapply(chapter_links, function(l) {
+          sprintf("[%s](%s) · %s", .escape_md_cell(l$title), l$url, .escape_md_cell(l$license))
+        }, character(1)),
+        collapse = "<br>"
+      )
+    }
+
+    prompt_col <- paste(sprintf("`%s`", .escape_md_cell(group_ids)), collapse = ", ")
+
+    table1_rows <- c(table1_rows, sprintf(
+      "| %s | %s | %s | %s |",
+      .escape_md_cell(goal_labels[[g]]), .escape_md_cell(design_labels[[d]]), where, prompt_col
+    ))
+  }
+
+  table1 <- paste(
+    "## Where to read",
+    "",
+    "| Goal | Design | Where to read | Prompt entries |",
+    "|---|---|---|---|",
+    paste(table1_rows, collapse = "\n"),
+    sep = "\n"
+  )
+
+  # 表二：資料集出處，依 url 去重，收集每個資料集被哪些條目使用
+  dataset_links <- list()
+  dataset_urls <- character()
+  dataset_users <- list()
+  for (id in ids) {
+    for (l in entries[[id]]$links) {
+      if (identical(link_kind(l), "dataset")) {
+        if (!(l$url %in% dataset_urls)) {
+          dataset_links[[length(dataset_links) + 1]] <- l
+          dataset_urls <- c(dataset_urls, l$url)
+          dataset_users[[l$url]] <- character()
+        }
+        dataset_users[[l$url]] <- c(dataset_users[[l$url]], id)
+      }
+    }
+  }
+
+  if (length(dataset_links) == 0) {
+    return(table1)
+  }
+
+  table2_rows <- vapply(dataset_links, function(l) {
+    used_by <- paste(sprintf("`%s`", .escape_md_cell(sort(unique(dataset_users[[l$url]])))), collapse = ", ")
+    sprintf("| [%s](%s) | %s | %s |", .escape_md_cell(l$title), l$url, .escape_md_cell(l$license), used_by)
+  }, character(1))
+
+  table2 <- paste(
+    "## Datasets used in the prompt library",
+    "",
+    "| Dataset | License | Used by |",
+    "|---|---|---|",
+    paste(table2_rows, collapse = "\n"),
+    sep = "\n"
+  )
+
+  paste(table1, table2, sep = "\n\n")
+}
+
+#' 把 render_reading_map_md() 的結果寫成檔案
+#' @param entries named list，來自 read_entries()
+#' @param out_path character(1) 輸出路徑
+write_reading_map <- function(entries, out_path) {
+  writeLines(render_reading_map_md(entries), out_path, useBytes = TRUE)
+  invisible(out_path)
+}
+
 # CLI 進入點 ----------------------------------------------------------------
 if (identical(environment(), globalenv()) && sys.nframe() == 0 && !interactive()) {
   file_arg <- grep("--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
@@ -366,4 +511,8 @@ if (identical(environment(), globalenv()) && sys.nframe() == 0 && !interactive()
 
   write_index_qmd(entries, index_out)
   cat(sprintf("已寫出總表：%s\n", index_out))
+
+  reading_map_out <- file.path(base_dir, "external", "_reading-map-table.md")
+  write_reading_map(entries, reading_map_out)
+  cat(sprintf("已寫出外部教材對照表：%s\n", reading_map_out))
 }

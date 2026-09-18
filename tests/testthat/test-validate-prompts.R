@@ -121,3 +121,35 @@ test_that("validate_all_entries 對目錄下所有合法條目回傳全 PASS", {
   expect_true(all(summary$valid))
   unlink(dir, recursive = TRUE)
 })
+
+# ---------------------------------------------------------------------------
+# links.kind（外部教材對照表用）：選填欄位，缺省視同 chapter，值限
+# chapter／dataset，非法值需被擋下。
+# ---------------------------------------------------------------------------
+
+test_that("links.kind 缺省時仍通過驗證（視同 chapter）", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  entry$links <- list(list(title = "測試章節", url = "https://example.com/ch1", license = "CC BY 4.0"))
+  result <- validate_entry(entry)
+  expect_true(result$valid)
+  expect_length(result$errors, 0)
+})
+
+test_that("links.kind 為合法值（chapter／dataset）時通過驗證", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  entry$links <- list(
+    list(title = "測試章節", url = "https://example.com/ch1", license = "CC BY 4.0", kind = "chapter"),
+    list(title = "測試資料集", url = "https://osf.io/xxxxx/", license = "CC0 1.0", kind = "dataset")
+  )
+  result <- validate_entry(entry)
+  expect_true(result$valid)
+  expect_length(result$errors, 0)
+})
+
+test_that("links.kind 為非受控詞彙時被擋下", {
+  entry <- yaml::read_yaml(fx("valid-entry.yaml"))
+  entry$links <- list(list(title = "測試章節", url = "https://example.com/ch1", license = "CC BY 4.0", kind = "bogus"))
+  result <- validate_entry(entry)
+  expect_false(result$valid)
+  expect_true(any(grepl("links\\[1\\]\\.kind", result$errors)))
+})
