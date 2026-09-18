@@ -882,14 +882,14 @@ Rules:
 <ul>
 <li><strong>code-read</strong>: 只用 <code>data</code>、<code>library()</code> 都在 rj_environment 裡、無 setwd／路徑／system</li>
 <li><strong>code-run</strong>: 針對回覆的轉檔程式碼貼進 Rj 執行（不是隨手跑別的程式碼），記錄輸出的維度與欄名</li>
-<li><strong>cross-check</strong>: 用轉出來的寬檔在 jamovi 跑 T-Tests ▸ Paired Samples T-Test，確認能選到轉出的兩欄</li>
+<li><strong>cross-check</strong>: 在同一個 .omv 用 Exploration ▸ Descriptives，以分組變項分組看長格式資料各水準的 n 與遺漏數，與 Rj 印出的寬資料列數及各欄遺漏值比對；再抽幾位受試者，核對寬資料兩欄的數值與長格式對應的列相符，確認沒有轉錯欄。Rj 轉出的寬資料不會成為 jamovi 資料集，所以不能直接拿它跑 Paired Samples T-Test</li>
 </ul>
 </div>
 <div class="en">
 <ul>
 <li><strong>code-read</strong>: Uses only <code>data</code>; any <code>library()</code> calls are packages available in rj_environment; no setwd, file paths, or system calls</li>
 <li><strong>code-run</strong>: Paste the reply’s reshaping code itself into Rj and run it (not some other code), and record the resulting dimensions and column names</li>
-<li><strong>cross-check</strong>: Use the reshaped wide data to run T-Tests ▸ Paired Samples T-Test in jamovi, and confirm the two reshaped columns can be selected</li>
+<li><strong>cross-check</strong>: In the same .omv, run Exploration ▸ Descriptives on the long data, split by the grouping variable. Compare each level’s n and missing count with the wide row count and the per-column missing values printed in Rj. Then check a few participants’ two wide values against their rows in the long data, so a swapped column cannot slip through. The wide data made in Rj does not become a jamovi dataset, so it cannot be fed straight into Paired Samples T-Test.</li>
 </ul>
 </div>
 </section>
@@ -917,7 +917,7 @@ Rules:
 <section id="實測記錄tested-with-4" class="level3">
 <h3 class="anchored" data-anchor-id="實測記錄tested-with-4"><span class="zh">實測記錄</span><span class="en">Tested with</span></h3>
 <ul>
-<li>2026-09-17 | gemini | gemini-flash-latest | <strong>partial</strong> | zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/long-to-wide-check_stroop_zhTW.omv、回覆副本 data/replies/long-to-wide-check_stroop_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；明說轉出後 dim 應為 270 3；沒有幫忙跑 t 檢定）。但 check 未達標：Rj 實際執行的是 summary(data)，不是回覆的轉檔程式碼，code-run 未針對模型產出的程式碼執行；cross-check 也未做（沒有跑 Paired Samples T-Test），依規則 expected 全中但 check 有失敗只能記 partial。</li>
+<li>2026-09-18 | gemini | gemini-flash-latest | <strong>pass</strong> | 重做版，zh 版，persona=consultant（預設），promptLang=zh，證據 data/long-to-wide-check_stroop_zhTW.omv、回覆副本 data/replies/long-to-wide-check_stroop_zhTW.md。expected 4/4：只用 data；開頭三個字串變數指派（id_col／names_col／values_col）；明說應看到 [1] 270 3，並要求各欄遺漏值為 0；未跑 t 檢定。check 三項齊備：code-read 只用 library(tidyverse)；code-run 貼進 Rj 的程式碼與回覆逐字相同，輸出 270 × 3、三欄遺漏值皆 0、零錯誤；cross-check 依本條修訂後的做法，在同一檔跑 Descriptives（Split by condition），兩水準各 270 筆、遺漏 0，與寬資料一致，另以原始資料核對前 6 位受試者的兩欄數值逐一相符。本條原判 partial（2026-09-17：Rj 只跑了 summary(data)，且沒有 cross-check），重做後改判 pass。</li>
 <li>2026-09-17 | gemini | gemini-flash-latest | <strong>partial</strong> | en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/long-to-wide-check_stroop_en.omv、回覆副本 data/replies/long-to-wide-check_stroop_en.md。判定 partial：expected 4/4，code-read 通過；code-run 通過（Rj 這次確實執行了回覆的轉檔程式碼，輸出維度 270 × 3，congruent／incongruent 兩欄名在 head() 可見）；但 cross-check 未做，沒有跑 Paired Samples T-Test 比對。</li>
 </ul>
 <hr>

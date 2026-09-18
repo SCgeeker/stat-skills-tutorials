@@ -29,7 +29,7 @@
 | `correlation-choice_lopez2024_en.omv` | `correlation-choice` | 英文 | askllm、corrMatrix、scat |
 | `describe-code-crosscheck_stroop_zhTW.omv` | `describe-code-crosscheck` | 中文 | askllmr、Rj、descriptives（jamovi 對照分析） |
 | `describe-code-crosscheck_stroop_en.omv` | `describe-code-crosscheck` | 英文 | askllmr、Rj、descriptives（jamovi 對照分析） |
-| `long-to-wide-check_stroop_zhTW.omv` | `long-to-wide-check` | 中文 | askllmr、Rj |
+| `long-to-wide-check_stroop_zhTW.omv` | `long-to-wide-check` | 中文 | askllmr、Rj、descriptives |
 | `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | 英文 | askllmr、Rj |
 | `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | 中文 | askllmr、Rj |
 | `contingency-association_ballou2024_en.omv` | `contingency-association` | 英文 | askllmr、Rj |
