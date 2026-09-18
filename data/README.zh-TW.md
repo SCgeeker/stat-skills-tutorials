@@ -27,6 +27,18 @@
 | `paired-vs-independent_stroop_en.omv` | `paired-vs-independent` | 英文 | askllm、gamljmixed、ttestIS |
 | `correlation-choice_lopez2024_zhTW.omv` | `correlation-choice` | 中文 | askllm、corrMatrix、scat |
 | `correlation-choice_lopez2024_en.omv` | `correlation-choice` | 英文 | askllm、corrMatrix、scat |
+| `describe-code-crosscheck_stroop_zhTW.omv` | `describe-code-crosscheck` | 中文 | askllmr、Rj、descriptives（jamovi 對照分析） |
+| `describe-code-crosscheck_stroop_en.omv` | `describe-code-crosscheck` | 英文 | askllmr、Rj、descriptives（jamovi 對照分析） |
+| `long-to-wide-check_stroop_zhTW.omv` | `long-to-wide-check` | 中文 | askllmr、Rj |
+| `long-to-wide-check_stroop_en.omv` | `long-to-wide-check` | 英文 | askllmr、Rj |
+| `contingency-association_ballou2024_zhTW.omv` | `contingency-association` | 中文 | askllmr、Rj |
+| `contingency-association_ballou2024_en.omv` | `contingency-association` | 英文 | askllmr、Rj |
+| `regression-code-check_payne2008_zhTW.omv` | `regression-code-check` | 中文 | askllmr、Rj |
+| `regression-code-check_payne2008_en.omv` | `regression-code-check` | 英文 | askllmr、Rj |
+| `regression-predictors_payne2008_zhTW.omv` | `regression-predictors` | 中文 | askllm、linReg |
+| `regression-predictors_payne2008_en.omv` | `regression-predictors` | 英文 | askllm、linReg |
+| `three-group-comparison_monin2008_zhTW.omv` | `three-group-comparison` | 中文 | askllm、anovaOneW |
+| `three-group-comparison_monin2008_en.omv` | `three-group-comparison` | 英文 | askllm、anovaOneW |
 
 實測日期 2026-09-08，全部使用 provider `gemini`、模型 `gemini-flash-latest`。`missing-data-triage`
 的中文 explainer 那次於 2026-09-09 重跑，原因見最後一節。
@@ -35,10 +47,18 @@
 `role`，其餘四次都沒設，跑的是預設的 `consultant`。它們檔名沒有 persona 後綴，因為這三條的
 `check` 清單都沒有要求跨 persona 比對。
 
+再接下來八個檔是批 B，2026-09-17 實測（`describe-code-crosscheck` 是 2026-09-18），provider 與
+模型相同。`describe-code-crosscheck`、`contingency-association`、`regression-code-check` 都設了
+`role: tutor`；`long-to-wide-check` 沒設，跑的是預設的 `consultant`。最後四個檔是批 C，
+2026-09-17 實測。`regression-predictors` 設了 `role: explainer`；`three-group-comparison` 沒設，
+跑的也是預設的 `consultant`。這十條的英文版都沒設 `promptLang`，中文版則全部設為
+`promptLang: zh`。
+
 ## 重跑這些實測
 
 每條條目的 `prompt` 都帶 `{佔位符}`。下表是實測當時填入的值，以及各自的資料來源。前三個下載連結
-於 2026-09-09 實測回 HTTP 200，後兩個於 2026-09-16 實測回 HTTP 200。
+於 2026-09-09 實測回 HTTP 200，接下來兩個於 2026-09-16 實測回 HTTP 200，批 B／C 的連結於
+2026-09-17 實測回 HTTP 200。
 
 | 條目 | 資料集 | 下載 |
 |---|---|---|
@@ -48,6 +68,12 @@
 | `describe-first-look` | psyteachr 的 Stroop 示範資料 | <https://psyteachr.github.io/data-skills-v3/data/stroop/stroop_data.zip>（用 `experiment_data.csv`，長格式 540 列） |
 | `paired-vs-independent` | 同一份 Stroop 資料 | 同上；`cross-check` 那步需要寬格式，作法見下 |
 | `correlation-choice` | Lopez et al. (2024) 湯碗研究 | <https://psyteachr.github.io/analysis-v4/data/data_ch9.zip>（用 `data_ch9_correlation.csv`，632 列、60 欄） |
+| `describe-code-crosscheck` | 同一份 Stroop 資料 | 同上；長格式，依 `condition` 分組 |
+| `long-to-wide-check` | 同一份 Stroop 資料 | 同上；實測時由回覆自己轉成寬格式 |
+| `contingency-association` | Ballou et al. (2024) 卡方檢定資料 | <https://psyteachr.github.io/analysis-v4/data/data_ch6.zip>（此檔只有 codebook；資料本身是 `data_ballou_reduced.csv`，1083 列） |
+| `regression-code-check` | Payne et al. (2008)，RP:P #44 複製研究資料 | <https://osf.io/rc6mv/>（`Dataset.Replication.study4.Payneetal.2008.JPSP.sav`，180 列） |
+| `regression-predictors` | 同一份 Payne et al. (2008) 資料 | 同上 |
+| `three-group-comparison` | Monin et al. (2008)，RP:P #43 複製研究資料 | <https://osf.io/pz0my/>（75 列；此檔以舊式 Mac 換行儲存，單獨的 CR、沒有 LF） |
 
 | 條目 | 佔位符 | 值 |
 |---|---|---|
@@ -57,6 +83,12 @@
 | `describe-first-look` | `{outcome}` / `{group}` / `{k}` / `{id}` | `reaction_time` / `condition` / 2 / `participant_id` |
 | `paired-vs-independent` | `{outcome}` / `{group}` / `{id}` | `reaction_time` / `condition` / `participant_id` |
 | `correlation-choice` | `{var_a}` / `{var_b}` / `{n_a}` / `{n_b}` | `CalEstimate` / `OzEstimate` / 622 / 622 |
+| `describe-code-crosscheck` | `{outcome}` / `{group}` / `{id}` | `reaction_time` / `condition` / `participant_id` |
+| `long-to-wide-check` | `{outcome}` / `{group}` / `{id}` | `reaction_time` / `condition` / `participant_id` |
+| `contingency-association` | `{var_a}` / `{var_b}` / `{n}` | `gender` / `eduLevel` / 1083 |
+| `regression-code-check` | `{outcome}` / `{pred_a}` / `{pred_b}` / `{id}` | `direct` / `indirect` / `manip` / `subject` |
+| `regression-predictors` | `{outcome}` / `{pred_a}` / `{pred_b}` / `{id}` / `{n}` | `direct` / `indirect` / `manip` / `subject` / 180 |
+| `three-group-comparison` | `{outcome}` / `{group}` / `{k}` / `{g1}`／`{n1}` / `{g2}`／`{n2}` / `{g3}`／`{n3}` / `{n}` / `{scale_min}`–`{scale_max}` | `Intelligent` / `Condition` / 3 / `Obedient`／20 / `Rebel Affirmed`／27 / `Rebel Control`／28 / 75 / 1–7 |
 
 看數字之前有兩件事要知道。`simon_effect` 不是檔案裡現成的欄位，實測時是以
 `session1_incongruent − session1_congruent` 算出來的，這就是它與 psyteachr 數字不同的原因
@@ -75,8 +107,13 @@
 | Zhang et al. (2014) Study 3 | psyteachr *Analysis* ch.13（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/13-factorial-anova.html> | CC BY 4.0 |
 | Stroop 示範資料 | psyteachr *Data Skills for Reproducible Research* ch.2（Nordmann & DeBruine, 2025），<https://psyteachr.github.io/data-skills-v3/stroop.html> | CC BY-SA 4.0 |
 | Lopez et al. (2024) 湯碗研究 | psyteachr *Analysis* ch.9（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/09-correlation.html> | CC BY 4.0 |
+| Ballou et al. (2024) 卡方檢定資料 | psyteachr *Analysis* ch.6（Mahrholz & Kuepper-Tetzel, 2025），<https://psyteachr.github.io/analysis-v4/data/data_ch6.zip> | CC BY 4.0 |
+| Payne et al. (2008) 複製研究資料 | Reproducibility Project: Psychology，RP:P #44，<https://osf.io/rc6mv/> | CC0 1.0 |
+| Monin et al. (2008) 複製研究資料 | Reproducibility Project: Psychology，RP:P #43，<https://osf.io/pz0my/> | CC0 1.0 |
 
-CC BY-SA 4.0 的素材（Dawtry 與 Stroop 資料）以相同方式分享。
+CC BY-SA 4.0 的素材（Dawtry 與 Stroop 資料）以相同方式分享。兩份 RP:P 複製研究資料是
+**CC0 1.0**，跟上面的 CC BY／CC BY-SA 素材不是同一種授權：CC0 等同放入公有領域，不要求標示
+出處，所以在這裡另外標出，不併入 CC BY-SA 那句話裡。
 
 ## 變項定義的兩個陷阱
 
@@ -96,6 +133,31 @@ CC BY-SA 4.0 的素材（Dawtry 與 Stroop 資料）以相同方式分享。
 psyteachr 文中的 n = 130 是篩選後的數字，不是檔案列數。兩個數字並不矛盾：`T2_Interest_Comp`
 有 22 筆遺漏，152 − 22 = 130，所以 304 列長格式裡有 282 筆有效觀察。重複量數 ANOVA 會排除
 不完整的個案，這就是它的 residual df 為 128（130 − 2 組）的原因。
+
+## 批 B／C 實測又踩到的四個陷阱
+
+以下是測試 `describe-code-crosscheck`、`contingency-association`、`regression-predictors`、
+`three-group-comparison` 時踩到的，一樣記在這裡免得下次重蹈。
+
+**jamovi 的 Descriptives 四分位數用的是 R 預設的 `type = 7`，不是 `type = 6`。** 在 jamovi 28.2
+內建 jmv 2.8.0 的環境下實測，Stroop congruent 組的第 25、75 百分位算出來是 667.93 與 818.76，
+這對得上 `quantile(x, type = 7)`（667.9336、818.764），對不上 `type = 6`（667.4837、819.0694）。
+偏態與峰度是 SPSS 也採用的樣本調整版 G1／G2。`describe-code-crosscheck` 的中文版與英文版回覆都跟使用者說
+jamovi 用的是 `type = 6`；cross-check 那步因為四個四分位數（兩組各自的 Q1、Q3）全部對不上而抓到
+這個錯誤宣稱。
+
+**Rj 不會顯示 R 的 `warning()`。** `chisq.test()` 在某個儲存格的期望次數偏低時會發出
+`Chi-squared approximation may be incorrect`，但這個警告不會出現在 Rj 的輸出區。
+`contingency-association` 的資料裡，期望次數表最小的一格（Non-binary × Vocational or Similar）
+是 4.88，低於經驗法則的門檻 5，只能自己讀印出來的 `$expected` 表格才會發現，不能等警告訊息跳出來。
+
+**jamovi 把 Payne 資料的 `subject` 讀成 Nominal，不是數字。** 讀入 `.sav` 檔後，jamovi 把
+`subject` 設成 180 水準的 Nominal，askLLM 送給模型的摘要把它描述成「factor, 180 levels」。若真
+的把它當因子放進迴歸，會把 180 個自由度全部耗光。
+
+**jamovi 的 Levene's 檢定以平均數為中心。** 針對 Monin et al. (2008) 的資料，實際跑一次
+`three-group-comparison` 的 One-Way ANOVA，Levene's 檢定給出 **F = 0.00、p = .996**：三組的變異
+數在實務上可以視為完全相等。
 
 ## `.omv` 裡存的回覆未必是當次執行的那一份
 

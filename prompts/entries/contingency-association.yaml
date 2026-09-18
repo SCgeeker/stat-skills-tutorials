@@ -1,0 +1,82 @@
+id: contingency-association
+title:
+  zh: 用 R 檢驗兩個類別變項的關聯，並自己讀結果
+  en: Testing association between two categorical variables in R, and reading the result yourself
+analysis: rtutor
+scenario:
+  zh: 有兩個類別變項，想請 R 跑卡方檢定，程式碼要能讓自己檢查前提是否成立，也不要模型替你解讀結果。
+  en: >-
+    You have two categorical variables and want R code for a chi-square test.
+    The code should let you check the assumptions yourself, and you do not
+    want the model to interpret the result for you.
+variables:
+  - {role: grouping, type: nominal, n_levels: 3}
+  - {role: outcome, type: nominal, n_levels: 5}
+design: none
+stat_goal: associate
+prerequisites:
+  - zh: 先確認兩個變項在 jamovi 裡都是 Nominal 型別，且都沒有遺漏值
+    en: Confirm both variables are set to Nominal in jamovi, and that neither has missing values.
+  - zh: Rj 不會顯示 R 的 warning()，程式碼印出的期望次數表要自己看，別等模型幫你抓
+    en: Rj does not display R's warning() messages; look at the expected-count table the code prints yourself instead of waiting for the model to flag it.
+persona: tutor
+prompt:
+  zh: |-
+    data 有 {var_a}（3 水準：Man、Woman、Non-binary）與 {var_b}（5 水準），{n} 列，兩欄都沒有遺漏。
+
+    請給我一段 R 程式碼檢驗這兩個類別變項是否有關聯，我之後要拿去和 jamovi 的結果比對。
+
+    規則：
+    1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+    2. 只用 data，不要 read.csv、不要 install.packages。
+    3. 程式碼要讓我能自己檢查這個檢定的前提有沒有被滿足。
+    4. 不要替我解釋結果代表什麼，我要自己讀。
+  en: |-
+    The data has {var_a} (3 levels: Man, Woman, Non-binary) and {var_b}
+    (5 levels), {n} rows, with no missing values in either column.
+
+    Please give me R code that tests whether these two categorical variables
+    are associated. I will compare the result against jamovi afterwards.
+
+    Rules:
+    1. Put every blank as a variable assignment at the top, with a string
+       placeholder as its value. Do not use comments as placeholders.
+    2. Use data only. No read.csv, no install.packages.
+    3. The code should let me check for myself whether the test's assumptions
+       hold.
+    4. Do not interpret the result for me. I want to read it myself.
+system_prompt_override: null
+expected:
+  - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+    en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+  - zh: 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+    en: Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+  - zh: 程式碼會印出期望次數表（例如 `chisq.test(...)$expected`）
+    en: The code prints the expected-count table (for example `chisq.test(...)$expected`)
+  - zh: 沒有替使用者宣稱兩者有關聯或暗示有傾向；提示詞已要求不解釋
+    en: Does not claim the two variables are associated or hint at a trend for the user; the prompt already asked it not to interpret
+check:
+  - step: code-read
+    what:
+      zh: 只用 base R（或 rj_environment 裡有的套件）、無 setwd／路徑／system
+      en: Uses only base R (or packages available in rj_environment); no setwd, file paths, or system calls
+  - step: code-run
+    what:
+      zh: 貼進 Rj 執行，記錄卡方統計量、df、p 值，並看程式碼印出的期望次數表，自行檢查是否有格 < 5
+      en: Paste it into Rj and run it, recording the chi-square statistic, df, and p value, then look at the printed expected-count table yourself to check whether any cell is below 5
+  - step: cross-check
+    what:
+      zh: 回 jamovi 跑 Frequencies ▸ Independent Samples χ² test of association，比對 χ²、df、p 是否一致
+      en: Go back to jamovi and run Frequencies ▸ Independent Samples chi-square test of association, and compare the chi-square, df, and p against the R output
+stop_criteria:
+  solved:
+    zh: code-run 的統計量與期望次數表都核對過，cross-check 與 jamovi 結果一致，且回覆全程沒有替你解讀
+    en: The code-run statistics and the expected-count table have both been checked, the cross-check matches jamovi, and the reply never interpreted the result for you.
+  reopen:
+    zh: 回覆把不顯著的 p 值講成「接近顯著」或「有傾向」、或完全沒提期望次數 → 逐字記下原文，換 consultant persona 重問一次比對
+    en: The reply describes a non-significant p value as "approaching significance" or "a trend", or never mentions the expected counts -> record the text verbatim and ask again with the consultant persona to compare.
+links:
+  - {title: "psyteachr Analysis ch.6 Chi-square test of association (Ballou et al. 2024 dataset source)", url: "https://psyteachr.github.io/analysis-v4/06-chi-square-one-sample.html", license: "CC BY 4.0"}
+tested_with:
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "zh 版，persona=tutor，promptLang=zh，證據 data/contingency-association_ballou2024_zhTW.omv、回覆副本 data/replies/contingency-association_ballou2024_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；印出 chisq.test(...)$expected；沒有替使用者解讀或說成有傾向）。check：code-read 通過（只用 base R，無紅旗）；code-run 通過，Rj 輸出 X-squared = 13.594, df = 8, p-value = 0.09299，期望次數表含 4.875346（Rj 不顯示 warning，故無警告原文，此步驟以看期望次數表自行檢查為準，視為通過）；但 cross-check 未做，沒有跑 Frequencies ▸ Independent Samples χ² test of association 比對，依規則 expected 全中但 check 有缺只能記 partial。"}
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "en 版，persona=tutor，promptLang 未設（en 預設），證據 data/contingency-association_ballou2024_en.omv、回覆副本 data/replies/contingency-association_ballou2024_en.md。判定 partial：expected 4/4，同 zh 版四項全中。check：code-read 通過（只用 base R）；code-run 通過，Rj 輸出同一組統計量（X-squared = 13.594, df = 8, p-value = 0.09299）與期望次數表（最小格 4.875346）；cross-check 未做，未跑列聯表 χ² 分析比對。"}

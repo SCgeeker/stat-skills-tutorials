@@ -1,0 +1,86 @@
+id: regression-code-check
+title:
+  zh: 迴歸診斷程式碼：先攔下不該進模型的變項
+  en: Regression diagnostic code that catches variables that should not enter the model
+analysis: rtutor
+scenario:
+  zh: 有一個連續結果變項與兩個預測變項，另外還有一個受試者編號欄。想請 R 做迴歸並附診斷，也想知道編號欄該不該放進模型。
+  en: >-
+    You have a continuous outcome and two predictors, plus a participant
+    identifier column. You want R code for the regression with diagnostics,
+    and want to know whether the identifier should enter the model.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+  - {role: id, type: nominal, n_levels: 180}
+design: none
+stat_goal: predict
+prerequisites:
+  - zh: 先在 jamovi 裡看過受試者編號欄的型別；本資料讀進來是 Nominal、180 個水準，不是連續變項
+    en: Check the participant identifier column's type in jamovi first; in this data it reads in as Nominal with 180 levels, not continuous.
+  - zh: 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+    en: Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+persona: tutor
+prompt:
+  zh: |-
+    data 有 {outcome}（連續結果變項）、{pred_a}（連續預測變項）、{pred_b}（編碼為 -1 與 1 的操弄變項）、{id}（受試者編號），共 180 列，沒有遺漏。
+
+    請給我一段 R 程式碼，用 {pred_a} 與 {pred_b} 預測 {outcome}，並做迴歸診斷。
+
+    規則：
+    1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+    2. 只用 data，不要 read.csv、不要 install.packages。
+    3. 我列出的變項裡如果有不該進模型的，請先告訴我，不要直接放進去。
+    4. 診斷要能讓我自己判斷共線性與殘差是否有問題。
+  en: |-
+    The data has {outcome} (continuous outcome), {pred_a} (continuous
+    predictor), {pred_b} (a manipulation coded -1 and 1), and {id}
+    (participant identifier). There are 180 rows with no missing values.
+
+    Please give me R code that predicts {outcome} from {pred_a} and {pred_b},
+    with regression diagnostics.
+
+    Rules:
+    1. Put every blank as a variable assignment at the top, with a string
+       placeholder as its value. Do not use comments as placeholders.
+    2. Use data only. No read.csv, no install.packages.
+    3. If any variable I listed should not enter the model, tell me first
+       rather than putting it in.
+    4. The diagnostics should let me judge collinearity and the residuals for
+       myself.
+system_prompt_override: null
+expected:
+  - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+    en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+  - zh: 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查，即使程式碼變長也一樣
+    en: Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in, even though the code is longer
+  - zh: 受試者編號欄沒有進入模型，並說明理由（它是識別碼）
+    en: The participant identifier does not enter the model, with an explanation that it is an identifier
+  - zh: 診斷至少包含共線性（VIF 或等價指標）與殘差檢視兩項
+    en: Diagnostics include at least collinearity (VIF or an equivalent) and a look at the residuals
+check:
+  - step: code-read
+    what:
+      zh: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system；若用 car::vif() 要先確認 car 是否在 rj_environment 裡
+      en: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls; if it uses car::vif(), confirm car is actually available in rj_environment
+  - step: code-run
+    what:
+      zh: 貼進 Rj 執行，記錄輸出或錯誤原文，核對係數、R²、F 值
+      en: Paste it into Rj and run it, recording the output or error verbatim, and check the coefficients, R-squared, and F value
+  - step: cross-check
+    what:
+      zh: 回 jamovi 跑 Regression ▸ Linear Regression，Assumption Checks 下勾 Collinearity statistics，比對係數與 VIF
+      en: Go back to jamovi and run Regression ▸ Linear Regression, ticking Collinearity statistics under Assumption Checks, and compare the coefficients and VIF
+stop_criteria:
+  solved:
+    zh: 識別碼被攔下且理由正確，code-run 的係數與 cross-check 的 jamovi 結果一致
+    en: The identifier is caught with a correct explanation, and the code-run coefficients match the cross-check results in jamovi.
+  reopen:
+    zh: 識別碼被放進模型、或診斷宣稱兩個預測變項高度相關要小心共線性（VIF 其實接近 1）→ 記為錯誤資訊，換 consultant 要完整版
+    en: The identifier is entered into the model, or the diagnostics claim the two predictors are highly correlated and warn about collinearity when the VIF is actually near 1 -> record it as incorrect information and ask the consultant persona for the full solution.
+links:
+  - {title: "OSF RP:P #44 Payne et al. (2008) replication data (Reproducibility Project: Psychology dataset source)", url: "https://osf.io/rc6mv/", license: "CC0 1.0"}
+tested_with:
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "zh 版，persona=tutor，promptLang=zh，證據 data/regression-code-check_payne2008_zhTW.omv、回覆副本 data/replies/regression-code-check_payne2008_zhTW.md。判定 partial：expected 4/4（開頭三個字串佔位符 target_dv／target_iv1／target_iv2，程式碼雖長但格式規範仍守住；受試者編號欄未進模型並說明是識別碼；診斷含 cor()（0.078，等同 VIF ≈ 1.006）與 plot(model) 殘差圖）。回覆說明識別碼若進模型會耗盡自由度，這在 jamovi 情境下正確（該欄為 Nominal、180 水準）。check：code-read 通過（無 library、無 car）；code-run 通過，係數與規格一致（indirect 0.7712、manip −0.0384、R² 0.297、F(2,177) = 37.4）；但 cross-check 未做，沒有跑 Linear Regression 比對，依規則只能記 partial。"}
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。判定 partial：expected 3/4，第 2 項未命中——開頭雖有 dep_var／indep_vars 佔位符，但第 19 行 cor(data[[ \"FILL_IN_PREDICTOR1\" ]], data[[ \"FILL_IN_PREDICTOR2\" ]]) 又把佔位符直接寫在函式呼叫裡，填值處分散兩地，是本批唯一的格式破口。其餘三項同 zh 版命中：識別碼未進模型並正確說明；診斷含共線性與殘差圖。check：code-read、code-run 皆通過，係數同上；cross-check 未做。"}

@@ -1,0 +1,81 @@
+id: three-group-comparison
+title:
+  zh: 三組比較前該檢查什麼
+  en: What to check before comparing three groups
+analysis: guider
+scenario:
+  zh: 資料有一個評分結果變項與一個三水準分組變項，想知道該用哪個分析比較三組平均數、前提檢查在 jamovi 哪裡勾選，以及摘要統計能不能看出組間差異——事後多重比較不在這次的範圍內。
+  en: >-
+    Your data has a rating outcome and a three-level grouping variable. You
+    want to know which analysis compares the three groups' means, where to
+    tick its assumption checks in jamovi, and whether the summary statistics
+    alone can reveal a difference. Post-hoc comparisons are out of scope
+    this time.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 3}
+design: between
+stat_goal: compare-k
+prerequisites:
+  - zh: 先確認資料列數是 {n}。這個檔以舊式 Mac 換行儲存（單獨的 CR，沒有 LF），部分工具會把整份誤讀成 1 列，載進 jamovi 後第一件事就是看列數
+    en: First confirm the row count is {n}. This file uses old-style Mac line endings, with a bare CR and no LF. Some tools misread the whole file as a single row, so check the row count first after loading it into jamovi.
+  - zh: 把 {outcome} 與 {group} 勾進 Variables to describe，核對三組的 n 是否為 {g1} {n1} 人、{g2} {n2} 人、{g3} {n3} 人
+    en: Tick {outcome} and {group} into Variables to describe, and check the three groups' n against {g1} = {n1}, {g2} = {n2}, and {g3} = {n3}.
+persona: consultant
+prompt:
+  zh: |-
+    {outcome} 是 {scale_min} 到 {scale_max} 的評分，{group} 有 {k} 個水準（{g1} {n1} 人、{g2} {n2} 人、{g3} {n3} 人），共 {n} 人，每人只屬於一個水準。
+
+    請回答以下三件事：
+    1. 比較這三組的 {outcome} 平均數該用哪個分析？請給逐字選單路徑。
+    2. 這個分析有哪些前提要檢查？各自在 jamovi 的哪裡勾選？請給逐字路徑。
+    3. 從我提供的摘要統計，你能判斷這三組有沒有差異嗎？請誠實回答。
+
+    請不要給事後多重比較的建議，那不在我這次的範圍內。
+  en: |-
+    {outcome} is a {scale_min}-to-{scale_max} rating. {group} has {k} levels:
+    {g1} with {n1} people, {g2} with {n2}, and {g3} with {n3}, for {n} people
+    in total. Each person belongs to one level only.
+
+    Please answer all three:
+    1. Which analysis compares the mean of {outcome} across these three groups? Give the exact menu path.
+    2. Which assumptions does that analysis need, and where do I tick each one in jamovi? Give the exact paths.
+    3. From the summary statistics I sent, can you tell whether the three groups differ? Answer honestly.
+
+    Please do not suggest post-hoc multiple comparisons. They are out of scope for me this time.
+system_prompt_override: null
+expected:
+  - zh: 指名 ANOVA ▸ One-Way ANOVA（或 ANOVA ▸ ANOVA）逐字路徑，兩者在 jamovi 選單裡都真實存在
+    en: Names the exact path ANOVA ▸ One-Way ANOVA (or ANOVA ▸ ANOVA); both exist in the real jamovi menu
+  - zh: 說出變異數同質性與常態性兩項前提，並正確指出兩者的勾選位置都在 Assumption Checks 區塊（Homogeneity test、Normality test、Q-Q plot），不是 Variances 區塊——Variances 區塊只有 Welch's 與 Fisher's 的選擇
+    en: States the homogeneity-of-variance and normality assumptions, and correctly places both tick boxes under Assumption Checks (Homogeneity test, Normality test, Q-Q plot) rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's
+  - zh: 明確承認從摘要統計判斷不了三組是否有差異，要跑完分析才知道
+    en: States plainly that the summary statistics alone cannot reveal whether the three groups differ; running the analysis is required to know
+  - zh: 沒有給事後多重比較的建議，守住提問稿的範圍限制
+    en: Gives no post-hoc multiple-comparison advice, honoring the prompt's scope limit
+check:
+  - step: path
+    what:
+      zh: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡逐字點得到，包括前提檢查的勾選位置是否確實在 Assumption Checks 而非 Variances 區塊
+      en: Every "Analyses ▸ ..." path in the reply can be clicked verbatim in your own jamovi, including whether the assumption tick boxes are really under Assumption Checks rather than Variances
+  - step: number
+    what:
+      zh: 回覆引用的三組 n 與 Descriptives 面板一致
+      en: The three groups' n cited in the reply match what you see in the Descriptives panel
+  - step: assumption
+    what:
+      zh: 自己跑一次 One-Way ANOVA，在 Assumption Checks 勾 Homogeneity test 與 Normality test，結果與回覆的說法相容或不相容都記下
+      en: Run One-Way ANOVA yourself, tick Homogeneity test and Normality test under Assumption Checks, and note whether the results match or contradict what the reply claims
+stop_criteria:
+  solved:
+    zh: 四項 expected 全命中且 path 查核零錯 → 依建議執行
+    en: All four expected elements are hit and the path check has zero errors -> proceed with the suggestion.
+  reopen:
+    zh: 任一選單路徑點不到（例如把 Homogeneity test 誤植在 Variances 區塊），或回覆給了事後比較建議 → 記為越界；若常態性不成立，可改看 ANOVA ▸ Non-Parametric ▸ One-Way ANOVA（Kruskal-Wallis），事後比較的讀物另見 links
+    en: Any menu path cannot be clicked (for example, placing Homogeneity test under Variances by mistake), or the reply offers post-hoc advice -> record it as overreaching; if normality fails, consider ANOVA ▸ Non-Parametric ▸ One-Way ANOVA (Kruskal-Wallis) instead, and see links for post-hoc reading.
+links:
+  - {title: "RP:P #43 Monin et al. 2008 replication data (OSF)", url: "https://osf.io/pz0my/", license: "CC0 1.0"}
+  - {title: "lsj-book ch.13 Comparing several means: one-way ANOVA (includes post-hoc tests)", url: "https://davidfoxcroft.github.io/lsj-book/13-Comparing-several-means-one-way-ANOVA.html", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: fail, note: "zh 版，persona=consultant，promptLang=zh，證據 data/three-group-comparison_monin2008_zhTW.omv、回覆副本 data/replies/three-group-comparison_monin2008_zhTW.md。判為 fail：回覆把 Homogeneity test（Levene's）的勾選位置寫在 Variances 區塊，但 jamovi 實際上 Homogeneity test 在 Assumption Checks 區塊，依規則「幻覺選單路徑一律 fail」。其餘三項：路徑 Analyses > ANOVA > One-Way ANOVA 正確；說出常態性與同質性兩項前提；明說「無法判斷」三組是否有差異；完全沒提事後檢定。check：number 引用整體平均 4.76、sd 1.8，與 357 ÷ 75 相符；assumption 使用者實跑 Welch F(2, 45.45) = 2.25、p = .117，Levene F = 0.00、p = .996，Shapiro-Wilk W = 0.93、p < .001（常態性不成立），拿來與回覆的說法比對；使用者沒有勾事後檢定。"}
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: pass, note: "en 版，persona=consultant，promptLang 未設（en 預設），證據 data/three-group-comparison_monin2008_en.omv、回覆副本 data/replies/three-group-comparison_monin2008_en.md。判為 pass。expected 4/4：給出 Analyses > ANOVA > One-Way ANOVA（另提 Analyses > ANOVA > ANOVA），同質性與常態性都正確寫在 Assumption Checks 底下的 Homogeneity test、Normality test、Q-Q plot；明說「No」無法從摘要判斷三組是否有差異；沒提事後檢定。check 三項通過：path 逐字相符；number 同 zh 版（整體平均 4.76、sd 1.8）；assumption 同 zh 版實測數值（Welch F(2, 45.45) = 2.25、p = .117；Levene F = 0.00、p = .996；Shapiro-Wilk W = 0.93、p < .001），與回覆相容。"}

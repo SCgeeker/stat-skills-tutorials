@@ -1,0 +1,77 @@
+id: regression-predictors
+title:
+  zh: 迴歸預測變項該怎麼選
+  en: Choosing regression predictors
+analysis: guider
+scenario:
+  zh: 資料有一個連續結果變項、兩個候選預測變項，還有一欄受試者編號，想知道該用哪個分析、哪個變項不該進模型、以及共線性能不能從摘要統計判斷。
+  en: >-
+    Your data has one continuous outcome, two candidate predictors, and a
+    participant-id column. You want to know which analysis to run, which
+    variable should not enter the model, and whether collinearity can be
+    judged from the summary statistics alone.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+  - {role: predictor, type: continuous, n_levels: null}
+  - {role: id, type: nominal, n_levels: 180}
+design: none
+stat_goal: predict
+prerequisites:
+  - zh: 把 {outcome}、{pred_a}、{pred_b}、{id} 都勾進 Variables to describe。注意 {id} 在 jamovi 裡會被讀成 Nominal（180 個水準），這是這條陷阱的關鍵——它不會顯示成一串巨大的數字平均數
+    en: Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. It will not show up as a huge, meaningless average.
+  - zh: 確認 {pred_a} 與 {pred_b} 在 jamovi 裡是連續變項（Continuous）。{pred_b} 雖然只有兩個值（-1 與 1），仍會被歸為連續，之後在 Linear Regression 裡會落進 Covariates 欄位框，不是 Factors
+    en: Confirm {pred_a} and {pred_b} are Continuous in jamovi. {pred_b} only takes two values (-1 and 1), yet it is still numeric, so it belongs in the Covariates box of Linear Regression, not Factors.
+persona: explainer
+prompt:
+  zh: |-
+    {outcome} 是連續結果變項，{pred_a} 是連續預測變項，{pred_b} 是編碼為 -1 與 1 的操弄變項，{id} 是受試者編號。共 {n} 列，沒有遺漏。
+
+    請用初學者聽得懂的方式回答：
+    1. 我要用 {pred_a} 與 {pred_b} 預測 {outcome}，該用哪個分析？請給逐字選單路徑，並說明每個變項該放進哪一個欄位框。
+    2. 我列出的四個變項裡，有沒有哪一個不該進入這個模型？為什麼？
+    3. 共線性該怎麼查？這件事你能從我提供的摘要統計判斷嗎？
+  en: |-
+    {outcome} is a continuous outcome, {pred_a} is a continuous predictor,
+    {pred_b} is a manipulation coded -1 and 1, and {id} identifies the
+    participant. There are {n} rows with no missing values.
+
+    Please answer in beginner-friendly terms:
+    1. I want to predict {outcome} from {pred_a} and {pred_b}. Which analysis should I use? Give the exact menu path, and say which box each variable goes into.
+    2. Of the four variables I listed, is there one that should not enter the model? Why?
+    3. How do I check for collinearity? Can you judge it from the summary statistics I sent?
+system_prompt_override: null
+expected:
+  - zh: 指名 Regression ▸ Linear Regression 逐字路徑，說明 {outcome} 放 Dependent Variable、{pred_a} 與 {pred_b} 放 Covariates（因為兩者在 jamovi 裡都是數值型；若 {pred_b} 改為類別型才會改放 Factors）
+    en: Names the exact path Regression ▸ Linear Regression, and states {outcome} goes in Dependent Variable while {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)
+  - zh: 點名 {id} 是識別碼、不該當預測變項進入模型，理由是它只是每列的代碼，放進去只會耗盡自由度（在 jamovi 中 {id} 是 180 水準的類別變項，放進 Factors 會產生 179 個虛擬變項）
+    en: Names {id} as an identifier that should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)
+  - zh: 明確承認共線性（VIF）無法從摘要統計判斷，要跑完模型、在 Assumption Checks 勾選 Collinearity statistics 才看得到
+    en: States plainly that collinearity (VIF) cannot be judged from the summary statistics; it only appears after you run the model and tick Collinearity statistics under Assumption Checks
+  - zh: 不宣稱看過散佈圖、殘差圖，或已經知道共線性的實際程度
+    en: Does not claim to have seen a scatterplot or residual plot, or to already know the actual degree of collinearity
+check:
+  - step: path
+    what:
+      zh: 回覆中 "Analyses ▸ Regression ▸ Linear Regression" 路徑在你的 jamovi 選單裡逐字點得到
+      en: The "Analyses ▸ Regression ▸ Linear Regression" path in the reply can be clicked verbatim in your own jamovi
+  - step: number
+    what:
+      zh: 回覆引用的 n 與各變項的 mean／sd 和 Descriptives 面板一致
+      en: The n and each variable's mean/sd cited in the reply match what you see in the Descriptives panel
+  - step: assumption
+    what:
+      zh: 自己跑一次 Linear Regression（Dependent Variable = {outcome}，Covariates = {pred_a} + {pred_b}），勾選 Collinearity statistics，看 VIF 是否與回覆的說法相容
+      en: Run Linear Regression yourself (Dependent Variable = {outcome}, Covariates = {pred_a} + {pred_b}), tick Collinearity statistics, and check whether the VIF values are compatible with what the reply claims
+stop_criteria:
+  solved:
+    zh: 四項 expected 全命中且 path 查核零錯 → 依建議執行
+    en: All four expected elements are hit and the path check is clean -> follow the advice.
+  reopen:
+    zh: 回覆宣稱已知共線性的實際程度，或未點名 {id} 應排除在模型外 → 記為越界，換 consultant persona 重問一次比對
+    en: The reply claims to already know the actual degree of collinearity, or fails to name {id} as something to exclude from the model -> record it as overreaching and ask again with the consultant persona to compare.
+links:
+  - {title: "RP:P #44 Payne et al. 2008 replication data (OSF)", url: "https://osf.io/rc6mv/", license: "CC0 1.0"}
+tested_with:
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: pass, note: "zh 版，persona=explainer，promptLang=zh，證據 data/regression-predictors_payne2008_zhTW.omv、回覆副本 data/replies/regression-predictors_payne2008_zhTW.md。expected 4/4：路徑 Analyses > Regression > Linear Regression，direct 放 Dependent Variable、indirect 放 Covariates，並說明 manip 因為是數值型可放 Covariates（若改為 Nominal 則放 Factors）；點名 subject 是識別碼不該進模型，理由是會耗盡自由度——在 jamovi 情境下正確（subject 為 Nominal、180 水準）；明說無法從摘要判斷共線性，要在 Assumption Checks 勾 Collinearity statistics；未宣稱看過散佈圖或殘差圖。check：path 逐字存在；number 只引用 n = 180，正確；assumption：使用者實跑 Linear Regression（dep = direct、covs = indirect + manip、勾 Collinearity），indirect 0.77、manip −0.04（p = .194）、R² = 0.30、VIF 皆 1.01，與回覆相容。"}
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: pass, note: "en 版，persona=explainer，promptLang 未設（en 預設），證據 data/regression-predictors_payne2008_en.omv、回覆副本 data/replies/regression-predictors_payne2008_en.md。expected 4/4，內容同 zh 版：Linear Regression 逐字路徑與欄位歸屬正確、明確排除 subject 並說明會耗盡自由度、承認無法判斷共線性需勾 Collinearity statistics、未宣稱看過散佈圖或殘差圖。check 三項同 zh 版皆通過：path 逐字相符；number 僅引用 n = 180；assumption 實跑結果 indirect 0.77、manip −0.04（p = .194）、R² = 0.30、VIF 皆 1.01，與回覆相容。"}

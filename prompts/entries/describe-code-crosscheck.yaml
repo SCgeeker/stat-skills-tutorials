@@ -1,0 +1,82 @@
+id: describe-code-crosscheck
+title:
+  zh: 用 R 逐格核對 jamovi 的描述統計
+  en: Cross-checking jamovi's descriptives with R
+analysis: rtutor
+scenario:
+  zh: 想用 R 算一次描述統計，拿去跟 jamovi Descriptives 的輸出逐格比對，確認兩邊算的是同一件事。
+  en: >-
+    You want R to compute the same descriptive statistics so you can compare
+    them cell by cell against jamovi's Descriptives output, to confirm both
+    sides are computing the same thing.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+  - {role: id, type: nominal, n_levels: null}
+design: within
+stat_goal: describe
+prerequisites:
+  - zh: 先在 jamovi 的 Descriptives 裡把 Skewness、Kurtosis、Percentiles 都勾出來，等一下要逐格比對
+    en: In jamovi's Descriptives, tick Skewness, Kurtosis, and Percentiles first; you will compare them cell by cell later.
+  - zh: 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+    en: Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+persona: tutor
+prompt:
+  zh: |-
+    data 裡有 {outcome}（連續）、{group}（2 水準）、{id}（受試者編號）。
+
+    請給我一段 R 程式碼，依 {group} 分組算出 {outcome} 的描述統計，我要拿它和 jamovi 的 Descriptives 逐格比對。
+
+    規則：
+    1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+    2. 只用 data，不要 read.csv、不要 install.packages、不要 setwd。
+    3. 說明哪些統計量在 R 和 jamovi 之間可能算不出同一個數字，以及為什麼。
+  en: |-
+    The data has {outcome} (continuous), {group} (2 levels), and
+    {id} (participant identifier).
+
+    Please give me R code that computes descriptive statistics for {outcome}
+    split by {group}, so that I can compare it cell by cell against jamovi's
+    Descriptives.
+
+    Rules:
+    1. Put every blank as a variable assignment at the top, with a string
+       placeholder as its value. Do not use comments as placeholders.
+    2. Use data only. No read.csv, no install.packages, no setwd.
+    3. Tell me which statistics may not come out to the same number in R and in
+       jamovi, and why.
+system_prompt_override: null
+expected:
+  - zh: 只用 `data`，不出現 read.csv / install.packages / setwd（R tutor 的硬規則）
+    en: Uses only `data`, with no read.csv / install.packages / setwd (a hard rule for the R tutor)
+  - zh: 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+    en: Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+  - zh: 輸出至少含 n、mean、sd、median、min、max，且依分組變項分開列出
+    en: Output includes at least n, mean, sd, median, min, and max, broken down by the grouping variable
+  - zh: 不宣稱輸出會與 jamovi 完全一致，並指出偏態、峰度（或四分位數）在兩邊可能算法不同
+    en: Does not claim the output will match jamovi exactly, and points out that skewness, kurtosis, or the quartiles may be computed differently on each side
+check:
+  - step: code-read
+    what:
+      zh: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system
+      en: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls
+  - step: code-run
+    what:
+      zh: 貼進 Rj 執行，記錄輸出或錯誤原文；確認六項統計量（n、mean、sd、median、min、max）算得出來
+      en: Paste it into Rj and run it, recording the output or error verbatim; confirm the six statistics (n, mean, sd, median, min, max) come out
+  - step: cross-check
+    what:
+      zh: 回 jamovi 跑 Exploration ▸ Descriptives，Split by 放分組變項，勾 Skewness、Kurtosis、Percentiles，逐格比對，特別看四分位數是否相符
+      en: Go back to jamovi and run Exploration ▸ Descriptives, split by the grouping variable, with Skewness, Kurtosis, and Percentiles ticked; compare cell by cell, especially whether the quartiles agree
+stop_criteria:
+  solved:
+    zh: code-run 六項統計量正確，且 cross-check 逐格比對後你已確認回覆的方法論宣稱正確
+    en: The code-run output is correct for all six statistics, and after the cross-check you have confirmed the reply's methodological claims are correct.
+  reopen:
+    zh: 回覆宣稱兩邊完全一致、或指認錯誤的四分位數演算法（例如講成 jamovi 用 type 6）→ 記為錯誤資訊，換 consultant 要正確說明
+    en: The reply claims the two sides match exactly, or misidentifies the quartile algorithm (for example, saying jamovi uses type 6) -> record it as incorrect information and ask the consultant persona for a correct explanation.
+links:
+  - {title: "psyteachr Data Skills ch.2 Stroop (dataset source)", url: "https://psyteachr.github.io/data-skills-v3/stroop.html", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-18, provider: gemini, model: gemini-flash-latest, result: fail, note: "zh 版，persona=tutor，promptLang=zh，證據 data/describe-code-crosscheck_stroop_zhTW.omv、回覆副本 data/replies/describe-code-crosscheck_stroop_zhTW.md。判定 fail：expected 形式上 4/4（只用 data；開頭字串佔位符可 parse；n/mean/sd/median/min/max 依 condition 分組；有指出四分位數與偏態峰度算法可能不同），但回覆宣稱「jamovi（以及 SPSS）預設計算四分位數採用的是 type = 6」，此為錯誤資訊，依規則一律判 fail。check：code-read 通過（library(dplyr)，無紅旗）；code-run 通過，Rj 零錯誤，六項統計量與 jamovi 一致；cross-check 已做（Descriptives 勾 Skewness／Kurtosis／Percentiles），四個四分位數全部不符：jamovi congruent 667.93／818.76、incongruent 796.78／984.23；Rj 用 type 6 得 667.48／819.07、796.22／984.68。此為 cross-check 抓到錯誤宣稱的示範案例。另記：本輪之前曾有一次提問漏貼第一句、以及 Rj 未跑新回覆程式碼的人為操作問題，此處記錄的是修正後重跑的版本。"}
+  - {date: 2026-09-18, provider: gemini, model: gemini-flash-latest, result: fail, note: "en 版，persona=tutor，promptLang 未設（en 預設），證據 data/describe-code-crosscheck_stroop_en.omv、回覆副本 data/replies/describe-code-crosscheck_stroop_en.md。判定 fail：同一錯誤宣稱且措辭更強，回覆寫「jamovi uses type = 6 … To match jamovi, you must specify type = 6」。偏態峰度說明（jamovi 用樣本調整版 G1/G2）正確，但四分位數演算法的宣稱是錯誤資訊，依規則一律判 fail。check 同 zh 版：code-read 通過（library(tidyverse)，無紅旗）、code-run 零錯誤、cross-check 四個四分位數不符（數值同 zh 版：jamovi congruent 667.93／818.76、incongruent 796.78／984.23；Rj type 6 得 667.48／819.07、796.22／984.68）。提問與規格只有換行位置不同。"}

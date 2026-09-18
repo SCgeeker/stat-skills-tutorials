@@ -1,0 +1,83 @@
+id: long-to-wide-check
+title:
+  zh: 把長格式轉寬，並驗證轉對了
+  en: Reshaping long to wide, and verifying it worked
+analysis: rtutor
+scenario:
+  zh: 資料是長格式，一位受試者在兩個條件下各佔一列。jamovi 的配對 t 檢定需要寬格式，想請 Rj 幫忙轉，並確認轉換沒有出錯。
+  en: >-
+    The data is in long format, with one row per participant per condition.
+    jamovi's paired t-test needs wide format, and you want Rj to reshape it and
+    help you verify nothing went wrong.
+variables:
+  - {role: outcome, type: continuous, n_levels: null}
+  - {role: grouping, type: nominal, n_levels: 2}
+  - {role: id, type: nominal, n_levels: null}
+design: within
+stat_goal: compare-2
+prerequisites:
+  - zh: 記下受試者人數，轉寬之後列數應該等於這個數字
+    en: Write down the number of participants; the reshaped row count should equal it.
+  - zh: 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+    en: Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+persona: consultant
+prompt:
+  zh: |-
+    data 是長格式，540 列：每位 {id} 在 {group} 的兩個水準（congruent、incongruent）各有一列 {outcome}。
+
+    jamovi 的 Paired Samples T-Test 需要寬格式。請給我一段 R 程式碼把它轉過去。
+
+    規則：
+    1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+    2. 只用 data，不要 read.csv、不要 install.packages。
+    3. 轉完之後印出可以讓我自己核對「有沒有轉錯」的東西，並說明我該看到什麼數字。
+    4. 不要幫我跑 t 檢定。
+  en: |-
+    The data is in long format, 540 rows: each {id} has one row of {outcome}
+    under each of the two levels of {group}, congruent and incongruent.
+
+    jamovi's Paired Samples T-Test needs wide format. Please give me R code
+    that reshapes it.
+
+    Rules:
+    1. Put every blank as a variable assignment at the top, with a string
+       placeholder as its value. Do not use comments as placeholders.
+    2. Use data only. No read.csv, no install.packages.
+    3. After reshaping, print something that lets me check for myself whether
+       it went wrong, and tell me what numbers I should see.
+    4. Do not run the t-test for me.
+system_prompt_override: null
+expected:
+  - zh: 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+    en: Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+  - zh: 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+    en: Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+  - zh: 有驗證步驟：印出列數、每位受試者的出現次數、或完整案例數，並說明應該看到的數字
+    en: Includes a verification step, printing the row count, the count per participant, or the number of complete cases, and states what number you should see
+  - zh: 沒有幫忙跑 t 檢定
+    en: Does not run the t-test for you
+check:
+  - step: code-read
+    what:
+      zh: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system
+      en: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls
+  - step: code-run
+    what:
+      zh: 針對回覆的轉檔程式碼貼進 Rj 執行（不是隨手跑別的程式碼），記錄輸出的維度與欄名
+      en: Paste the reply's reshaping code itself into Rj and run it (not some other code), and record the resulting dimensions and column names
+  - step: cross-check
+    what:
+      zh: 用轉出來的寬檔在 jamovi 跑 T-Tests ▸ Paired Samples T-Test，確認能選到轉出的兩欄
+      en: Use the reshaped wide data to run T-Tests ▸ Paired Samples T-Test in jamovi, and confirm the two reshaped columns can be selected
+stop_criteria:
+  solved:
+    zh: code-run 維度正確（270 列）且 cross-check 的配對 t 檢定能跑起來
+    en: The code-run dimensions are correct (270 rows), and the cross-check paired t-test runs successfully.
+  reopen:
+    zh: 列數不是 270、程式碼用了環境沒有的套件、或根本沒有驗證步驟 → 把結果貼回，換 tutor persona 逐行檢查
+    en: The row count is not 270, the code uses a package not available in the environment, or there is no verification step at all -> paste the result back and ask the tutor persona to check it line by line.
+links:
+  - {title: "psyteachr Data Skills ch.2 Stroop (dataset source)", url: "https://psyteachr.github.io/data-skills-v3/stroop.html", license: "CC BY-SA 4.0"}
+tested_with:
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/long-to-wide-check_stroop_zhTW.omv、回覆副本 data/replies/long-to-wide-check_stroop_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；明說轉出後 dim 應為 270 3；沒有幫忙跑 t 檢定）。但 check 未達標：Rj 實際執行的是 summary(data)，不是回覆的轉檔程式碼，code-run 未針對模型產出的程式碼執行；cross-check 也未做（沒有跑 Paired Samples T-Test），依規則 expected 全中但 check 有失敗只能記 partial。"}
+  - {date: 2026-09-17, provider: gemini, model: gemini-flash-latest, result: partial, note: "en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/long-to-wide-check_stroop_en.omv、回覆副本 data/replies/long-to-wide-check_stroop_en.md。判定 partial：expected 4/4，code-read 通過；code-run 通過（Rj 這次確實執行了回覆的轉檔程式碼，輸出維度 270 × 3，congruent／incongruent 兩欄名在 head() 可見）；但 cross-check 未做，沒有跑 Paired Samples T-Test 比對。"}

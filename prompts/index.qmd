@@ -19,6 +19,120 @@ pending_notice_results <- unlist(lapply(pending_notice_entries, function(pn_e) {
 cat(pending_notice(pending_notice_results))
 ```
 
+## [用 R 檢驗兩個類別變項的關聯，並自己讀結果]{.zh}[Testing association between two categorical variables in R, and reading the result yourself]{.en}
+
+**analysis**: `rtutor` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `associate` &nbsp;|&nbsp; **persona**: `tutor`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+有兩個類別變項，想請 R 跑卡方檢定，程式碼要能讓自己檢查前提是否成立，也不要模型替你解讀結果。
+:::
+
+::: {.en}
+You have two categorical variables and want R code for a chi-square test. The code should let you check the assumptions yourself, and you do not want the model to interpret the result for you.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先確認兩個變項在 jamovi 裡都是 Nominal 型別，且都沒有遺漏值
+- Rj 不會顯示 R 的 warning()，程式碼印出的期望次數表要自己看，別等模型幫你抓
+:::
+
+::: {.en}
+- Confirm both variables are set to Nominal in jamovi, and that neither has missing values.
+- Rj does not display R's warning() messages; look at the expected-count table the code prints yourself instead of waiting for the model to flag it.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+data 有 {var_a}（3 水準：Man、Woman、Non-binary）與 {var_b}（5 水準），{n} 列，兩欄都沒有遺漏。
+
+請給我一段 R 程式碼檢驗這兩個類別變項是否有關聯，我之後要拿去和 jamovi 的結果比對。
+
+規則：
+1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+2. 只用 data，不要 read.csv、不要 install.packages。
+3. 程式碼要讓我能自己檢查這個檢定的前提有沒有被滿足。
+4. 不要替我解釋結果代表什麼，我要自己讀。
+```
+:::
+
+::: {.en}
+```
+The data has {var_a} (3 levels: Man, Woman, Non-binary) and {var_b}
+(5 levels), {n} rows, with no missing values in either column.
+
+Please give me R code that tests whether these two categorical variables
+are associated. I will compare the result against jamovi afterwards.
+
+Rules:
+1. Put every blank as a variable assignment at the top, with a string
+   placeholder as its value. Do not use comments as placeholders.
+2. Use data only. No read.csv, no install.packages.
+3. The code should let me check for myself whether the test's assumptions
+   hold.
+4. Do not interpret the result for me. I want to read it myself.
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+- 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+- 程式碼會印出期望次數表（例如 `chisq.test(...)$expected`）
+- 沒有替使用者宣稱兩者有關聯或暗示有傾向；提示詞已要求不解釋
+:::
+
+::: {.en}
+- Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+- Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+- The code prints the expected-count table (for example `chisq.test(...)$expected`)
+- Does not claim the two variables are associated or hint at a trend for the user; the prompt already asked it not to interpret
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **code-read**: 只用 base R（或 rj_environment 裡有的套件）、無 setwd／路徑／system
+- **code-run**: 貼進 Rj 執行，記錄卡方統計量、df、p 值，並看程式碼印出的期望次數表，自行檢查是否有格 < 5
+- **cross-check**: 回 jamovi 跑 Frequencies ▸ Independent Samples χ² test of association，比對 χ²、df、p 是否一致
+:::
+
+::: {.en}
+- **code-read**: Uses only base R (or packages available in rj_environment); no setwd, file paths, or system calls
+- **code-run**: Paste it into Rj and run it, recording the chi-square statistic, df, and p value, then look at the printed expected-count table yourself to check whether any cell is below 5
+- **cross-check**: Go back to jamovi and run Frequencies ▸ Independent Samples chi-square test of association, and compare the chi-square, df, and p against the R output
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: code-run 的統計量與期望次數表都核對過，cross-check 與 jamovi 結果一致，且回覆全程沒有替你解讀
+- **reopen**: 回覆把不顯著的 p 值講成「接近顯著」或「有傾向」、或完全沒提期望次數 → 逐字記下原文，換 consultant persona 重問一次比對
+:::
+
+::: {.en}
+- **solved**: The code-run statistics and the expected-count table have both been checked, the cross-check matches jamovi, and the reply never interpreted the result for you.
+- **reopen**: The reply describes a non-significant p value as "approaching significance" or "a trend", or never mentions the expected counts -> record the text verbatim and ask again with the consultant persona to compare.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Analysis ch.6 Chi-square test of association (Ballou et al. 2024 dataset source)](https://psyteachr.github.io/analysis-v4/06-chi-square-one-sample.html)（CC BY 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | zh 版，persona=tutor，promptLang=zh，證據 data/contingency-association_ballou2024_zhTW.omv、回覆副本 data/replies/contingency-association_ballou2024_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；印出 chisq.test(...)$expected；沒有替使用者解讀或說成有傾向）。check：code-read 通過（只用 base R，無紅旗）；code-run 通過，Rj 輸出 X-squared = 13.594, df = 8, p-value = 0.09299，期望次數表含 4.875346（Rj 不顯示 warning，故無警告原文，此步驟以看期望次數表自行檢查為準，視為通過）；但 cross-check 未做，沒有跑 Frequencies ▸ Independent Samples χ² test of association 比對，依規則 expected 全中但 check 有缺只能記 partial。
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | en 版，persona=tutor，promptLang 未設（en 預設），證據 data/contingency-association_ballou2024_en.omv、回覆副本 data/replies/contingency-association_ballou2024_en.md。判定 partial：expected 4/4，同 zh 版四項全中。check：code-read 通過（只用 base R）；code-run 通過，Rj 輸出同一組統計量（X-squared = 13.594, df = 8, p-value = 0.09299）與期望次數表（最小格 4.875346）；cross-check 未做，未跑列聯表 χ² 分析比對。
+
+
+---
+
 ## [兩個連續變項的關聯該用哪種相關]{.zh}[Which correlation for two continuous variables]{.en}
 
 **analysis**: `guider` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `associate` &nbsp;|&nbsp; **persona**: `consultant`
@@ -127,6 +241,119 @@ Please answer all three:
 
 ---
 
+## [用 R 逐格核對 jamovi 的描述統計]{.zh}[Cross-checking jamovi's descriptives with R]{.en}
+
+**analysis**: `rtutor` &nbsp;|&nbsp; **design**: `within` &nbsp;|&nbsp; **stat_goal**: `describe` &nbsp;|&nbsp; **persona**: `tutor`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+想用 R 算一次描述統計，拿去跟 jamovi Descriptives 的輸出逐格比對，確認兩邊算的是同一件事。
+:::
+
+::: {.en}
+You want R to compute the same descriptive statistics so you can compare them cell by cell against jamovi's Descriptives output, to confirm both sides are computing the same thing.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先在 jamovi 的 Descriptives 裡把 Skewness、Kurtosis、Percentiles 都勾出來，等一下要逐格比對
+- 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+:::
+
+::: {.en}
+- In jamovi's Descriptives, tick Skewness, Kurtosis, and Percentiles first; you will compare them cell by cell later.
+- Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+data 裡有 {outcome}（連續）、{group}（2 水準）、{id}（受試者編號）。
+
+請給我一段 R 程式碼，依 {group} 分組算出 {outcome} 的描述統計，我要拿它和 jamovi 的 Descriptives 逐格比對。
+
+規則：
+1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+2. 只用 data，不要 read.csv、不要 install.packages、不要 setwd。
+3. 說明哪些統計量在 R 和 jamovi 之間可能算不出同一個數字，以及為什麼。
+```
+:::
+
+::: {.en}
+```
+The data has {outcome} (continuous), {group} (2 levels), and
+{id} (participant identifier).
+
+Please give me R code that computes descriptive statistics for {outcome}
+split by {group}, so that I can compare it cell by cell against jamovi's
+Descriptives.
+
+Rules:
+1. Put every blank as a variable assignment at the top, with a string
+   placeholder as its value. Do not use comments as placeholders.
+2. Use data only. No read.csv, no install.packages, no setwd.
+3. Tell me which statistics may not come out to the same number in R and in
+   jamovi, and why.
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 只用 `data`，不出現 read.csv / install.packages / setwd（R tutor 的硬規則）
+- 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+- 輸出至少含 n、mean、sd、median、min、max，且依分組變項分開列出
+- 不宣稱輸出會與 jamovi 完全一致，並指出偏態、峰度（或四分位數）在兩邊可能算法不同
+:::
+
+::: {.en}
+- Uses only `data`, with no read.csv / install.packages / setwd (a hard rule for the R tutor)
+- Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+- Output includes at least n, mean, sd, median, min, and max, broken down by the grouping variable
+- Does not claim the output will match jamovi exactly, and points out that skewness, kurtosis, or the quartiles may be computed differently on each side
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **code-read**: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system
+- **code-run**: 貼進 Rj 執行，記錄輸出或錯誤原文；確認六項統計量（n、mean、sd、median、min、max）算得出來
+- **cross-check**: 回 jamovi 跑 Exploration ▸ Descriptives，Split by 放分組變項，勾 Skewness、Kurtosis、Percentiles，逐格比對，特別看四分位數是否相符
+:::
+
+::: {.en}
+- **code-read**: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls
+- **code-run**: Paste it into Rj and run it, recording the output or error verbatim; confirm the six statistics (n, mean, sd, median, min, max) come out
+- **cross-check**: Go back to jamovi and run Exploration ▸ Descriptives, split by the grouping variable, with Skewness, Kurtosis, and Percentiles ticked; compare cell by cell, especially whether the quartiles agree
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: code-run 六項統計量正確，且 cross-check 逐格比對後你已確認回覆的方法論宣稱正確
+- **reopen**: 回覆宣稱兩邊完全一致、或指認錯誤的四分位數演算法（例如講成 jamovi 用 type 6）→ 記為錯誤資訊，換 consultant 要正確說明
+:::
+
+::: {.en}
+- **solved**: The code-run output is correct for all six statistics, and after the cross-check you have confirmed the reply's methodological claims are correct.
+- **reopen**: The reply claims the two sides match exactly, or misidentifies the quartile algorithm (for example, saying jamovi uses type 6) -> record it as incorrect information and ask the consultant persona for a correct explanation.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Data Skills ch.2 Stroop (dataset source)](https://psyteachr.github.io/data-skills-v3/stroop.html)（CC BY-SA 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-18 | gemini | gemini-flash-latest | **fail** | zh 版，persona=tutor，promptLang=zh，證據 data/describe-code-crosscheck_stroop_zhTW.omv、回覆副本 data/replies/describe-code-crosscheck_stroop_zhTW.md。判定 fail：expected 形式上 4/4（只用 data；開頭字串佔位符可 parse；n/mean/sd/median/min/max 依 condition 分組；有指出四分位數與偏態峰度算法可能不同），但回覆宣稱「jamovi（以及 SPSS）預設計算四分位數採用的是 type = 6」，此為錯誤資訊，依規則一律判 fail。check：code-read 通過（library(dplyr)，無紅旗）；code-run 通過，Rj 零錯誤，六項統計量與 jamovi 一致；cross-check 已做（Descriptives 勾 Skewness／Kurtosis／Percentiles），四個四分位數全部不符：jamovi congruent 667.93／818.76、incongruent 796.78／984.23；Rj 用 type 6 得 667.48／819.07、796.22／984.68。此為 cross-check 抓到錯誤宣稱的示範案例。另記：本輪之前曾有一次提問漏貼第一句、以及 Rj 未跑新回覆程式碼的人為操作問題，此處記錄的是修正後重跑的版本。
+- 2026-09-18 | gemini | gemini-flash-latest | **fail** | en 版，persona=tutor，promptLang 未設（en 預設），證據 data/describe-code-crosscheck_stroop_en.omv、回覆副本 data/replies/describe-code-crosscheck_stroop_en.md。判定 fail：同一錯誤宣稱且措辭更強，回覆寫「jamovi uses type = 6 … To match jamovi, you must specify type = 6」。偏態峰度說明（jamovi 用樣本調整版 G1/G2）正確，但四分位數演算法的宣稱是錯誤資訊，依規則一律判 fail。check 同 zh 版：code-read 通過（library(tidyverse)，無紅旗）、code-run 零錯誤、cross-check 四個四分位數不符（數值同 zh 版：jamovi congruent 667.93／818.76、incongruent 796.78／984.23；Rj type 6 得 667.48／819.07、796.22／984.68）。提問與規格只有換行位置不同。
+
+
+---
+
 ## [拿到資料的第一眼該看什麼]{.zh}[What to look at first]{.en}
 
 **analysis**: `guider` &nbsp;|&nbsp; **design**: `within` &nbsp;|&nbsp; **stat_goal**: `describe` &nbsp;|&nbsp; **persona**: `explainer`
@@ -230,6 +457,120 @@ Please answer in beginner-friendly terms:
 
 - 2026-09-16 | gemini | gemini-flash-latest | **pass** | zh 版，persona=explainer，promptLang=zh，證據 data/describe-first-look_stroop_zhTW.omv、回覆副本 data/replies/describe-first-look_stroop_zhTW.md。expected 4/4：路徑 Analyses > Exploration > Descriptives 並指明 Split by；答「無法完全確定」分布形狀並要求自畫 Histogram 與看 Skewness/Kurtosis；點出四件摘要看不到的事，第一件正是「無法確認每人是否各 1 筆 congruent/incongruent」；全程未宣稱檢視過原始資料。check 三項齊備：path 比對本機 jmv/jamovi.yaml 逐字相符；number 817.7 / 811 / 418.9 / 1359 / 270 人 / 540 列 與 R 實算 817.7276 / 811.0353 / 418.9321 / 1358.5688 相符；assumption 已畫直方圖（08 descriptives/resources 內），回覆只給「大致對稱」的弱推論，與全體偏態 0.312 相容。
 - 2026-09-16 | gemini | gemini-flash-latest | **pass** | en 版，persona=explainer，promptLang 未設（en 預設），證據 data/describe-first-look_stroop_en.omv、回覆副本 data/replies/describe-first-look_stroop_en.md。expected 4/4，同 zh 版四項全中。此版在第 2 題更進一步：由 max 離 median 比 min 遠推出 possible slight right skew，並主動指出摘要看不出雙峰。R 實算全體偏態 0.312，該推論成立；分組後偏態僅 −0.077 與 −0.008，全體的右偏其實來自兩組平均數相差 147ms 的疊加。check 三項同 zh 版，另畫了第二張圖。
+
+
+---
+
+## [把長格式轉寬，並驗證轉對了]{.zh}[Reshaping long to wide, and verifying it worked]{.en}
+
+**analysis**: `rtutor` &nbsp;|&nbsp; **design**: `within` &nbsp;|&nbsp; **stat_goal**: `compare-2` &nbsp;|&nbsp; **persona**: `consultant`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+資料是長格式，一位受試者在兩個條件下各佔一列。jamovi 的配對 t 檢定需要寬格式，想請 Rj 幫忙轉，並確認轉換沒有出錯。
+:::
+
+::: {.en}
+The data is in long format, with one row per participant per condition. jamovi's paired t-test needs wide format, and you want Rj to reshape it and help you verify nothing went wrong.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 記下受試者人數，轉寬之後列數應該等於這個數字
+- 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+:::
+
+::: {.en}
+- Write down the number of participants; the reshaped row count should equal it.
+- Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+data 是長格式，540 列：每位 {id} 在 {group} 的兩個水準（congruent、incongruent）各有一列 {outcome}。
+
+jamovi 的 Paired Samples T-Test 需要寬格式。請給我一段 R 程式碼把它轉過去。
+
+規則：
+1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+2. 只用 data，不要 read.csv、不要 install.packages。
+3. 轉完之後印出可以讓我自己核對「有沒有轉錯」的東西，並說明我該看到什麼數字。
+4. 不要幫我跑 t 檢定。
+```
+:::
+
+::: {.en}
+```
+The data is in long format, 540 rows: each {id} has one row of {outcome}
+under each of the two levels of {group}, congruent and incongruent.
+
+jamovi's Paired Samples T-Test needs wide format. Please give me R code
+that reshapes it.
+
+Rules:
+1. Put every blank as a variable assignment at the top, with a string
+   placeholder as its value. Do not use comments as placeholders.
+2. Use data only. No read.csv, no install.packages.
+3. After reshaping, print something that lets me check for myself whether
+   it went wrong, and tell me what numbers I should see.
+4. Do not run the t-test for me.
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+- 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查
+- 有驗證步驟：印出列數、每位受試者的出現次數、或完整案例數，並說明應該看到的數字
+- 沒有幫忙跑 t 檢定
+:::
+
+::: {.en}
+- Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+- Blanks are variable assignments at the top with string placeholders as their values; the code passes a syntax check before they are filled in
+- Includes a verification step, printing the row count, the count per participant, or the number of complete cases, and states what number you should see
+- Does not run the t-test for you
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **code-read**: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system
+- **code-run**: 針對回覆的轉檔程式碼貼進 Rj 執行（不是隨手跑別的程式碼），記錄輸出的維度與欄名
+- **cross-check**: 用轉出來的寬檔在 jamovi 跑 T-Tests ▸ Paired Samples T-Test，確認能選到轉出的兩欄
+:::
+
+::: {.en}
+- **code-read**: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls
+- **code-run**: Paste the reply's reshaping code itself into Rj and run it (not some other code), and record the resulting dimensions and column names
+- **cross-check**: Use the reshaped wide data to run T-Tests ▸ Paired Samples T-Test in jamovi, and confirm the two reshaped columns can be selected
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: code-run 維度正確（270 列）且 cross-check 的配對 t 檢定能跑起來
+- **reopen**: 列數不是 270、程式碼用了環境沒有的套件、或根本沒有驗證步驟 → 把結果貼回，換 tutor persona 逐行檢查
+:::
+
+::: {.en}
+- **solved**: The code-run dimensions are correct (270 rows), and the cross-check paired t-test runs successfully.
+- **reopen**: The row count is not 270, the code uses a package not available in the environment, or there is no verification step at all -> paste the result back and ask the tutor persona to check it line by line.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [psyteachr Data Skills ch.2 Stroop (dataset source)](https://psyteachr.github.io/data-skills-v3/stroop.html)（CC BY-SA 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/long-to-wide-check_stroop_zhTW.omv、回覆副本 data/replies/long-to-wide-check_stroop_zhTW.md。判定 partial：expected 4/4（只用 data；開頭字串佔位符可 parse；明說轉出後 dim 應為 270 3；沒有幫忙跑 t 檢定）。但 check 未達標：Rj 實際執行的是 summary(data)，不是回覆的轉檔程式碼，code-run 未針對模型產出的程式碼執行；cross-check 也未做（沒有跑 Paired Samples T-Test），依規則 expected 全中但 check 有失敗只能記 partial。
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/long-to-wide-check_stroop_en.omv、回覆副本 data/replies/long-to-wide-check_stroop_en.md。判定 partial：expected 4/4，code-read 通過；code-run 通過（Rj 這次確實執行了回覆的轉檔程式碼，輸出維度 270 × 3，congruent／incongruent 兩欄名在 head() 可見）；但 cross-check 未做，沒有跑 Paired Samples T-Test 比對。
 
 
 ---
@@ -547,6 +888,339 @@ Please answer all three:
 
 - 2026-09-16 | gemini | gemini-flash-latest | **partial** | zh 版，persona=consultant（未設 role，取 .a.yaml 預設），promptLang=zh，證據 data/paired-vs-independent_stroop_zhTW.omv、回覆副本 data/replies/paired-vs-independent_stroop_zhTW.md。expected 2/4：路徑兩條都對，但第 2 題標題寫「**可以**看出高度配對的特徵」，與 expected 第 2、4 項相反——它把「participant_id 有 270 個水準、總列數 540」推成「每位受試者皆正好出現 2 次」，而 540 ÷ 270 = 2 推不出這件事（一人 3 列、另一人 1 列同樣成立）。括號裡補了「無法 100% 排除」，但標題已經定調。該斷言碰巧為真（R 實算每人正好 2 列、每人每條件正好 1 筆，270/270），沒有錯誤資訊，故不判 fail。check 三項零錯：三條路徑逐字比對通過，含第三方模組的 Linear Models ▸ GAMLj3 ▸ Linear Mixed Model；引用的 270 與 540 正確；cross-check 已跑，GAMLj 混合模型得 t(269) = 13.50，與配對 t 檢定的 t(269) = −13.50 同值（差在對比方向），誤用獨立樣本得 Welch t(495.76) = −13.72 仍 p < .001。原文已收進 verify/spot-the-error.qmd 第 12 題，與英文版並列作為對照。
 - 2026-09-16 | gemini | gemini-flash-latest | **pass** | en 版，persona=consultant（同上取預設），promptLang 未設（en 預設），證據 data/paired-vs-independent_stroop_en.omv、回覆副本 data/replies/paired-vs-independent_stroop_en.md。expected 4/4：第 2 題答 'Partially, but not definitively'，並明說 the summary does not include a cross-tabulation、因此 cannot strictly verify 每人是否一筆 congruent 一筆 incongruent。與 zh 版只差 promptLang，同模型同資料同 persona，差異即語言本身，是現成的對照組。check 三項同 zh 版，零錯。
+
+
+---
+
+## [迴歸診斷程式碼：先攔下不該進模型的變項]{.zh}[Regression diagnostic code that catches variables that should not enter the model]{.en}
+
+**analysis**: `rtutor` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `predict` &nbsp;|&nbsp; **persona**: `tutor`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+有一個連續結果變項與兩個預測變項，另外還有一個受試者編號欄。想請 R 做迴歸並附診斷，也想知道編號欄該不該放進模型。
+:::
+
+::: {.en}
+You have a continuous outcome and two predictors, plus a participant identifier column. You want R code for the regression with diagnostics, and want to know whether the identifier should enter the model.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先在 jamovi 裡看過受試者編號欄的型別；本資料讀進來是 Nominal、180 個水準，不是連續變項
+- 確認 Rj 已安裝（否則 R tutor 會改教 Syntax Mode）
+:::
+
+::: {.en}
+- Check the participant identifier column's type in jamovi first; in this data it reads in as Nominal with 180 levels, not continuous.
+- Confirm Rj is installed (otherwise the R tutor will teach Syntax Mode instead).
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+data 有 {outcome}（連續結果變項）、{pred_a}（連續預測變項）、{pred_b}（編碼為 -1 與 1 的操弄變項）、{id}（受試者編號），共 180 列，沒有遺漏。
+
+請給我一段 R 程式碼，用 {pred_a} 與 {pred_b} 預測 {outcome}，並做迴歸診斷。
+
+規則：
+1. 待填處寫成開頭的變數指派、值放字串佔位符，不要用註解當佔位符。
+2. 只用 data，不要 read.csv、不要 install.packages。
+3. 我列出的變項裡如果有不該進模型的，請先告訴我，不要直接放進去。
+4. 診斷要能讓我自己判斷共線性與殘差是否有問題。
+```
+:::
+
+::: {.en}
+```
+The data has {outcome} (continuous outcome), {pred_a} (continuous
+predictor), {pred_b} (a manipulation coded -1 and 1), and {id}
+(participant identifier). There are 180 rows with no missing values.
+
+Please give me R code that predicts {outcome} from {pred_a} and {pred_b},
+with regression diagnostics.
+
+Rules:
+1. Put every blank as a variable assignment at the top, with a string
+   placeholder as its value. Do not use comments as placeholders.
+2. Use data only. No read.csv, no install.packages.
+3. If any variable I listed should not enter the model, tell me first
+   rather than putting it in.
+4. The diagnostics should let me judge collinearity and the residuals for
+   myself.
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 只用 `data`，不出現 read.csv / install.packages（R tutor 的硬規則）
+- 待填處是開頭的變數指派、值為字串佔位符，填值前即可通過語法檢查，即使程式碼變長也一樣
+- 受試者編號欄沒有進入模型，並說明理由（它是識別碼）
+- 診斷至少包含共線性（VIF 或等價指標）與殘差檢視兩項
+:::
+
+::: {.en}
+- Uses only `data`, with no read.csv / install.packages (a hard rule for the R tutor)
+- Blanks are variable assignments at the top with string placeholders as their values, and the code passes a syntax check before they are filled in, even though the code is longer
+- The participant identifier does not enter the model, with an explanation that it is an identifier
+- Diagnostics include at least collinearity (VIF or an equivalent) and a look at the residuals
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **code-read**: 只用 `data`、`library()` 都在 rj_environment 裡、無 setwd／路徑／system；若用 car::vif() 要先確認 car 是否在 rj_environment 裡
+- **code-run**: 貼進 Rj 執行，記錄輸出或錯誤原文，核對係數、R²、F 值
+- **cross-check**: 回 jamovi 跑 Regression ▸ Linear Regression，Assumption Checks 下勾 Collinearity statistics，比對係數與 VIF
+:::
+
+::: {.en}
+- **code-read**: Uses only `data`; any `library()` calls are packages available in rj_environment; no setwd, file paths, or system calls; if it uses car::vif(), confirm car is actually available in rj_environment
+- **code-run**: Paste it into Rj and run it, recording the output or error verbatim, and check the coefficients, R-squared, and F value
+- **cross-check**: Go back to jamovi and run Regression ▸ Linear Regression, ticking Collinearity statistics under Assumption Checks, and compare the coefficients and VIF
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 識別碼被攔下且理由正確，code-run 的係數與 cross-check 的 jamovi 結果一致
+- **reopen**: 識別碼被放進模型、或診斷宣稱兩個預測變項高度相關要小心共線性（VIF 其實接近 1）→ 記為錯誤資訊，換 consultant 要完整版
+:::
+
+::: {.en}
+- **solved**: The identifier is caught with a correct explanation, and the code-run coefficients match the cross-check results in jamovi.
+- **reopen**: The identifier is entered into the model, or the diagnostics claim the two predictors are highly correlated and warn about collinearity when the VIF is actually near 1 -> record it as incorrect information and ask the consultant persona for the full solution.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [OSF RP:P #44 Payne et al. (2008) replication data (Reproducibility Project: Psychology dataset source)](https://osf.io/rc6mv/)（CC0 1.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | zh 版，persona=tutor，promptLang=zh，證據 data/regression-code-check_payne2008_zhTW.omv、回覆副本 data/replies/regression-code-check_payne2008_zhTW.md。判定 partial：expected 4/4（開頭三個字串佔位符 target_dv／target_iv1／target_iv2，程式碼雖長但格式規範仍守住；受試者編號欄未進模型並說明是識別碼；診斷含 cor()（0.078，等同 VIF ≈ 1.006）與 plot(model) 殘差圖）。回覆說明識別碼若進模型會耗盡自由度，這在 jamovi 情境下正確（該欄為 Nominal、180 水準）。check：code-read 通過（無 library、無 car）；code-run 通過，係數與規格一致（indirect 0.7712、manip −0.0384、R² 0.297、F(2,177) = 37.4）；但 cross-check 未做，沒有跑 Linear Regression 比對，依規則只能記 partial。
+- 2026-09-17 | gemini | gemini-flash-latest | **partial** | en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。判定 partial：expected 3/4，第 2 項未命中——開頭雖有 dep_var／indep_vars 佔位符，但第 19 行 cor(data[[ "FILL_IN_PREDICTOR1" ]], data[[ "FILL_IN_PREDICTOR2" ]]) 又把佔位符直接寫在函式呼叫裡，填值處分散兩地，是本批唯一的格式破口。其餘三項同 zh 版命中：識別碼未進模型並正確說明；診斷含共線性與殘差圖。check：code-read、code-run 皆通過，係數同上；cross-check 未做。
+
+
+---
+
+## [迴歸預測變項該怎麼選]{.zh}[Choosing regression predictors]{.en}
+
+**analysis**: `guider` &nbsp;|&nbsp; **design**: `none` &nbsp;|&nbsp; **stat_goal**: `predict` &nbsp;|&nbsp; **persona**: `explainer`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+資料有一個連續結果變項、兩個候選預測變項，還有一欄受試者編號，想知道該用哪個分析、哪個變項不該進模型、以及共線性能不能從摘要統計判斷。
+:::
+
+::: {.en}
+Your data has one continuous outcome, two candidate predictors, and a participant-id column. You want to know which analysis to run, which variable should not enter the model, and whether collinearity can be judged from the summary statistics alone.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 把 {outcome}、{pred_a}、{pred_b}、{id} 都勾進 Variables to describe。注意 {id} 在 jamovi 裡會被讀成 Nominal（180 個水準），這是這條陷阱的關鍵——它不會顯示成一串巨大的數字平均數
+- 確認 {pred_a} 與 {pred_b} 在 jamovi 裡是連續變項（Continuous）。{pred_b} 雖然只有兩個值（-1 與 1），仍會被歸為連續，之後在 Linear Regression 裡會落進 Covariates 欄位框，不是 Factors
+:::
+
+::: {.en}
+- Tick {outcome}, {pred_a}, {pred_b}, and {id} into Variables to describe. jamovi reads {id} as Nominal with {n} levels. That is the trap at the heart of this entry. It will not show up as a huge, meaningless average.
+- Confirm {pred_a} and {pred_b} are Continuous in jamovi. {pred_b} only takes two values (-1 and 1), yet it is still numeric, so it belongs in the Covariates box of Linear Regression, not Factors.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+{outcome} 是連續結果變項，{pred_a} 是連續預測變項，{pred_b} 是編碼為 -1 與 1 的操弄變項，{id} 是受試者編號。共 {n} 列，沒有遺漏。
+
+請用初學者聽得懂的方式回答：
+1. 我要用 {pred_a} 與 {pred_b} 預測 {outcome}，該用哪個分析？請給逐字選單路徑，並說明每個變項該放進哪一個欄位框。
+2. 我列出的四個變項裡，有沒有哪一個不該進入這個模型？為什麼？
+3. 共線性該怎麼查？這件事你能從我提供的摘要統計判斷嗎？
+```
+:::
+
+::: {.en}
+```
+{outcome} is a continuous outcome, {pred_a} is a continuous predictor,
+{pred_b} is a manipulation coded -1 and 1, and {id} identifies the
+participant. There are {n} rows with no missing values.
+
+Please answer in beginner-friendly terms:
+1. I want to predict {outcome} from {pred_a} and {pred_b}. Which analysis should I use? Give the exact menu path, and say which box each variable goes into.
+2. Of the four variables I listed, is there one that should not enter the model? Why?
+3. How do I check for collinearity? Can you judge it from the summary statistics I sent?
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 指名 Regression ▸ Linear Regression 逐字路徑，說明 {outcome} 放 Dependent Variable、{pred_a} 與 {pred_b} 放 Covariates（因為兩者在 jamovi 裡都是數值型；若 {pred_b} 改為類別型才會改放 Factors）
+- 點名 {id} 是識別碼、不該當預測變項進入模型，理由是它只是每列的代碼，放進去只會耗盡自由度（在 jamovi 中 {id} 是 180 水準的類別變項，放進 Factors 會產生 179 個虛擬變項）
+- 明確承認共線性（VIF）無法從摘要統計判斷，要跑完模型、在 Assumption Checks 勾選 Collinearity statistics 才看得到
+- 不宣稱看過散佈圖、殘差圖，或已經知道共線性的實際程度
+:::
+
+::: {.en}
+- Names the exact path Regression ▸ Linear Regression, and states {outcome} goes in Dependent Variable while {pred_a} and {pred_b} go in Covariates because both are numeric in jamovi (only a categorical {pred_b} would belong in Factors instead)
+- Names {id} as an identifier that should not enter the model, because it is just a per-row code and including it only wastes degrees of freedom ({id} is a 180-level categorical variable in jamovi, so putting it in Factors would create 179 dummy variables)
+- States plainly that collinearity (VIF) cannot be judged from the summary statistics; it only appears after you run the model and tick Collinearity statistics under Assumption Checks
+- Does not claim to have seen a scatterplot or residual plot, or to already know the actual degree of collinearity
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **path**: 回覆中 "Analyses ▸ Regression ▸ Linear Regression" 路徑在你的 jamovi 選單裡逐字點得到
+- **number**: 回覆引用的 n 與各變項的 mean／sd 和 Descriptives 面板一致
+- **assumption**: 自己跑一次 Linear Regression（Dependent Variable = {outcome}，Covariates = {pred_a} + {pred_b}），勾選 Collinearity statistics，看 VIF 是否與回覆的說法相容
+:::
+
+::: {.en}
+- **path**: The "Analyses ▸ Regression ▸ Linear Regression" path in the reply can be clicked verbatim in your own jamovi
+- **number**: The n and each variable's mean/sd cited in the reply match what you see in the Descriptives panel
+- **assumption**: Run Linear Regression yourself (Dependent Variable = {outcome}, Covariates = {pred_a} + {pred_b}), tick Collinearity statistics, and check whether the VIF values are compatible with what the reply claims
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 四項 expected 全命中且 path 查核零錯 → 依建議執行
+- **reopen**: 回覆宣稱已知共線性的實際程度，或未點名 {id} 應排除在模型外 → 記為越界，換 consultant persona 重問一次比對
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit and the path check is clean -> follow the advice.
+- **reopen**: The reply claims to already know the actual degree of collinearity, or fails to name {id} as something to exclude from the model -> record it as overreaching and ask again with the consultant persona to compare.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [RP:P #44 Payne et al. 2008 replication data (OSF)](https://osf.io/rc6mv/)（CC0 1.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-17 | gemini | gemini-flash-latest | **pass** | zh 版，persona=explainer，promptLang=zh，證據 data/regression-predictors_payne2008_zhTW.omv、回覆副本 data/replies/regression-predictors_payne2008_zhTW.md。expected 4/4：路徑 Analyses > Regression > Linear Regression，direct 放 Dependent Variable、indirect 放 Covariates，並說明 manip 因為是數值型可放 Covariates（若改為 Nominal 則放 Factors）；點名 subject 是識別碼不該進模型，理由是會耗盡自由度——在 jamovi 情境下正確（subject 為 Nominal、180 水準）；明說無法從摘要判斷共線性，要在 Assumption Checks 勾 Collinearity statistics；未宣稱看過散佈圖或殘差圖。check：path 逐字存在；number 只引用 n = 180，正確；assumption：使用者實跑 Linear Regression（dep = direct、covs = indirect + manip、勾 Collinearity），indirect 0.77、manip −0.04（p = .194）、R² = 0.30、VIF 皆 1.01，與回覆相容。
+- 2026-09-17 | gemini | gemini-flash-latest | **pass** | en 版，persona=explainer，promptLang 未設（en 預設），證據 data/regression-predictors_payne2008_en.omv、回覆副本 data/replies/regression-predictors_payne2008_en.md。expected 4/4，內容同 zh 版：Linear Regression 逐字路徑與欄位歸屬正確、明確排除 subject 並說明會耗盡自由度、承認無法判斷共線性需勾 Collinearity statistics、未宣稱看過散佈圖或殘差圖。check 三項同 zh 版皆通過：path 逐字相符；number 僅引用 n = 180；assumption 實跑結果 indirect 0.77、manip −0.04（p = .194）、R² = 0.30、VIF 皆 1.01，與回覆相容。
+
+
+---
+
+## [三組比較前該檢查什麼]{.zh}[What to check before comparing three groups]{.en}
+
+**analysis**: `guider` &nbsp;|&nbsp; **design**: `between` &nbsp;|&nbsp; **stat_goal**: `compare-k` &nbsp;|&nbsp; **persona**: `consultant`
+
+### [情境]{.zh}[Scenario]{.en}
+
+::: {.zh}
+資料有一個評分結果變項與一個三水準分組變項，想知道該用哪個分析比較三組平均數、前提檢查在 jamovi 哪裡勾選，以及摘要統計能不能看出組間差異——事後多重比較不在這次的範圍內。
+:::
+
+::: {.en}
+Your data has a rating outcome and a three-level grouping variable. You want to know which analysis compares the three groups' means, where to tick its assumption checks in jamovi, and whether the summary statistics alone can reveal a difference. Post-hoc comparisons are out of scope this time.
+:::
+
+### [送出前必做]{.zh}[Prerequisites]{.en}
+
+::: {.zh}
+- 先確認資料列數是 {n}。這個檔以舊式 Mac 換行儲存（單獨的 CR，沒有 LF），部分工具會把整份誤讀成 1 列，載進 jamovi 後第一件事就是看列數
+- 把 {outcome} 與 {group} 勾進 Variables to describe，核對三組的 n 是否為 {g1} {n1} 人、{g2} {n2} 人、{g3} {n3} 人
+:::
+
+::: {.en}
+- First confirm the row count is {n}. This file uses old-style Mac line endings, with a bare CR and no LF. Some tools misread the whole file as a single row, so check the row count first after loading it into jamovi.
+- Tick {outcome} and {group} into Variables to describe, and check the three groups' n against {g1} = {n1}, {g2} = {n2}, and {g3} = {n3}.
+:::
+
+### [提示詞]{.zh}[Prompt]{.en}
+
+::: {.zh}
+```
+{outcome} 是 {scale_min} 到 {scale_max} 的評分，{group} 有 {k} 個水準（{g1} {n1} 人、{g2} {n2} 人、{g3} {n3} 人），共 {n} 人，每人只屬於一個水準。
+
+請回答以下三件事：
+1. 比較這三組的 {outcome} 平均數該用哪個分析？請給逐字選單路徑。
+2. 這個分析有哪些前提要檢查？各自在 jamovi 的哪裡勾選？請給逐字路徑。
+3. 從我提供的摘要統計，你能判斷這三組有沒有差異嗎？請誠實回答。
+
+請不要給事後多重比較的建議，那不在我這次的範圍內。
+```
+:::
+
+::: {.en}
+```
+{outcome} is a {scale_min}-to-{scale_max} rating. {group} has {k} levels:
+{g1} with {n1} people, {g2} with {n2}, and {g3} with {n3}, for {n} people
+in total. Each person belongs to one level only.
+
+Please answer all three:
+1. Which analysis compares the mean of {outcome} across these three groups? Give the exact menu path.
+2. Which assumptions does that analysis need, and where do I tick each one in jamovi? Give the exact paths.
+3. From the summary statistics I sent, can you tell whether the three groups differ? Answer honestly.
+
+Please do not suggest post-hoc multiple comparisons. They are out of scope for me this time.
+```
+:::
+
+### [期望回覆要素]{.zh}[Expected elements]{.en}
+
+::: {.zh}
+- 指名 ANOVA ▸ One-Way ANOVA（或 ANOVA ▸ ANOVA）逐字路徑，兩者在 jamovi 選單裡都真實存在
+- 說出變異數同質性與常態性兩項前提，並正確指出兩者的勾選位置都在 Assumption Checks 區塊（Homogeneity test、Normality test、Q-Q plot），不是 Variances 區塊——Variances 區塊只有 Welch's 與 Fisher's 的選擇
+- 明確承認從摘要統計判斷不了三組是否有差異，要跑完分析才知道
+- 沒有給事後多重比較的建議，守住提問稿的範圍限制
+:::
+
+::: {.en}
+- Names the exact path ANOVA ▸ One-Way ANOVA (or ANOVA ▸ ANOVA); both exist in the real jamovi menu
+- States the homogeneity-of-variance and normality assumptions, and correctly places both tick boxes under Assumption Checks (Homogeneity test, Normality test, Q-Q plot) rather than under Variances. The Variances block only offers the choice between Welch's and Fisher's
+- States plainly that the summary statistics alone cannot reveal whether the three groups differ; running the analysis is required to know
+- Gives no post-hoc multiple-comparison advice, honoring the prompt's scope limit
+:::
+
+### [查核點]{.zh}[Check]{.en}
+
+::: {.zh}
+- **path**: 回覆中每條 "Analyses ▸ …" 路徑在你的 jamovi 選單裡逐字點得到，包括前提檢查的勾選位置是否確實在 Assumption Checks 而非 Variances 區塊
+- **number**: 回覆引用的三組 n 與 Descriptives 面板一致
+- **assumption**: 自己跑一次 One-Way ANOVA，在 Assumption Checks 勾 Homogeneity test 與 Normality test，結果與回覆的說法相容或不相容都記下
+:::
+
+::: {.en}
+- **path**: Every "Analyses ▸ ..." path in the reply can be clicked verbatim in your own jamovi, including whether the assumption tick boxes are really under Assumption Checks rather than Variances
+- **number**: The three groups' n cited in the reply match what you see in the Descriptives panel
+- **assumption**: Run One-Way ANOVA yourself, tick Homogeneity test and Normality test under Assumption Checks, and note whether the results match or contradict what the reply claims
+:::
+
+### [判準]{.zh}[Stop criteria]{.en}
+
+::: {.zh}
+- **solved**: 四項 expected 全命中且 path 查核零錯 → 依建議執行
+- **reopen**: 任一選單路徑點不到（例如把 Homogeneity test 誤植在 Variances 區塊），或回覆給了事後比較建議 → 記為越界；若常態性不成立，可改看 ANOVA ▸ Non-Parametric ▸ One-Way ANOVA（Kruskal-Wallis），事後比較的讀物另見 links
+:::
+
+::: {.en}
+- **solved**: All four expected elements are hit and the path check has zero errors -> proceed with the suggestion.
+- **reopen**: Any menu path cannot be clicked (for example, placing Homogeneity test under Variances by mistake), or the reply offers post-hoc advice -> record it as overreaching; if normality fails, consider ANOVA ▸ Non-Parametric ▸ One-Way ANOVA (Kruskal-Wallis) instead, and see links for post-hoc reading.
+:::
+
+### [延伸閱讀]{.zh}[Links]{.en}
+
+- [RP:P #43 Monin et al. 2008 replication data (OSF)](https://osf.io/pz0my/)（CC0 1.0）
+- [lsj-book ch.13 Comparing several means: one-way ANOVA (includes post-hoc tests)](https://davidfoxcroft.github.io/lsj-book/13-Comparing-several-means-one-way-ANOVA.html)（CC BY-SA 4.0）
+
+### [實測記錄]{.zh}[Tested with]{.en}
+
+- 2026-09-17 | gemini | gemini-flash-latest | **fail** | zh 版，persona=consultant，promptLang=zh，證據 data/three-group-comparison_monin2008_zhTW.omv、回覆副本 data/replies/three-group-comparison_monin2008_zhTW.md。判為 fail：回覆把 Homogeneity test（Levene's）的勾選位置寫在 Variances 區塊，但 jamovi 實際上 Homogeneity test 在 Assumption Checks 區塊，依規則「幻覺選單路徑一律 fail」。其餘三項：路徑 Analyses > ANOVA > One-Way ANOVA 正確；說出常態性與同質性兩項前提；明說「無法判斷」三組是否有差異；完全沒提事後檢定。check：number 引用整體平均 4.76、sd 1.8，與 357 ÷ 75 相符；assumption 使用者實跑 Welch F(2, 45.45) = 2.25、p = .117，Levene F = 0.00、p = .996，Shapiro-Wilk W = 0.93、p < .001（常態性不成立），拿來與回覆的說法比對；使用者沒有勾事後檢定。
+- 2026-09-17 | gemini | gemini-flash-latest | **pass** | en 版，persona=consultant，promptLang 未設（en 預設），證據 data/three-group-comparison_monin2008_en.omv、回覆副本 data/replies/three-group-comparison_monin2008_en.md。判為 pass。expected 4/4：給出 Analyses > ANOVA > One-Way ANOVA（另提 Analyses > ANOVA > ANOVA），同質性與常態性都正確寫在 Assumption Checks 底下的 Homogeneity test、Normality test、Q-Q plot；明說「No」無法從摘要判斷三組是否有差異；沒提事後檢定。check 三項通過：path 逐字相符；number 同 zh 版（整體平均 4.76、sd 1.8）；assumption 同 zh 版實測數值（Welch F(2, 45.45) = 2.25、p = .117；Levene F = 0.00、p = .996；Shapiro-Wilk W = 0.93、p < .001），與回覆相容。
 
 
 ---
