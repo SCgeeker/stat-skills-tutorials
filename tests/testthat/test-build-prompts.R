@@ -322,13 +322,36 @@ test_that("render_reading_map_md 同組內 chapter 連結依 url 去重", {
   expect_equal(length(matches), 1)
 })
 
-test_that("render_reading_map_md 該組沒有任何 chapter 時顯示 No chapter linked yet", {
+test_that("render_reading_map_md 該組沒有 chapter 時改列範例資料與實測檔位置，不出現待辦措辭", {
   entries <- list(
     y1 = mk_entry("predict", "none",
                   links = list(list(title = "Dataset Y", url = "http://data-y", license = "CC0", kind = "dataset")))
   )
+  md <- render_reading_map_md(entries, data_dir_url = "http://example/data")
+  table1_part <- sub("(?s)## Datasets used.*$", "", md, perl = TRUE)
+  expect_true(grepl("Worked example in this library:", table1_part, fixed = TRUE))
+  expect_true(grepl("[Dataset Y](http://data-y) · CC0", table1_part, fixed = TRUE))
+  expect_true(grepl("Recorded test files: [data/ on GitHub](http://example/data)", table1_part, fixed = TRUE))
+  expect_false(grepl("linked yet", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 該組既無 chapter 也無 dataset 時只列實測檔位置", {
+  entries <- list(
+    v1 = mk_entry("screen", "none", links = list())
+  )
+  md <- render_reading_map_md(entries, data_dir_url = "http://example/data")
+  expect_true(grepl("Recorded test files: [data/ on GitHub](http://example/data)", md, fixed = TRUE))
+  expect_false(grepl("Worked example in this library:", md, fixed = TRUE))
+  expect_false(grepl("linked yet", md, fixed = TRUE))
+})
+
+test_that("render_reading_map_md 的實測檔位置預設指向公開 repo 的 data/", {
+  entries <- list(
+    u1 = mk_entry("predict", "none",
+                  links = list(list(title = "Dataset U", url = "http://data-u", license = "CC0", kind = "dataset")))
+  )
   md <- render_reading_map_md(entries)
-  expect_true(grepl("No chapter linked yet", md, fixed = TRUE))
+  expect_true(grepl("https://github.com/SCgeeker/stat-skills-tutorials/tree/main/data", md, fixed = TRUE))
 })
 
 test_that("render_reading_map_md 的 dataset 連結不進表一，只進表二", {

@@ -354,6 +354,9 @@ link_kind <- function(link) {
 #' Markdown 表格欄位內容跳脫：把 "|" 轉成 "\|"，避免破壞表格分隔
 .escape_md_cell <- function(x) gsub("|", "\\|", x, fixed = TRUE)
 
+#' 對照表中「本庫實測檔」的位置：公開 repo 的 data/ 資料夾
+READING_MAP_DATA_URL <- "https://github.com/SCgeeker/stat-skills-tutorials/tree/main/data"
+
 #' 依 stat_goal x design 分組，產生「外部教材對照表」的 Markdown（兩張表）
 #' 純函式：只讀 entries（list 的 name 即 id）裡的 stat_goal / design / links，
 #' 不觸碰檔案。
@@ -361,15 +364,17 @@ link_kind <- function(link) {
 #' 表一「Where to read」：依資料中實際出現的 (stat_goal, design) 組合各一
 #' 列，goal 依 screen/describe/compare-2/compare-k/associate/predict/
 #' reliability 排序，design 依 between/within/mixed/none 排序。Where to
-#' read 欄只收該組所有條目裡 kind 為 chapter 的 link，依 url 去重；該組沒有
-#' 任何 chapter link 時顯示 "No chapter linked yet"（刻意保留的缺口，不補）。
+#' read 欄只收該組所有條目裡 kind 為 chapter 的 link，依 url 去重。該組沒有
+#' 任何 chapter link 時，改列本庫的正式範例：該組條目的 dataset link（範例
+#' 資料），以及實測檔所在的 data/ 位置。公開頁面不出現待辦措辭。
 #'
 #' 表二「Datasets used in the prompt library」：收所有條目裡 kind 為
 #' dataset 的 link，依 url 去重；沒有任何 dataset link 時整張表省略。
 #'
 #' @param entries named list，來自 read_entries()
+#' @param data_dir_url character(1) 實測檔所在位置的網址，預設為公開 repo 的 data/
 #' @return character(1) Markdown 全文
-render_reading_map_md <- function(entries) {
+render_reading_map_md <- function(entries, data_dir_url = READING_MAP_DATA_URL) {
   goal_labels <- c(
     screen       = "Screen data before analysis",
     describe     = "Describe variables",
@@ -402,26 +407,39 @@ render_reading_map_md <- function(entries) {
     d <- combos$design[r]
     group_ids <- sort(ids[goals == g & designs == d])
 
-    chapter_links <- list()
-    seen_urls <- character()
-    for (id in group_ids) {
-      for (l in entries[[id]]$links) {
-        if (identical(link_kind(l), "chapter") && !(l$url %in% seen_urls)) {
-          chapter_links[[length(chapter_links) + 1]] <- l
-          seen_urls <- c(seen_urls, l$url)
+    # 收集該組某一 kind 的 link，依 url 去重
+    group_links <- function(kind) {
+      out <- list()
+      seen_urls <- character()
+      for (id in group_ids) {
+        for (l in entries[[id]]$links) {
+          if (identical(link_kind(l), kind) && !(l$url %in% seen_urls)) {
+            out[[length(out) + 1]] <- l
+            seen_urls <- c(seen_urls, l$url)
+          }
         }
       }
+      out
+    }
+    fmt_links <- function(links) {
+      vapply(links, function(l) {
+        sprintf("[%s](%s) · %s", .escape_md_cell(l$title), l$url, .escape_md_cell(l$license))
+      }, character(1))
     }
 
-    where <- if (length(chapter_links) == 0) {
-      "No chapter linked yet"
+    chapter_links <- group_links("chapter")
+    where <- if (length(chapter_links) > 0) {
+      paste(fmt_links(chapter_links), collapse = "<br>")
     } else {
-      paste(
-        vapply(chapter_links, function(l) {
-          sprintf("[%s](%s) · %s", .escape_md_cell(l$title), l$url, .escape_md_cell(l$license))
-        }, character(1)),
-        collapse = "<br>"
-      )
+      # 沒有教材章節：改列本庫的正式範例（範例資料＋實測檔位置）
+      dataset_links <- group_links("dataset")
+      recorded <- sprintf("Recorded test files: [data/ on GitHub](%s)", data_dir_url)
+      if (length(dataset_links) > 0) {
+        paste(c("Worked example in this library:", fmt_links(dataset_links), recorded),
+              collapse = "<br>")
+      } else {
+        recorded
+      }
     }
 
     prompt_col <- paste(sprintf("`%s`", .escape_md_cell(group_ids)), collapse = ", ")
