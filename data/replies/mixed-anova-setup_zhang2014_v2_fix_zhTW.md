@@ -24,6 +24,9 @@
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 library(tidyverse)
 
 # --- 請在此設定變數（將字串替換為摘要中的實際欄位名稱）---
@@ -41,17 +44,17 @@ data_long <- data %>%
 
 # --- 印出每個受試者 × 時間點的列數供核對 ---
 # 若轉換正確，每個受試者在每個時間點的計數通常應為 1
-table(Participant = data_long$Participant_ID, Time = data_long[[time_col_name]])r
+table(Participant = data_long$Participant_ID, Time = data_long[[time_col_name]])
+```
+
+說明：
 
 在 `<rj_environment>` 中已包含 `tidyverse` 套件，我們可以使用 `tidyr::pivot_longer()` 函式將資料由寬格式（Wide）轉為長格式（Long）。
 
 請參考下方的骨架，並根據資料摘要將開頭的字串佔位符替換為正確的欄位名稱：
-
-
 
 思考引導：
 - 查看上方資料摘要，受試者在 T1 與 T2 的分數欄位名稱分別是什麼？請將它們填入 `target_cols` 中。
 - 執行後觀察列聯表輸出，是否有任何受試者的計數不為 1 或出現遺漏？
 
 請把程式碼貼進 Rj Editor 並按下 Run，若有任何錯誤訊息或疑問請回報給我。
-

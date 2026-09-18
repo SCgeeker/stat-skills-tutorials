@@ -30,6 +30,9 @@ Please guide me under these rules, without giving the full solution:
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 library(tidyverse)
 
 # --- Fill in these placeholders ---
@@ -48,13 +51,13 @@ data_long <- data %>%
 
 # Verify: Print row counts per participant across time points
 # (Each participant should have exactly 1 row per time point)
-table(Participant = data_long[[id_var]], Time = data_long[[time_name]])r
+table(Participant = data_long[[id_var]], Time = data_long[[time_name]])
+```
+
+說明：
 
 To reshape your repeated-measures columns (`T1_Pred_Interest_Comp` and `T2_Interest_Comp`) into long format, we can use `pivot_longer()` from the `tidyverse` package.
 
 Fill in the string placeholders at the top with your column names and chosen names for the new variables:
 
-
-
 Paste the code into the Rj Editor, press Run, and report back any errors or results.
-

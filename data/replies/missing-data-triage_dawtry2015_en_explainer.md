@@ -45,5 +45,5 @@ While the percentage is small, deciding *how* to handle missing data depends on 
 
 * **Deletion (Complete-Case Analysis):** Automatically dropping rows with missing values. This is only safe if you can reasonably assume the data are *Missing Completely at Random* (MCAR)—meaning the missing values occurred purely by chance. If high-income respondents deliberately refused to answer, deleting them could bias your results.
 * **Imputation:** Replacing missing values with estimated numbers (such as the group average or an algorithmically predicted value). This requires deciding whether artificial estimates are scientifically defensible for your research question.
-* **Coding as a Distinct Category:** In survey research, refusing to answer political or income questions can sometimes be a meaningful attitude in itself (e.g., privacy concerns or political disaffection). Deciding whether "missing" holds substantive meaning depends entirely on what your study was designed to measure.r
+* **Coding as a Distinct Category:** In survey research, refusing to answer political or income questions can sometimes be a meaningful attitude in itself (e.g., privacy concerns or political disaffection). Deciding whether "missing" holds substantive meaning depends entirely on what your study was designed to measure.
 

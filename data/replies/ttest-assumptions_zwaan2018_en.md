@@ -45,5 +45,5 @@ Open `Analyses > T-Tests > Independent Samples T-Test` and, under the **Assumpti
 If the normality assumption is violated:
 * **Mann-Whitney U test**: Within the same analysis window (`Analyses > T-Tests > Independent Samples T-Test`), check the **Mann-Whitney U** box under the **Tests** section.
 * Alternatively, run:
-  * `Analyses > ANOVA > Non-Parametric > One-Way ANOVA — Kruskal-Wallis` (which is mathematically equivalent for two groups).r
+  * `Analyses > ANOVA > Non-Parametric > One-Way ANOVA — Kruskal-Wallis` (which is mathematically equivalent for two groups).
 

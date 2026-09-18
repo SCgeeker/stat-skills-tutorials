@@ -25,6 +25,9 @@ Please guide me under these rules, without giving the full solution:
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 library(tidyverse)
 
 # 1. Reshape the dataset from wide to long
@@ -39,15 +42,15 @@ data_long <- data %>%
 
 # 2. Verify row counts per subject x time point
 # Hint: table() will show the count of entries for each combination
-table(data_long$# TODO: Participant_ID column, data_long$# TODO: your new time column)r
+table(data_long$# TODO: Participant_ID column, data_long$# TODO: your new time column)
+```
+
+說明：
 
 To reshape your repeated-measures columns (`T1_Pred_Interest_Comp` and `T2_Interest_Comp`) into long format, we can use `pivot_longer()` from the `tidyverse` package. 
 
 Here is a skeleton to guide you:
 
-
-
 Fill in the `# TODO` sections with your column names.
 
 Paste the code into the Rj Editor and press Run, and report back any error or unexpected output!
-

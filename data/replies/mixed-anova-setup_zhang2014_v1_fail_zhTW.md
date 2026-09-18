@@ -24,6 +24,9 @@
 
 ## 模型回覆（逐字）
 
+程式碼：
+
+```r
 library(tidyverse)
 
 # 1. 使用 pivot_longer 將兩個時間點的欄位轉為長格式
@@ -39,7 +42,10 @@ data_long <- data %>%
 cat("轉換後總列數：", nrow(data_long), "\n")
 
 # 核對每個受試者是否都有對應的時間點列數
-head(table(data_long$Participant_ID))r
+head(table(data_long$Participant_ID))
+```
+
+說明：
 
 要將寬格式資料（Wide format）轉換為長格式（Long format），在 R 中常見的做法是使用 `tidyverse` 中的 `pivot_longer()` 函式（或是 base R 的 `reshape()`）。
 
@@ -49,7 +55,4 @@ head(table(data_long$Participant_ID))r
 
 請參考下方的程式碼骨架，將 `# TODO` 的部分補齊：
 
-
-
 請把上述程式碼貼進 jamovi 的 Rj Editor，按下綠色的 Run 三角形按鈕執行，並告訴我執行結果或出現的任何錯誤訊息！
-

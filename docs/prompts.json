@@ -1090,7 +1090,7 @@
         "provider": "gemini",
         "model": "gemini-flash-latest",
         "result": "partial",
-        "note": "補做 cross-check 後重評，en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。expected 3/4：第 2 項未命中。開頭有 dep_var／indep_vars 兩個佔位符，但第 19 行的 cor() 又把 FILL_IN_PREDICTOR1、FILL_IN_PREDICTOR2 直接寫在函式引數裡，填值處分散兩地，這是批 B 唯一的格式破口。其餘三項命中：只用 data；subject 未進模型並說明是識別碼；診斷含 cor() 與 plot(model)。check 三項皆通過：code-read 無 library；code-run 貼進 Rj 的程式碼與回覆同源，係數與 zh 版相同，cor() 輸出 0.07816，零錯誤；cross-check：jamovi Linear Regression 的係數、R² = 0.30、VIF 1.01 與 Rj 一致。cross-check 補齊後，仍因 expected 有漏維持 partial；問題出在回覆格式，不在操作。"
+        "note": "補做 cross-check 後重評，en 版，persona=tutor，promptLang 未設（en 預設），證據 data/regression-code-check_payne2008_en.omv、回覆副本 data/replies/regression-code-check_payne2008_en.md。expected 3/4：第 2 項未命中。開頭有 dep_var／indep_vars 兩個佔位符，但第 19 行的 cor() 又把 FILL_IN_PREDICTOR1、FILL_IN_PREDICTOR2 直接寫在函式引數裡，填值處分散兩地，這是批 B 唯一的格式破口。其餘三項命中：只用 data；subject 未進模型並說明是識別碼；診斷含 cor() 與 plot(model)。check 三項皆通過：code-read 無 library；code-run 貼進 Rj 的程式碼與回覆同源，係數與 zh 版相同，cor() 輸出 0.07816，零錯誤；cross-check：jamovi Linear Regression 的係數、R² = 0.30、VIF 1.01 與 Rj 一致。cross-check 補齊後，仍因 expected 有漏維持 partial；問題出在回覆格式，不在操作。決定不重測（2026-09-18）：錯誤來自 LLM 生成的程式碼，使用者必須自行修改 cor() 裡的兩個佔位符才能產生結果；重測只會得到另一次產出，本筆保留作為格式規範在長程式碼上失守的實例。"
       }
     ]
   },

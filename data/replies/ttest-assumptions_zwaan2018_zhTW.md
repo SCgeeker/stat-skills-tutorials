@@ -50,5 +50,5 @@ simon_effect 是連續變項，similarity 有兩組（n 分別為 80、80）。
 * **方案 A（直接在 t 檢定介面中勾選）**：
   在 `Analyses > T-Tests > Independent Samples T-Test` 介面中的 **Tests** 區塊勾選 **Mann-Whitney U**。
 * **方案 B（獨立模組選單）**：
-  `Analyses > ANOVA > Non-Parametric > One-Way ANOVA — Kruskal-Wallis`（兩組情況下結果等同於 Mann-Whitney U 檢定）。r
+  `Analyses > ANOVA > Non-Parametric > One-Way ANOVA — Kruskal-Wallis`（兩組情況下結果等同於 Mann-Whitney U 檢定）。
 

@@ -41,5 +41,5 @@ If you create an indicator variable in the spreadsheet to flag missing values (e
 
 ### 3. Which treatment decisions depend on your research design?
 * **Assessing the Missingness Mechanism (MCAR vs. MAR vs. MNAR):** You must determine *why* the data are missing based on how the survey was administered. For example, if higher-income respondents deliberately refused to disclose their income, the data are *Missing Not at Random (MNAR)*, which can introduce bias regardless of the sample size.
-* **Complete-Case Deletion vs. Imputation:** With only ~1.3% missing, default listwise deletion (dropping those 4 rows in analyses requiring both variables) is standard and usually safe if the data are missing at random. However, if your research protocol, field standards, or preregistration require retaining every case, you would need to justify and choose an imputation method.r
+* **Complete-Case Deletion vs. Imputation:** With only ~1.3% missing, default listwise deletion (dropping those 4 rows in analyses requiring both variables) is standard and usually safe if the data are missing at random. However, if your research protocol, field standards, or preregistration require retaining every case, you would need to justify and choose an imputation method.
 
